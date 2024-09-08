@@ -22,176 +22,538 @@ switch *call_NoOp *NOT_IMPLEMENTED *NOT_IMPLEMENTED *NOT_IMPLEMENTED *NOT_IMPLEM
 	// The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?
 	err
 
-// getSum(a: uint64, b: uint64): uint64
-//
-// Calculates the sum of two numbers
-//
-// @param a
-// @param b
-// @returns The sum of a and b
-getSum:
-	proto 2 1
+// checkCallerIsListingOwner(listingKey: Listing): void
+checkCallerIsListingOwner:
+	proto 1 0
 
-	// contracts/AlgoDirectory.algo.ts:12
-	// return a + b;
-	frame_dig -1 // a: uint64
-	frame_dig -2 // b: uint64
-	+
+	// contracts/AlgoDirectory.algo.ts:22
+	// assert(this.txn.sender === this.listings(listingKey).value, 'Caller must be listing owner')
+	txn Sender
+	frame_dig -1 // listingKey: Listing
+	box_get
+
+	// box value does not exist: this.listings(listingKey).value
+	assert
+	==
+
+	// Caller must be listing owner
+	assert
 	retsub
 
-// getDifference(a: uint64, b: uint64): uint64
-//
-// Calculates the difference between two numbers
-//
-// @param a
-// @param b
-// @returns The difference between a and b.
-getDifference:
-	proto 2 1
+// checkNFDIsSegmentOfDirectory(nfdAppID: uint64): void
+checkNFDIsSegmentOfDirectory:
+	proto 1 0
 
-	// contracts/AlgoDirectory.algo.ts:23
-	// return a >= b ? a - b : b - a;
-	frame_dig -1 // a: uint64
-	frame_dig -2 // b: uint64
-	>=
-	bz *ternary0_false
-	frame_dig -1 // a: uint64
-	frame_dig -2 // b: uint64
-	-
-	b *ternary0_end
+	// contracts/AlgoDirectory.algo.ts:27
+	// assert(
+	//       (AppID.fromUint64(nfdAppID).globalState('i.parentAppID') as uint64) === 576232821,
+	//       'NFD must be a segment of directory.algo with parent app ID 576232821'
+	//     )
+	frame_dig -1 // nfdAppID: uint64
+	byte 0x692e706172656e744170704944 // "i.parentAppID"
+	app_global_get_ex
 
-*ternary0_false:
-	frame_dig -2 // b: uint64
-	frame_dig -1 // a: uint64
-	-
+	// global state value does not exist: AppID.fromUint64(nfdAppID).globalState('i.parentAppID')
+	assert
+	int 576232821
+	==
 
-*ternary0_end:
+	// NFD must be a segment of directory.algo with parent app ID 576232821
+	assert
 	retsub
 
-// doMath(uint64,uint64,string)uint64
-*abi_route_doMath:
-	// The ABI return prefix
-	byte 0x151f7c75
+// checkCallerIsNFDOwner(nfdAppID: uint64): void
+checkCallerIsNFDOwner:
+	proto 1 0
 
-	// operation: string
-	txna ApplicationArgs 3
-	extract 2 0
+	// contracts/AlgoDirectory.algo.ts:35
+	// assert(
+	//       this.txn.sender === (AppID.fromUint64(nfdAppID).globalState('i.owner.a') as Address),
+	//       'Listing creator must be the NFD app i.owner.a'
+	//     )
+	txn Sender
+	frame_dig -1 // nfdAppID: uint64
+	byte 0x692e6f776e65722e61 // "i.owner.a"
+	app_global_get_ex
 
-	// b: uint64
+	// global state value does not exist: AppID.fromUint64(nfdAppID).globalState('i.owner.a')
+	assert
+	==
+
+	// Listing creator must be the NFD app i.owner.a
+	assert
+	retsub
+
+// checkNFDNotExpired(nfdAppID: uint64): void
+checkNFDNotExpired:
+	proto 1 0
+
+	// contracts/AlgoDirectory.algo.ts:43
+	// assert(
+	//       globals.latestTimestamp <= (AppID.fromUint64(nfdAppID).globalState('i.expirationTime') as uint64),
+	//       'NFD segment must not be expired'
+	//     )
+	global LatestTimestamp
+	frame_dig -1 // nfdAppID: uint64
+	byte 0x692e65787069726174696f6e54696d65 // "i.expirationTime"
+	app_global_get_ex
+
+	// global state value does not exist: AppID.fromUint64(nfdAppID).globalState('i.expirationTime')
+	assert
+	<=
+
+	// NFD segment must not be expired
+	assert
+	retsub
+
+// createListing(pay,uint64,byte[10])void
+*abi_route_createListing:
+	// listingTags: byte[10]
 	txna ApplicationArgs 2
-	btoi
+	dup
+	len
+	int 10
+	==
 
-	// a: uint64
+	// argument 0 (listingTags) for createListing must be a byte[10]
+	assert
+
+	// nfdAppID: uint64
 	txna ApplicationArgs 1
 	btoi
 
-	// execute doMath(uint64,uint64,string)uint64
-	callsub doMath
-	itob
-	concat
-	log
+	// collateralPayment: pay
+	txn GroupIndex
+	int 1
+	-
+	dup
+	gtxns TypeEnum
+	int pay
+	==
+
+	// argument 2 (collateralPayment) for createListing must be a pay transaction
+	assert
+
+	// execute createListing(pay,uint64,byte[10])void
+	callsub createListing
 	int 1
 	return
 
-// doMath(a: uint64, b: uint64, operation: string): uint64
+// createListing(collateralPayment: PayTxn, nfdAppID: uint64, listingTags: StaticArray<byte, 10>): void
 //
-// A method that takes two numbers and does either addition or subtraction
+// Creates a listing in the directory by vouching for an NFD root or segment of directory.algo.
 //
-// @param a The first uint64
-// @param b The second uint64
-// @param operation The operation to perform. Can be either 'sum' or 'difference'
-//
-// @returns The result of the operation
-doMath:
-	proto 3 1
+// @param nfdAppID The uint64 application ID of the NFD that will be listed
+// @param collateralPayment The Algo payment of collateral to vouch for the listing
+createListing:
+	proto 3 0
 
 	// Push empty bytes after the frame pointer to reserve space for local variables
 	byte 0x
+	dup
 
-	// *if0_condition
-	// contracts/AlgoDirectory.algo.ts:38
-	// operation === 'sum'
-	frame_dig -3 // operation: string
-	byte 0x73756d // "sum"
+	// contracts/AlgoDirectory.algo.ts:57
+	// verifyPayTxn(collateralPayment, {
+	//       sender: this.txn.sender,
+	//       receiver: this.app.address,
+	//       amount: { greaterThan: TOTAL_LISTING_BOXES_COST },
+	//     })
+	// verify sender
+	frame_dig -1 // collateralPayment: PayTxn
+	gtxns Sender
+	txn Sender
 	==
-	bz *if0_elseif1_condition
 
-	// *if0_consequent
-	// contracts/AlgoDirectory.algo.ts:39
-	// result = this.getSum(a, b)
-	frame_dig -2 // b: uint64
-	frame_dig -1 // a: uint64
-	callsub getSum
-	frame_bury 0 // result: uint64
-	b *if0_end
+	// transaction verification failed: {"txn":"collateralPayment","field":"sender","expected":"this.txn.sender"}
+	assert
 
-*if0_elseif1_condition:
-	// contracts/AlgoDirectory.algo.ts:40
-	// operation === 'difference'
-	frame_dig -3 // operation: string
-	byte 0x646966666572656e6365 // "difference"
+	// verify receiver
+	frame_dig -1 // collateralPayment: PayTxn
+	gtxns Receiver
+	global CurrentApplicationAddress
 	==
-	bz *if0_else
 
-	// *if0_elseif1_consequent
-	// contracts/AlgoDirectory.algo.ts:41
-	// result = this.getDifference(a, b)
-	frame_dig -2 // b: uint64
-	frame_dig -1 // a: uint64
-	callsub getDifference
-	frame_bury 0 // result: uint64
-	b *if0_end
+	// transaction verification failed: {"txn":"collateralPayment","field":"receiver","expected":"this.app.address"}
+	assert
 
-*if0_else:
-	// Invalid operation
-	err
+	// verify amount
+	frame_dig -1 // collateralPayment: PayTxn
+	gtxns Amount
+	int 46600
+	>
 
-*if0_end:
-	// contracts/AlgoDirectory.algo.ts:44
-	// return result;
-	frame_dig 0 // result: uint64
+	// transaction verification failed: {"txn":"collateralPayment","field":"amount","condition":"greaterThan","expected":">TOTAL_LISTING_BOXES_COST"}
+	assert
 
-	// set the subroutine return value
-	frame_bury 0
-	retsub
+	// contracts/AlgoDirectory.algo.ts:64
+	// this.checkNFDIsSegmentOfDirectory(nfdAppID)
+	frame_dig -2 // nfdAppID: uint64
+	callsub checkNFDIsSegmentOfDirectory
 
-// hello(string)string
-*abi_route_hello:
-	// The ABI return prefix
-	byte 0x151f7c75
+	// contracts/AlgoDirectory.algo.ts:65
+	// this.checkCallerIsNFDOwner(nfdAppID)
+	frame_dig -2 // nfdAppID: uint64
+	callsub checkCallerIsNFDOwner
 
-	// name: string
-	txna ApplicationArgs 1
-	extract 2 0
+	// contracts/AlgoDirectory.algo.ts:66
+	// this.checkNFDNotExpired(nfdAppID)
+	frame_dig -2 // nfdAppID: uint64
+	callsub checkNFDNotExpired
 
-	// execute hello(string)string
-	callsub hello
+	// contracts/AlgoDirectory.algo.ts:69
+	// nfdName = AppID.fromUint64(nfdAppID).globalState('i.name') as string
+	frame_dig -2 // nfdAppID: uint64
+	byte 0x692e6e616d65 // "i.name"
+	app_global_get_ex
+
+	// global state value does not exist: AppID.fromUint64(nfdAppID).globalState('i.name')
+	assert
+	frame_bury 0 // nfdName: string
+
+	// contracts/AlgoDirectory.algo.ts:70
+	// sendAppCall({
+	//       applicationID: AppID.fromUint64(84366825), // Mainnet 760937186
+	//       applicationArgs: ['is_valid_nfd_appid', nfdName, itob(nfdAppID)],
+	//     })
+	itxn_begin
+	int appl
+	itxn_field TypeEnum
+
+	// contracts/AlgoDirectory.algo.ts:71
+	// applicationID: AppID.fromUint64(84366825)
+	int 84366825
+	itxn_field ApplicationID
+
+	// contracts/AlgoDirectory.algo.ts:72
+	// applicationArgs: ['is_valid_nfd_appid', nfdName, itob(nfdAppID)]
+	byte 0x69735f76616c69645f6e66645f6170706964 // "is_valid_nfd_appid"
+	itxn_field ApplicationArgs
+	frame_dig 0 // nfdName: string
+	itxn_field ApplicationArgs
+	frame_dig -2 // nfdAppID: uint64
+	itob
+	itxn_field ApplicationArgs
+
+	// Fee field not set, defaulting to 0
+	int 0
+	itxn_field Fee
+
+	// Submit inner transaction
+	itxn_submit
+
+	// contracts/AlgoDirectory.algo.ts:74
+	// assert(btoi(this.itxn.lastLog) === 1, 'NFD app ID must be valid at the NFD registry')
+	itxn LastLog
+	btoi
+	int 1
+	==
+
+	// NFD app ID must be valid at the NFD registry
+	assert
+
+	// contracts/AlgoDirectory.algo.ts:77
+	// assert(!this.listedNFDappIDs(nfdAppID).exists, 'Listing for this NFD must not already exist')
+	frame_dig -2 // nfdAppID: uint64
+	itob
+	box_len
+	swap
+	pop
+	!
+
+	// Listing for this NFD must not already exist
+	assert
+
+	// contracts/AlgoDirectory.algo.ts:80
+	// listingKey: Listing = {
+	//       timestamp: globals.latestTimestamp,
+	//       vouchAmount: collateralPayment.amount,
+	//       nfdAppID: nfdAppID,
+	//       tags: listingTags,
+	//       isDirectorySegment: false,
+	//       name: nfdName,
+	//     }
+	byte 0x // initial head
+	byte 0x // initial tail
+	byte 0x0024 // initial head offset
+	global LatestTimestamp
+	itob
+	callsub *process_static_tuple_element
+	frame_dig -1 // collateralPayment: PayTxn
+	gtxns Amount
+	itob
+	callsub *process_static_tuple_element
+	frame_dig -2 // nfdAppID: uint64
+	itob
+	callsub *process_static_tuple_element
+	frame_dig -3 // listingTags: StaticArray<byte, 10>
+	callsub *process_static_tuple_element
+	byte 0x00
+	int 0
+	dup
+	setbit
+	callsub *process_static_tuple_element
+	frame_dig 0 // nfdName: string
 	dup
 	len
 	itob
 	extract 6 2
 	swap
 	concat
-	concat
-	log
+	callsub *process_dynamic_tuple_element
+	pop // pop head offset
+	concat // concat head and tail
+	frame_bury 1 // listingKey: Listing
+
+	// contracts/AlgoDirectory.algo.ts:88
+	// this.listings(listingKey).value = this.txn.sender
+	frame_dig 1 // listingKey: Listing
+	txn Sender
+	box_put
+
+	// contracts/AlgoDirectory.algo.ts:89
+	// this.listedNFDappIDs(nfdAppID).create()
+	frame_dig -2 // nfdAppID: uint64
+	itob
+	int 0
+	box_create
+	pop
+	retsub
+
+// refreshListing((uint64,uint64,uint64,byte[10],bool,string))void
+*abi_route_refreshListing:
+	// listingKey: (uint64,uint64,uint64,byte[10],bool,string)
+	txna ApplicationArgs 1
+
+	// execute refreshListing((uint64,uint64,uint64,byte[10],bool,string))void
+	callsub refreshListing
 	int 1
 	return
 
-// hello(name: string): string
+// refreshListing(listingKey: Listing): void
 //
-// A demonstration method used in the AlgoKit fullstack template.
-// Greets the user by name.
+// Refreshes a listing in the directory and updates its last touched timestamp.
 //
-// @param name The name of the user to greet.
-// @returns A greeting message to the user.
-hello:
-	proto 1 1
+// @param listingKey The box key of the listing to refresh with the current timestamp.
+refreshListing:
+	proto 1 0
 
-	// contracts/AlgoDirectory.algo.ts:55
-	// return 'Hello, ' + name;
-	byte 0x48656c6c6f2c20 // "Hello, "
-	frame_dig -1 // name: string
-	concat
+	// Push empty bytes after the frame pointer to reserve space for local variables
+	byte 0x
+	dup
+
+	// contracts/AlgoDirectory.algo.ts:99
+	// this.checkCallerIsListingOwner(listingKey)
+	frame_dig -1 // listingKey: Listing
+	callsub checkCallerIsListingOwner
+
+	// contracts/AlgoDirectory.algo.ts:100
+	// nfdAppID = listingKey.nfdAppID
+	frame_dig -1 // listingKey: Listing
+	store 255 // full array
+	load 255 // full array
+	extract 16 8
+	btoi
+	frame_bury 0 // nfdAppID: uint64
+
+	// contracts/AlgoDirectory.algo.ts:101
+	// this.checkCallerIsNFDOwner(nfdAppID)
+	frame_dig 0 // nfdAppID: uint64
+	callsub checkCallerIsNFDOwner
+
+	// contracts/AlgoDirectory.algo.ts:102
+	// this.checkNFDNotExpired(nfdAppID)
+	frame_dig 0 // nfdAppID: uint64
+	callsub checkNFDNotExpired
+
+	// contracts/AlgoDirectory.algo.ts:105
+	// newListingKey = clone(listingKey)
+	frame_dig -1 // listingKey: Listing
+	frame_bury 1 // newListingKey: (uint64,uint64,uint64,byte[10],bool,string)
+
+	// contracts/AlgoDirectory.algo.ts:106
+	// newListingKey.timestamp = globals.latestTimestamp
+	frame_dig 1 // newListingKey: (uint64,uint64,uint64,byte[10],bool,string)
+	store 255 // full array
+	load 255 // full array
+	int 0
+	global LatestTimestamp
+	itob
+	replace3
+	frame_bury 1 // newListingKey: (uint64,uint64,uint64,byte[10],bool,string)
+
+	// contracts/AlgoDirectory.algo.ts:107
+	// this.listings(newListingKey).value = this.txn.sender
+	frame_dig 1 // newListingKey: (uint64,uint64,uint64,byte[10],bool,string)
+	txn Sender
+	box_put
+
+	// contracts/AlgoDirectory.algo.ts:110
+	// this.listings(listingKey).delete()
+	frame_dig -1 // listingKey: Listing
+	box_del
+	retsub
+
+// abandonListing((uint64,uint64,uint64,byte[10],bool,string))void
+*abi_route_abandonListing:
+	// listingKey: (uint64,uint64,uint64,byte[10],bool,string)
+	txna ApplicationArgs 1
+
+	// execute abandonListing((uint64,uint64,uint64,byte[10],bool,string))void
+	callsub abandonListing
+	int 1
+	return
+
+// abandonListing(listingKey: Listing): void
+//
+// Abandons a listing in the directory and returns the vouched collateral.
+//
+// @param listingKey The box key of the listing to abandon and reclaim collateral.
+abandonListing:
+	proto 1 0
+
+	// contracts/AlgoDirectory.algo.ts:119
+	// this.checkCallerIsListingOwner(listingKey)
+	frame_dig -1 // listingKey: Listing
+	callsub checkCallerIsListingOwner
+
+	// contracts/AlgoDirectory.algo.ts:122
+	// this.listedNFDappIDs(listingKey.nfdAppID).delete()
+	frame_dig -1 // listingKey: Listing
+	store 255 // full array
+	load 255 // full array
+	extract 16 8
+	btoi
+	itob
+	box_del
+
+	// contracts/AlgoDirectory.algo.ts:123
+	// this.listings(listingKey).delete()
+	frame_dig -1 // listingKey: Listing
+	box_del
+
+	// contracts/AlgoDirectory.algo.ts:126
+	// sendPayment({
+	//       sender: this.app.address,
+	//       receiver: this.listings(listingKey).value,
+	//       amount: listingKey.vouchAmount,
+	//       fee: 0,
+	//     })
+	itxn_begin
+	int pay
+	itxn_field TypeEnum
+
+	// contracts/AlgoDirectory.algo.ts:127
+	// sender: this.app.address
+	global CurrentApplicationAddress
+	itxn_field Sender
+
+	// contracts/AlgoDirectory.algo.ts:128
+	// receiver: this.listings(listingKey).value
+	frame_dig -1 // listingKey: Listing
+	box_get
+
+	// box value does not exist: this.listings(listingKey).value
+	assert
+	itxn_field Receiver
+
+	// contracts/AlgoDirectory.algo.ts:129
+	// amount: listingKey.vouchAmount
+	frame_dig -1 // listingKey: Listing
+	store 255 // full array
+	load 255 // full array
+	extract 8 8
+	btoi
+	itxn_field Amount
+
+	// contracts/AlgoDirectory.algo.ts:130
+	// fee: 0
+	int 0
+	itxn_field Fee
+
+	// Submit inner transaction
+	itxn_submit
+	retsub
+
+// deleteListing((uint64,uint64,uint64,byte[10],bool,string))void
+*abi_route_deleteListing:
+	// listingKey: (uint64,uint64,uint64,byte[10],bool,string)
+	txna ApplicationArgs 1
+
+	// execute deleteListing((uint64,uint64,uint64,byte[10],bool,string))void
+	callsub deleteListing
+	int 1
+	return
+
+// deleteListing(listingKey: Listing): void
+//
+// Deletes a listing from the directory & sends the collateral to the fee sink.
+//
+// @param listingKey The box key of the listing to delete.
+deleteListing:
+	proto 1 0
+
+	// contracts/AlgoDirectory.algo.ts:141
+	// verifyAppCallTxn(this.txn, { sender: globals.creatorAddress })
+	// verify sender
+	txn Sender
+	global CreatorAddress
+	==
+
+	// transaction verification failed: {"txn":"this.txn","field":"sender","expected":"globals.creatorAddress"}
+	assert
+
+	// contracts/AlgoDirectory.algo.ts:144
+	// this.listedNFDappIDs(listingKey.nfdAppID).delete()
+	frame_dig -1 // listingKey: Listing
+	store 255 // full array
+	load 255 // full array
+	extract 16 8
+	btoi
+	itob
+	box_del
+
+	// contracts/AlgoDirectory.algo.ts:145
+	// this.listings(listingKey).delete()
+	frame_dig -1 // listingKey: Listing
+	box_del
+
+	// contracts/AlgoDirectory.algo.ts:148
+	// sendPayment({
+	//       sender: this.app.address,
+	//       receiver: Address.fromAddress('Y76M3MSY6DKBRHBL7C3NNDXGS5IIMQVQVUAB6MP4XEMMGVF2QWNPL226CA'), // Fee sink
+	//       amount: listingKey.vouchAmount,
+	//       fee: 0,
+	//     })
+	itxn_begin
+	int pay
+	itxn_field TypeEnum
+
+	// contracts/AlgoDirectory.algo.ts:149
+	// sender: this.app.address
+	global CurrentApplicationAddress
+	itxn_field Sender
+
+	// contracts/AlgoDirectory.algo.ts:150
+	// receiver: Address.fromAddress('Y76M3MSY6DKBRHBL7C3NNDXGS5IIMQVQVUAB6MP4XEMMGVF2QWNPL226CA')
+	addr Y76M3MSY6DKBRHBL7C3NNDXGS5IIMQVQVUAB6MP4XEMMGVF2QWNPL226CA
+	itxn_field Receiver
+
+	// contracts/AlgoDirectory.algo.ts:151
+	// amount: listingKey.vouchAmount
+	frame_dig -1 // listingKey: Listing
+	store 255 // full array
+	load 255 // full array
+	extract 8 8
+	btoi
+	itxn_field Amount
+
+	// contracts/AlgoDirectory.algo.ts:152
+	// fee: 0
+	int 0
+	itxn_field Fee
+
+	// Submit inner transaction
+	itxn_submit
 	retsub
 
 *abi_route_createApplication:
@@ -207,10 +569,45 @@ hello:
 	err
 
 *call_NoOp:
-	method "doMath(uint64,uint64,string)uint64"
-	method "hello(string)string"
+	method "createListing(pay,uint64,byte[10])void"
+	method "refreshListing((uint64,uint64,uint64,byte[10],bool,string))void"
+	method "abandonListing((uint64,uint64,uint64,byte[10],bool,string))void"
+	method "deleteListing((uint64,uint64,uint64,byte[10],bool,string))void"
 	txna ApplicationArgs 0
-	match *abi_route_doMath *abi_route_hello
+	match *abi_route_createListing *abi_route_refreshListing *abi_route_abandonListing *abi_route_deleteListing
 
 	// this contract does not implement the given ABI method for call NoOp
 	err
+
+*process_static_tuple_element:
+	proto 4 3
+	frame_dig -4 // tuple head
+	frame_dig -1 // element
+	concat
+	frame_dig -3 // tuple tail
+	frame_dig -2 // head offset
+	retsub
+
+*process_dynamic_tuple_element:
+	proto 4 3
+	frame_dig -4 // tuple head
+	frame_dig -2 // head offset
+	concat
+	frame_bury -4 // tuple head
+	frame_dig -1 // element
+	dup
+	len
+	frame_dig -2 // head offset
+	btoi
+	+
+	itob
+	extract 6 2
+	frame_bury -2 // head offset
+	frame_dig -3 // tuple tail
+	swap
+	concat
+	frame_bury -3 // tuple tail
+	frame_dig -4 // tuple head
+	frame_dig -3 // tuple tail
+	frame_dig -2 // head offset
+	retsub

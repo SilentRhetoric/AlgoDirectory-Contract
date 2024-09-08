@@ -3,43 +3,68 @@
   "desc": "",
   "methods": [
     {
-      "name": "doMath",
-      "desc": "A method that takes two numbers and does either addition or subtraction",
+      "name": "createListing",
+      "desc": "Creates a listing in the directory by vouching for an NFD root or segment of directory.algo.",
       "args": [
         {
-          "name": "a",
-          "type": "uint64",
-          "desc": "The first uint64"
+          "name": "collateralPayment",
+          "type": "pay",
+          "desc": "The Algo payment of collateral to vouch for the listing"
         },
         {
-          "name": "b",
+          "name": "nfdAppID",
           "type": "uint64",
-          "desc": "The second uint64"
+          "desc": "The uint64 application ID of the NFD that will be listed"
         },
         {
-          "name": "operation",
-          "type": "string",
-          "desc": "The operation to perform. Can be either 'sum' or 'difference'"
+          "name": "listingTags",
+          "type": "byte[10]"
         }
       ],
       "returns": {
-        "type": "uint64",
-        "desc": "The result of the operation"
+        "type": "void"
       }
     },
     {
-      "name": "hello",
-      "desc": "A demonstration method used in the AlgoKit fullstack template.\nGreets the user by name.",
+      "name": "refreshListing",
+      "desc": "Refreshes a listing in the directory and updates its last touched timestamp.",
       "args": [
         {
-          "name": "name",
-          "type": "string",
-          "desc": "The name of the user to greet."
+          "name": "listingKey",
+          "type": "(uint64,uint64,uint64,byte[10],bool,string)",
+          "desc": "The box key of the listing to refresh with the current timestamp."
         }
       ],
       "returns": {
-        "type": "string",
-        "desc": "A greeting message to the user."
+        "type": "void"
+      }
+    },
+    {
+      "name": "abandonListing",
+      "desc": "Abandons a listing in the directory and returns the vouched collateral.",
+      "args": [
+        {
+          "name": "listingKey",
+          "type": "(uint64,uint64,uint64,byte[10],bool,string)",
+          "desc": "The box key of the listing to abandon and reclaim collateral."
+        }
+      ],
+      "returns": {
+        "type": "void"
+      }
+    },
+    {
+      "name": "deleteListing",
+      "desc": "Deletes a listing from the directory & sends the collateral to the fee sink.",
+      "args": [
+        {
+          "name": "listingKey",
+          "type": "(uint64,uint64,uint64,byte[10],bool,string)",
+          "desc": "The box key of the listing to delete."
+        }
+      ],
+      "returns": {
+        "type": "void"
       }
     },
     {
