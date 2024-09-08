@@ -1,0 +1,53 @@
+{
+  "name": "AlgoDirectory",
+  "desc": "",
+  "methods": [
+    {
+      "name": "doMath",
+      "desc": "A method that takes two numbers and does either addition or subtraction",
+      "args": [
+        {
+          "name": "a",
+          "type": "uint64",
+          "desc": "The first uint64"
+        },
+        {
+          "name": "b",
+          "type": "uint64",
+          "desc": "The second uint64"
+        },
+        {
+          "name": "operation",
+          "type": "string",
+          "desc": "The operation to perform. Can be either 'sum' or 'difference'"
+        }
+      ],
+      "returns": {
+        "type": "uint64",
+        "desc": "The result of the operation"
+      }
+    },
+    {
+      "name": "hello",
+      "desc": "A demonstration method used in the AlgoKit fullstack template.\nGreets the user by name.",
+      "args": [
+        {
+          "name": "name",
+          "type": "string",
+          "desc": "The name of the user to greet."
+        }
+      ],
+      "returns": {
+        "type": "string",
+        "desc": "A greeting message to the user."
+      }
+    },
+    {
+      "name": "createApplication",
+      "args": [],
+      "returns": {
+        "type": "void"
+      }
+    }
+  ]
+}
