@@ -74,6 +74,7 @@ export class AlgoDirectory extends Contract {
     assert(btoi(this.itxn.lastLog) === 1, 'NFD app ID must be valid at the NFD registry');
 
     // Check that a directory listing for this NFD App ID does not already exist
+    // TODO: This is broken
     assert(!this.listedNFDappIDs(nfdAppID).exists, 'Listing for this NFD must not already exist');
 
     // Create the listing in the directory
@@ -152,4 +153,10 @@ export class AlgoDirectory extends Contract {
       fee: 0,
     });
   }
+
+  updateApplication(): void {
+    assert(this.txn.sender === this.app.creator, 'Only the creator can update the application');
+  }
+
+  createApplication(): void {}
 }
