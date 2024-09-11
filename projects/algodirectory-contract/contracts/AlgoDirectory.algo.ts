@@ -4,9 +4,9 @@ type Listing = {
   timestamp: uint64; // 8 bytes
   vouchAmount: uint64; // 8 bytes
   nfdAppID: uint64; // 8 bytes
-  tags: StaticArray<byte, 10>; // 10 bytes, each representing one of 255 possible tags
-  isDirectorySegment: boolean; // 1 byte
-  name: string; // NFD names are to 27 characters, which is 29 bytes ABI encoded
+  tags: StaticArray<byte, 13>; // 13 bytes, each representing one of 255 possible tags
+  // // isDirectorySegment: boolean; // 1 byte
+  name: bytes; // NFD names are to 27 characters
 }; // 64 bytes total
 
 const LISTED_NFD_APP_ID_BOX_COST = 5700; // 2500 + (400 * (8))
@@ -25,7 +25,7 @@ export class AlgoDirectory extends Contract {
   private checkNFDIsSegmentOfDirectory(nfdAppID: uint64): void {
     // Ensure the NFD is a segment of directory.algo by checking the parent appID
     assert(
-      (AppID.fromUint64(nfdAppID).globalState('i.parentAppID') as uint64) === 576232821,
+      btoi(AppID.fromUint64(nfdAppID).globalState('i.parentAppID') as bytes) === 576232821,
       'NFD must be a segment of directory.algo with parent app ID 576232821'
     );
   }
@@ -41,7 +41,7 @@ export class AlgoDirectory extends Contract {
   private checkNFDNotExpired(nfdAppID: uint64): void {
     // Check that the segment is current and not expired
     assert(
-      globals.latestTimestamp <= (AppID.fromUint64(nfdAppID).globalState('i.expirationTime') as uint64),
+      globals.latestTimestamp <= btoi(AppID.fromUint64(nfdAppID).globalState('i.expirationTime') as bytes),
       'NFD segment must not be expired'
     );
   }
@@ -52,7 +52,7 @@ export class AlgoDirectory extends Contract {
    * @param nfdAppID The uint64 application ID of the NFD that will be listed
    * @param collateralPayment The Algo payment of collateral to vouch for the listing
    */
-  createListing(collateralPayment: PayTxn, nfdAppID: uint64, listingTags: StaticArray<byte, 10>): void {
+  createListing(collateralPayment: PayTxn, nfdAppID: uint64, listingTags: StaticArray<byte, 13>): Listing {
     // Check that the caller is paying a mimimum amount of collateral to vouch for the listing
     verifyPayTxn(collateralPayment, {
       sender: this.txn.sender,
@@ -66,28 +66,34 @@ export class AlgoDirectory extends Contract {
     this.checkNFDNotExpired(nfdAppID);
 
     // Check in the NFD registry that this is a valid NFD app ID (not a fake NFD)
-    const nfdName = AppID.fromUint64(nfdAppID).globalState('i.name') as string;
+    const nfdLongName = AppID.fromUint64(nfdAppID).globalState('i.name') as bytes;
+
     sendAppCall({
       applicationID: AppID.fromUint64(84366825), // Mainnet 760937186
-      applicationArgs: ['is_valid_nfd_appid', nfdName, itob(nfdAppID)],
+      applicationArgs: ['is_valid_nfd_appid', nfdLongName, itob(nfdAppID)],
+      fee: 0,
     });
     assert(btoi(this.itxn.lastLog) === 1, 'NFD app ID must be valid at the NFD registry');
 
     // Check that a directory listing for this NFD App ID does not already exist
-    // TODO: This is broken
     assert(!this.listedNFDappIDs(nfdAppID).exists, 'Listing for this NFD must not already exist');
 
     // Create the listing in the directory
+    this.listedNFDappIDs(nfdAppID).create();
+
+    // The NFD name needs to have directory.algo trimmed off the end & padded to 27 bytes
+    const nfdSegmentName = substring3(nfdLongName, 0, len(nfdLongName) - 15);
+
     const listingKey: Listing = {
       timestamp: globals.latestTimestamp,
       vouchAmount: collateralPayment.amount,
       nfdAppID: nfdAppID,
       tags: listingTags,
-      isDirectorySegment: false,
-      name: nfdName,
+      // // isDirectorySegment: false,
+      name: nfdSegmentName,
     };
     this.listings(listingKey).value = this.txn.sender;
-    this.listedNFDappIDs(nfdAppID).create();
+    return listingKey;
   }
 
   /**

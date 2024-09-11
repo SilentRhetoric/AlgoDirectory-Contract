@@ -46,7 +46,7 @@ checkNFDIsSegmentOfDirectory:
 
 	// contracts/AlgoDirectory.algo.ts:27
 	// assert(
-	//       (AppID.fromUint64(nfdAppID).globalState('i.parentAppID') as uint64) === 576232821,
+	//       btoi(AppID.fromUint64(nfdAppID).globalState('i.parentAppID') as bytes) === 576232821,
 	//       'NFD must be a segment of directory.algo with parent app ID 576232821'
 	//     )
 	frame_dig -1 // nfdAppID: uint64
@@ -55,6 +55,7 @@ checkNFDIsSegmentOfDirectory:
 
 	// global state value does not exist: AppID.fromUint64(nfdAppID).globalState('i.parentAppID')
 	assert
+	btoi
 	int 576232821
 	==
 
@@ -90,7 +91,7 @@ checkNFDNotExpired:
 
 	// contracts/AlgoDirectory.algo.ts:43
 	// assert(
-	//       globals.latestTimestamp <= (AppID.fromUint64(nfdAppID).globalState('i.expirationTime') as uint64),
+	//       globals.latestTimestamp <= btoi(AppID.fromUint64(nfdAppID).globalState('i.expirationTime') as bytes),
 	//       'NFD segment must not be expired'
 	//     )
 	global LatestTimestamp
@@ -100,22 +101,26 @@ checkNFDNotExpired:
 
 	// global state value does not exist: AppID.fromUint64(nfdAppID).globalState('i.expirationTime')
 	assert
+	btoi
 	<=
 
 	// NFD segment must not be expired
 	assert
 	retsub
 
-// createListing(pay,uint64,byte[10])void
+// createListing(pay,uint64,byte[13])(uint64,uint64,uint64,byte[13],byte[])
 *abi_route_createListing:
-	// listingTags: byte[10]
+	// The ABI return prefix
+	byte 0x151f7c75
+
+	// listingTags: byte[13]
 	txna ApplicationArgs 2
 	dup
 	len
-	int 10
+	int 13
 	==
 
-	// argument 0 (listingTags) for createListing must be a byte[10]
+	// argument 0 (listingTags) for createListing must be a byte[13]
 	assert
 
 	// nfdAppID: uint64
@@ -134,23 +139,25 @@ checkNFDNotExpired:
 	// argument 2 (collateralPayment) for createListing must be a pay transaction
 	assert
 
-	// execute createListing(pay,uint64,byte[10])void
+	// execute createListing(pay,uint64,byte[13])(uint64,uint64,uint64,byte[13],byte[])
 	callsub createListing
+	concat
+	log
 	int 1
 	return
 
-// createListing(collateralPayment: PayTxn, nfdAppID: uint64, listingTags: StaticArray<byte, 10>): void
+// createListing(collateralPayment: PayTxn, nfdAppID: uint64, listingTags: StaticArray<byte, 13>): Listing
 //
 // Creates a listing in the directory by vouching for an NFD root or segment of directory.algo.
 //
 // @param nfdAppID The uint64 application ID of the NFD that will be listed
 // @param collateralPayment The Algo payment of collateral to vouch for the listing
 createListing:
-	proto 3 0
+	proto 3 1
 
 	// Push empty bytes after the frame pointer to reserve space for local variables
 	byte 0x
-	dup
+	dupn 2
 
 	// contracts/AlgoDirectory.algo.ts:57
 	// verifyPayTxn(collateralPayment, {
@@ -201,47 +208,49 @@ createListing:
 	callsub checkNFDNotExpired
 
 	// contracts/AlgoDirectory.algo.ts:69
-	// nfdName = AppID.fromUint64(nfdAppID).globalState('i.name') as string
+	// nfdLongName = AppID.fromUint64(nfdAppID).globalState('i.name') as bytes
 	frame_dig -2 // nfdAppID: uint64
 	byte 0x692e6e616d65 // "i.name"
 	app_global_get_ex
 
 	// global state value does not exist: AppID.fromUint64(nfdAppID).globalState('i.name')
 	assert
-	frame_bury 0 // nfdName: string
+	frame_bury 0 // nfdLongName: byte[]
 
-	// contracts/AlgoDirectory.algo.ts:70
+	// contracts/AlgoDirectory.algo.ts:71
 	// sendAppCall({
 	//       applicationID: AppID.fromUint64(84366825), // Mainnet 760937186
-	//       applicationArgs: ['is_valid_nfd_appid', nfdName, itob(nfdAppID)],
+	//       applicationArgs: ['is_valid_nfd_appid', nfdLongName, itob(nfdAppID)],
+	//       fee: 0,
 	//     })
 	itxn_begin
 	int appl
 	itxn_field TypeEnum
 
-	// contracts/AlgoDirectory.algo.ts:71
+	// contracts/AlgoDirectory.algo.ts:72
 	// applicationID: AppID.fromUint64(84366825)
 	int 84366825
 	itxn_field ApplicationID
 
-	// contracts/AlgoDirectory.algo.ts:72
-	// applicationArgs: ['is_valid_nfd_appid', nfdName, itob(nfdAppID)]
+	// contracts/AlgoDirectory.algo.ts:73
+	// applicationArgs: ['is_valid_nfd_appid', nfdLongName, itob(nfdAppID)]
 	byte 0x69735f76616c69645f6e66645f6170706964 // "is_valid_nfd_appid"
 	itxn_field ApplicationArgs
-	frame_dig 0 // nfdName: string
+	frame_dig 0 // nfdLongName: byte[]
 	itxn_field ApplicationArgs
 	frame_dig -2 // nfdAppID: uint64
 	itob
 	itxn_field ApplicationArgs
 
-	// Fee field not set, defaulting to 0
+	// contracts/AlgoDirectory.algo.ts:74
+	// fee: 0
 	int 0
 	itxn_field Fee
 
 	// Submit inner transaction
 	itxn_submit
 
-	// contracts/AlgoDirectory.algo.ts:74
+	// contracts/AlgoDirectory.algo.ts:76
 	// assert(btoi(this.itxn.lastLog) === 1, 'NFD app ID must be valid at the NFD registry')
 	itxn LastLog
 	btoi
@@ -251,7 +260,7 @@ createListing:
 	// NFD app ID must be valid at the NFD registry
 	assert
 
-	// contracts/AlgoDirectory.algo.ts:77
+	// contracts/AlgoDirectory.algo.ts:79
 	// assert(!this.listedNFDappIDs(nfdAppID).exists, 'Listing for this NFD must not already exist')
 	frame_dig -2 // nfdAppID: uint64
 	itob
@@ -263,18 +272,37 @@ createListing:
 	// Listing for this NFD must not already exist
 	assert
 
-	// contracts/AlgoDirectory.algo.ts:80
+	// contracts/AlgoDirectory.algo.ts:82
+	// this.listedNFDappIDs(nfdAppID).create()
+	frame_dig -2 // nfdAppID: uint64
+	itob
+	int 0
+	box_create
+	pop
+
+	// contracts/AlgoDirectory.algo.ts:85
+	// nfdSegmentName = substring3(nfdLongName, 0, len(nfdLongName) - 15)
+	frame_dig 0 // nfdLongName: byte[]
+	int 0
+	frame_dig 0 // nfdLongName: byte[]
+	len
+	int 15
+	-
+	substring3
+	frame_bury 1 // nfdSegmentName: byte[]
+
+	// contracts/AlgoDirectory.algo.ts:87
 	// listingKey: Listing = {
 	//       timestamp: globals.latestTimestamp,
 	//       vouchAmount: collateralPayment.amount,
 	//       nfdAppID: nfdAppID,
 	//       tags: listingTags,
-	//       isDirectorySegment: false,
-	//       name: nfdName,
+	//       // // isDirectorySegment: false,
+	//       name: nfdSegmentName,
 	//     }
 	byte 0x // initial head
 	byte 0x // initial tail
-	byte 0x0024 // initial head offset
+	byte 0x0027 // initial head offset
 	global LatestTimestamp
 	itob
 	callsub *process_static_tuple_element
@@ -285,14 +313,9 @@ createListing:
 	frame_dig -2 // nfdAppID: uint64
 	itob
 	callsub *process_static_tuple_element
-	frame_dig -3 // listingTags: StaticArray<byte, 10>
+	frame_dig -3 // listingTags: StaticArray<byte, 13>
 	callsub *process_static_tuple_element
-	byte 0x00
-	int 0
-	dup
-	setbit
-	callsub *process_static_tuple_element
-	frame_dig 0 // nfdName: string
+	frame_dig 1 // nfdSegmentName: byte[]
 	dup
 	len
 	itob
@@ -302,29 +325,31 @@ createListing:
 	callsub *process_dynamic_tuple_element
 	pop // pop head offset
 	concat // concat head and tail
-	frame_bury 1 // listingKey: Listing
+	frame_bury 2 // listingKey: Listing
 
-	// contracts/AlgoDirectory.algo.ts:88
+	// contracts/AlgoDirectory.algo.ts:95
 	// this.listings(listingKey).value = this.txn.sender
-	frame_dig 1 // listingKey: Listing
+	frame_dig 2 // listingKey: Listing
 	txn Sender
 	box_put
 
-	// contracts/AlgoDirectory.algo.ts:89
-	// this.listedNFDappIDs(nfdAppID).create()
-	frame_dig -2 // nfdAppID: uint64
-	itob
-	int 0
-	box_create
-	pop
+	// contracts/AlgoDirectory.algo.ts:96
+	// return listingKey;
+	frame_dig 2 // listingKey: Listing
+
+	// set the subroutine return value
+	frame_bury 0
+
+	// pop all local variables from the stack
+	popn 2
 	retsub
 
-// refreshListing((uint64,uint64,uint64,byte[10],bool,string))void
+// refreshListing((uint64,uint64,uint64,byte[13],byte[]))void
 *abi_route_refreshListing:
-	// listingKey: (uint64,uint64,uint64,byte[10],bool,string)
+	// listingKey: (uint64,uint64,uint64,byte[13],byte[])
 	txna ApplicationArgs 1
 
-	// execute refreshListing((uint64,uint64,uint64,byte[10],bool,string))void
+	// execute refreshListing((uint64,uint64,uint64,byte[13],byte[]))void
 	callsub refreshListing
 	int 1
 	return
@@ -341,12 +366,12 @@ refreshListing:
 	byte 0x
 	dup
 
-	// contracts/AlgoDirectory.algo.ts:99
+	// contracts/AlgoDirectory.algo.ts:106
 	// this.checkCallerIsListingOwner(listingKey)
 	frame_dig -1 // listingKey: Listing
 	callsub checkCallerIsListingOwner
 
-	// contracts/AlgoDirectory.algo.ts:100
+	// contracts/AlgoDirectory.algo.ts:107
 	// nfdAppID = listingKey.nfdAppID
 	frame_dig -1 // listingKey: Listing
 	store 255 // full array
@@ -355,50 +380,50 @@ refreshListing:
 	btoi
 	frame_bury 0 // nfdAppID: uint64
 
-	// contracts/AlgoDirectory.algo.ts:101
+	// contracts/AlgoDirectory.algo.ts:108
 	// this.checkCallerIsNFDOwner(nfdAppID)
 	frame_dig 0 // nfdAppID: uint64
 	callsub checkCallerIsNFDOwner
 
-	// contracts/AlgoDirectory.algo.ts:102
+	// contracts/AlgoDirectory.algo.ts:109
 	// this.checkNFDNotExpired(nfdAppID)
 	frame_dig 0 // nfdAppID: uint64
 	callsub checkNFDNotExpired
 
-	// contracts/AlgoDirectory.algo.ts:105
+	// contracts/AlgoDirectory.algo.ts:112
 	// newListingKey = clone(listingKey)
 	frame_dig -1 // listingKey: Listing
-	frame_bury 1 // newListingKey: (uint64,uint64,uint64,byte[10],bool,string)
+	frame_bury 1 // newListingKey: (uint64,uint64,uint64,byte[13],byte[])
 
-	// contracts/AlgoDirectory.algo.ts:106
+	// contracts/AlgoDirectory.algo.ts:113
 	// newListingKey.timestamp = globals.latestTimestamp
-	frame_dig 1 // newListingKey: (uint64,uint64,uint64,byte[10],bool,string)
+	frame_dig 1 // newListingKey: (uint64,uint64,uint64,byte[13],byte[])
 	store 255 // full array
 	load 255 // full array
 	int 0
 	global LatestTimestamp
 	itob
 	replace3
-	frame_bury 1 // newListingKey: (uint64,uint64,uint64,byte[10],bool,string)
+	frame_bury 1 // newListingKey: (uint64,uint64,uint64,byte[13],byte[])
 
-	// contracts/AlgoDirectory.algo.ts:107
+	// contracts/AlgoDirectory.algo.ts:114
 	// this.listings(newListingKey).value = this.txn.sender
-	frame_dig 1 // newListingKey: (uint64,uint64,uint64,byte[10],bool,string)
+	frame_dig 1 // newListingKey: (uint64,uint64,uint64,byte[13],byte[])
 	txn Sender
 	box_put
 
-	// contracts/AlgoDirectory.algo.ts:110
+	// contracts/AlgoDirectory.algo.ts:117
 	// this.listings(listingKey).delete()
 	frame_dig -1 // listingKey: Listing
 	box_del
 	retsub
 
-// abandonListing((uint64,uint64,uint64,byte[10],bool,string))void
+// abandonListing((uint64,uint64,uint64,byte[13],byte[]))void
 *abi_route_abandonListing:
-	// listingKey: (uint64,uint64,uint64,byte[10],bool,string)
+	// listingKey: (uint64,uint64,uint64,byte[13],byte[])
 	txna ApplicationArgs 1
 
-	// execute abandonListing((uint64,uint64,uint64,byte[10],bool,string))void
+	// execute abandonListing((uint64,uint64,uint64,byte[13],byte[]))void
 	callsub abandonListing
 	int 1
 	return
@@ -411,12 +436,12 @@ refreshListing:
 abandonListing:
 	proto 1 0
 
-	// contracts/AlgoDirectory.algo.ts:119
+	// contracts/AlgoDirectory.algo.ts:126
 	// this.checkCallerIsListingOwner(listingKey)
 	frame_dig -1 // listingKey: Listing
 	callsub checkCallerIsListingOwner
 
-	// contracts/AlgoDirectory.algo.ts:122
+	// contracts/AlgoDirectory.algo.ts:129
 	// this.listedNFDappIDs(listingKey.nfdAppID).delete()
 	frame_dig -1 // listingKey: Listing
 	store 255 // full array
@@ -426,12 +451,12 @@ abandonListing:
 	itob
 	box_del
 
-	// contracts/AlgoDirectory.algo.ts:123
+	// contracts/AlgoDirectory.algo.ts:130
 	// this.listings(listingKey).delete()
 	frame_dig -1 // listingKey: Listing
 	box_del
 
-	// contracts/AlgoDirectory.algo.ts:126
+	// contracts/AlgoDirectory.algo.ts:133
 	// sendPayment({
 	//       sender: this.app.address,
 	//       receiver: this.listings(listingKey).value,
@@ -442,12 +467,12 @@ abandonListing:
 	int pay
 	itxn_field TypeEnum
 
-	// contracts/AlgoDirectory.algo.ts:127
+	// contracts/AlgoDirectory.algo.ts:134
 	// sender: this.app.address
 	global CurrentApplicationAddress
 	itxn_field Sender
 
-	// contracts/AlgoDirectory.algo.ts:128
+	// contracts/AlgoDirectory.algo.ts:135
 	// receiver: this.listings(listingKey).value
 	frame_dig -1 // listingKey: Listing
 	box_get
@@ -456,7 +481,7 @@ abandonListing:
 	assert
 	itxn_field Receiver
 
-	// contracts/AlgoDirectory.algo.ts:129
+	// contracts/AlgoDirectory.algo.ts:136
 	// amount: listingKey.vouchAmount
 	frame_dig -1 // listingKey: Listing
 	store 255 // full array
@@ -465,7 +490,7 @@ abandonListing:
 	btoi
 	itxn_field Amount
 
-	// contracts/AlgoDirectory.algo.ts:130
+	// contracts/AlgoDirectory.algo.ts:137
 	// fee: 0
 	int 0
 	itxn_field Fee
@@ -474,12 +499,12 @@ abandonListing:
 	itxn_submit
 	retsub
 
-// deleteListing((uint64,uint64,uint64,byte[10],bool,string))void
+// deleteListing((uint64,uint64,uint64,byte[13],byte[]))void
 *abi_route_deleteListing:
-	// listingKey: (uint64,uint64,uint64,byte[10],bool,string)
+	// listingKey: (uint64,uint64,uint64,byte[13],byte[])
 	txna ApplicationArgs 1
 
-	// execute deleteListing((uint64,uint64,uint64,byte[10],bool,string))void
+	// execute deleteListing((uint64,uint64,uint64,byte[13],byte[]))void
 	callsub deleteListing
 	int 1
 	return
@@ -492,7 +517,7 @@ abandonListing:
 deleteListing:
 	proto 1 0
 
-	// contracts/AlgoDirectory.algo.ts:141
+	// contracts/AlgoDirectory.algo.ts:148
 	// verifyAppCallTxn(this.txn, { sender: globals.creatorAddress })
 	// verify sender
 	txn Sender
@@ -502,7 +527,7 @@ deleteListing:
 	// transaction verification failed: {"txn":"this.txn","field":"sender","expected":"globals.creatorAddress"}
 	assert
 
-	// contracts/AlgoDirectory.algo.ts:144
+	// contracts/AlgoDirectory.algo.ts:151
 	// this.listedNFDappIDs(listingKey.nfdAppID).delete()
 	frame_dig -1 // listingKey: Listing
 	store 255 // full array
@@ -512,12 +537,12 @@ deleteListing:
 	itob
 	box_del
 
-	// contracts/AlgoDirectory.algo.ts:145
+	// contracts/AlgoDirectory.algo.ts:152
 	// this.listings(listingKey).delete()
 	frame_dig -1 // listingKey: Listing
 	box_del
 
-	// contracts/AlgoDirectory.algo.ts:148
+	// contracts/AlgoDirectory.algo.ts:155
 	// sendPayment({
 	//       sender: this.app.address,
 	//       receiver: Address.fromAddress('Y76M3MSY6DKBRHBL7C3NNDXGS5IIMQVQVUAB6MP4XEMMGVF2QWNPL226CA'), // Fee sink
@@ -528,17 +553,17 @@ deleteListing:
 	int pay
 	itxn_field TypeEnum
 
-	// contracts/AlgoDirectory.algo.ts:149
+	// contracts/AlgoDirectory.algo.ts:156
 	// sender: this.app.address
 	global CurrentApplicationAddress
 	itxn_field Sender
 
-	// contracts/AlgoDirectory.algo.ts:150
+	// contracts/AlgoDirectory.algo.ts:157
 	// receiver: Address.fromAddress('Y76M3MSY6DKBRHBL7C3NNDXGS5IIMQVQVUAB6MP4XEMMGVF2QWNPL226CA')
 	addr Y76M3MSY6DKBRHBL7C3NNDXGS5IIMQVQVUAB6MP4XEMMGVF2QWNPL226CA
 	itxn_field Receiver
 
-	// contracts/AlgoDirectory.algo.ts:151
+	// contracts/AlgoDirectory.algo.ts:158
 	// amount: listingKey.vouchAmount
 	frame_dig -1 // listingKey: Listing
 	store 255 // full array
@@ -547,7 +572,7 @@ deleteListing:
 	btoi
 	itxn_field Amount
 
-	// contracts/AlgoDirectory.algo.ts:152
+	// contracts/AlgoDirectory.algo.ts:159
 	// fee: 0
 	int 0
 	itxn_field Fee
@@ -567,7 +592,7 @@ deleteListing:
 updateApplication:
 	proto 0 0
 
-	// contracts/AlgoDirectory.algo.ts:157
+	// contracts/AlgoDirectory.algo.ts:164
 	// assert(this.txn.sender === this.app.creator, 'Only the creator can update the application')
 	txn Sender
 	txna Applications 0
@@ -600,10 +625,10 @@ createApplication:
 	err
 
 *call_NoOp:
-	method "createListing(pay,uint64,byte[10])void"
-	method "refreshListing((uint64,uint64,uint64,byte[10],bool,string))void"
-	method "abandonListing((uint64,uint64,uint64,byte[10],bool,string))void"
-	method "deleteListing((uint64,uint64,uint64,byte[10],bool,string))void"
+	method "createListing(pay,uint64,byte[13])(uint64,uint64,uint64,byte[13],byte[])"
+	method "refreshListing((uint64,uint64,uint64,byte[13],byte[]))void"
+	method "abandonListing((uint64,uint64,uint64,byte[13],byte[]))void"
+	method "deleteListing((uint64,uint64,uint64,byte[13],byte[]))void"
 	txna ApplicationArgs 0
 	match *abi_route_createListing *abi_route_refreshListing *abi_route_abandonListing *abi_route_deleteListing
 

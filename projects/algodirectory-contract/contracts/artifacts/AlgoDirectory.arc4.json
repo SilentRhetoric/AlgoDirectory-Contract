@@ -18,11 +18,11 @@
         },
         {
           "name": "listingTags",
-          "type": "byte[10]"
+          "type": "byte[13]"
         }
       ],
       "returns": {
-        "type": "void"
+        "type": "(uint64,uint64,uint64,byte[13],byte[])"
       }
     },
     {
@@ -31,7 +31,7 @@
       "args": [
         {
           "name": "listingKey",
-          "type": "(uint64,uint64,uint64,byte[10],bool,string)",
+          "type": "(uint64,uint64,uint64,byte[13],byte[])",
           "desc": "The box key of the listing to refresh with the current timestamp."
         }
       ],
@@ -45,7 +45,7 @@
       "args": [
         {
           "name": "listingKey",
-          "type": "(uint64,uint64,uint64,byte[10],bool,string)",
+          "type": "(uint64,uint64,uint64,byte[13],byte[])",
           "desc": "The box key of the listing to abandon and reclaim collateral."
         }
       ],
@@ -59,7 +59,7 @@
       "args": [
         {
           "name": "listingKey",
-          "type": "(uint64,uint64,uint64,byte[10],bool,string)",
+          "type": "(uint64,uint64,uint64,byte[13],byte[])",
           "desc": "The box key of the listing to delete."
         }
       ],

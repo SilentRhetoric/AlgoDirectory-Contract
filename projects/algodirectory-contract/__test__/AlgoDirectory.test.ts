@@ -1,5 +1,4 @@
 import { describe, test, expect, beforeAll } from '@jest/globals';
-// import { algorandFixture } from '@algorandfoundation/algokit-utils/testing';
 import * as algokit from '@algorandfoundation/algokit-utils';
 import { ClientManager } from '@algorandfoundation/algokit-utils/types/client-manager';
 import { makePaymentTxnWithSuggestedParamsFromObject } from 'algosdk';
@@ -10,17 +9,6 @@ import { AlgoDirectoryClient } from '../contracts/clients/AlgoDirectoryClient';
 
 const NAME = 'TESTER';
 
-// const fixture = algorandFixture({
-//   algodConfig: ClientManager.getAlgoNodeConfig('testnet', 'algod'),
-//   indexerConfig: ClientManager.getAlgoNodeConfig('testnet', 'indexer'),
-//   // kmd: ClientManager.getKmdClient({
-//   //   server: 'http://localhost',
-//   //   port: '4002',
-//   //   token: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
-//   // }),
-//   testAccountFunding: new AlgoAmount({ algos: 0 }),
-// });
-
 algokit.Config.configure({
   debug: true, // Only works in NodeJS environment!
   populateAppCallResources: true,
@@ -30,28 +18,26 @@ const algorand = algokit.AlgorandClient.testNet();
 
 let testAccount: SigningAccount;
 let generatedAppClient: AlgoDirectoryClient;
-// let deployedAppAddress: string;
+let deployedAppAddress: string;
 
 describe('AlgoDirectory', () => {
-  // beforeEach(fixture.beforeEach);
-
   beforeAll(async () => {
-    // await fixture.beforeEach();
-    // const { algorand } = fixture;
     const accountManager = new AccountManager(new ClientManager({ algod: algorand.client.algod }));
     testAccount = (await accountManager.fromEnvironment(NAME, new AlgoAmount({ algos: 0 }))).account;
 
     generatedAppClient = new AlgoDirectoryClient(
       {
         sender: testAccount,
-        resolveBy: 'id',
-        id: 720461229, // Now deployed on Testnet as App ID 720461229
+        resolveBy: 'creatorAndName',
+        creatorAddress: testAccount.addr,
+        findExistingUsing: algorand.client.indexer,
       },
       algorand.client.algod
     );
 
-    // const createResult = await generatedAppClient.create.createApplication({});
-    // deployedAppAddress = createResult.appAddress;
+    const result = await generatedAppClient.create.createApplication({});
+    deployedAppAddress = result.appAddress;
+    console.debug(`Deployed app at address: ${deployedAppAddress}`);
   });
 
   /*
@@ -61,19 +47,31 @@ describe('AlgoDirectory', () => {
   // Create a listing and confirm that the two boxes are created as we expect
   test('createListing', async () => {
     const suggestedParams = await algorand.getSuggestedParams();
+
     const payTxn = makePaymentTxnWithSuggestedParamsFromObject({
       from: testAccount.addr,
-      to: 'SH7EJO4GUJNKCOCLUVPJRROQABM4VSUITV3ILG4RVXDRVW5LRWDGT3YOZQ', // deployedAppAddress,
-      amount: new AlgoAmount({ algos: 1 }).microAlgos,
+      to: deployedAppAddress,
+      amount: new AlgoAmount({ microAlgos: 146600 }).microAlgos, // Each listing 46600
       suggestedParams,
     });
 
-    const result = await generatedAppClient.createListing({
-      collateralPayment: payTxn,
-      nfdAppId: 576232891,
-      listingTags: new Uint8Array(10),
-    });
-    expect(result.confirmations?.valueOf()).toBe(!null); // TODO
+    // const boxName = 'AAAAAGbhCZEAAAAAAA9CQAAAAAAiWJ27AAAAAAAAAAAAAAAAAAAnAAR0ZXN0';
+    const result = await generatedAppClient.createListing(
+      {
+        collateralPayment: payTxn,
+        nfdAppId: 576232891,
+        listingTags: new Uint8Array(13),
+      },
+      {
+        sendParams: { fee: new AlgoAmount({ microAlgos: 2000 }) },
+        // boxes: [{ appId: 0, name: boxName }],
+      }
+    );
+
+    console.debug('Result return value: ', result.return);
+
+    expect(result.confirmations?.length).toBe(2);
+    expect(result.confirmation?.confirmedRound).toBeGreaterThan(0);
   });
 
   // Refresh an existing listing and confirm that the timestamp has been updated
