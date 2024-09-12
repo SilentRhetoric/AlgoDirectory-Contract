@@ -25,6 +25,7 @@ describe('AlgoDirectory', () => {
     const accountManager = new AccountManager(new ClientManager({ algod: algorand.client.algod }));
     testAccount = (await accountManager.fromEnvironment(NAME, new AlgoAmount({ algos: 0 }))).account;
 
+    // TODO: Convert this to an idempotent deployment approach so it updates the app in place
     generatedAppClient = new AlgoDirectoryClient(
       {
         sender: testAccount,
@@ -55,7 +56,6 @@ describe('AlgoDirectory', () => {
       suggestedParams,
     });
 
-    // const boxName = 'AAAAAGbhCZEAAAAAAA9CQAAAAAAiWJ27AAAAAAAAAAAAAAAAAAAnAAR0ZXN0';
     const result = await generatedAppClient.createListing(
       {
         collateralPayment: payTxn,
@@ -64,7 +64,6 @@ describe('AlgoDirectory', () => {
       },
       {
         sendParams: { fee: new AlgoAmount({ microAlgos: 2000 }) },
-        // boxes: [{ appId: 0, name: boxName }],
       }
     );
 

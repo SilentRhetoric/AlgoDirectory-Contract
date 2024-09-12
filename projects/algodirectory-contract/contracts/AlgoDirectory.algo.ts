@@ -5,8 +5,7 @@ type Listing = {
   vouchAmount: uint64; // 8 bytes
   nfdAppID: uint64; // 8 bytes
   tags: StaticArray<byte, 13>; // 13 bytes, each representing one of 255 possible tags
-  // // isDirectorySegment: boolean; // 1 byte
-  name: bytes; // NFD names are to 27 characters
+  name: string; // NFD names are up to 27 characters
 }; // 64 bytes total
 
 const LISTED_NFD_APP_ID_BOX_COST = 5700; // 2500 + (400 * (8))
@@ -85,11 +84,10 @@ export class AlgoDirectory extends Contract {
     const nfdSegmentName = substring3(nfdLongName, 0, len(nfdLongName) - 15);
 
     const listingKey: Listing = {
-      timestamp: globals.latestTimestamp,
+      timestamp: btoi(replace3(itob(globals.latestTimestamp), 4, bzero(4))), // Round the timestamp down to the 5th byte
       vouchAmount: collateralPayment.amount,
       nfdAppID: nfdAppID,
       tags: listingTags,
-      // // isDirectorySegment: false,
       name: nfdSegmentName,
     };
     this.listings(listingKey).value = this.txn.sender;
@@ -160,9 +158,9 @@ export class AlgoDirectory extends Contract {
     });
   }
 
+  createApplication(): void {}
+
   updateApplication(): void {
     assert(this.txn.sender === this.app.creator, 'Only the creator can update the application');
   }
-
-  createApplication(): void {}
 }
