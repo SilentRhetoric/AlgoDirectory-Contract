@@ -7,7 +7,12 @@ import { AlgoAmount } from '@algorandfoundation/algokit-utils/types/amount';
 import { SigningAccount } from '@algorandfoundation/algokit-utils/types/account';
 import { AlgoDirectoryClient } from '../contracts/clients/AlgoDirectoryClient';
 
-const NAME = 'TESTER';
+const CREATOR = 'CREATOR';
+const CREATOR_SEGMENT_APPID = 576232891; // test.directory.algo
+const DAVE = 'DAVE';
+const DAVE_SEGEMENT_APPID = 673442367; // dave.directory.algo
+const BETH = 'BETH';
+const BETH_SEGMENT_APPID = 606016435; // beth.directory.algo
 
 algokit.Config.configure({
   debug: true, // Only works in NodeJS environment!
@@ -16,66 +21,80 @@ algokit.Config.configure({
 
 const algorand = algokit.AlgorandClient.testNet();
 
-let testAccount: SigningAccount;
-let generatedAppClient: AlgoDirectoryClient;
+let creatorAccount: SigningAccount;
+let daveAppClient: AlgoDirectoryClient;
+let deployedAppID: number | bigint;
 let deployedAppAddress: string;
 
 describe('AlgoDirectory', () => {
   beforeAll(async () => {
     const accountManager = new AccountManager(new ClientManager({ algod: algorand.client.algod }));
-    testAccount = (await accountManager.fromEnvironment(NAME, new AlgoAmount({ algos: 0 }))).account;
-    algorand.setSignerFromAccount(testAccount);
+    creatorAccount = (await accountManager.fromEnvironment(CREATOR, new AlgoAmount({ algos: 0 }))).account;
+    algorand.setSignerFromAccount(creatorAccount);
 
     // TODO: Convert this to an idempotent deployment approach so it updates the app in place
-    generatedAppClient = new AlgoDirectoryClient(
+    daveAppClient = new AlgoDirectoryClient(
       {
-        sender: testAccount,
+        sender: creatorAccount,
         resolveBy: 'creatorAndName',
-        creatorAddress: testAccount.addr,
+        creatorAddress: creatorAccount.addr,
         findExistingUsing: algorand.client.indexer,
       },
       algorand.client.algod
     );
 
-    const result = await generatedAppClient.create.createApplication({});
+    const result = await daveAppClient.create.createApplication({});
+    deployedAppID = result.appId;
     deployedAppAddress = result.appAddress;
     console.debug(`Deployed app at address: ${deployedAppAddress}`);
 
     // Fund the app MBR
     const payResult = await algorand.send.payment({
-      sender: testAccount.addr,
+      sender: creatorAccount.addr,
       receiver: deployedAppAddress,
       amount: (0.1).algos(),
     });
     console.debug('Payment result: ', payResult.txIds);
   });
 
-  /*
+  /* ****************
   Positive test cases
-  */
+  **************** */
 
   // Create a listing and confirm that the two boxes are created as we expect
   test('createListing', async () => {
-    const suggestedParams = await algorand.getSuggestedParams();
+    // Dave is going to create a listing for dave.directory.algo
+    const accountManager = new AccountManager(new ClientManager({ algod: algorand.client.algod }));
+    const daveAccount = (await accountManager.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }))).account;
+    algorand.setSignerFromAccount(daveAccount);
+    daveAppClient = new AlgoDirectoryClient(
+      {
+        sender: daveAccount,
+        resolveBy: 'id',
+        id: deployedAppID,
+      },
+      algorand.client.algod
+    );
 
+    const suggestedParams = await algorand.getSuggestedParams();
     const payTxn = makePaymentTxnWithSuggestedParamsFromObject({
-      from: testAccount.addr,
+      from: daveAccount.addr,
       to: deployedAppAddress,
-      amount: new AlgoAmount({ microAlgos: 172200 }).microAlgos, // Each listing 57000
+      amount: new AlgoAmount({ microAlgos: 72200 }).microAlgos, // Each listing 72_200 uA
       suggestedParams,
     });
 
-    const result = await generatedAppClient.createListing(
+    const result = await daveAppClient.createListing(
       {
         collateralPayment: payTxn,
-        nfdAppId: 576232891,
+        nfdAppId: DAVE_SEGEMENT_APPID,
         listingTags: new Uint8Array(13),
       },
       {
         sendParams: { fee: new AlgoAmount({ microAlgos: 2000 }) },
       }
     );
-
+    console.debug('Create txID: ', result.transaction.txID());
     console.debug('Result return value: ', result.return);
 
     expect(result.confirmations?.length).toBe(2);
@@ -84,10 +103,22 @@ describe('AlgoDirectory', () => {
 
   // Refresh an existing listing and confirm that the timestamp has been updated
   test('refreshListing', async () => {
-    const result = await generatedAppClient.refreshListing({
-      nfdAppId: 576232891,
-    });
+    // Dave is going to refresh his listing for dave.directory.algo
+    const accountManager = new AccountManager(new ClientManager({ algod: algorand.client.algod }));
+    const daveAccount = (await accountManager.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }))).account;
+    algorand.setSignerFromAccount(daveAccount);
+    daveAppClient = new AlgoDirectoryClient(
+      {
+        sender: daveAccount,
+        resolveBy: 'id',
+        id: deployedAppID,
+      },
+      algorand.client.algod
+    );
 
+    const result = await daveAppClient.refreshListing({
+      nfdAppId: DAVE_SEGEMENT_APPID,
+    });
     console.debug('Refresh txID: ', result.transaction.txID());
     console.debug('Refresh result: ', result.return);
 
@@ -97,15 +128,27 @@ describe('AlgoDirectory', () => {
 
   // Abandon a listing and confirm that the vouched collateral is returned
   test('abandonListing', async () => {
-    const result = await generatedAppClient.abandonListing(
+    // Dave is going to abandon his listing for dave.directory.algo
+    const accountManager = new AccountManager(new ClientManager({ algod: algorand.client.algod }));
+    const daveAccount = (await accountManager.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }))).account;
+    algorand.setSignerFromAccount(daveAccount);
+    daveAppClient = new AlgoDirectoryClient(
       {
-        nfdAppId: 576232891,
+        sender: daveAccount,
+        resolveBy: 'id',
+        id: deployedAppID,
+      },
+      algorand.client.algod
+    );
+
+    const result = await daveAppClient.abandonListing(
+      {
+        nfdAppId: DAVE_SEGEMENT_APPID,
       },
       {
         sendParams: { fee: new AlgoAmount({ microAlgos: 2000 }) },
       }
     );
-
     console.debug('Abandon txID: ', result.transaction.txID());
 
     expect(result.confirmations?.length).toBe(1);
@@ -114,9 +157,9 @@ describe('AlgoDirectory', () => {
 
   // Create a listing, then delete it and confirm that the collateral is sent to the fee sink
 
-  /*
+  /* ****************
   Negative test cases
-  */
+  **************** */
 
   // Attempt to create a listing with insufficient payment; expect failure
   // test("Test description", () => {
@@ -126,17 +169,15 @@ describe('AlgoDirectory', () => {
   //   expect(t).toThrow(TypeError);
   // });
 
-  // Attempt to create a listing that is not a segment of directory.algo; expect failure
+  // Attempt to CREATE a listing that is not a segment of directory.algo; expect failure
 
-  // Attempt to create a listing for an NFD caller doesn't own; expect failure
+  // Attempt to CREATE a listing for an NFD the caller doesn't own; expect failure (DAVE create for beth.directory.algo)
 
-  // Attempt to create a listing with expired NFD; expect failure
+  // Attempt to CREATE a listing for an expired NFD; expect failure (TBD how to achieve this on testnet with V3 being so new and all NFDs having just been bought)
 
-  // Attempt to refresh a listing that the caller doesn't own; expect failure
+  // Attempt to REFRESH a listing for an NFD the caller doesn't own; expect failure (DAVE create listing and BETH attempt to refresh it)
 
-  // Attempt to refresh a listing for an NFD that the caller doesn't own; expect failure
+  // Attempt to REFRESH a listing with expired NFD; expect failure (TBD how to achieve this on testnet with V3 being so new and all NFDs having just been bought)
 
-  // Attempt to refresh a listing with expired NFD; expect failure
-
-  // Attempt to abandon a listing that the caller doesn't own; expect failure
+  // Attempt to ABANDON a listing that the caller doesn't own; expect failure (DAVE create listing and BETH attempt to abandon it)
 });

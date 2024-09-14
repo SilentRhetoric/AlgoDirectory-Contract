@@ -837,7 +837,7 @@
   {
     "teal": 219,
     "source": 64,
-    "errorMessage": "transaction verification failed: {\"txn\":\"collateralPayment\",\"field\":\"amount\",\"condition\":\"greaterThan\",\"expected\":\">TOTAL_LISTING_BOXES_COST\"}",
+    "errorMessage": "transaction verification failed: {\"txn\":\"collateralPayment\",\"field\":\"amount\",\"condition\":\"greaterThanEqualTo\",\"expected\":\">=TOTAL_LISTING_BOXES_COST\"}",
     "pc": [
       233
     ]

@@ -189,7 +189,7 @@ createListing:
 	// verifyPayTxn(collateralPayment, {
 	//       sender: this.txn.sender,
 	//       receiver: this.app.address,
-	//       amount: { greaterThan: TOTAL_LISTING_BOXES_COST },
+	//       amount: { greaterThanEqualTo: TOTAL_LISTING_BOXES_COST },
 	//     })
 	// verify sender
 	frame_dig -1 // collateralPayment: PayTxn
@@ -213,9 +213,9 @@ createListing:
 	frame_dig -1 // collateralPayment: PayTxn
 	gtxns Amount
 	int 72200
-	>
+	>=
 
-	// transaction verification failed: {"txn":"collateralPayment","field":"amount","condition":"greaterThan","expected":">TOTAL_LISTING_BOXES_COST"}
+	// transaction verification failed: {"txn":"collateralPayment","field":"amount","condition":"greaterThanEqualTo","expected":">=TOTAL_LISTING_BOXES_COST"}
 	assert
 
 	// contracts/AlgoDirectory.algo.ts:68

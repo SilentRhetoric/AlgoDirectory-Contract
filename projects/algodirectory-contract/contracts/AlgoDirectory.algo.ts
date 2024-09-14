@@ -61,7 +61,7 @@ export class AlgoDirectory extends Contract {
     verifyPayTxn(collateralPayment, {
       sender: this.txn.sender,
       receiver: this.app.address,
-      amount: { greaterThan: TOTAL_LISTING_BOXES_COST },
+      amount: { greaterThanEqualTo: TOTAL_LISTING_BOXES_COST },
     });
 
     // Ensure the NFD is a directory.algo segment, the caller owns it, and it is not expired
