@@ -8,16 +8,17 @@ type Listing = {
   name: string; // NFD names are up to 27 characters
 }; // 64 bytes total
 
-const LISTED_NFD_APP_ID_BOX_COST = 5700; // 2500 + (400 * (8))
+const LISTED_NFD_APP_ID_BOX_COST = 31300; // 2500 + (400 * (8 + 64))
 const LISTING_BOX_COST = 40900; // 2500 + (400 * (64 + 32))
 const TOTAL_LISTING_BOXES_COST = LISTED_NFD_APP_ID_BOX_COST + LISTING_BOX_COST;
 
 export class AlgoDirectory extends Contract {
-  listedNFDappIDs = BoxMap<uint64, bytes<0>>(); // 8 byte key + 0 byte value =  8 bytes total
+  listedNFDappIDs = BoxMap<uint64, Listing>(); // 8 byte key + 0 byte value =  8 bytes total
 
   listings = BoxMap<Listing, Address>(); // 64 byte key + 32 byte value = 96 bytes total
 
-  private checkCallerIsListingOwner(listingKey: Listing): void {
+  private checkCallerIsListingOwner(nfdAppID: uint64): void {
+    const listingKey = this.listedNFDappIDs(nfdAppID).value;
     assert(this.txn.sender === this.listings(listingKey).value, 'Caller must be listing owner');
   }
 
@@ -43,6 +44,10 @@ export class AlgoDirectory extends Contract {
       globals.latestTimestamp <= btoi(AppID.fromUint64(nfdAppID).globalState('i.expirationTime') as bytes),
       'NFD segment must not be expired'
     );
+  }
+
+  private getRoundedTimestamp(): uint64 {
+    return btoi(replace3(itob(globals.latestTimestamp), 7, bzero(1)));
   }
 
   /**
@@ -77,55 +82,67 @@ export class AlgoDirectory extends Contract {
     // Check that a directory listing for this NFD App ID does not already exist
     assert(!this.listedNFDappIDs(nfdAppID).exists, 'Listing for this NFD must not already exist');
 
-    // Create the listing in the directory
-    this.listedNFDappIDs(nfdAppID).create();
-
     // The NFD name needs to have directory.algo trimmed off the end & padded to 27 bytes
     const nfdSegmentName = substring3(nfdLongName, 0, len(nfdLongName) - 15);
 
     const listingKey: Listing = {
-      timestamp: btoi(replace3(itob(globals.latestTimestamp), 4, bzero(4))), // Round the timestamp down to the 5th byte
+      timestamp: this.getRoundedTimestamp(), // Round the timestamp
       vouchAmount: collateralPayment.amount,
       nfdAppID: nfdAppID,
       tags: listingTags,
       name: nfdSegmentName,
     };
+
+    // Create the listing in the directory
     this.listings(listingKey).value = this.txn.sender;
+
+    // Map the NFD App ID to the listing key
+    this.listedNFDappIDs(nfdAppID).value = listingKey;
+
     return listingKey;
   }
 
   /**
    * Refreshes a listing in the directory and updates its last touched timestamp.
    *
-   * @param listingKey The box key of the listing to refresh with the current timestamp.
+   * @param nfdAppID The uint64 application ID of the NFD that will be refreshed
    */
-  refreshListing(listingKey: Listing): void {
+  refreshListing(nfdAppID: uint64): Listing {
     // Ensure the caller owns this listing, owns the NFD, and the NFD has not expired
-    this.checkCallerIsListingOwner(listingKey);
-    const nfdAppID = listingKey.nfdAppID;
+    this.checkCallerIsListingOwner(nfdAppID);
     this.checkCallerIsNFDOwner(nfdAppID);
     this.checkNFDNotExpired(nfdAppID);
 
     // The new listing box will be swapped for one with a new timestamp in the key struct
-    const newListingKey = clone(listingKey);
-    newListingKey.timestamp = globals.latestTimestamp;
+    const oldListingKey = this.listedNFDappIDs(nfdAppID).value;
+    const newListingKey: Listing = {
+      timestamp: this.getRoundedTimestamp(), // Round the timestamp
+      vouchAmount: oldListingKey.vouchAmount,
+      nfdAppID: oldListingKey.nfdAppID,
+      tags: oldListingKey.tags,
+      name: oldListingKey.name,
+    };
+
+    // Remove the old listing box
+    this.listings(oldListingKey).delete();
+
+    // Create the new, refreshed listing box (may be the same if not much time has passed)
     this.listings(newListingKey).value = this.txn.sender;
 
-    // Finally, remove the old listing box
-    this.listings(listingKey).delete();
+    // Map the new listing to the NFD App ID
+    this.listedNFDappIDs(nfdAppID).value = newListingKey;
+
+    return newListingKey;
   }
 
   /**
    * Abandons a listing in the directory and returns the vouched collateral.
    *
-   * @param listingKey The box key of the listing to abandon and reclaim collateral.
+   * @param nfdAppID The uint64 application ID of the NFD that will be abandoned
    */
-  abandonListing(listingKey: Listing): void {
-    this.checkCallerIsListingOwner(listingKey);
-
-    // Remove both boxes for the listing: the NFD App ID and the listing itself
-    this.listedNFDappIDs(listingKey.nfdAppID).delete();
-    this.listings(listingKey).delete();
+  abandonListing(nfdAppID: uint64): void {
+    const listingKey = this.listedNFDappIDs(nfdAppID).value;
+    this.checkCallerIsListingOwner(nfdAppID);
 
     // Return the vouched collateral to the listing owner
     sendPayment({
@@ -134,16 +151,22 @@ export class AlgoDirectory extends Contract {
       amount: listingKey.vouchAmount,
       fee: 0,
     });
+
+    // Remove both boxes for the listing: the NFD App ID and the listing itself
+    this.listings(listingKey).delete();
+    this.listedNFDappIDs(nfdAppID).delete();
   }
 
   /**
    * Deletes a listing from the directory & sends the collateral to the fee sink.
    *
-   * @param listingKey The box key of the listing to delete.
+   * @param nfdAppID The uint64 application ID of the NFD that will be deleted
    */
-  deleteListing(listingKey: Listing): void {
+  deleteListing(nfdAppID: uint64): void {
     // This method is restricted to only the creator of the directory contract
     verifyAppCallTxn(this.txn, { sender: globals.creatorAddress });
+
+    const listingKey = this.listedNFDappIDs(nfdAppID).value;
 
     // Remove both boxes for the listing
     this.listedNFDappIDs(listingKey.nfdAppID).delete();

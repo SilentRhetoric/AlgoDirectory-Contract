@@ -30,13 +30,13 @@
       "desc": "Refreshes a listing in the directory and updates its last touched timestamp.",
       "args": [
         {
-          "name": "listingKey",
-          "type": "(uint64,uint64,uint64,byte[13],string)",
-          "desc": "The box key of the listing to refresh with the current timestamp."
+          "name": "nfdAppID",
+          "type": "uint64",
+          "desc": "The uint64 application ID of the NFD that will be refreshed"
         }
       ],
       "returns": {
-        "type": "void"
+        "type": "(uint64,uint64,uint64,byte[13],string)"
       }
     },
     {
@@ -44,9 +44,9 @@
       "desc": "Abandons a listing in the directory and returns the vouched collateral.",
       "args": [
         {
-          "name": "listingKey",
-          "type": "(uint64,uint64,uint64,byte[13],string)",
-          "desc": "The box key of the listing to abandon and reclaim collateral."
+          "name": "nfdAppID",
+          "type": "uint64",
+          "desc": "The uint64 application ID of the NFD that will be abandoned"
         }
       ],
       "returns": {
@@ -58,9 +58,9 @@
       "desc": "Deletes a listing from the directory & sends the collateral to the fee sink.",
       "args": [
         {
-          "name": "listingKey",
-          "type": "(uint64,uint64,uint64,byte[13],string)",
-          "desc": "The box key of the listing to delete."
+          "name": "nfdAppID",
+          "type": "uint64",
+          "desc": "The uint64 application ID of the NFD that will be deleted"
         }
       ],
       "returns": {
