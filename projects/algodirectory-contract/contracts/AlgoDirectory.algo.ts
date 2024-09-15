@@ -17,6 +17,8 @@ export class AlgoDirectory extends Contract {
 
   listings = BoxMap<Listing, Address>(); // 64 byte key + 32 byte value = 96 bytes total
 
+  adminToken = GlobalStateKey<AssetID>(); // The ASA ID of the token which gates the ability to delete listings
+
   private checkCallerIsListingOwner(nfdAppID: uint64): void {
     const listingKey = this.listedNFDappIDs(nfdAppID).value;
     assert(this.txn.sender === this.listings(listingKey).value, 'Caller must be listing owner');
@@ -163,25 +165,33 @@ export class AlgoDirectory extends Contract {
    * @param nfdAppID The uint64 application ID of the NFD that will be deleted
    */
   deleteListing(nfdAppID: uint64): void {
-    // This method is restricted to only the creator of the directory contract
-    verifyAppCallTxn(this.txn, { sender: globals.creatorAddress });
+    // // This method is restricted to only the creator of the directory contract
+    // verifyAppCallTxn(this.txn, { sender: globals.creatorAddress });
+
+    // This method is restricted to only holders of the admin asset
+    assert(this.txn.sender.assetBalance(this.adminToken.value) > 0, 'Caller must have the admin token');
 
     const listingKey = this.listedNFDappIDs(nfdAppID).value;
-
-    // Remove both boxes for the listing
-    this.listedNFDappIDs(listingKey.nfdAppID).delete();
-    this.listings(listingKey).delete();
 
     // Yeet the vouched collateral into the fee sink as punishment
     sendPayment({
       sender: this.app.address,
-      receiver: Address.fromAddress('Y76M3MSY6DKBRHBL7C3NNDXGS5IIMQVQVUAB6MP4XEMMGVF2QWNPL226CA'), // Fee sink
+      receiver: Address.fromAddress('A7NMWS3NT3IUDMLVO26ULGXGIIOUQ3ND2TXSER6EBGRZNOBOUIQXHIBGDE'), // Testnet fee sink / Mainnet Y76M3MSY6DKBRHBL7C3NNDXGS5IIMQVQVUAB6MP4XEMMGVF2QWNPL226CA
       amount: listingKey.vouchAmount,
       fee: 0,
     });
+
+    // Remove both boxes for the listing
+    this.listings(listingKey).delete();
+    this.listedNFDappIDs(nfdAppID).delete();
   }
 
   createApplication(): void {}
+
+  setAdminToken(asaID: AssetID): void {
+    assert(this.txn.sender === this.app.creator, 'Only the creator can set the admin token');
+    this.adminToken.value = asaID;
+  }
 
   updateApplication(): void {
     assert(this.txn.sender === this.app.creator, 'Only the creator can update the application');

@@ -75,6 +75,18 @@
       }
     },
     {
+      "name": "setAdminToken",
+      "args": [
+        {
+          "name": "asaID",
+          "type": "uint64"
+        }
+      ],
+      "returns": {
+        "type": "void"
+      }
+    },
+    {
       "name": "updateApplication",
       "args": [],
       "returns": {
