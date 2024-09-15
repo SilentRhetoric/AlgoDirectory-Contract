@@ -165,9 +165,6 @@ export class AlgoDirectory extends Contract {
    * @param nfdAppID The uint64 application ID of the NFD that will be deleted
    */
   deleteListing(nfdAppID: uint64): void {
-    // // This method is restricted to only the creator of the directory contract
-    // verifyAppCallTxn(this.txn, { sender: globals.creatorAddress });
-
     // This method is restricted to only holders of the admin asset
     assert(this.txn.sender.assetBalance(this.adminToken.value) > 0, 'Caller must have the admin token');
 

@@ -2676,7 +2676,7 @@
   },
   {
     "teal": 659,
-    "source": 172,
+    "source": 169,
     "pc": [
       656,
       657
@@ -2684,21 +2684,21 @@
   },
   {
     "teal": 660,
-    "source": 172,
+    "source": 169,
     "pc": [
       658
     ]
   },
   {
     "teal": 661,
-    "source": 172,
+    "source": 169,
     "pc": [
       659
     ]
   },
   {
     "teal": 662,
-    "source": 172,
+    "source": 169,
     "pc": [
       660,
       661
@@ -2706,28 +2706,28 @@
   },
   {
     "teal": 663,
-    "source": 172,
+    "source": 169,
     "pc": [
       662
     ]
   },
   {
     "teal": 664,
-    "source": 172,
+    "source": 169,
     "pc": [
       663
     ]
   },
   {
     "teal": 665,
-    "source": 172,
+    "source": 169,
     "pc": [
       664
     ]
   },
   {
     "teal": 668,
-    "source": 172,
+    "source": 169,
     "errorMessage": "Caller must have the admin token",
     "pc": [
       665
@@ -2735,7 +2735,7 @@
   },
   {
     "teal": 672,
-    "source": 174,
+    "source": 171,
     "pc": [
       666,
       667
@@ -2743,14 +2743,14 @@
   },
   {
     "teal": 673,
-    "source": 174,
+    "source": 171,
     "pc": [
       668
     ]
   },
   {
     "teal": 674,
-    "source": 174,
+    "source": 171,
     "pc": [
       669,
       670
@@ -2758,21 +2758,21 @@
   },
   {
     "teal": 683,
-    "source": 177,
+    "source": 174,
     "pc": [
       671
     ]
   },
   {
     "teal": 684,
-    "source": 177,
+    "source": 174,
     "pc": [
       672
     ]
   },
   {
     "teal": 685,
-    "source": 177,
+    "source": 174,
     "pc": [
       673,
       674
@@ -2780,7 +2780,7 @@
   },
   {
     "teal": 689,
-    "source": 178,
+    "source": 175,
     "pc": [
       675,
       676
@@ -2788,7 +2788,7 @@
   },
   {
     "teal": 690,
-    "source": 178,
+    "source": 175,
     "pc": [
       677,
       678
@@ -2796,7 +2796,7 @@
   },
   {
     "teal": 694,
-    "source": 179,
+    "source": 176,
     "pc": [
       679,
       680,
@@ -2836,7 +2836,7 @@
   },
   {
     "teal": 695,
-    "source": 179,
+    "source": 176,
     "pc": [
       713,
       714
@@ -2844,7 +2844,7 @@
   },
   {
     "teal": 699,
-    "source": 174,
+    "source": 171,
     "pc": [
       715,
       716
@@ -2852,14 +2852,14 @@
   },
   {
     "teal": 700,
-    "source": 174,
+    "source": 171,
     "pc": [
       717
     ]
   },
   {
     "teal": 703,
-    "source": 174,
+    "source": 171,
     "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
     "pc": [
       718
@@ -2867,7 +2867,7 @@
   },
   {
     "teal": 704,
-    "source": 180,
+    "source": 177,
     "pc": [
       719,
       720
@@ -2875,7 +2875,7 @@
   },
   {
     "teal": 705,
-    "source": 180,
+    "source": 177,
     "pc": [
       721,
       722
@@ -2883,7 +2883,7 @@
   },
   {
     "teal": 706,
-    "source": 180,
+    "source": 177,
     "pc": [
       723,
       724,
@@ -2892,14 +2892,14 @@
   },
   {
     "teal": 707,
-    "source": 180,
+    "source": 177,
     "pc": [
       726
     ]
   },
   {
     "teal": 708,
-    "source": 180,
+    "source": 177,
     "pc": [
       727,
       728
@@ -2907,14 +2907,14 @@
   },
   {
     "teal": 712,
-    "source": 181,
+    "source": 178,
     "pc": [
       729
     ]
   },
   {
     "teal": 713,
-    "source": 181,
+    "source": 178,
     "pc": [
       730,
       731
@@ -2922,14 +2922,14 @@
   },
   {
     "teal": 716,
-    "source": 177,
+    "source": 174,
     "pc": [
       732
     ]
   },
   {
     "teal": 720,
-    "source": 174,
+    "source": 171,
     "pc": [
       733,
       734
@@ -2937,14 +2937,14 @@
   },
   {
     "teal": 721,
-    "source": 174,
+    "source": 171,
     "pc": [
       735
     ]
   },
   {
     "teal": 724,
-    "source": 174,
+    "source": 171,
     "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
     "pc": [
       736
@@ -2952,14 +2952,14 @@
   },
   {
     "teal": 725,
-    "source": 185,
+    "source": 182,
     "pc": [
       737
     ]
   },
   {
     "teal": 729,
-    "source": 186,
+    "source": 183,
     "pc": [
       738,
       739
@@ -2967,14 +2967,14 @@
   },
   {
     "teal": 730,
-    "source": 186,
+    "source": 183,
     "pc": [
       740
     ]
   },
   {
     "teal": 731,
-    "source": 186,
+    "source": 183,
     "pc": [
       741
     ]
@@ -2988,7 +2988,7 @@
   },
   {
     "teal": 737,
-    "source": 189,
+    "source": 186,
     "pc": [
       743,
       744,
@@ -2997,21 +2997,21 @@
   },
   {
     "teal": 738,
-    "source": 189,
+    "source": 186,
     "pc": [
       746
     ]
   },
   {
     "teal": 739,
-    "source": 189,
+    "source": 186,
     "pc": [
       747
     ]
   },
   {
     "teal": 743,
-    "source": 189,
+    "source": 186,
     "pc": [
       748,
       749,
@@ -3020,14 +3020,14 @@
   },
   {
     "teal": 744,
-    "source": 189,
+    "source": 186,
     "pc": [
       751
     ]
   },
   {
     "teal": 749,
-    "source": 191,
+    "source": 188,
     "pc": [
       752,
       753,
@@ -3036,14 +3036,14 @@
   },
   {
     "teal": 750,
-    "source": 191,
+    "source": 188,
     "pc": [
       755
     ]
   },
   {
     "teal": 753,
-    "source": 191,
+    "source": 188,
     "pc": [
       756,
       757,
@@ -3052,21 +3052,21 @@
   },
   {
     "teal": 754,
-    "source": 191,
+    "source": 188,
     "pc": [
       759
     ]
   },
   {
     "teal": 755,
-    "source": 191,
+    "source": 188,
     "pc": [
       760
     ]
   },
   {
     "teal": 759,
-    "source": 191,
+    "source": 188,
     "pc": [
       761,
       762,
@@ -3075,7 +3075,7 @@
   },
   {
     "teal": 763,
-    "source": 192,
+    "source": 189,
     "pc": [
       764,
       765
@@ -3083,7 +3083,7 @@
   },
   {
     "teal": 764,
-    "source": 192,
+    "source": 189,
     "pc": [
       766,
       767,
@@ -3092,7 +3092,7 @@
   },
   {
     "teal": 765,
-    "source": 192,
+    "source": 189,
     "pc": [
       769,
       770
@@ -3100,21 +3100,21 @@
   },
   {
     "teal": 766,
-    "source": 192,
+    "source": 189,
     "pc": [
       771
     ]
   },
   {
     "teal": 767,
-    "source": 192,
+    "source": 189,
     "pc": [
       772
     ]
   },
   {
     "teal": 770,
-    "source": 192,
+    "source": 189,
     "errorMessage": "Only the creator can set the admin token",
     "pc": [
       773
@@ -3122,14 +3122,14 @@
   },
   {
     "teal": 774,
-    "source": 193,
+    "source": 190,
     "pc": [
       774
     ]
   },
   {
     "teal": 775,
-    "source": 193,
+    "source": 190,
     "pc": [
       775,
       776
@@ -3137,21 +3137,21 @@
   },
   {
     "teal": 776,
-    "source": 193,
+    "source": 190,
     "pc": [
       777
     ]
   },
   {
     "teal": 777,
-    "source": 191,
+    "source": 188,
     "pc": [
       778
     ]
   },
   {
     "teal": 782,
-    "source": 196,
+    "source": 193,
     "pc": [
       779,
       780,
@@ -3160,21 +3160,21 @@
   },
   {
     "teal": 783,
-    "source": 196,
+    "source": 193,
     "pc": [
       782
     ]
   },
   {
     "teal": 784,
-    "source": 196,
+    "source": 193,
     "pc": [
       783
     ]
   },
   {
     "teal": 788,
-    "source": 196,
+    "source": 193,
     "pc": [
       784,
       785,
@@ -3183,7 +3183,7 @@
   },
   {
     "teal": 792,
-    "source": 197,
+    "source": 194,
     "pc": [
       787,
       788
@@ -3191,7 +3191,7 @@
   },
   {
     "teal": 793,
-    "source": 197,
+    "source": 194,
     "pc": [
       789,
       790,
@@ -3200,7 +3200,7 @@
   },
   {
     "teal": 794,
-    "source": 197,
+    "source": 194,
     "pc": [
       792,
       793
@@ -3208,21 +3208,21 @@
   },
   {
     "teal": 795,
-    "source": 197,
+    "source": 194,
     "pc": [
       794
     ]
   },
   {
     "teal": 796,
-    "source": 197,
+    "source": 194,
     "pc": [
       795
     ]
   },
   {
     "teal": 799,
-    "source": 197,
+    "source": 194,
     "errorMessage": "Only the creator can update the application",
     "pc": [
       796
@@ -3230,7 +3230,7 @@
   },
   {
     "teal": 800,
-    "source": 196,
+    "source": 193,
     "pc": [
       797
     ]
