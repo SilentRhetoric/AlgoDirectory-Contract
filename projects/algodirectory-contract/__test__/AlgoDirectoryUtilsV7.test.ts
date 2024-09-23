@@ -14,9 +14,8 @@ const DIRECTORY_DOT_ALGO_APP_ID = Number(process.env.DIRECTORY_DOT_ALGO_APP_ID);
 
 // For testing purposes
 const CREATOR = 'CREATOR';
-const CREATOR_SEGMENT_APPID = Number(process.env.CREATOR_SEGMENT_APP_ID); // test.directory.algo
 const DAVE = 'DAVE';
-const DAVE_SEGEMENT_APPID = Number(process.env.DAVE_SEGMENT_APP_ID); // test.directory.algo
+const DAVE_SEGMENT_APPID = Number(process.env.DAVE_SEGMENT_APP_ID); // test.directory.algo
 const BETH = 'BETH';
 const BETH_SEGMENT_APPID = Number(process.env.DAVE_SEGMENT_APP_ID); // beth.directory.algo
 
@@ -147,7 +146,7 @@ describe('AlgoDirectory', () => {
   //   const result = await daveAppClient.createListing(
   //     {
   //       collateralPayment: payTxn,
-  //       nfdAppId: DAVE_SEGEMENT_APPID,
+  //       nfdAppId: DAVE_SEGMENT_APPID,
   //       listingTags: new Uint8Array(13),
   //     },
   //     {
@@ -177,7 +176,7 @@ describe('AlgoDirectory', () => {
   //   );
 
   //   const result = await daveAppClient.refreshListing({
-  //     nfdAppId: DAVE_SEGEMENT_APPID,
+  //     nfdAppId: DAVE_SEGMENT_APPID,
   //   });
   //   console.debug('Refresh txID: ', result.transaction.txID());
   //   console.debug('Refresh return: ', result.return);
@@ -203,7 +202,7 @@ describe('AlgoDirectory', () => {
 
   //   const result = await daveAppClient.abandonListing(
   //     {
-  //       nfdAppId: DAVE_SEGEMENT_APPID,
+  //       nfdAppId: DAVE_SEGMENT_APPID,
   //     },
   //     {
   //       sendParams: { fee: new AlgoAmount({ microAlgos: 2000 }) },
@@ -241,7 +240,7 @@ describe('AlgoDirectory', () => {
   //   const createResult = await daveAppClient.createListing(
   //     {
   //       collateralPayment: payTxn,
-  //       nfdAppId: DAVE_SEGEMENT_APPID,
+  //       nfdAppId: DAVE_SEGMENT_APPID,
   //       listingTags: new Uint8Array(13),
   //     },
   //     {
@@ -268,78 +267,13 @@ describe('AlgoDirectory', () => {
 
   //   const deleteResult = await creatorAppClient.deleteListing(
   //     {
-  //       nfdAppId: DAVE_SEGEMENT_APPID,
+  //       nfdAppId: DAVE_SEGMENT_APPID,
   //     },
   //     {
   //       sendParams: { fee: new AlgoAmount({ microAlgos: 2000 }) },
   //     }
   //   );
   //   console.debug('Creator delete txID: ', deleteResult.transaction.txID());
-
-  //   expect(deleteResult.confirmations?.length).toBe(1);
-  //   expect(deleteResult.confirmation?.confirmedRound).toBeGreaterThan(0);
-  //   // TODO: expect the innerTxn receiver to be the fee sink
-  // }); // Create a listing, then delete it and confirm that the collateral is sent to the fee sink
-
-  // test('bethDeleteListing', async () => {
-  //   // Step 1: Dave is going to create a listing for dave.directory.algo
-  //   const accountManager = new AccountManager(new ClientManager({ algod: algorand.client.algod }));
-  //   const daveAccount = (await accountManager.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }))).account;
-  //   algorand.setSignerFromAccount(daveAccount);
-  //   const daveAppClient = new AlgoDirectoryClient(
-  //     {
-  //       sender: daveAccount,
-  //       resolveBy: 'id',
-  //       id: deployedAppID,
-  //     },
-  //     algorand.client.algod
-  //   );
-
-  //   const suggestedParams = await algorand.getSuggestedParams();
-  //   const payTxn = makePaymentTxnWithSuggestedParamsFromObject({
-  //     from: daveAccount.addr,
-  //     to: deployedAppAddress,
-  //     amount: new AlgoAmount({ microAlgos: 72200 }).microAlgos, // Each listing 72_200 uA
-  //     suggestedParams,
-  //   });
-
-  //   const createResult = await daveAppClient.createListing(
-  //     {
-  //       collateralPayment: payTxn,
-  //       nfdAppId: DAVE_SEGEMENT_APPID,
-  //       listingTags: new Uint8Array(13),
-  //     },
-  //     {
-  //       sendParams: { fee: new AlgoAmount({ microAlgos: 2000 }) },
-  //     }
-  //   );
-  //   console.debug('Create txID: ', createResult.transaction.txID());
-  //   console.debug('Create return: ', createResult.return);
-
-  //   expect(createResult.confirmations?.length).toBe(2);
-  //   expect(createResult.confirmation?.confirmedRound).toBeGreaterThan(0);
-
-  //   // Step 2: Beth is now going to delete Dave's listing for dave.directory.algo
-  //   const bethAccount = (await accountManager.fromEnvironment(BETH, new AlgoAmount({ algos: 0 }))).account;
-  //   algorand.setSignerFromAccount(bethAccount);
-  //   const creatorAppClient = new AlgoDirectoryClient(
-  //     {
-  //       sender: bethAccount,
-  //       resolveBy: 'id',
-  //       id: deployedAppID,
-  //     },
-  //     algorand.client.algod
-  //   );
-
-  //   const deleteResult = await creatorAppClient.deleteListing(
-  //     {
-  //       nfdAppId: DAVE_SEGEMENT_APPID,
-  //     },
-  //     {
-  //       sendParams: { fee: new AlgoAmount({ microAlgos: 2000 }) },
-  //     }
-  //   );
-  //   console.debug('Bethd delete txID: ', deleteResult.transaction.txID());
 
   //   expect(deleteResult.confirmations?.length).toBe(1);
   //   expect(deleteResult.confirmation?.confirmedRound).toBeGreaterThan(0);

@@ -18,7 +18,7 @@ const FEE_SINK_ADDRESS = (process.env.FEE_SINK_ADDRESS ||
 const CREATOR = 'CREATOR';
 const CREATOR_SEGMENT_APPID = (process.env.CREATOR_SEGMENT_APP_ID || 576232891) as number; // test.directory.algo
 const DAVE = 'DAVE';
-const DAVE_SEGEMENT_APPID = (process.env.DAVE_SEGMENT_APP_ID || 673442367) as number; // dave.directory.algo
+const DAVE_SEGMENT_APPID = (process.env.DAVE_SEGMENT_APP_ID || 673442367) as number; // dave.directory.algo
 const BETH = 'BETH';
 const BETH_SEGMENT_APPID = (process.env.DAVE_SEGMENT_APP_ID || 606016435) as number; // beth.directory.algo
 
@@ -141,7 +141,7 @@ describe('AlgoDirectory', () => {
     const result = await daveAppClient.createListing(
       {
         collateralPayment: payTxn,
-        nfdAppId: DAVE_SEGEMENT_APPID,
+        nfdAppId: DAVE_SEGMENT_APPID,
         listingTags: new Uint8Array(13),
       },
       {
@@ -171,7 +171,7 @@ describe('AlgoDirectory', () => {
     );
 
     const result = await daveAppClient.refreshListing({
-      nfdAppId: DAVE_SEGEMENT_APPID,
+      nfdAppId: DAVE_SEGMENT_APPID,
     });
     console.debug('Refresh txID: ', result.transaction.txID());
     console.debug('Refresh return: ', result.return);
@@ -197,7 +197,7 @@ describe('AlgoDirectory', () => {
 
     const result = await daveAppClient.abandonListing(
       {
-        nfdAppId: DAVE_SEGEMENT_APPID,
+        nfdAppId: DAVE_SEGMENT_APPID,
       },
       {
         sendParams: { fee: new AlgoAmount({ microAlgos: 2000 }) },
@@ -235,7 +235,7 @@ describe('AlgoDirectory', () => {
     const createResult = await daveAppClient.createListing(
       {
         collateralPayment: payTxn,
-        nfdAppId: DAVE_SEGEMENT_APPID,
+        nfdAppId: DAVE_SEGMENT_APPID,
         listingTags: new Uint8Array(13),
       },
       {
@@ -262,7 +262,7 @@ describe('AlgoDirectory', () => {
 
     const deleteResult = await creatorAppClient.deleteListing(
       {
-        nfdAppId: DAVE_SEGEMENT_APPID,
+        nfdAppId: DAVE_SEGMENT_APPID,
       },
       {
         sendParams: { fee: new AlgoAmount({ microAlgos: 2000 }) },
@@ -300,7 +300,7 @@ describe('AlgoDirectory', () => {
     const createResult = await daveAppClient.createListing(
       {
         collateralPayment: payTxn,
-        nfdAppId: DAVE_SEGEMENT_APPID,
+        nfdAppId: DAVE_SEGMENT_APPID,
         listingTags: new Uint8Array(13),
       },
       {
@@ -327,7 +327,7 @@ describe('AlgoDirectory', () => {
 
     const deleteResult = await creatorAppClient.deleteListing(
       {
-        nfdAppId: DAVE_SEGEMENT_APPID,
+        nfdAppId: DAVE_SEGMENT_APPID,
       },
       {
         sendParams: { fee: new AlgoAmount({ microAlgos: 2000 }) },
