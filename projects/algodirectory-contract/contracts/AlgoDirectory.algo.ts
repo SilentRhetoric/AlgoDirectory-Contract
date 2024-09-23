@@ -13,11 +13,19 @@ const LISTING_BOX_COST = 40900; // 2500 + (400 * (64 + 32))
 const TOTAL_LISTING_BOXES_COST = LISTED_NFD_APP_ID_BOX_COST + LISTING_BOX_COST;
 
 export class AlgoDirectory extends Contract {
+  // Testnet A7NMWS3NT3IUDMLVO26ULGXGIIOUQ3ND2TXSER6EBGRZNOBOUIQXHIBGDE
+  // Mainnet Y76M3MSY6DKBRHBL7C3NNDXGS5IIMQVQVUAB6MP4XEMMGVF2QWNPL226CA
+  feeSinkAddress = TemplateVar<Address>();
+
+  directoryDotAlgoAppID = TemplateVar<AppID>(); // Testnet 576232821 / Mainnet 766401564
+
+  nfdRegistryAppID = TemplateVar<AppID>(); // Testnet 84366825 / Mainnet 760937186
+
+  adminToken = GlobalStateKey<AssetID>(); // The ASA ID of the token which gates the ability to delete listings
+
   listedNFDappIDs = BoxMap<uint64, Listing>(); // 8 byte key + 0 byte value =  8 bytes total
 
   listings = BoxMap<Listing, Address>(); // 64 byte key + 32 byte value = 96 bytes total
-
-  adminToken = GlobalStateKey<AssetID>(); // The ASA ID of the token which gates the ability to delete listings
 
   private checkCallerIsListingOwner(nfdAppID: uint64): void {
     const listingKey = this.listedNFDappIDs(nfdAppID).value;
@@ -27,8 +35,8 @@ export class AlgoDirectory extends Contract {
   private checkNFDIsSegmentOfDirectory(nfdAppID: uint64): void {
     // Ensure the NFD is a segment of directory.algo by checking the parent appID
     assert(
-      btoi(AppID.fromUint64(nfdAppID).globalState('i.parentAppID') as bytes) === 576232821,
-      'NFD must be a segment of directory.algo with parent app ID 576232821'
+      btoi(AppID.fromUint64(nfdAppID).globalState('i.parentAppID') as bytes) === this.directoryDotAlgoAppID.id,
+      'NFD must be a segment of directory.algo'
     );
   }
 
@@ -55,8 +63,9 @@ export class AlgoDirectory extends Contract {
   /**
    * Creates a listing in the directory by vouching for an NFD root or segment of directory.algo.
    *
-   * @param nfdAppID The uint64 application ID of the NFD that will be listed
    * @param collateralPayment The Algo payment of collateral to vouch for the listing
+   * @param nfdAppID The uint64 application ID of the NFD that will be listed
+   * @param listingTags Array of 13 bytes each representing a tag for the listing
    */
   createListing(collateralPayment: PayTxn, nfdAppID: uint64, listingTags: StaticArray<byte, 13>): Listing {
     // Check that the caller is paying a mimimum amount of collateral to vouch for the listing
@@ -75,7 +84,7 @@ export class AlgoDirectory extends Contract {
     const nfdLongName = AppID.fromUint64(nfdAppID).globalState('i.name') as bytes;
 
     sendAppCall({
-      applicationID: AppID.fromUint64(84366825), // Mainnet 760937186
+      applicationID: this.nfdRegistryAppID,
       applicationArgs: ['is_valid_nfd_appid', nfdLongName, itob(nfdAppID)],
       fee: 0,
     });
@@ -173,9 +182,10 @@ export class AlgoDirectory extends Contract {
     // Yeet the vouched collateral into the fee sink as punishment
     sendPayment({
       sender: this.app.address,
-      receiver: Address.fromAddress('A7NMWS3NT3IUDMLVO26ULGXGIIOUQ3ND2TXSER6EBGRZNOBOUIQXHIBGDE'), // Testnet fee sink / Mainnet Y76M3MSY6DKBRHBL7C3NNDXGS5IIMQVQVUAB6MP4XEMMGVF2QWNPL226CA
+      receiver: this.feeSinkAddress,
       amount: listingKey.vouchAmount,
       fee: 0,
+      note: 'Yeeted ' + listingKey.name,
     });
 
     // Remove both boxes for the listing
@@ -183,12 +193,17 @@ export class AlgoDirectory extends Contract {
     this.listedNFDappIDs(nfdAppID).delete();
   }
 
-  createApplication(): void {}
-
+  /**
+   * Stores an ASA ID in global state that will control administration rights
+   *
+   * @param asaID The uint64 asset ID of the ASA to be the admin token
+   */
   setAdminToken(asaID: AssetID): void {
     assert(this.txn.sender === this.app.creator, 'Only the creator can set the admin token');
     this.adminToken.value = asaID;
   }
+
+  createApplication(): void {}
 
   updateApplication(): void {
     assert(this.txn.sender === this.app.creator, 'Only the creator can update the application');

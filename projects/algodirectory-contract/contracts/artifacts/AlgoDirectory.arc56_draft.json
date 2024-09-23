@@ -18,7 +18,8 @@
         },
         {
           "name": "listingTags",
-          "type": "byte[13]"
+          "type": "byte[13]",
+          "desc": "Array of 13 bytes each representing a tag for the listing"
         }
       ],
       "returns": {
@@ -94,24 +95,13 @@
       }
     },
     {
-      "name": "createApplication",
-      "args": [],
-      "returns": {
-        "type": "void"
-      },
-      "actions": {
-        "create": [
-          "NoOp"
-        ],
-        "call": []
-      }
-    },
-    {
       "name": "setAdminToken",
+      "desc": "Stores an ASA ID in global state that will control administration rights",
       "args": [
         {
           "name": "asaID",
-          "type": "uint64"
+          "type": "uint64",
+          "desc": "The uint64 asset ID of the ASA to be the admin token"
         }
       ],
       "returns": {
@@ -122,6 +112,19 @@
         "call": [
           "NoOp"
         ]
+      }
+    },
+    {
+      "name": "createApplication",
+      "args": [],
+      "returns": {
+        "type": "void"
+      },
+      "actions": {
+        "create": [
+          "NoOp"
+        ],
+        "call": []
       }
     },
     {
@@ -224,68 +227,68 @@
         24,
         25,
         26,
-        27
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38
+      ]
+    },
+    {
+      "teal": 9,
+      "source": 15,
+      "pc": [
+        39
+      ]
+    },
+    {
+      "teal": 10,
+      "source": 15,
+      "pc": [
+        40
+      ]
+    },
+    {
+      "teal": 11,
+      "source": 15,
+      "pc": [
+        41,
+        42
+      ]
+    },
+    {
+      "teal": 12,
+      "source": 15,
+      "pc": [
+        43
       ]
     },
     {
       "teal": 13,
       "source": 15,
       "pc": [
-        28,
-        29
+        44
       ]
     },
     {
       "teal": 14,
       "source": 15,
       "pc": [
-        30
+        45,
+        46
       ]
     },
     {
       "teal": 15,
       "source": 15,
       "pc": [
-        31
-      ]
-    },
-    {
-      "teal": 16,
-      "source": 15,
-      "pc": [
-        32
-      ]
-    },
-    {
-      "teal": 17,
-      "source": 15,
-      "pc": [
-        33,
-        34
-      ]
-    },
-    {
-      "teal": 18,
-      "source": 15,
-      "pc": [
-        35
-      ]
-    },
-    {
-      "teal": 19,
-      "source": 15,
-      "pc": [
-        36,
-        37,
-        38,
-        39,
-        40,
-        41,
-        42,
-        43,
-        44,
-        45,
-        46,
         47,
         48,
         49,
@@ -300,148 +303,84 @@
         58,
         59,
         60,
-        61
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80
+      ]
+    },
+    {
+      "teal": 16,
+      "source": 15,
+      "pc": [
+        81,
+        82
       ]
     },
     {
       "teal": 23,
       "source": 15,
-      "errorMessage": "The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?",
-      "pc": [
-        62
-      ]
-    },
-    {
-      "teal": 27,
-      "source": 22,
-      "pc": [
-        63,
-        64,
-        65
-      ]
-    },
-    {
-      "teal": 30,
-      "source": 22,
-      "pc": [
-        66
-      ]
-    },
-    {
-      "teal": 34,
-      "source": 23,
-      "pc": [
-        67,
-        68
-      ]
-    },
-    {
-      "teal": 35,
-      "source": 23,
-      "pc": [
-        69
-      ]
-    },
-    {
-      "teal": 36,
-      "source": 23,
-      "pc": [
-        70,
-        71
-      ]
-    },
-    {
-      "teal": 40,
-      "source": 24,
-      "pc": [
-        72,
-        73
-      ]
-    },
-    {
-      "teal": 41,
-      "source": 23,
-      "pc": [
-        74,
-        75
-      ]
-    },
-    {
-      "teal": 42,
-      "source": 23,
-      "pc": [
-        76
-      ]
-    },
-    {
-      "teal": 45,
-      "source": 23,
-      "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
-      "pc": [
-        77
-      ]
-    },
-    {
-      "teal": 46,
-      "source": 24,
-      "pc": [
-        78
-      ]
-    },
-    {
-      "teal": 49,
-      "source": 24,
-      "errorMessage": "box value does not exist: this.listings(listingKey).value",
-      "pc": [
-        79
-      ]
-    },
-    {
-      "teal": 50,
-      "source": 24,
-      "pc": [
-        80
-      ]
-    },
-    {
-      "teal": 53,
-      "source": 24,
-      "errorMessage": "Caller must be listing owner",
-      "pc": [
-        81
-      ]
-    },
-    {
-      "teal": 54,
-      "source": 22,
-      "pc": [
-        82
-      ]
-    },
-    {
-      "teal": 58,
-      "source": 27,
       "pc": [
         83,
-        84,
+        84
+      ]
+    },
+    {
+      "teal": 24,
+      "source": 15,
+      "pc": [
         85
       ]
     },
     {
-      "teal": 65,
-      "source": 30,
+      "teal": 25,
+      "source": 15,
       "pc": [
-        86,
+        86
+      ]
+    },
+    {
+      "teal": 26,
+      "source": 15,
+      "pc": [
         87
       ]
     },
     {
-      "teal": 66,
-      "source": 30,
+      "teal": 27,
+      "source": 15,
       "pc": [
         88,
-        89,
-        90,
+        89
+      ]
+    },
+    {
+      "teal": 28,
+      "source": 15,
+      "pc": [
+        90
+      ]
+    },
+    {
+      "teal": 29,
+      "source": 15,
+      "pc": [
         91,
         92,
         93,
@@ -453,147 +392,141 @@
         99,
         100,
         101,
-        102
-      ]
-    },
-    {
-      "teal": 67,
-      "source": 30,
-      "pc": [
-        103
-      ]
-    },
-    {
-      "teal": 70,
-      "source": 30,
-      "errorMessage": "global state value does not exist: AppID.fromUint64(nfdAppID).globalState('i.parentAppID')",
-      "pc": [
-        104
-      ]
-    },
-    {
-      "teal": 71,
-      "source": 30,
-      "pc": [
-        105
-      ]
-    },
-    {
-      "teal": 72,
-      "source": 30,
-      "pc": [
+        102,
+        103,
+        104,
+        105,
         106,
         107,
         108,
         109,
         110,
-        111
-      ]
-    },
-    {
-      "teal": 73,
-      "source": 30,
-      "pc": [
-        112
-      ]
-    },
-    {
-      "teal": 76,
-      "source": 29,
-      "errorMessage": "NFD must be a segment of directory.algo with parent app ID 576232821",
-      "pc": [
-        113
-      ]
-    },
-    {
-      "teal": 77,
-      "source": 27,
-      "pc": [
-        114
-      ]
-    },
-    {
-      "teal": 81,
-      "source": 35,
-      "pc": [
+        111,
+        112,
+        113,
+        114,
         115,
-        116,
+        116
+      ]
+    },
+    {
+      "teal": 33,
+      "source": 15,
+      "errorMessage": "The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?",
+      "pc": [
         117
       ]
     },
     {
-      "teal": 88,
-      "source": 38,
+      "teal": 37,
+      "source": 30,
       "pc": [
         118,
-        119
+        119,
+        120
       ]
     },
     {
-      "teal": 89,
-      "source": 38,
+      "teal": 40,
+      "source": 30,
       "pc": [
-        120,
         121
       ]
     },
     {
-      "teal": 90,
-      "source": 38,
+      "teal": 44,
+      "source": 31,
       "pc": [
         122,
-        123,
-        124,
+        123
+      ]
+    },
+    {
+      "teal": 45,
+      "source": 31,
+      "pc": [
+        124
+      ]
+    },
+    {
+      "teal": 46,
+      "source": 31,
+      "pc": [
         125,
-        126,
+        126
+      ]
+    },
+    {
+      "teal": 50,
+      "source": 32,
+      "pc": [
         127,
-        128,
+        128
+      ]
+    },
+    {
+      "teal": 51,
+      "source": 31,
+      "pc": [
         129,
-        130,
-        131,
+        130
+      ]
+    },
+    {
+      "teal": 52,
+      "source": 31,
+      "pc": [
+        131
+      ]
+    },
+    {
+      "teal": 55,
+      "source": 31,
+      "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
+      "pc": [
         132
       ]
     },
     {
-      "teal": 91,
-      "source": 38,
+      "teal": 56,
+      "source": 32,
       "pc": [
         133
       ]
     },
     {
-      "teal": 94,
-      "source": 38,
-      "errorMessage": "global state value does not exist: AppID.fromUint64(nfdAppID).globalState('i.owner.a')",
+      "teal": 59,
+      "source": 32,
+      "errorMessage": "box value does not exist: this.listings(listingKey).value",
       "pc": [
         134
       ]
     },
     {
-      "teal": 95,
-      "source": 38,
+      "teal": 60,
+      "source": 32,
       "pc": [
         135
       ]
     },
     {
-      "teal": 98,
-      "source": 37,
-      "errorMessage": "Listing creator must be the NFD app i.owner.a",
+      "teal": 63,
+      "source": 32,
+      "errorMessage": "Caller must be listing owner",
       "pc": [
         136
       ]
     },
     {
-      "teal": 99,
-      "source": 35,
+      "teal": 64,
+      "source": 30,
       "pc": [
         137
       ]
     },
     {
-      "teal": 103,
-      "source": 43,
+      "teal": 68,
+      "source": 35,
       "pc": [
         138,
         139,
@@ -601,25 +534,19 @@
       ]
     },
     {
-      "teal": 110,
-      "source": 46,
+      "teal": 75,
+      "source": 38,
       "pc": [
         141,
         142
       ]
     },
     {
-      "teal": 111,
-      "source": 46,
+      "teal": 76,
+      "source": 38,
       "pc": [
         143,
-        144
-      ]
-    },
-    {
-      "teal": 112,
-      "source": 46,
-      "pc": [
+        144,
         145,
         146,
         147,
@@ -632,466 +559,419 @@
         154,
         155,
         156,
-        157,
-        158,
-        159,
-        160,
+        157
+      ]
+    },
+    {
+      "teal": 77,
+      "source": 38,
+      "pc": [
+        158
+      ]
+    },
+    {
+      "teal": 80,
+      "source": 38,
+      "errorMessage": "global state value does not exist: AppID.fromUint64(nfdAppID).globalState('i.parentAppID')",
+      "pc": [
+        159
+      ]
+    },
+    {
+      "teal": 81,
+      "source": 38,
+      "pc": [
+        160
+      ]
+    },
+    {
+      "teal": 82,
+      "source": 38,
+      "pc": [
         161,
         162
       ]
     },
     {
-      "teal": 113,
-      "source": 46,
+      "teal": 83,
+      "source": 38,
       "pc": [
         163
       ]
     },
     {
-      "teal": 116,
-      "source": 46,
-      "errorMessage": "global state value does not exist: AppID.fromUint64(nfdAppID).globalState('i.expirationTime')",
+      "teal": 86,
+      "source": 37,
+      "errorMessage": "NFD must be a segment of directory.algo",
       "pc": [
         164
       ]
     },
     {
-      "teal": 117,
-      "source": 46,
+      "teal": 87,
+      "source": 35,
       "pc": [
         165
       ]
     },
     {
-      "teal": 118,
-      "source": 46,
-      "pc": [
-        166
-      ]
-    },
-    {
-      "teal": 121,
-      "source": 45,
-      "errorMessage": "NFD segment must not be expired",
-      "pc": [
-        167
-      ]
-    },
-    {
-      "teal": 122,
+      "teal": 91,
       "source": 43,
       "pc": [
+        166,
+        167,
         168
       ]
     },
     {
-      "teal": 126,
-      "source": 51,
+      "teal": 98,
+      "source": 46,
       "pc": [
         169,
-        170,
-        171
+        170
       ]
     },
     {
-      "teal": 130,
-      "source": 52,
+      "teal": 99,
+      "source": 46,
       "pc": [
-        172,
-        173
+        171,
+        172
       ]
     },
     {
-      "teal": 131,
-      "source": 52,
+      "teal": 100,
+      "source": 46,
       "pc": [
-        174
-      ]
-    },
-    {
-      "teal": 132,
-      "source": 52,
-      "pc": [
+        173,
+        174,
         175,
         176,
-        177
-      ]
-    },
-    {
-      "teal": 133,
-      "source": 52,
-      "pc": [
+        177,
         178,
-        179
+        179,
+        180,
+        181,
+        182,
+        183
       ]
     },
     {
-      "teal": 134,
-      "source": 52,
+      "teal": 101,
+      "source": 46,
       "pc": [
-        180
+        184
       ]
     },
     {
-      "teal": 135,
-      "source": 51,
+      "teal": 104,
+      "source": 46,
+      "errorMessage": "global state value does not exist: AppID.fromUint64(nfdAppID).globalState('i.owner.a')",
       "pc": [
-        181
-      ]
-    },
-    {
-      "teal": 140,
-      "source": 61,
-      "pc": [
-        182
-      ]
-    },
-    {
-      "teal": 143,
-      "source": 61,
-      "pc": [
-        183,
-        184,
         185
       ]
     },
     {
-      "teal": 144,
-      "source": 61,
+      "teal": 105,
+      "source": 46,
       "pc": [
         186
       ]
     },
     {
-      "teal": 145,
-      "source": 61,
+      "teal": 108,
+      "source": 45,
+      "errorMessage": "Listing creator must be the NFD app i.owner.a",
       "pc": [
         187
       ]
     },
     {
-      "teal": 146,
-      "source": 61,
+      "teal": 109,
+      "source": 43,
       "pc": [
-        188,
-        189
+        188
       ]
     },
     {
-      "teal": 147,
-      "source": 61,
+      "teal": 113,
+      "source": 51,
       "pc": [
-        190
-      ]
-    },
-    {
-      "teal": 150,
-      "source": 61,
-      "errorMessage": "argument 0 (listingTags) for createListing must be a byte[13]",
-      "pc": [
+        189,
+        190,
         191
       ]
     },
     {
-      "teal": 153,
-      "source": 61,
+      "teal": 120,
+      "source": 54,
       "pc": [
         192,
-        193,
-        194
+        193
       ]
     },
     {
-      "teal": 154,
-      "source": 61,
+      "teal": 121,
+      "source": 54,
       "pc": [
+        194,
         195
       ]
     },
     {
-      "teal": 157,
-      "source": 61,
+      "teal": 122,
+      "source": 54,
       "pc": [
         196,
-        197
-      ]
-    },
-    {
-      "teal": 158,
-      "source": 61,
-      "pc": [
-        198
-      ]
-    },
-    {
-      "teal": 159,
-      "source": 61,
-      "pc": [
-        199
-      ]
-    },
-    {
-      "teal": 160,
-      "source": 61,
-      "pc": [
-        200
-      ]
-    },
-    {
-      "teal": 161,
-      "source": 61,
-      "pc": [
+        197,
+        198,
+        199,
+        200,
         201,
-        202
-      ]
-    },
-    {
-      "teal": 162,
-      "source": 61,
-      "pc": [
-        203
-      ]
-    },
-    {
-      "teal": 163,
-      "source": 61,
-      "pc": [
-        204
-      ]
-    },
-    {
-      "teal": 166,
-      "source": 61,
-      "errorMessage": "argument 2 (collateralPayment) for createListing must be a pay transaction",
-      "pc": [
-        205
-      ]
-    },
-    {
-      "teal": 169,
-      "source": 61,
-      "pc": [
+        202,
+        203,
+        204,
+        205,
         206,
         207,
-        208
+        208,
+        209,
+        210,
+        211,
+        212,
+        213
       ]
     },
     {
-      "teal": 170,
-      "source": 61,
+      "teal": 123,
+      "source": 54,
       "pc": [
-        209
+        214
       ]
     },
     {
-      "teal": 171,
-      "source": 61,
+      "teal": 126,
+      "source": 54,
+      "errorMessage": "global state value does not exist: AppID.fromUint64(nfdAppID).globalState('i.expirationTime')",
       "pc": [
-        210
-      ]
-    },
-    {
-      "teal": 172,
-      "source": 61,
-      "pc": [
-        211
-      ]
-    },
-    {
-      "teal": 173,
-      "source": 61,
-      "pc": [
-        212
-      ]
-    },
-    {
-      "teal": 182,
-      "source": 61,
-      "pc": [
-        213,
-        214,
         215
       ]
     },
     {
-      "teal": 185,
-      "source": 61,
+      "teal": 127,
+      "source": 54,
       "pc": [
         216
       ]
     },
     {
-      "teal": 186,
-      "source": 61,
+      "teal": 128,
+      "source": 54,
       "pc": [
-        217,
+        217
+      ]
+    },
+    {
+      "teal": 131,
+      "source": 53,
+      "errorMessage": "NFD segment must not be expired",
+      "pc": [
         218
       ]
     },
     {
-      "teal": 195,
-      "source": 63,
+      "teal": 132,
+      "source": 51,
       "pc": [
-        219,
-        220
+        219
       ]
     },
     {
-      "teal": 196,
-      "source": 64,
+      "teal": 136,
+      "source": 59,
       "pc": [
+        220,
         221,
         222
       ]
     },
     {
-      "teal": 197,
-      "source": 64,
+      "teal": 140,
+      "source": 60,
       "pc": [
         223,
         224
       ]
     },
     {
-      "teal": 198,
-      "source": 64,
+      "teal": 141,
+      "source": 60,
       "pc": [
         225
       ]
     },
     {
-      "teal": 201,
-      "source": 64,
-      "errorMessage": "transaction verification failed: {\"txn\":\"collateralPayment\",\"field\":\"sender\",\"expected\":\"this.txn.sender\"}",
+      "teal": 142,
+      "source": 60,
       "pc": [
-        226
-      ]
-    },
-    {
-      "teal": 204,
-      "source": 63,
-      "pc": [
+        226,
         227,
         228
       ]
     },
     {
-      "teal": 205,
-      "source": 65,
+      "teal": 143,
+      "source": 60,
       "pc": [
         229,
         230
       ]
     },
     {
-      "teal": 206,
-      "source": 65,
+      "teal": 144,
+      "source": 60,
       "pc": [
-        231,
+        231
+      ]
+    },
+    {
+      "teal": 145,
+      "source": 59,
+      "pc": [
         232
       ]
     },
     {
-      "teal": 207,
-      "source": 65,
+      "teal": 150,
+      "source": 70,
       "pc": [
         233
       ]
     },
     {
-      "teal": 210,
-      "source": 65,
-      "errorMessage": "transaction verification failed: {\"txn\":\"collateralPayment\",\"field\":\"receiver\",\"expected\":\"this.app.address\"}",
+      "teal": 153,
+      "source": 70,
       "pc": [
-        234
-      ]
-    },
-    {
-      "teal": 213,
-      "source": 63,
-      "pc": [
+        234,
         235,
         236
       ]
     },
     {
-      "teal": 214,
-      "source": 66,
+      "teal": 154,
+      "source": 70,
       "pc": [
-        237,
+        237
+      ]
+    },
+    {
+      "teal": 155,
+      "source": 70,
+      "pc": [
         238
       ]
     },
     {
-      "teal": 215,
-      "source": 13,
+      "teal": 156,
+      "source": 70,
       "pc": [
         239,
-        240,
-        241,
+        240
+      ]
+    },
+    {
+      "teal": 157,
+      "source": 70,
+      "pc": [
+        241
+      ]
+    },
+    {
+      "teal": 160,
+      "source": 70,
+      "errorMessage": "argument 0 (listingTags) for createListing must be a byte[13]",
+      "pc": [
         242
       ]
     },
     {
-      "teal": 216,
-      "source": 66,
-      "pc": [
-        243
-      ]
-    },
-    {
-      "teal": 219,
-      "source": 66,
-      "errorMessage": "transaction verification failed: {\"txn\":\"collateralPayment\",\"field\":\"amount\",\"condition\":\"greaterThanEqualTo\",\"expected\":\">=TOTAL_LISTING_BOXES_COST\"}",
-      "pc": [
-        244
-      ]
-    },
-    {
-      "teal": 223,
+      "teal": 163,
       "source": 70,
       "pc": [
-        245,
+        243,
+        244,
+        245
+      ]
+    },
+    {
+      "teal": 164,
+      "source": 70,
+      "pc": [
         246
       ]
     },
     {
-      "teal": 224,
+      "teal": 167,
       "source": 70,
       "pc": [
         247,
-        248,
+        248
+      ]
+    },
+    {
+      "teal": 168,
+      "source": 70,
+      "pc": [
         249
       ]
     },
     {
-      "teal": 228,
-      "source": 71,
+      "teal": 169,
+      "source": 70,
       "pc": [
-        250,
+        250
+      ]
+    },
+    {
+      "teal": 170,
+      "source": 70,
+      "pc": [
         251
       ]
     },
     {
-      "teal": 229,
-      "source": 71,
+      "teal": 171,
+      "source": 70,
       "pc": [
         252,
-        253,
+        253
+      ]
+    },
+    {
+      "teal": 172,
+      "source": 70,
+      "pc": [
         254
       ]
     },
     {
-      "teal": 233,
-      "source": 72,
+      "teal": 173,
+      "source": 70,
       "pc": [
-        255,
+        255
+      ]
+    },
+    {
+      "teal": 176,
+      "source": 70,
+      "errorMessage": "argument 2 (collateralPayment) for createListing must be a pay transaction",
+      "pc": [
         256
       ]
     },
     {
-      "teal": 234,
-      "source": 72,
+      "teal": 179,
+      "source": 70,
       "pc": [
         257,
         258,
@@ -1099,909 +979,923 @@
       ]
     },
     {
-      "teal": 238,
-      "source": 75,
+      "teal": 180,
+      "source": 70,
       "pc": [
-        260,
+        260
+      ]
+    },
+    {
+      "teal": 181,
+      "source": 70,
+      "pc": [
         261
       ]
     },
     {
-      "teal": 239,
-      "source": 75,
+      "teal": 182,
+      "source": 70,
       "pc": [
-        262,
-        263,
+        262
+      ]
+    },
+    {
+      "teal": 183,
+      "source": 70,
+      "pc": [
+        263
+      ]
+    },
+    {
+      "teal": 193,
+      "source": 70,
+      "pc": [
         264,
         265,
-        266,
-        267,
+        266
+      ]
+    },
+    {
+      "teal": 196,
+      "source": 70,
+      "pc": [
+        267
+      ]
+    },
+    {
+      "teal": 197,
+      "source": 70,
+      "pc": [
         268,
         269
       ]
     },
     {
-      "teal": 240,
-      "source": 75,
+      "teal": 206,
+      "source": 72,
       "pc": [
-        270
-      ]
-    },
-    {
-      "teal": 243,
-      "source": 75,
-      "errorMessage": "global state value does not exist: AppID.fromUint64(nfdAppID).globalState('i.name')",
-      "pc": [
+        270,
         271
       ]
     },
     {
-      "teal": 244,
-      "source": 75,
+      "teal": 207,
+      "source": 73,
       "pc": [
         272,
         273
       ]
     },
     {
-      "teal": 252,
-      "source": 77,
+      "teal": 208,
+      "source": 73,
       "pc": [
-        274
-      ]
-    },
-    {
-      "teal": 253,
-      "source": 77,
-      "pc": [
+        274,
         275
       ]
     },
     {
-      "teal": 254,
-      "source": 77,
+      "teal": 209,
+      "source": 73,
       "pc": [
-        276,
+        276
+      ]
+    },
+    {
+      "teal": 212,
+      "source": 73,
+      "errorMessage": "transaction verification failed: {\"txn\":\"collateralPayment\",\"field\":\"sender\",\"expected\":\"this.txn.sender\"}",
+      "pc": [
         277
       ]
     },
     {
-      "teal": 258,
-      "source": 78,
+      "teal": 215,
+      "source": 72,
       "pc": [
         278,
-        279,
-        280,
-        281,
-        282
+        279
       ]
     },
     {
-      "teal": 259,
-      "source": 78,
+      "teal": 216,
+      "source": 74,
       "pc": [
-        283,
+        280,
+        281
+      ]
+    },
+    {
+      "teal": 217,
+      "source": 74,
+      "pc": [
+        282,
+        283
+      ]
+    },
+    {
+      "teal": 218,
+      "source": 74,
+      "pc": [
         284
       ]
     },
     {
-      "teal": 263,
-      "source": 79,
+      "teal": 221,
+      "source": 74,
+      "errorMessage": "transaction verification failed: {\"txn\":\"collateralPayment\",\"field\":\"receiver\",\"expected\":\"this.app.address\"}",
       "pc": [
-        285,
+        285
+      ]
+    },
+    {
+      "teal": 224,
+      "source": 72,
+      "pc": [
         286,
-        287,
+        287
+      ]
+    },
+    {
+      "teal": 225,
+      "source": 75,
+      "pc": [
         288,
-        289,
+        289
+      ]
+    },
+    {
+      "teal": 226,
+      "source": 13,
+      "pc": [
         290,
         291,
         292,
-        293,
-        294,
-        295,
+        293
+      ]
+    },
+    {
+      "teal": 227,
+      "source": 75,
+      "pc": [
+        294
+      ]
+    },
+    {
+      "teal": 230,
+      "source": 75,
+      "errorMessage": "transaction verification failed: {\"txn\":\"collateralPayment\",\"field\":\"amount\",\"condition\":\"greaterThanEqualTo\",\"expected\":\">=TOTAL_LISTING_BOXES_COST\"}",
+      "pc": [
+        295
+      ]
+    },
+    {
+      "teal": 234,
+      "source": 79,
+      "pc": [
         296,
-        297,
+        297
+      ]
+    },
+    {
+      "teal": 235,
+      "source": 79,
+      "pc": [
         298,
         299,
-        300,
+        300
+      ]
+    },
+    {
+      "teal": 239,
+      "source": 80,
+      "pc": [
         301,
-        302,
+        302
+      ]
+    },
+    {
+      "teal": 240,
+      "source": 80,
+      "pc": [
         303,
-        304
+        304,
+        305
       ]
     },
     {
-      "teal": 264,
-      "source": 79,
+      "teal": 244,
+      "source": 81,
       "pc": [
-        305,
-        306
+        306,
+        307
       ]
     },
     {
-      "teal": 265,
-      "source": 79,
+      "teal": 245,
+      "source": 81,
       "pc": [
-        307,
-        308
-      ]
-    },
-    {
-      "teal": 266,
-      "source": 79,
-      "pc": [
+        308,
         309,
         310
       ]
     },
     {
-      "teal": 267,
-      "source": 79,
+      "teal": 249,
+      "source": 84,
       "pc": [
         311,
         312
       ]
     },
     {
-      "teal": 268,
-      "source": 79,
+      "teal": 250,
+      "source": 84,
       "pc": [
-        313
-      ]
-    },
-    {
-      "teal": 269,
-      "source": 79,
-      "pc": [
+        313,
         314,
-        315
-      ]
-    },
-    {
-      "teal": 273,
-      "source": 80,
-      "pc": [
-        316
-      ]
-    },
-    {
-      "teal": 274,
-      "source": 80,
-      "pc": [
+        315,
+        316,
         317,
-        318
+        318,
+        319,
+        320
       ]
     },
     {
-      "teal": 277,
-      "source": 77,
+      "teal": 251,
+      "source": 84,
       "pc": [
-        319
-      ]
-    },
-    {
-      "teal": 281,
-      "source": 82,
-      "pc": [
-        320,
         321
       ]
     },
     {
-      "teal": 282,
-      "source": 82,
+      "teal": 254,
+      "source": 84,
+      "errorMessage": "global state value does not exist: AppID.fromUint64(nfdAppID).globalState('i.name')",
       "pc": [
         322
       ]
     },
     {
-      "teal": 283,
-      "source": 82,
+      "teal": 255,
+      "source": 84,
       "pc": [
-        323
-      ]
-    },
-    {
-      "teal": 284,
-      "source": 82,
-      "pc": [
+        323,
         324
       ]
     },
     {
-      "teal": 287,
-      "source": 82,
-      "errorMessage": "NFD app ID must be valid at the NFD registry",
+      "teal": 263,
+      "source": 86,
       "pc": [
         325
       ]
     },
     {
-      "teal": 291,
-      "source": 85,
+      "teal": 264,
+      "source": 86,
       "pc": [
-        326,
-        327
+        326
       ]
     },
     {
-      "teal": 292,
-      "source": 85,
+      "teal": 265,
+      "source": 86,
       "pc": [
+        327,
         328
       ]
     },
     {
-      "teal": 293,
-      "source": 85,
+      "teal": 269,
+      "source": 87,
       "pc": [
-        329
-      ]
-    },
-    {
-      "teal": 294,
-      "source": 85,
-      "pc": [
+        329,
         330
       ]
     },
     {
-      "teal": 295,
-      "source": 85,
+      "teal": 270,
+      "source": 87,
       "pc": [
-        331
-      ]
-    },
-    {
-      "teal": 296,
-      "source": 85,
-      "pc": [
+        331,
         332
       ]
     },
     {
-      "teal": 299,
-      "source": 85,
-      "errorMessage": "Listing for this NFD must not already exist",
-      "pc": [
-        333
-      ]
-    },
-    {
-      "teal": 303,
+      "teal": 274,
       "source": 88,
       "pc": [
+        333,
         334,
-        335
-      ]
-    },
-    {
-      "teal": 304,
-      "source": 88,
-      "pc": [
-        336
-      ]
-    },
-    {
-      "teal": 305,
-      "source": 88,
-      "pc": [
+        335,
+        336,
         337,
-        338
-      ]
-    },
-    {
-      "teal": 306,
-      "source": 88,
-      "pc": [
-        339
-      ]
-    },
-    {
-      "teal": 307,
-      "source": 88,
-      "pc": [
+        338,
+        339,
         340,
-        341
-      ]
-    },
-    {
-      "teal": 308,
-      "source": 88,
-      "pc": [
-        342
-      ]
-    },
-    {
-      "teal": 309,
-      "source": 88,
-      "pc": [
-        343
-      ]
-    },
-    {
-      "teal": 310,
-      "source": 88,
-      "pc": [
+        341,
+        342,
+        343,
         344,
-        345
-      ]
-    },
-    {
-      "teal": 320,
-      "source": 90,
-      "pc": [
-        346
-      ]
-    },
-    {
-      "teal": 321,
-      "source": 90,
-      "pc": [
-        347
-      ]
-    },
-    {
-      "teal": 322,
-      "source": 90,
-      "pc": [
-        348
-      ]
-    },
-    {
-      "teal": 323,
-      "source": 91,
-      "pc": [
+        345,
+        346,
+        347,
+        348,
         349,
         350,
-        351
-      ]
-    },
-    {
-      "teal": 324,
-      "source": 91,
-      "pc": [
+        351,
         352
       ]
     },
     {
-      "teal": 325,
-      "source": 91,
+      "teal": 275,
+      "source": 88,
       "pc": [
         353,
-        354,
-        355
+        354
       ]
     },
     {
-      "teal": 326,
-      "source": 92,
+      "teal": 276,
+      "source": 88,
       "pc": [
-        356,
-        357
+        355,
+        356
       ]
     },
     {
-      "teal": 327,
-      "source": 92,
+      "teal": 277,
+      "source": 88,
       "pc": [
-        358,
-        359
+        357,
+        358
       ]
     },
     {
-      "teal": 328,
-      "source": 92,
+      "teal": 278,
+      "source": 88,
       "pc": [
+        359,
         360
       ]
     },
     {
-      "teal": 329,
-      "source": 92,
+      "teal": 279,
+      "source": 88,
       "pc": [
-        361,
+        361
+      ]
+    },
+    {
+      "teal": 280,
+      "source": 88,
+      "pc": [
         362,
         363
       ]
     },
     {
-      "teal": 330,
-      "source": 93,
+      "teal": 284,
+      "source": 89,
       "pc": [
-        364,
-        365
+        364
       ]
     },
     {
-      "teal": 331,
-      "source": 93,
+      "teal": 285,
+      "source": 89,
       "pc": [
+        365,
         366
       ]
     },
     {
-      "teal": 332,
-      "source": 93,
+      "teal": 288,
+      "source": 86,
       "pc": [
-        367,
+        367
+      ]
+    },
+    {
+      "teal": 292,
+      "source": 91,
+      "pc": [
         368,
         369
       ]
     },
     {
-      "teal": 333,
-      "source": 94,
+      "teal": 293,
+      "source": 91,
       "pc": [
-        370,
+        370
+      ]
+    },
+    {
+      "teal": 294,
+      "source": 91,
+      "pc": [
         371
       ]
     },
     {
-      "teal": 334,
-      "source": 94,
+      "teal": 295,
+      "source": 91,
       "pc": [
-        372,
-        373,
-        374
+        372
       ]
     },
     {
-      "teal": 335,
-      "source": 95,
+      "teal": 298,
+      "source": 91,
+      "errorMessage": "NFD app ID must be valid at the NFD registry",
       "pc": [
-        375,
+        373
+      ]
+    },
+    {
+      "teal": 302,
+      "source": 94,
+      "pc": [
+        374,
+        375
+      ]
+    },
+    {
+      "teal": 303,
+      "source": 94,
+      "pc": [
         376
       ]
     },
     {
-      "teal": 336,
-      "source": 95,
+      "teal": 304,
+      "source": 94,
       "pc": [
         377
       ]
     },
     {
-      "teal": 337,
-      "source": 95,
+      "teal": 305,
+      "source": 94,
       "pc": [
         378
       ]
     },
     {
-      "teal": 338,
-      "source": 95,
+      "teal": 306,
+      "source": 94,
       "pc": [
         379
       ]
     },
     {
-      "teal": 339,
-      "source": 95,
+      "teal": 307,
+      "source": 94,
       "pc": [
-        380,
-        381,
-        382
+        380
       ]
     },
     {
-      "teal": 340,
-      "source": 95,
+      "teal": 310,
+      "source": 94,
+      "errorMessage": "Listing for this NFD must not already exist",
       "pc": [
+        381
+      ]
+    },
+    {
+      "teal": 314,
+      "source": 97,
+      "pc": [
+        382,
         383
       ]
     },
     {
-      "teal": 341,
-      "source": 95,
+      "teal": 315,
+      "source": 97,
       "pc": [
         384
       ]
     },
     {
-      "teal": 342,
-      "source": 95,
+      "teal": 316,
+      "source": 97,
       "pc": [
         385,
-        386,
+        386
+      ]
+    },
+    {
+      "teal": 317,
+      "source": 97,
+      "pc": [
         387
       ]
     },
     {
-      "teal": 343,
-      "source": 90,
+      "teal": 318,
+      "source": 97,
       "pc": [
-        388
-      ]
-    },
-    {
-      "teal": 344,
-      "source": 90,
-      "pc": [
+        388,
         389
       ]
     },
     {
-      "teal": 345,
-      "source": 90,
+      "teal": 319,
+      "source": 97,
       "pc": [
-        390,
+        390
+      ]
+    },
+    {
+      "teal": 320,
+      "source": 97,
+      "pc": [
         391
       ]
     },
     {
-      "teal": 349,
-      "source": 99,
+      "teal": 321,
+      "source": 97,
       "pc": [
         392,
         393
       ]
     },
     {
-      "teal": 350,
+      "teal": 331,
       "source": 99,
       "pc": [
-        394,
+        394
+      ]
+    },
+    {
+      "teal": 332,
+      "source": 99,
+      "pc": [
         395
       ]
     },
     {
-      "teal": 351,
+      "teal": 333,
       "source": 99,
       "pc": [
         396
       ]
     },
     {
-      "teal": 355,
-      "source": 102,
+      "teal": 334,
+      "source": 100,
       "pc": [
         397,
-        398
-      ]
-    },
-    {
-      "teal": 356,
-      "source": 102,
-      "pc": [
+        398,
         399
       ]
     },
     {
-      "teal": 357,
-      "source": 102,
+      "teal": 335,
+      "source": 100,
       "pc": [
         400
       ]
     },
     {
-      "teal": 358,
-      "source": 102,
+      "teal": 336,
+      "source": 100,
       "pc": [
-        401
+        401,
+        402,
+        403
       ]
     },
     {
-      "teal": 359,
-      "source": 102,
+      "teal": 337,
+      "source": 101,
       "pc": [
-        402
-      ]
-    },
-    {
-      "teal": 360,
-      "source": 102,
-      "pc": [
-        403,
-        404
-      ]
-    },
-    {
-      "teal": 361,
-      "source": 102,
-      "pc": [
+        404,
         405
       ]
     },
     {
-      "teal": 365,
-      "source": 104,
+      "teal": 338,
+      "source": 101,
       "pc": [
         406,
         407
       ]
     },
     {
-      "teal": 368,
-      "source": 61,
+      "teal": 339,
+      "source": 101,
       "pc": [
-        408,
-        409
+        408
       ]
     },
     {
-      "teal": 371,
-      "source": 61,
+      "teal": 340,
+      "source": 101,
       "pc": [
+        409,
         410,
         411
       ]
     },
     {
-      "teal": 372,
-      "source": 61,
+      "teal": 341,
+      "source": 102,
       "pc": [
-        412
-      ]
-    },
-    {
-      "teal": 377,
-      "source": 112,
-      "pc": [
+        412,
         413
       ]
     },
     {
-      "teal": 380,
-      "source": 112,
+      "teal": 342,
+      "source": 102,
       "pc": [
-        414,
-        415,
-        416
+        414
       ]
     },
     {
-      "teal": 381,
-      "source": 112,
+      "teal": 343,
+      "source": 102,
       "pc": [
+        415,
+        416,
         417
       ]
     },
     {
-      "teal": 384,
-      "source": 112,
+      "teal": 344,
+      "source": 103,
       "pc": [
         418,
-        419,
-        420
+        419
       ]
     },
     {
-      "teal": 385,
-      "source": 112,
+      "teal": 345,
+      "source": 103,
       "pc": [
-        421
-      ]
-    },
-    {
-      "teal": 386,
-      "source": 112,
-      "pc": [
+        420,
+        421,
         422
       ]
     },
     {
-      "teal": 387,
-      "source": 112,
+      "teal": 346,
+      "source": 104,
       "pc": [
-        423
-      ]
-    },
-    {
-      "teal": 388,
-      "source": 112,
-      "pc": [
+        423,
         424
       ]
     },
     {
-      "teal": 396,
-      "source": 112,
+      "teal": 347,
+      "source": 104,
       "pc": [
-        425,
-        426,
+        425
+      ]
+    },
+    {
+      "teal": 348,
+      "source": 104,
+      "pc": [
+        426
+      ]
+    },
+    {
+      "teal": 349,
+      "source": 104,
+      "pc": [
         427
       ]
     },
     {
-      "teal": 399,
-      "source": 112,
+      "teal": 350,
+      "source": 104,
       "pc": [
-        428
+        428,
+        429,
+        430
       ]
     },
     {
-      "teal": 400,
-      "source": 112,
+      "teal": 351,
+      "source": 104,
       "pc": [
-        429
-      ]
-    },
-    {
-      "teal": 404,
-      "source": 114,
-      "pc": [
-        430,
         431
       ]
     },
     {
-      "teal": 405,
-      "source": 114,
+      "teal": 352,
+      "source": 104,
       "pc": [
-        432,
-        433,
-        434
+        432
       ]
     },
     {
-      "teal": 409,
-      "source": 115,
+      "teal": 353,
+      "source": 104,
       "pc": [
-        435,
+        433,
+        434,
+        435
+      ]
+    },
+    {
+      "teal": 354,
+      "source": 99,
+      "pc": [
         436
       ]
     },
     {
-      "teal": 410,
-      "source": 115,
+      "teal": 355,
+      "source": 99,
       "pc": [
-        437,
+        437
+      ]
+    },
+    {
+      "teal": 356,
+      "source": 99,
+      "pc": [
         438,
         439
       ]
     },
     {
-      "teal": 414,
-      "source": 116,
+      "teal": 360,
+      "source": 108,
       "pc": [
         440,
         441
       ]
     },
     {
-      "teal": 415,
-      "source": 116,
+      "teal": 361,
+      "source": 108,
       "pc": [
         442,
-        443,
+        443
+      ]
+    },
+    {
+      "teal": 362,
+      "source": 108,
+      "pc": [
         444
       ]
     },
     {
-      "teal": 419,
-      "source": 119,
+      "teal": 366,
+      "source": 111,
       "pc": [
         445,
         446
       ]
     },
     {
-      "teal": 420,
-      "source": 119,
+      "teal": 367,
+      "source": 111,
       "pc": [
         447
       ]
     },
     {
-      "teal": 421,
-      "source": 119,
+      "teal": 368,
+      "source": 111,
       "pc": [
-        448,
+        448
+      ]
+    },
+    {
+      "teal": 369,
+      "source": 111,
+      "pc": [
         449
       ]
     },
     {
-      "teal": 431,
-      "source": 120,
+      "teal": 370,
+      "source": 111,
       "pc": [
         450
       ]
     },
     {
-      "teal": 432,
-      "source": 120,
+      "teal": 371,
+      "source": 111,
       "pc": [
-        451
-      ]
-    },
-    {
-      "teal": 433,
-      "source": 120,
-      "pc": [
+        451,
         452
       ]
     },
     {
-      "teal": 434,
-      "source": 121,
+      "teal": 372,
+      "source": 111,
       "pc": [
-        453,
+        453
+      ]
+    },
+    {
+      "teal": 376,
+      "source": 113,
+      "pc": [
         454,
         455
       ]
     },
     {
-      "teal": 435,
-      "source": 121,
+      "teal": 379,
+      "source": 70,
       "pc": [
-        456
+        456,
+        457
       ]
     },
     {
-      "teal": 436,
-      "source": 121,
+      "teal": 382,
+      "source": 70,
       "pc": [
-        457,
         458,
         459
       ]
     },
     {
-      "teal": 437,
-      "source": 119,
+      "teal": 383,
+      "source": 70,
       "pc": [
-        460,
+        460
+      ]
+    },
+    {
+      "teal": 388,
+      "source": 121,
+      "pc": [
         461
       ]
     },
     {
-      "teal": 438,
-      "source": 119,
+      "teal": 391,
+      "source": 121,
       "pc": [
-        462
+        462,
+        463,
+        464
       ]
     },
     {
-      "teal": 441,
-      "source": 119,
-      "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
+      "teal": 392,
+      "source": 121,
       "pc": [
-        463
-      ]
-    },
-    {
-      "teal": 442,
-      "source": 122,
-      "pc": [
-        464,
         465
       ]
     },
     {
-      "teal": 443,
-      "source": 122,
+      "teal": 395,
+      "source": 121,
       "pc": [
         466,
-        467
+        467,
+        468
       ]
     },
     {
-      "teal": 444,
-      "source": 122,
+      "teal": 396,
+      "source": 121,
       "pc": [
-        468,
-        469,
+        469
+      ]
+    },
+    {
+      "teal": 397,
+      "source": 121,
+      "pc": [
         470
       ]
     },
     {
-      "teal": 445,
-      "source": 122,
+      "teal": 398,
+      "source": 121,
       "pc": [
         471
       ]
     },
     {
-      "teal": 446,
-      "source": 122,
+      "teal": 399,
+      "source": 121,
       "pc": [
         472
       ]
     },
     {
-      "teal": 447,
-      "source": 122,
+      "teal": 407,
+      "source": 121,
       "pc": [
         473,
         474,
@@ -2009,271 +1903,252 @@
       ]
     },
     {
-      "teal": 448,
-      "source": 119,
+      "teal": 410,
+      "source": 121,
       "pc": [
-        476,
+        476
+      ]
+    },
+    {
+      "teal": 411,
+      "source": 121,
+      "pc": [
         477
       ]
     },
     {
-      "teal": 449,
-      "source": 119,
+      "teal": 415,
+      "source": 123,
       "pc": [
-        478
-      ]
-    },
-    {
-      "teal": 452,
-      "source": 119,
-      "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
-      "pc": [
+        478,
         479
       ]
     },
     {
-      "teal": 453,
+      "teal": 416,
       "source": 123,
       "pc": [
         480,
-        481
+        481,
+        482
       ]
     },
     {
-      "teal": 454,
-      "source": 123,
+      "teal": 420,
+      "source": 124,
       "pc": [
-        482,
-        483
+        483,
+        484
       ]
     },
     {
-      "teal": 455,
-      "source": 123,
+      "teal": 421,
+      "source": 124,
       "pc": [
-        484,
         485,
-        486
-      ]
-    },
-    {
-      "teal": 456,
-      "source": 123,
-      "pc": [
+        486,
         487
       ]
     },
     {
-      "teal": 457,
-      "source": 123,
+      "teal": 425,
+      "source": 125,
       "pc": [
-        488
+        488,
+        489
       ]
     },
     {
-      "teal": 458,
-      "source": 123,
+      "teal": 426,
+      "source": 125,
       "pc": [
-        489,
         490,
-        491
+        491,
+        492
       ]
     },
     {
-      "teal": 459,
-      "source": 119,
+      "teal": 430,
+      "source": 128,
       "pc": [
-        492,
-        493
-      ]
-    },
-    {
-      "teal": 460,
-      "source": 119,
-      "pc": [
+        493,
         494
       ]
     },
     {
-      "teal": 463,
-      "source": 119,
-      "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
+      "teal": 431,
+      "source": 128,
       "pc": [
         495
       ]
     },
     {
-      "teal": 464,
-      "source": 124,
+      "teal": 432,
+      "source": 128,
       "pc": [
         496,
         497
       ]
     },
     {
-      "teal": 465,
-      "source": 124,
+      "teal": 442,
+      "source": 129,
       "pc": [
-        498,
+        498
+      ]
+    },
+    {
+      "teal": 443,
+      "source": 129,
+      "pc": [
         499
       ]
     },
     {
-      "teal": 466,
-      "source": 124,
+      "teal": 444,
+      "source": 129,
       "pc": [
-        500,
+        500
+      ]
+    },
+    {
+      "teal": 445,
+      "source": 130,
+      "pc": [
         501,
-        502
+        502,
+        503
       ]
     },
     {
-      "teal": 467,
-      "source": 124,
+      "teal": 446,
+      "source": 130,
       "pc": [
-        503,
-        504,
-        505
+        504
       ]
     },
     {
-      "teal": 468,
-      "source": 119,
+      "teal": 447,
+      "source": 130,
       "pc": [
+        505,
         506,
         507
       ]
     },
     {
-      "teal": 469,
-      "source": 119,
+      "teal": 448,
+      "source": 128,
       "pc": [
-        508
-      ]
-    },
-    {
-      "teal": 472,
-      "source": 119,
-      "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
-      "pc": [
+        508,
         509
       ]
     },
     {
-      "teal": 473,
-      "source": 125,
+      "teal": 449,
+      "source": 128,
       "pc": [
-        510,
+        510
+      ]
+    },
+    {
+      "teal": 452,
+      "source": 128,
+      "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
+      "pc": [
         511
       ]
     },
     {
-      "teal": 474,
-      "source": 125,
+      "teal": 453,
+      "source": 131,
       "pc": [
         512,
         513
       ]
     },
     {
-      "teal": 475,
-      "source": 125,
+      "teal": 454,
+      "source": 131,
       "pc": [
         514,
         515
       ]
     },
     {
-      "teal": 476,
-      "source": 125,
+      "teal": 455,
+      "source": 131,
       "pc": [
         516,
-        517
+        517,
+        518
       ]
     },
     {
-      "teal": 477,
-      "source": 125,
+      "teal": 456,
+      "source": 131,
       "pc": [
-        518,
         519
       ]
     },
     {
-      "teal": 478,
-      "source": 125,
+      "teal": 457,
+      "source": 131,
       "pc": [
         520
       ]
     },
     {
-      "teal": 479,
-      "source": 125,
+      "teal": 458,
+      "source": 131,
       "pc": [
-        521
-      ]
-    },
-    {
-      "teal": 480,
-      "source": 125,
-      "pc": [
+        521,
         522,
         523
       ]
     },
     {
-      "teal": 481,
-      "source": 125,
+      "teal": 459,
+      "source": 128,
       "pc": [
-        524
-      ]
-    },
-    {
-      "teal": 482,
-      "source": 125,
-      "pc": [
+        524,
         525
       ]
     },
     {
-      "teal": 483,
-      "source": 125,
+      "teal": 460,
+      "source": 128,
       "pc": [
         526
       ]
     },
     {
-      "teal": 484,
-      "source": 125,
+      "teal": 463,
+      "source": 128,
+      "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
       "pc": [
         527
       ]
     },
     {
-      "teal": 485,
-      "source": 125,
+      "teal": 464,
+      "source": 132,
       "pc": [
         528,
         529
       ]
     },
     {
-      "teal": 486,
-      "source": 125,
+      "teal": 465,
+      "source": 132,
       "pc": [
-        530
-      ]
-    },
-    {
-      "teal": 487,
-      "source": 125,
-      "pc": [
+        530,
         531
       ]
     },
     {
-      "teal": 488,
-      "source": 125,
+      "teal": 466,
+      "source": 132,
       "pc": [
         532,
         533,
@@ -2281,257 +2156,252 @@
       ]
     },
     {
-      "teal": 489,
-      "source": 125,
+      "teal": 467,
+      "source": 132,
       "pc": [
         535
       ]
     },
     {
-      "teal": 490,
-      "source": 125,
+      "teal": 468,
+      "source": 132,
       "pc": [
         536
       ]
     },
     {
-      "teal": 491,
-      "source": 125,
+      "teal": 469,
+      "source": 132,
       "pc": [
-        537
-      ]
-    },
-    {
-      "teal": 492,
-      "source": 125,
-      "pc": [
+        537,
         538,
-        539,
-        540
+        539
       ]
     },
     {
-      "teal": 493,
-      "source": 125,
+      "teal": 470,
+      "source": 128,
       "pc": [
+        540,
         541
       ]
     },
     {
-      "teal": 494,
-      "source": 125,
+      "teal": 471,
+      "source": 128,
       "pc": [
         542
       ]
     },
     {
-      "teal": 495,
-      "source": 125,
+      "teal": 474,
+      "source": 128,
+      "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
       "pc": [
-        543,
+        543
+      ]
+    },
+    {
+      "teal": 475,
+      "source": 133,
+      "pc": [
         544,
         545
       ]
     },
     {
-      "teal": 496,
-      "source": 120,
+      "teal": 476,
+      "source": 133,
       "pc": [
-        546
-      ]
-    },
-    {
-      "teal": 497,
-      "source": 120,
-      "pc": [
+        546,
         547
       ]
     },
     {
-      "teal": 498,
-      "source": 120,
+      "teal": 477,
+      "source": 133,
       "pc": [
         548,
-        549
+        549,
+        550
       ]
     },
     {
-      "teal": 502,
-      "source": 119,
+      "teal": 478,
+      "source": 133,
       "pc": [
-        550,
-        551
-      ]
-    },
-    {
-      "teal": 503,
-      "source": 119,
-      "pc": [
-        552
-      ]
-    },
-    {
-      "teal": 506,
-      "source": 119,
-      "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
-      "pc": [
+        551,
+        552,
         553
       ]
     },
     {
-      "teal": 507,
-      "source": 129,
+      "teal": 479,
+      "source": 128,
       "pc": [
-        554
+        554,
+        555
       ]
     },
     {
-      "teal": 511,
-      "source": 132,
+      "teal": 480,
+      "source": 128,
       "pc": [
-        555,
         556
       ]
     },
     {
-      "teal": 512,
-      "source": 132,
+      "teal": 483,
+      "source": 128,
+      "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
       "pc": [
-        557,
-        558
+        557
       ]
     },
     {
-      "teal": 513,
-      "source": 132,
+      "teal": 484,
+      "source": 134,
       "pc": [
+        558,
         559
       ]
     },
     {
-      "teal": 517,
-      "source": 135,
+      "teal": 485,
+      "source": 134,
       "pc": [
-        560,
-        561
+        560
       ]
     },
     {
-      "teal": 518,
-      "source": 135,
+      "teal": 486,
+      "source": 134,
       "pc": [
+        561,
         562
       ]
     },
     {
-      "teal": 519,
-      "source": 135,
+      "teal": 487,
+      "source": 134,
       "pc": [
-        563
-      ]
-    },
-    {
-      "teal": 520,
-      "source": 135,
-      "pc": [
+        563,
         564
       ]
     },
     {
-      "teal": 521,
-      "source": 135,
+      "teal": 488,
+      "source": 134,
       "pc": [
-        565
+        565,
+        566
       ]
     },
     {
-      "teal": 522,
-      "source": 135,
+      "teal": 489,
+      "source": 134,
       "pc": [
-        566,
         567
       ]
     },
     {
-      "teal": 523,
-      "source": 135,
+      "teal": 490,
+      "source": 134,
       "pc": [
         568
       ]
     },
     {
-      "teal": 527,
-      "source": 137,
+      "teal": 491,
+      "source": 134,
       "pc": [
         569,
         570
       ]
     },
     {
-      "teal": 530,
-      "source": 112,
+      "teal": 492,
+      "source": 134,
       "pc": [
-        571,
+        571
+      ]
+    },
+    {
+      "teal": 493,
+      "source": 134,
+      "pc": [
         572
       ]
     },
     {
-      "teal": 533,
-      "source": 112,
+      "teal": 494,
+      "source": 134,
       "pc": [
-        573,
+        573
+      ]
+    },
+    {
+      "teal": 495,
+      "source": 134,
+      "pc": [
         574
       ]
     },
     {
-      "teal": 534,
-      "source": 112,
+      "teal": 496,
+      "source": 134,
       "pc": [
-        575
+        575,
+        576
       ]
     },
     {
-      "teal": 539,
-      "source": 145,
+      "teal": 497,
+      "source": 134,
       "pc": [
-        576,
-        577,
+        577
+      ]
+    },
+    {
+      "teal": 498,
+      "source": 134,
+      "pc": [
         578
       ]
     },
     {
-      "teal": 540,
-      "source": 145,
+      "teal": 499,
+      "source": 134,
       "pc": [
-        579
+        579,
+        580,
+        581
       ]
     },
     {
-      "teal": 543,
-      "source": 145,
+      "teal": 500,
+      "source": 134,
       "pc": [
-        580,
-        581,
         582
       ]
     },
     {
-      "teal": 544,
-      "source": 145,
+      "teal": 501,
+      "source": 134,
       "pc": [
         583
       ]
     },
     {
-      "teal": 545,
-      "source": 145,
+      "teal": 502,
+      "source": 134,
       "pc": [
         584
       ]
     },
     {
-      "teal": 553,
-      "source": 145,
+      "teal": 503,
+      "source": 134,
       "pc": [
         585,
         586,
@@ -2539,178 +2409,188 @@
       ]
     },
     {
-      "teal": 556,
-      "source": 145,
+      "teal": 504,
+      "source": 134,
       "pc": [
         588
       ]
     },
     {
-      "teal": 560,
-      "source": 146,
+      "teal": 505,
+      "source": 134,
       "pc": [
-        589,
-        590
+        589
       ]
     },
     {
-      "teal": 561,
-      "source": 146,
+      "teal": 506,
+      "source": 134,
       "pc": [
-        591
+        590,
+        591,
+        592
       ]
     },
     {
-      "teal": 562,
-      "source": 146,
+      "teal": 507,
+      "source": 129,
       "pc": [
-        592,
         593
       ]
     },
     {
-      "teal": 566,
-      "source": 147,
+      "teal": 508,
+      "source": 129,
       "pc": [
-        594,
-        595
+        594
       ]
     },
     {
-      "teal": 567,
-      "source": 147,
+      "teal": 509,
+      "source": 129,
       "pc": [
-        596,
+        595,
+        596
+      ]
+    },
+    {
+      "teal": 513,
+      "source": 128,
+      "pc": [
         597,
         598
       ]
     },
     {
-      "teal": 576,
-      "source": 150,
+      "teal": 514,
+      "source": 128,
       "pc": [
         599
       ]
     },
     {
-      "teal": 577,
-      "source": 150,
+      "teal": 517,
+      "source": 128,
+      "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
       "pc": [
         600
       ]
     },
     {
-      "teal": 578,
-      "source": 150,
+      "teal": 518,
+      "source": 138,
       "pc": [
-        601,
-        602
+        601
       ]
     },
     {
-      "teal": 582,
-      "source": 151,
+      "teal": 522,
+      "source": 141,
       "pc": [
-        603,
-        604
+        602,
+        603
       ]
     },
     {
-      "teal": 583,
-      "source": 151,
+      "teal": 523,
+      "source": 141,
       "pc": [
-        605,
+        604,
+        605
+      ]
+    },
+    {
+      "teal": 524,
+      "source": 141,
+      "pc": [
         606
       ]
     },
     {
-      "teal": 587,
-      "source": 146,
+      "teal": 528,
+      "source": 144,
       "pc": [
         607,
         608
       ]
     },
     {
-      "teal": 588,
-      "source": 146,
+      "teal": 529,
+      "source": 144,
       "pc": [
         609
       ]
     },
     {
-      "teal": 591,
-      "source": 146,
-      "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
+      "teal": 530,
+      "source": 144,
       "pc": [
         610
       ]
     },
     {
-      "teal": 592,
-      "source": 152,
+      "teal": 531,
+      "source": 144,
       "pc": [
         611
       ]
     },
     {
-      "teal": 595,
-      "source": 152,
-      "errorMessage": "box value does not exist: this.listings(listingKey).value",
+      "teal": 532,
+      "source": 144,
       "pc": [
         612
       ]
     },
     {
-      "teal": 596,
-      "source": 152,
+      "teal": 533,
+      "source": 144,
       "pc": [
         613,
         614
       ]
     },
     {
-      "teal": 600,
-      "source": 146,
+      "teal": 534,
+      "source": 144,
       "pc": [
-        615,
-        616
+        615
       ]
     },
     {
-      "teal": 601,
+      "teal": 538,
       "source": 146,
       "pc": [
+        616,
         617
       ]
     },
     {
-      "teal": 604,
-      "source": 146,
-      "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
+      "teal": 541,
+      "source": 121,
       "pc": [
-        618
+        618,
+        619
       ]
     },
     {
-      "teal": 605,
-      "source": 153,
+      "teal": 544,
+      "source": 121,
       "pc": [
-        619,
-        620
+        620,
+        621
       ]
     },
     {
-      "teal": 606,
-      "source": 153,
+      "teal": 545,
+      "source": 121,
       "pc": [
-        621,
         622
       ]
     },
     {
-      "teal": 607,
-      "source": 153,
+      "teal": 550,
+      "source": 154,
       "pc": [
         623,
         624,
@@ -2718,104 +2598,85 @@
       ]
     },
     {
-      "teal": 608,
-      "source": 153,
+      "teal": 551,
+      "source": 154,
       "pc": [
         626
       ]
     },
     {
-      "teal": 609,
-      "source": 153,
-      "pc": [
-        627,
-        628
-      ]
-    },
-    {
-      "teal": 613,
+      "teal": 554,
       "source": 154,
       "pc": [
+        627,
+        628,
         629
       ]
     },
     {
-      "teal": 614,
+      "teal": 555,
       "source": 154,
       "pc": [
-        630,
+        630
+      ]
+    },
+    {
+      "teal": 556,
+      "source": 154,
+      "pc": [
         631
       ]
     },
     {
-      "teal": 617,
-      "source": 150,
+      "teal": 564,
+      "source": 154,
       "pc": [
-        632
-      ]
-    },
-    {
-      "teal": 621,
-      "source": 146,
-      "pc": [
+        632,
         633,
         634
       ]
     },
     {
-      "teal": 622,
-      "source": 146,
+      "teal": 567,
+      "source": 154,
       "pc": [
         635
       ]
     },
     {
-      "teal": 625,
-      "source": 146,
-      "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
+      "teal": 571,
+      "source": 155,
       "pc": [
-        636
-      ]
-    },
-    {
-      "teal": 626,
-      "source": 158,
-      "pc": [
+        636,
         637
       ]
     },
     {
-      "teal": 630,
-      "source": 159,
+      "teal": 572,
+      "source": 155,
       "pc": [
-        638,
-        639
+        638
       ]
     },
     {
-      "teal": 631,
-      "source": 159,
+      "teal": 573,
+      "source": 155,
       "pc": [
+        639,
         640
       ]
     },
     {
-      "teal": 632,
-      "source": 159,
+      "teal": 577,
+      "source": 156,
       "pc": [
-        641
-      ]
-    },
-    {
-      "teal": 633,
-      "source": 145,
-      "pc": [
+        641,
         642
       ]
     },
     {
-      "teal": 638,
-      "source": 167,
+      "teal": 578,
+      "source": 156,
       "pc": [
         643,
         644,
@@ -2823,682 +2684,871 @@
       ]
     },
     {
-      "teal": 639,
-      "source": 167,
+      "teal": 587,
+      "source": 159,
       "pc": [
         646
       ]
     },
     {
-      "teal": 642,
-      "source": 167,
+      "teal": 588,
+      "source": 159,
       "pc": [
-        647,
+        647
+      ]
+    },
+    {
+      "teal": 589,
+      "source": 159,
+      "pc": [
         648,
         649
       ]
     },
     {
-      "teal": 643,
-      "source": 167,
+      "teal": 593,
+      "source": 160,
       "pc": [
-        650
-      ]
-    },
-    {
-      "teal": 644,
-      "source": 167,
-      "pc": [
+        650,
         651
       ]
     },
     {
-      "teal": 652,
-      "source": 167,
+      "teal": 594,
+      "source": 160,
       "pc": [
         652,
-        653,
-        654
+        653
       ]
     },
     {
-      "teal": 655,
-      "source": 167,
+      "teal": 598,
+      "source": 155,
       "pc": [
+        654,
         655
       ]
     },
     {
-      "teal": 659,
-      "source": 169,
+      "teal": 599,
+      "source": 155,
       "pc": [
-        656,
+        656
+      ]
+    },
+    {
+      "teal": 602,
+      "source": 155,
+      "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
+      "pc": [
         657
       ]
     },
     {
-      "teal": 660,
-      "source": 169,
+      "teal": 603,
+      "source": 161,
       "pc": [
         658
       ]
     },
     {
-      "teal": 661,
-      "source": 169,
+      "teal": 606,
+      "source": 161,
+      "errorMessage": "box value does not exist: this.listings(listingKey).value",
       "pc": [
         659
       ]
     },
     {
-      "teal": 662,
-      "source": 169,
+      "teal": 607,
+      "source": 161,
       "pc": [
         660,
         661
       ]
     },
     {
-      "teal": 663,
-      "source": 169,
+      "teal": 611,
+      "source": 155,
       "pc": [
-        662
-      ]
-    },
-    {
-      "teal": 664,
-      "source": 169,
-      "pc": [
+        662,
         663
       ]
     },
     {
-      "teal": 665,
-      "source": 169,
+      "teal": 612,
+      "source": 155,
       "pc": [
         664
       ]
     },
     {
-      "teal": 668,
-      "source": 169,
-      "errorMessage": "Caller must have the admin token",
+      "teal": 615,
+      "source": 155,
+      "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
       "pc": [
         665
       ]
     },
     {
-      "teal": 672,
-      "source": 171,
+      "teal": 616,
+      "source": 162,
       "pc": [
         666,
         667
       ]
     },
     {
-      "teal": 673,
-      "source": 171,
+      "teal": 617,
+      "source": 162,
       "pc": [
-        668
+        668,
+        669
       ]
     },
     {
-      "teal": 674,
-      "source": 171,
+      "teal": 618,
+      "source": 162,
       "pc": [
-        669,
-        670
-      ]
-    },
-    {
-      "teal": 683,
-      "source": 174,
-      "pc": [
-        671
-      ]
-    },
-    {
-      "teal": 684,
-      "source": 174,
-      "pc": [
+        670,
+        671,
         672
       ]
     },
     {
-      "teal": 685,
-      "source": 174,
+      "teal": 619,
+      "source": 162,
       "pc": [
-        673,
-        674
+        673
       ]
     },
     {
-      "teal": 689,
-      "source": 175,
+      "teal": 620,
+      "source": 162,
       "pc": [
-        675,
+        674,
+        675
+      ]
+    },
+    {
+      "teal": 624,
+      "source": 163,
+      "pc": [
         676
       ]
     },
     {
-      "teal": 690,
-      "source": 175,
+      "teal": 625,
+      "source": 163,
       "pc": [
         677,
         678
       ]
     },
     {
-      "teal": 694,
+      "teal": 628,
+      "source": 159,
+      "pc": [
+        679
+      ]
+    },
+    {
+      "teal": 632,
+      "source": 155,
+      "pc": [
+        680,
+        681
+      ]
+    },
+    {
+      "teal": 633,
+      "source": 155,
+      "pc": [
+        682
+      ]
+    },
+    {
+      "teal": 636,
+      "source": 155,
+      "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
+      "pc": [
+        683
+      ]
+    },
+    {
+      "teal": 637,
+      "source": 167,
+      "pc": [
+        684
+      ]
+    },
+    {
+      "teal": 641,
+      "source": 168,
+      "pc": [
+        685,
+        686
+      ]
+    },
+    {
+      "teal": 642,
+      "source": 168,
+      "pc": [
+        687
+      ]
+    },
+    {
+      "teal": 643,
+      "source": 168,
+      "pc": [
+        688
+      ]
+    },
+    {
+      "teal": 644,
+      "source": 154,
+      "pc": [
+        689
+      ]
+    },
+    {
+      "teal": 649,
       "source": 176,
       "pc": [
-        679,
-        680,
-        681,
-        682,
-        683,
-        684,
-        685,
-        686,
-        687,
-        688,
-        689,
         690,
         691,
-        692,
-        693,
+        692
+      ]
+    },
+    {
+      "teal": 650,
+      "source": 176,
+      "pc": [
+        693
+      ]
+    },
+    {
+      "teal": 653,
+      "source": 176,
+      "pc": [
         694,
         695,
-        696,
-        697,
-        698,
+        696
+      ]
+    },
+    {
+      "teal": 654,
+      "source": 176,
+      "pc": [
+        697
+      ]
+    },
+    {
+      "teal": 655,
+      "source": 176,
+      "pc": [
+        698
+      ]
+    },
+    {
+      "teal": 663,
+      "source": 176,
+      "pc": [
         699,
         700,
-        701,
-        702,
+        701
+      ]
+    },
+    {
+      "teal": 666,
+      "source": 176,
+      "pc": [
+        702
+      ]
+    },
+    {
+      "teal": 670,
+      "source": 178,
+      "pc": [
         703,
-        704,
+        704
+      ]
+    },
+    {
+      "teal": 671,
+      "source": 178,
+      "pc": [
         705,
-        706,
-        707,
+        706
+      ]
+    },
+    {
+      "teal": 672,
+      "source": 178,
+      "pc": [
+        707
+      ]
+    },
+    {
+      "teal": 673,
+      "source": 178,
+      "pc": [
         708,
-        709,
-        710,
-        711,
+        709
+      ]
+    },
+    {
+      "teal": 674,
+      "source": 178,
+      "pc": [
+        710
+      ]
+    },
+    {
+      "teal": 675,
+      "source": 178,
+      "pc": [
+        711
+      ]
+    },
+    {
+      "teal": 676,
+      "source": 178,
+      "pc": [
         712
       ]
     },
     {
-      "teal": 695,
-      "source": 176,
+      "teal": 679,
+      "source": 178,
+      "errorMessage": "Caller must have the admin token",
       "pc": [
-        713,
-        714
+        713
       ]
     },
     {
-      "teal": 699,
-      "source": 171,
+      "teal": 683,
+      "source": 180,
       "pc": [
-        715,
+        714,
+        715
+      ]
+    },
+    {
+      "teal": 684,
+      "source": 180,
+      "pc": [
         716
       ]
     },
     {
-      "teal": 700,
-      "source": 171,
+      "teal": 685,
+      "source": 180,
       "pc": [
-        717
-      ]
-    },
-    {
-      "teal": 703,
-      "source": 171,
-      "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
-      "pc": [
+        717,
         718
       ]
     },
     {
-      "teal": 704,
-      "source": 177,
+      "teal": 695,
+      "source": 183,
       "pc": [
-        719,
+        719
+      ]
+    },
+    {
+      "teal": 696,
+      "source": 183,
+      "pc": [
         720
       ]
     },
     {
-      "teal": 705,
-      "source": 177,
+      "teal": 697,
+      "source": 183,
       "pc": [
         721,
         722
       ]
     },
     {
-      "teal": 706,
-      "source": 177,
+      "teal": 701,
+      "source": 184,
       "pc": [
         723,
-        724,
-        725
+        724
       ]
     },
     {
-      "teal": 707,
-      "source": 177,
+      "teal": 702,
+      "source": 184,
       "pc": [
+        725,
         726
       ]
     },
     {
-      "teal": 708,
-      "source": 177,
+      "teal": 706,
+      "source": 185,
       "pc": [
         727,
         728
       ]
     },
     {
-      "teal": 712,
-      "source": 178,
+      "teal": 707,
+      "source": 185,
       "pc": [
-        729
+        729,
+        730
       ]
     },
     {
-      "teal": 713,
-      "source": 178,
+      "teal": 711,
+      "source": 180,
       "pc": [
-        730,
-        731
-      ]
-    },
-    {
-      "teal": 716,
-      "source": 174,
-      "pc": [
+        731,
         732
       ]
     },
     {
-      "teal": 720,
-      "source": 171,
+      "teal": 712,
+      "source": 180,
       "pc": [
-        733,
+        733
+      ]
+    },
+    {
+      "teal": 715,
+      "source": 180,
+      "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
+      "pc": [
         734
       ]
     },
     {
-      "teal": 721,
-      "source": 171,
+      "teal": 716,
+      "source": 186,
       "pc": [
-        735
-      ]
-    },
-    {
-      "teal": 724,
-      "source": 171,
-      "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
-      "pc": [
+        735,
         736
       ]
     },
     {
-      "teal": 725,
-      "source": 182,
+      "teal": 717,
+      "source": 186,
       "pc": [
-        737
+        737,
+        738
       ]
     },
     {
-      "teal": 729,
-      "source": 183,
+      "teal": 718,
+      "source": 186,
       "pc": [
-        738,
-        739
-      ]
-    },
-    {
-      "teal": 730,
-      "source": 183,
-      "pc": [
-        740
-      ]
-    },
-    {
-      "teal": 731,
-      "source": 183,
-      "pc": [
+        739,
+        740,
         741
       ]
     },
     {
-      "teal": 732,
-      "source": 167,
+      "teal": 719,
+      "source": 186,
       "pc": [
         742
       ]
     },
     {
-      "teal": 737,
+      "teal": 720,
       "source": 186,
       "pc": [
         743,
-        744,
+        744
+      ]
+    },
+    {
+      "teal": 724,
+      "source": 187,
+      "pc": [
         745
       ]
     },
     {
-      "teal": 738,
-      "source": 186,
+      "teal": 725,
+      "source": 187,
       "pc": [
-        746
-      ]
-    },
-    {
-      "teal": 739,
-      "source": 186,
-      "pc": [
+        746,
         747
       ]
     },
     {
-      "teal": 743,
-      "source": 186,
+      "teal": 729,
+      "source": 188,
       "pc": [
         748,
         749,
-        750
-      ]
-    },
-    {
-      "teal": 744,
-      "source": 186,
-      "pc": [
-        751
-      ]
-    },
-    {
-      "teal": 749,
-      "source": 188,
-      "pc": [
+        750,
+        751,
         752,
         753,
-        754
+        754,
+        755,
+        756
       ]
     },
     {
-      "teal": 750,
-      "source": 188,
+      "teal": 730,
+      "source": 180,
       "pc": [
-        755
-      ]
-    },
-    {
-      "teal": 753,
-      "source": 188,
-      "pc": [
-        756,
         757,
         758
       ]
     },
     {
-      "teal": 754,
-      "source": 188,
+      "teal": 731,
+      "source": 180,
       "pc": [
         759
       ]
     },
     {
-      "teal": 755,
-      "source": 188,
+      "teal": 734,
+      "source": 180,
+      "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
       "pc": [
         760
       ]
     },
     {
-      "teal": 759,
+      "teal": 735,
       "source": 188,
       "pc": [
         761,
-        762,
+        762
+      ]
+    },
+    {
+      "teal": 736,
+      "source": 188,
+      "pc": [
         763
       ]
     },
     {
-      "teal": 763,
-      "source": 189,
+      "teal": 737,
+      "source": 188,
       "pc": [
         764,
         765
       ]
     },
     {
-      "teal": 764,
-      "source": 189,
+      "teal": 738,
+      "source": 188,
       "pc": [
         766,
-        767,
-        768
+        767
       ]
     },
     {
-      "teal": 765,
-      "source": 189,
+      "teal": 739,
+      "source": 188,
       "pc": [
-        769,
+        768,
+        769
+      ]
+    },
+    {
+      "teal": 740,
+      "source": 188,
+      "pc": [
         770
       ]
     },
     {
-      "teal": 766,
-      "source": 189,
+      "teal": 741,
+      "source": 188,
       "pc": [
         771
       ]
     },
     {
-      "teal": 767,
-      "source": 189,
+      "teal": 742,
+      "source": 188,
       "pc": [
-        772
-      ]
-    },
-    {
-      "teal": 770,
-      "source": 189,
-      "errorMessage": "Only the creator can set the admin token",
-      "pc": [
+        772,
         773
       ]
     },
     {
-      "teal": 774,
-      "source": 190,
+      "teal": 743,
+      "source": 188,
       "pc": [
         774
       ]
     },
     {
-      "teal": 775,
-      "source": 190,
+      "teal": 744,
+      "source": 188,
       "pc": [
-        775,
+        775
+      ]
+    },
+    {
+      "teal": 745,
+      "source": 188,
+      "pc": [
         776
       ]
     },
     {
-      "teal": 776,
-      "source": 190,
+      "teal": 746,
+      "source": 188,
       "pc": [
         777
       ]
     },
     {
-      "teal": 777,
+      "teal": 747,
       "source": 188,
       "pc": [
-        778
+        778,
+        779
       ]
     },
     {
-      "teal": 782,
-      "source": 193,
+      "teal": 748,
+      "source": 188,
       "pc": [
-        779,
-        780,
+        780
+      ]
+    },
+    {
+      "teal": 749,
+      "source": 188,
+      "pc": [
         781
       ]
     },
     {
-      "teal": 783,
-      "source": 193,
+      "teal": 750,
+      "source": 188,
       "pc": [
-        782
+        782,
+        783,
+        784
       ]
     },
     {
-      "teal": 784,
-      "source": 193,
+      "teal": 751,
+      "source": 188,
       "pc": [
-        783
+        785
       ]
     },
     {
-      "teal": 788,
-      "source": 193,
+      "teal": 752,
+      "source": 188,
       "pc": [
-        784,
-        785,
-        786
+        786,
+        787
       ]
     },
     {
-      "teal": 792,
-      "source": 194,
+      "teal": 755,
+      "source": 183,
       "pc": [
-        787,
         788
       ]
     },
     {
-      "teal": 793,
-      "source": 194,
+      "teal": 759,
+      "source": 180,
       "pc": [
         789,
-        790,
+        790
+      ]
+    },
+    {
+      "teal": 760,
+      "source": 180,
+      "pc": [
         791
       ]
     },
     {
-      "teal": 794,
-      "source": 194,
+      "teal": 763,
+      "source": 180,
+      "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
       "pc": [
-        792,
+        792
+      ]
+    },
+    {
+      "teal": 764,
+      "source": 192,
+      "pc": [
         793
       ]
     },
     {
-      "teal": 795,
-      "source": 194,
+      "teal": 768,
+      "source": 193,
       "pc": [
-        794
-      ]
-    },
-    {
-      "teal": 796,
-      "source": 194,
-      "pc": [
+        794,
         795
       ]
     },
     {
-      "teal": 799,
-      "source": 194,
-      "errorMessage": "Only the creator can update the application",
+      "teal": 769,
+      "source": 193,
       "pc": [
         796
       ]
     },
     {
-      "teal": 800,
+      "teal": 770,
       "source": 193,
       "pc": [
         797
       ]
     },
     {
-      "teal": 803,
-      "source": 15,
+      "teal": 771,
+      "source": 176,
       "pc": [
-        798,
-        799,
-        800,
-        801,
-        802,
-        803
+        798
       ]
     },
     {
-      "teal": 804,
-      "source": 15,
+      "teal": 776,
+      "source": 201,
       "pc": [
+        799,
+        800,
+        801
+      ]
+    },
+    {
+      "teal": 777,
+      "source": 201,
+      "pc": [
+        802
+      ]
+    },
+    {
+      "teal": 780,
+      "source": 201,
+      "pc": [
+        803,
         804,
-        805,
+        805
+      ]
+    },
+    {
+      "teal": 781,
+      "source": 201,
+      "pc": [
         806
       ]
     },
     {
-      "teal": 805,
-      "source": 15,
+      "teal": 782,
+      "source": 201,
       "pc": [
-        807,
+        807
+      ]
+    },
+    {
+      "teal": 790,
+      "source": 201,
+      "pc": [
         808,
         809,
         810
       ]
     },
     {
-      "teal": 808,
-      "source": 15,
-      "errorMessage": "this contract does not implement the given ABI method for create NoOp",
+      "teal": 794,
+      "source": 202,
       "pc": [
-        811
+        811,
+        812
       ]
     },
     {
-      "teal": 811,
-      "source": 15,
+      "teal": 795,
+      "source": 202,
       "pc": [
-        812,
         813,
         814,
-        815,
+        815
+      ]
+    },
+    {
+      "teal": 796,
+      "source": 202,
+      "pc": [
         816,
         817
       ]
     },
     {
-      "teal": 812,
-      "source": 15,
+      "teal": 797,
+      "source": 202,
       "pc": [
-        818,
-        819,
-        820,
+        818
+      ]
+    },
+    {
+      "teal": 798,
+      "source": 202,
+      "pc": [
+        819
+      ]
+    },
+    {
+      "teal": 801,
+      "source": 202,
+      "errorMessage": "Only the creator can set the admin token",
+      "pc": [
+        820
+      ]
+    },
+    {
+      "teal": 805,
+      "source": 203,
+      "pc": [
         821,
-        822,
-        823
+        822
+      ]
+    },
+    {
+      "teal": 806,
+      "source": 203,
+      "pc": [
+        823,
+        824
+      ]
+    },
+    {
+      "teal": 807,
+      "source": 203,
+      "pc": [
+        825
+      ]
+    },
+    {
+      "teal": 808,
+      "source": 201,
+      "pc": [
+        826
       ]
     },
     {
       "teal": 813,
-      "source": 15,
+      "source": 206,
       "pc": [
-        824,
-        825,
-        826,
         827,
         828,
         829
@@ -3506,334 +3556,546 @@
     },
     {
       "teal": 814,
-      "source": 15,
+      "source": 206,
       "pc": [
-        830,
-        831,
-        832,
-        833,
-        834,
-        835
+        830
       ]
     },
     {
       "teal": 815,
-      "source": 15,
+      "source": 206,
       "pc": [
-        836,
-        837,
-        838,
-        839,
-        840,
-        841
+        831
       ]
     },
     {
-      "teal": 816,
-      "source": 15,
+      "teal": 819,
+      "source": 206,
       "pc": [
-        842,
-        843,
-        844
-      ]
-    },
-    {
-      "teal": 817,
-      "source": 15,
-      "pc": [
-        845,
-        846,
-        847,
-        848,
-        849,
-        850,
-        851,
-        852,
-        853,
-        854,
-        855,
-        856
+        832,
+        833,
+        834
       ]
     },
     {
       "teal": 820,
-      "source": 15,
-      "errorMessage": "this contract does not implement the given ABI method for call NoOp",
+      "source": 206,
       "pc": [
-        857
-      ]
-    },
-    {
-      "teal": 823,
-      "source": 15,
-      "pc": [
-        858,
-        859,
-        860,
-        861,
-        862,
-        863
-      ]
-    },
-    {
-      "teal": 824,
-      "source": 15,
-      "pc": [
-        864,
-        865,
-        866
+        835
       ]
     },
     {
       "teal": 825,
-      "source": 15,
+      "source": 208,
       "pc": [
-        867,
-        868,
-        869,
-        870
+        836,
+        837,
+        838
       ]
     },
     {
-      "teal": 828,
-      "source": 15,
-      "errorMessage": "this contract does not implement the given ABI method for call UpdateApplication",
+      "teal": 826,
+      "source": 208,
       "pc": [
-        871
+        839
+      ]
+    },
+    {
+      "teal": 827,
+      "source": 208,
+      "pc": [
+        840
       ]
     },
     {
       "teal": 831,
-      "source": 15,
+      "source": 208,
       "pc": [
-        872,
-        873,
-        874
-      ]
-    },
-    {
-      "teal": 832,
-      "source": 15,
-      "pc": [
-        875,
-        876
-      ]
-    },
-    {
-      "teal": 833,
-      "source": 15,
-      "pc": [
-        877,
-        878
-      ]
-    },
-    {
-      "teal": 834,
-      "source": 15,
-      "pc": [
-        879
+        841,
+        842,
+        843
       ]
     },
     {
       "teal": 835,
-      "source": 15,
+      "source": 209,
       "pc": [
-        880,
-        881
+        844,
+        845
       ]
     },
     {
       "teal": 836,
-      "source": 15,
+      "source": 209,
       "pc": [
-        882,
-        883
+        846,
+        847,
+        848
       ]
     },
     {
       "teal": 837,
-      "source": 15,
+      "source": 209,
       "pc": [
-        884
+        849,
+        850
       ]
     },
     {
-      "teal": 840,
-      "source": 15,
+      "teal": 838,
+      "source": 209,
       "pc": [
-        885,
-        886,
-        887
+        851
       ]
     },
     {
-      "teal": 841,
-      "source": 15,
+      "teal": 839,
+      "source": 209,
       "pc": [
-        888,
-        889
+        852
       ]
     },
     {
       "teal": 842,
-      "source": 15,
+      "source": 209,
+      "errorMessage": "Only the creator can update the application",
       "pc": [
-        890,
-        891
+        853
       ]
     },
     {
       "teal": 843,
-      "source": 15,
+      "source": 208,
       "pc": [
-        892
-      ]
-    },
-    {
-      "teal": 844,
-      "source": 15,
-      "pc": [
-        893,
-        894
-      ]
-    },
-    {
-      "teal": 845,
-      "source": 15,
-      "pc": [
-        895,
-        896
+        854
       ]
     },
     {
       "teal": 846,
       "source": 15,
       "pc": [
-        897
+        855,
+        856,
+        857,
+        858,
+        859,
+        860
       ]
     },
     {
       "teal": 847,
       "source": 15,
       "pc": [
-        898
+        861,
+        862,
+        863
       ]
     },
     {
       "teal": 848,
       "source": 15,
       "pc": [
-        899,
-        900
-      ]
-    },
-    {
-      "teal": 849,
-      "source": 15,
-      "pc": [
-        901
-      ]
-    },
-    {
-      "teal": 850,
-      "source": 15,
-      "pc": [
-        902
+        864,
+        865,
+        866,
+        867
       ]
     },
     {
       "teal": 851,
       "source": 15,
+      "errorMessage": "this contract does not implement the given ABI method for create NoOp",
       "pc": [
-        903
-      ]
-    },
-    {
-      "teal": 852,
-      "source": 15,
-      "pc": [
-        904,
-        905,
-        906
-      ]
-    },
-    {
-      "teal": 853,
-      "source": 15,
-      "pc": [
-        907,
-        908
+        868
       ]
     },
     {
       "teal": 854,
       "source": 15,
       "pc": [
-        909,
-        910
+        869,
+        870,
+        871,
+        872,
+        873,
+        874
       ]
     },
     {
       "teal": 855,
       "source": 15,
       "pc": [
-        911
+        875,
+        876,
+        877,
+        878,
+        879,
+        880
       ]
     },
     {
       "teal": 856,
       "source": 15,
       "pc": [
-        912
+        881,
+        882,
+        883,
+        884,
+        885,
+        886
       ]
     },
     {
       "teal": 857,
       "source": 15,
       "pc": [
-        913,
-        914
+        887,
+        888,
+        889,
+        890,
+        891,
+        892
       ]
     },
     {
       "teal": 858,
       "source": 15,
       "pc": [
-        915,
-        916
+        893,
+        894,
+        895,
+        896,
+        897,
+        898
       ]
     },
     {
       "teal": 859,
       "source": 15,
       "pc": [
-        917,
-        918
+        899,
+        900,
+        901
       ]
     },
     {
       "teal": 860,
       "source": 15,
       "pc": [
+        902,
+        903,
+        904,
+        905,
+        906,
+        907,
+        908,
+        909,
+        910,
+        911,
+        912,
+        913
+      ]
+    },
+    {
+      "teal": 863,
+      "source": 15,
+      "errorMessage": "this contract does not implement the given ABI method for call NoOp",
+      "pc": [
+        914
+      ]
+    },
+    {
+      "teal": 866,
+      "source": 15,
+      "pc": [
+        915,
+        916,
+        917,
+        918,
         919,
         920
       ]
     },
     {
-      "teal": 861,
+      "teal": 867,
       "source": 15,
       "pc": [
-        921
+        921,
+        922,
+        923
+      ]
+    },
+    {
+      "teal": 868,
+      "source": 15,
+      "pc": [
+        924,
+        925,
+        926,
+        927
+      ]
+    },
+    {
+      "teal": 871,
+      "source": 15,
+      "errorMessage": "this contract does not implement the given ABI method for call UpdateApplication",
+      "pc": [
+        928
+      ]
+    },
+    {
+      "teal": 874,
+      "source": 15,
+      "pc": [
+        929,
+        930,
+        931
+      ]
+    },
+    {
+      "teal": 875,
+      "source": 15,
+      "pc": [
+        932,
+        933
+      ]
+    },
+    {
+      "teal": 876,
+      "source": 15,
+      "pc": [
+        934,
+        935
+      ]
+    },
+    {
+      "teal": 877,
+      "source": 15,
+      "pc": [
+        936
+      ]
+    },
+    {
+      "teal": 878,
+      "source": 15,
+      "pc": [
+        937,
+        938
+      ]
+    },
+    {
+      "teal": 879,
+      "source": 15,
+      "pc": [
+        939,
+        940
+      ]
+    },
+    {
+      "teal": 880,
+      "source": 15,
+      "pc": [
+        941
+      ]
+    },
+    {
+      "teal": 883,
+      "source": 15,
+      "pc": [
+        942,
+        943,
+        944
+      ]
+    },
+    {
+      "teal": 884,
+      "source": 15,
+      "pc": [
+        945,
+        946
+      ]
+    },
+    {
+      "teal": 885,
+      "source": 15,
+      "pc": [
+        947,
+        948
+      ]
+    },
+    {
+      "teal": 886,
+      "source": 15,
+      "pc": [
+        949
+      ]
+    },
+    {
+      "teal": 887,
+      "source": 15,
+      "pc": [
+        950,
+        951
+      ]
+    },
+    {
+      "teal": 888,
+      "source": 15,
+      "pc": [
+        952,
+        953
+      ]
+    },
+    {
+      "teal": 889,
+      "source": 15,
+      "pc": [
+        954
+      ]
+    },
+    {
+      "teal": 890,
+      "source": 15,
+      "pc": [
+        955
+      ]
+    },
+    {
+      "teal": 891,
+      "source": 15,
+      "pc": [
+        956,
+        957
+      ]
+    },
+    {
+      "teal": 892,
+      "source": 15,
+      "pc": [
+        958
+      ]
+    },
+    {
+      "teal": 893,
+      "source": 15,
+      "pc": [
+        959
+      ]
+    },
+    {
+      "teal": 894,
+      "source": 15,
+      "pc": [
+        960
+      ]
+    },
+    {
+      "teal": 895,
+      "source": 15,
+      "pc": [
+        961,
+        962,
+        963
+      ]
+    },
+    {
+      "teal": 896,
+      "source": 15,
+      "pc": [
+        964,
+        965
+      ]
+    },
+    {
+      "teal": 897,
+      "source": 15,
+      "pc": [
+        966,
+        967
+      ]
+    },
+    {
+      "teal": 898,
+      "source": 15,
+      "pc": [
+        968
+      ]
+    },
+    {
+      "teal": 899,
+      "source": 15,
+      "pc": [
+        969
+      ]
+    },
+    {
+      "teal": 900,
+      "source": 15,
+      "pc": [
+        970,
+        971
+      ]
+    },
+    {
+      "teal": 901,
+      "source": 15,
+      "pc": [
+        972,
+        973
+      ]
+    },
+    {
+      "teal": 902,
+      "source": 15,
+      "pc": [
+        974,
+        975
+      ]
+    },
+    {
+      "teal": 903,
+      "source": 15,
+      "pc": [
+        976,
+        977
+      ]
+    },
+    {
+      "teal": 904,
+      "source": 15,
+      "pc": [
+        978
       ]
     }
   ],
   "source": {
-    "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCgovLyBUaGlzIFRFQUwgd2FzIGdlbmVyYXRlZCBieSBURUFMU2NyaXB0IHYwLjEwMi4wCi8vIGh0dHBzOi8vZ2l0aHViLmNvbS9hbGdvcmFuZGZvdW5kYXRpb24vVEVBTFNjcmlwdAoKLy8gVGhpcyBjb250cmFjdCBpcyBjb21wbGlhbnQgd2l0aCBhbmQvb3IgaW1wbGVtZW50cyB0aGUgZm9sbG93aW5nIEFSQ3M6IFsgQVJDNCBdCgovLyBUaGUgZm9sbG93aW5nIHRlbiBsaW5lcyBvZiBURUFMIGhhbmRsZSBpbml0aWFsIHByb2dyYW0gZmxvdwovLyBUaGlzIHBhdHRlcm4gaXMgdXNlZCB0byBtYWtlIGl0IGVhc3kgZm9yIGFueW9uZSB0byBwYXJzZSB0aGUgc3RhcnQgb2YgdGhlIHByb2dyYW0gYW5kIGRldGVybWluZSBpZiBhIHNwZWNpZmljIGFjdGlvbiBpcyBhbGxvd2VkCi8vIEhlcmUsIGFjdGlvbiByZWZlcnMgdG8gdGhlIE9uQ29tcGxldGUgaW4gY29tYmluYXRpb24gd2l0aCB3aGV0aGVyIHRoZSBhcHAgaXMgYmVpbmcgY3JlYXRlZCBvciBjYWxsZWQKLy8gRXZlcnkgcG9zc2libGUgYWN0aW9uIGZvciB0aGlzIGNvbnRyYWN0IGlzIHJlcHJlc2VudGVkIGluIHRoZSBzd2l0Y2ggc3RhdGVtZW50Ci8vIElmIHRoZSBhY3Rpb24gaXMgbm90IGltcGxlbWVudGVkIGluIHRoZSBjb250cmFjdCwgaXRzIHJlc3BlY3RpdmUgYnJhbmNoIHdpbGwgYmUgIipOT1RfSU1QTEVNRU5URUQiIHdoaWNoIGp1c3QgY29udGFpbnMgImVyciIKdHhuIEFwcGxpY2F0aW9uSUQKIQppbnQgNgoqCnR4biBPbkNvbXBsZXRpb24KKwpzd2l0Y2ggKmNhbGxfTm9PcCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqY2FsbF9VcGRhdGVBcHBsaWNhdGlvbiAqTk9UX0lNUExFTUVOVEVEICpjcmVhdGVfTm9PcCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQKCipOT1RfSU1QTEVNRU5URUQ6CgkvLyBUaGUgcmVxdWVzdGVkIGFjdGlvbiBpcyBub3QgaW1wbGVtZW50ZWQgaW4gdGhpcyBjb250cmFjdC4gQXJlIHlvdSB1c2luZyB0aGUgY29ycmVjdCBPbkNvbXBsZXRlPyBEaWQgeW91IHNldCB5b3VyIGFwcCBJRD8KCWVycgoKLy8gY2hlY2tDYWxsZXJJc0xpc3RpbmdPd25lcihuZmRBcHBJRDogdWludDY0KTogdm9pZApjaGVja0NhbGxlcklzTGlzdGluZ093bmVyOgoJcHJvdG8gMSAwCgoJLy8gUHVzaCBlbXB0eSBieXRlcyBhZnRlciB0aGUgZnJhbWUgcG9pbnRlciB0byByZXNlcnZlIHNwYWNlIGZvciBsb2NhbCB2YXJpYWJsZXMKCWJ5dGUgMHgKCgkvLyBjb250cmFjdHMvQWxnb0RpcmVjdG9yeS5hbGdvLnRzOjIzCgkvLyBsaXN0aW5nS2V5ID0gdGhpcy5saXN0ZWRORkRhcHBJRHMobmZkQXBwSUQpLnZhbHVlCglmcmFtZV9kaWcgLTEgLy8gbmZkQXBwSUQ6IHVpbnQ2NAoJaXRvYgoJZnJhbWVfYnVyeSAwIC8vIHN0b3JhZ2Uga2V5Ly9saXN0aW5nS2V5CgoJLy8gY29udHJhY3RzL0FsZ29EaXJlY3RvcnkuYWxnby50czoyNAoJLy8gYXNzZXJ0KHRoaXMudHhuLnNlbmRlciA9PT0gdGhpcy5saXN0aW5ncyhsaXN0aW5nS2V5KS52YWx1ZSwgJ0NhbGxlciBtdXN0IGJlIGxpc3Rpbmcgb3duZXInKQoJdHhuIFNlbmRlcgoJZnJhbWVfZGlnIDAgLy8gc3RvcmFnZSBrZXkvL2xpc3RpbmdLZXkKCWJveF9nZXQKCgkvLyBib3ggdmFsdWUgZG9lcyBub3QgZXhpc3Q6IHRoaXMubGlzdGVkTkZEYXBwSURzKG5mZEFwcElEKS52YWx1ZQoJYXNzZXJ0Cglib3hfZ2V0CgoJLy8gYm94IHZhbHVlIGRvZXMgbm90IGV4aXN0OiB0aGlzLmxpc3RpbmdzKGxpc3RpbmdLZXkpLnZhbHVlCglhc3NlcnQKCT09CgoJLy8gQ2FsbGVyIG11c3QgYmUgbGlzdGluZyBvd25lcgoJYXNzZXJ0CglyZXRzdWIKCi8vIGNoZWNrTkZESXNTZWdtZW50T2ZEaXJlY3RvcnkobmZkQXBwSUQ6IHVpbnQ2NCk6IHZvaWQKY2hlY2tORkRJc1NlZ21lbnRPZkRpcmVjdG9yeToKCXByb3RvIDEgMAoKCS8vIGNvbnRyYWN0cy9BbGdvRGlyZWN0b3J5LmFsZ28udHM6MjkKCS8vIGFzc2VydCgKCS8vICAgICAgIGJ0b2koQXBwSUQuZnJvbVVpbnQ2NChuZmRBcHBJRCkuZ2xvYmFsU3RhdGUoJ2kucGFyZW50QXBwSUQnKSBhcyBieXRlcykgPT09IDU3NjIzMjgyMSwKCS8vICAgICAgICdORkQgbXVzdCBiZSBhIHNlZ21lbnQgb2YgZGlyZWN0b3J5LmFsZ28gd2l0aCBwYXJlbnQgYXBwIElEIDU3NjIzMjgyMScKCS8vICAgICApCglmcmFtZV9kaWcgLTEgLy8gbmZkQXBwSUQ6IHVpbnQ2NAoJYnl0ZSAweDY5MmU3MDYxNzI2NTZlNzQ0MTcwNzA0OTQ0IC8vICJpLnBhcmVudEFwcElEIgoJYXBwX2dsb2JhbF9nZXRfZXgKCgkvLyBnbG9iYWwgc3RhdGUgdmFsdWUgZG9lcyBub3QgZXhpc3Q6IEFwcElELmZyb21VaW50NjQobmZkQXBwSUQpLmdsb2JhbFN0YXRlKCdpLnBhcmVudEFwcElEJykKCWFzc2VydAoJYnRvaQoJaW50IDU3NjIzMjgyMQoJPT0KCgkvLyBORkQgbXVzdCBiZSBhIHNlZ21lbnQgb2YgZGlyZWN0b3J5LmFsZ28gd2l0aCBwYXJlbnQgYXBwIElEIDU3NjIzMjgyMQoJYXNzZXJ0CglyZXRzdWIKCi8vIGNoZWNrQ2FsbGVySXNORkRPd25lcihuZmRBcHBJRDogdWludDY0KTogdm9pZApjaGVja0NhbGxlcklzTkZET3duZXI6Cglwcm90byAxIDAKCgkvLyBjb250cmFjdHMvQWxnb0RpcmVjdG9yeS5hbGdvLnRzOjM3CgkvLyBhc3NlcnQoCgkvLyAgICAgICB0aGlzLnR4bi5zZW5kZXIgPT09IChBcHBJRC5mcm9tVWludDY0KG5mZEFwcElEKS5nbG9iYWxTdGF0ZSgnaS5vd25lci5hJykgYXMgQWRkcmVzcyksCgkvLyAgICAgICAnTGlzdGluZyBjcmVhdG9yIG11c3QgYmUgdGhlIE5GRCBhcHAgaS5vd25lci5hJwoJLy8gICAgICkKCXR4biBTZW5kZXIKCWZyYW1lX2RpZyAtMSAvLyBuZmRBcHBJRDogdWludDY0CglieXRlIDB4NjkyZTZmNzc2ZTY1NzIyZTYxIC8vICJpLm93bmVyLmEiCglhcHBfZ2xvYmFsX2dldF9leAoKCS8vIGdsb2JhbCBzdGF0ZSB2YWx1ZSBkb2VzIG5vdCBleGlzdDogQXBwSUQuZnJvbVVpbnQ2NChuZmRBcHBJRCkuZ2xvYmFsU3RhdGUoJ2kub3duZXIuYScpCglhc3NlcnQKCT09CgoJLy8gTGlzdGluZyBjcmVhdG9yIG11c3QgYmUgdGhlIE5GRCBhcHAgaS5vd25lci5hCglhc3NlcnQKCXJldHN1YgoKLy8gY2hlY2tORkROb3RFeHBpcmVkKG5mZEFwcElEOiB1aW50NjQpOiB2b2lkCmNoZWNrTkZETm90RXhwaXJlZDoKCXByb3RvIDEgMAoKCS8vIGNvbnRyYWN0cy9BbGdvRGlyZWN0b3J5LmFsZ28udHM6NDUKCS8vIGFzc2VydCgKCS8vICAgICAgIGdsb2JhbHMubGF0ZXN0VGltZXN0YW1wIDw9IGJ0b2koQXBwSUQuZnJvbVVpbnQ2NChuZmRBcHBJRCkuZ2xvYmFsU3RhdGUoJ2kuZXhwaXJhdGlvblRpbWUnKSBhcyBieXRlcyksCgkvLyAgICAgICAnTkZEIHNlZ21lbnQgbXVzdCBub3QgYmUgZXhwaXJlZCcKCS8vICAgICApCglnbG9iYWwgTGF0ZXN0VGltZXN0YW1wCglmcmFtZV9kaWcgLTEgLy8gbmZkQXBwSUQ6IHVpbnQ2NAoJYnl0ZSAweDY5MmU2NTc4NzA2OTcyNjE3NDY5NmY2ZTU0Njk2ZDY1IC8vICJpLmV4cGlyYXRpb25UaW1lIgoJYXBwX2dsb2JhbF9nZXRfZXgKCgkvLyBnbG9iYWwgc3RhdGUgdmFsdWUgZG9lcyBub3QgZXhpc3Q6IEFwcElELmZyb21VaW50NjQobmZkQXBwSUQpLmdsb2JhbFN0YXRlKCdpLmV4cGlyYXRpb25UaW1lJykKCWFzc2VydAoJYnRvaQoJPD0KCgkvLyBORkQgc2VnbWVudCBtdXN0IG5vdCBiZSBleHBpcmVkCglhc3NlcnQKCXJldHN1YgoKLy8gZ2V0Um91bmRlZFRpbWVzdGFtcCgpOiB1aW50NjQKZ2V0Um91bmRlZFRpbWVzdGFtcDoKCXByb3RvIDAgMQoKCS8vIGNvbnRyYWN0cy9BbGdvRGlyZWN0b3J5LmFsZ28udHM6NTIKCS8vIHJldHVybiBidG9pKHJlcGxhY2UzKGl0b2IoZ2xvYmFscy5sYXRlc3RUaW1lc3RhbXApLCA3LCBiemVybygxKSkpOwoJZ2xvYmFsIExhdGVzdFRpbWVzdGFtcAoJaXRvYgoJYnl0ZSAweDAwCglyZXBsYWNlMiA3CglidG9pCglyZXRzdWIKCi8vIGNyZWF0ZUxpc3RpbmcocGF5LHVpbnQ2NCxieXRlWzEzXSkodWludDY0LHVpbnQ2NCx1aW50NjQsYnl0ZVsxM10sc3RyaW5nKQoqYWJpX3JvdXRlX2NyZWF0ZUxpc3Rpbmc6CgkvLyBUaGUgQUJJIHJldHVybiBwcmVmaXgKCWJ5dGUgMHgxNTFmN2M3NQoKCS8vIGxpc3RpbmdUYWdzOiBieXRlWzEzXQoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgoJZHVwCglsZW4KCWludCAxMwoJPT0KCgkvLyBhcmd1bWVudCAwIChsaXN0aW5nVGFncykgZm9yIGNyZWF0ZUxpc3RpbmcgbXVzdCBiZSBhIGJ5dGVbMTNdCglhc3NlcnQKCgkvLyBuZmRBcHBJRDogdWludDY0Cgl0eG5hIEFwcGxpY2F0aW9uQXJncyAxCglidG9pCgoJLy8gY29sbGF0ZXJhbFBheW1lbnQ6IHBheQoJdHhuIEdyb3VwSW5kZXgKCWludCAxCgktCglkdXAKCWd0eG5zIFR5cGVFbnVtCglpbnQgcGF5Cgk9PQoKCS8vIGFyZ3VtZW50IDIgKGNvbGxhdGVyYWxQYXltZW50KSBmb3IgY3JlYXRlTGlzdGluZyBtdXN0IGJlIGEgcGF5IHRyYW5zYWN0aW9uCglhc3NlcnQKCgkvLyBleGVjdXRlIGNyZWF0ZUxpc3RpbmcocGF5LHVpbnQ2NCxieXRlWzEzXSkodWludDY0LHVpbnQ2NCx1aW50NjQsYnl0ZVsxM10sc3RyaW5nKQoJY2FsbHN1YiBjcmVhdGVMaXN0aW5nCgljb25jYXQKCWxvZwoJaW50IDEKCXJldHVybgoKLy8gY3JlYXRlTGlzdGluZyhjb2xsYXRlcmFsUGF5bWVudDogUGF5VHhuLCBuZmRBcHBJRDogdWludDY0LCBsaXN0aW5nVGFnczogU3RhdGljQXJyYXk8Ynl0ZSwgMTM+KTogTGlzdGluZwovLwovLyBDcmVhdGVzIGEgbGlzdGluZyBpbiB0aGUgZGlyZWN0b3J5IGJ5IHZvdWNoaW5nIGZvciBhbiBORkQgcm9vdCBvciBzZWdtZW50IG9mIGRpcmVjdG9yeS5hbGdvLgovLwovLyBAcGFyYW0gbmZkQXBwSUQgVGhlIHVpbnQ2NCBhcHBsaWNhdGlvbiBJRCBvZiB0aGUgTkZEIHRoYXQgd2lsbCBiZSBsaXN0ZWQKLy8gQHBhcmFtIGNvbGxhdGVyYWxQYXltZW50IFRoZSBBbGdvIHBheW1lbnQgb2YgY29sbGF0ZXJhbCB0byB2b3VjaCBmb3IgdGhlIGxpc3RpbmcKY3JlYXRlTGlzdGluZzoKCXByb3RvIDMgMQoKCS8vIFB1c2ggZW1wdHkgYnl0ZXMgYWZ0ZXIgdGhlIGZyYW1lIHBvaW50ZXIgdG8gcmVzZXJ2ZSBzcGFjZSBmb3IgbG9jYWwgdmFyaWFibGVzCglieXRlIDB4CglkdXBuIDIKCgkvLyBjb250cmFjdHMvQWxnb0RpcmVjdG9yeS5hbGdvLnRzOjYzCgkvLyB2ZXJpZnlQYXlUeG4oY29sbGF0ZXJhbFBheW1lbnQsIHsKCS8vICAgICAgIHNlbmRlcjogdGhpcy50eG4uc2VuZGVyLAoJLy8gICAgICAgcmVjZWl2ZXI6IHRoaXMuYXBwLmFkZHJlc3MsCgkvLyAgICAgICBhbW91bnQ6IHsgZ3JlYXRlclRoYW5FcXVhbFRvOiBUT1RBTF9MSVNUSU5HX0JPWEVTX0NPU1QgfSwKCS8vICAgICB9KQoJLy8gdmVyaWZ5IHNlbmRlcgoJZnJhbWVfZGlnIC0xIC8vIGNvbGxhdGVyYWxQYXltZW50OiBQYXlUeG4KCWd0eG5zIFNlbmRlcgoJdHhuIFNlbmRlcgoJPT0KCgkvLyB0cmFuc2FjdGlvbiB2ZXJpZmljYXRpb24gZmFpbGVkOiB7InR4biI6ImNvbGxhdGVyYWxQYXltZW50IiwiZmllbGQiOiJzZW5kZXIiLCJleHBlY3RlZCI6InRoaXMudHhuLnNlbmRlciJ9Cglhc3NlcnQKCgkvLyB2ZXJpZnkgcmVjZWl2ZXIKCWZyYW1lX2RpZyAtMSAvLyBjb2xsYXRlcmFsUGF5bWVudDogUGF5VHhuCglndHhucyBSZWNlaXZlcgoJZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MKCT09CgoJLy8gdHJhbnNhY3Rpb24gdmVyaWZpY2F0aW9uIGZhaWxlZDogeyJ0eG4iOiJjb2xsYXRlcmFsUGF5bWVudCIsImZpZWxkIjoicmVjZWl2ZXIiLCJleHBlY3RlZCI6InRoaXMuYXBwLmFkZHJlc3MifQoJYXNzZXJ0CgoJLy8gdmVyaWZ5IGFtb3VudAoJZnJhbWVfZGlnIC0xIC8vIGNvbGxhdGVyYWxQYXltZW50OiBQYXlUeG4KCWd0eG5zIEFtb3VudAoJaW50IDcyMjAwCgk+PQoKCS8vIHRyYW5zYWN0aW9uIHZlcmlmaWNhdGlvbiBmYWlsZWQ6IHsidHhuIjoiY29sbGF0ZXJhbFBheW1lbnQiLCJmaWVsZCI6ImFtb3VudCIsImNvbmRpdGlvbiI6ImdyZWF0ZXJUaGFuRXF1YWxUbyIsImV4cGVjdGVkIjoiPj1UT1RBTF9MSVNUSU5HX0JPWEVTX0NPU1QifQoJYXNzZXJ0CgoJLy8gY29udHJhY3RzL0FsZ29EaXJlY3RvcnkuYWxnby50czo3MAoJLy8gdGhpcy5jaGVja05GRElzU2VnbWVudE9mRGlyZWN0b3J5KG5mZEFwcElEKQoJZnJhbWVfZGlnIC0yIC8vIG5mZEFwcElEOiB1aW50NjQKCWNhbGxzdWIgY2hlY2tORkRJc1NlZ21lbnRPZkRpcmVjdG9yeQoKCS8vIGNvbnRyYWN0cy9BbGdvRGlyZWN0b3J5LmFsZ28udHM6NzEKCS8vIHRoaXMuY2hlY2tDYWxsZXJJc05GRE93bmVyKG5mZEFwcElEKQoJZnJhbWVfZGlnIC0yIC8vIG5mZEFwcElEOiB1aW50NjQKCWNhbGxzdWIgY2hlY2tDYWxsZXJJc05GRE93bmVyCgoJLy8gY29udHJhY3RzL0FsZ29EaXJlY3RvcnkuYWxnby50czo3MgoJLy8gdGhpcy5jaGVja05GRE5vdEV4cGlyZWQobmZkQXBwSUQpCglmcmFtZV9kaWcgLTIgLy8gbmZkQXBwSUQ6IHVpbnQ2NAoJY2FsbHN1YiBjaGVja05GRE5vdEV4cGlyZWQKCgkvLyBjb250cmFjdHMvQWxnb0RpcmVjdG9yeS5hbGdvLnRzOjc1CgkvLyBuZmRMb25nTmFtZSA9IEFwcElELmZyb21VaW50NjQobmZkQXBwSUQpLmdsb2JhbFN0YXRlKCdpLm5hbWUnKSBhcyBieXRlcwoJZnJhbWVfZGlnIC0yIC8vIG5mZEFwcElEOiB1aW50NjQKCWJ5dGUgMHg2OTJlNmU2MTZkNjUgLy8gImkubmFtZSIKCWFwcF9nbG9iYWxfZ2V0X2V4CgoJLy8gZ2xvYmFsIHN0YXRlIHZhbHVlIGRvZXMgbm90IGV4aXN0OiBBcHBJRC5mcm9tVWludDY0KG5mZEFwcElEKS5nbG9iYWxTdGF0ZSgnaS5uYW1lJykKCWFzc2VydAoJZnJhbWVfYnVyeSAwIC8vIG5mZExvbmdOYW1lOiBieXRlW10KCgkvLyBjb250cmFjdHMvQWxnb0RpcmVjdG9yeS5hbGdvLnRzOjc3CgkvLyBzZW5kQXBwQ2FsbCh7CgkvLyAgICAgICBhcHBsaWNhdGlvbklEOiBBcHBJRC5mcm9tVWludDY0KDg0MzY2ODI1KSwgLy8gTWFpbm5ldCA3NjA5MzcxODYKCS8vICAgICAgIGFwcGxpY2F0aW9uQXJnczogWydpc192YWxpZF9uZmRfYXBwaWQnLCBuZmRMb25nTmFtZSwgaXRvYihuZmRBcHBJRCldLAoJLy8gICAgICAgZmVlOiAwLAoJLy8gICAgIH0pCglpdHhuX2JlZ2luCglpbnQgYXBwbAoJaXR4bl9maWVsZCBUeXBlRW51bQoKCS8vIGNvbnRyYWN0cy9BbGdvRGlyZWN0b3J5LmFsZ28udHM6NzgKCS8vIGFwcGxpY2F0aW9uSUQ6IEFwcElELmZyb21VaW50NjQoODQzNjY4MjUpCglpbnQgODQzNjY4MjUKCWl0eG5fZmllbGQgQXBwbGljYXRpb25JRAoKCS8vIGNvbnRyYWN0cy9BbGdvRGlyZWN0b3J5LmFsZ28udHM6NzkKCS8vIGFwcGxpY2F0aW9uQXJnczogWydpc192YWxpZF9uZmRfYXBwaWQnLCBuZmRMb25nTmFtZSwgaXRvYihuZmRBcHBJRCldCglieXRlIDB4Njk3MzVmNzY2MTZjNjk2NDVmNmU2NjY0NWY2MTcwNzA2OTY0IC8vICJpc192YWxpZF9uZmRfYXBwaWQiCglpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uQXJncwoJZnJhbWVfZGlnIDAgLy8gbmZkTG9uZ05hbWU6IGJ5dGVbXQoJaXR4bl9maWVsZCBBcHBsaWNhdGlvbkFyZ3MKCWZyYW1lX2RpZyAtMiAvLyBuZmRBcHBJRDogdWludDY0CglpdG9iCglpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uQXJncwoKCS8vIGNvbnRyYWN0cy9BbGdvRGlyZWN0b3J5LmFsZ28udHM6ODAKCS8vIGZlZTogMAoJaW50IDAKCWl0eG5fZmllbGQgRmVlCgoJLy8gU3VibWl0IGlubmVyIHRyYW5zYWN0aW9uCglpdHhuX3N1Ym1pdAoKCS8vIGNvbnRyYWN0cy9BbGdvRGlyZWN0b3J5LmFsZ28udHM6ODIKCS8vIGFzc2VydChidG9pKHRoaXMuaXR4bi5sYXN0TG9nKSA9PT0gMSwgJ05GRCBhcHAgSUQgbXVzdCBiZSB2YWxpZCBhdCB0aGUgTkZEIHJlZ2lzdHJ5JykKCWl0eG4gTGFzdExvZwoJYnRvaQoJaW50IDEKCT09CgoJLy8gTkZEIGFwcCBJRCBtdXN0IGJlIHZhbGlkIGF0IHRoZSBORkQgcmVnaXN0cnkKCWFzc2VydAoKCS8vIGNvbnRyYWN0cy9BbGdvRGlyZWN0b3J5LmFsZ28udHM6ODUKCS8vIGFzc2VydCghdGhpcy5saXN0ZWRORkRhcHBJRHMobmZkQXBwSUQpLmV4aXN0cywgJ0xpc3RpbmcgZm9yIHRoaXMgTkZEIG11c3Qgbm90IGFscmVhZHkgZXhpc3QnKQoJZnJhbWVfZGlnIC0yIC8vIG5mZEFwcElEOiB1aW50NjQKCWl0b2IKCWJveF9sZW4KCXN3YXAKCXBvcAoJIQoKCS8vIExpc3RpbmcgZm9yIHRoaXMgTkZEIG11c3Qgbm90IGFscmVhZHkgZXhpc3QKCWFzc2VydAoKCS8vIGNvbnRyYWN0cy9BbGdvRGlyZWN0b3J5LmFsZ28udHM6ODgKCS8vIG5mZFNlZ21lbnROYW1lID0gc3Vic3RyaW5nMyhuZmRMb25nTmFtZSwgMCwgbGVuKG5mZExvbmdOYW1lKSAtIDE1KQoJZnJhbWVfZGlnIDAgLy8gbmZkTG9uZ05hbWU6IGJ5dGVbXQoJaW50IDAKCWZyYW1lX2RpZyAwIC8vIG5mZExvbmdOYW1lOiBieXRlW10KCWxlbgoJaW50IDE1CgktCglzdWJzdHJpbmczCglmcmFtZV9idXJ5IDEgLy8gbmZkU2VnbWVudE5hbWU6IGJ5dGVbXQoKCS8vIGNvbnRyYWN0cy9BbGdvRGlyZWN0b3J5LmFsZ28udHM6OTAKCS8vIGxpc3RpbmdLZXk6IExpc3RpbmcgPSB7CgkvLyAgICAgICB0aW1lc3RhbXA6IHRoaXMuZ2V0Um91bmRlZFRpbWVzdGFtcCgpLCAvLyBSb3VuZCB0aGUgdGltZXN0YW1wCgkvLyAgICAgICB2b3VjaEFtb3VudDogY29sbGF0ZXJhbFBheW1lbnQuYW1vdW50LAoJLy8gICAgICAgbmZkQXBwSUQ6IG5mZEFwcElELAoJLy8gICAgICAgdGFnczogbGlzdGluZ1RhZ3MsCgkvLyAgICAgICBuYW1lOiBuZmRTZWdtZW50TmFtZSwKCS8vICAgICB9CglieXRlIDB4IC8vIGluaXRpYWwgaGVhZAoJYnl0ZSAweCAvLyBpbml0aWFsIHRhaWwKCWJ5dGUgMHgwMDI3IC8vIGluaXRpYWwgaGVhZCBvZmZzZXQKCWNhbGxzdWIgZ2V0Um91bmRlZFRpbWVzdGFtcAoJaXRvYgoJY2FsbHN1YiAqcHJvY2Vzc19zdGF0aWNfdHVwbGVfZWxlbWVudAoJZnJhbWVfZGlnIC0xIC8vIGNvbGxhdGVyYWxQYXltZW50OiBQYXlUeG4KCWd0eG5zIEFtb3VudAoJaXRvYgoJY2FsbHN1YiAqcHJvY2Vzc19zdGF0aWNfdHVwbGVfZWxlbWVudAoJZnJhbWVfZGlnIC0yIC8vIG5mZEFwcElEOiB1aW50NjQKCWl0b2IKCWNhbGxzdWIgKnByb2Nlc3Nfc3RhdGljX3R1cGxlX2VsZW1lbnQKCWZyYW1lX2RpZyAtMyAvLyBsaXN0aW5nVGFnczogU3RhdGljQXJyYXk8Ynl0ZSwgMTM+CgljYWxsc3ViICpwcm9jZXNzX3N0YXRpY190dXBsZV9lbGVtZW50CglmcmFtZV9kaWcgMSAvLyBuZmRTZWdtZW50TmFtZTogYnl0ZVtdCglkdXAKCWxlbgoJaXRvYgoJZXh0cmFjdCA2IDIKCXN3YXAKCWNvbmNhdAoJY2FsbHN1YiAqcHJvY2Vzc19keW5hbWljX3R1cGxlX2VsZW1lbnQKCXBvcCAvLyBwb3AgaGVhZCBvZmZzZXQKCWNvbmNhdCAvLyBjb25jYXQgaGVhZCBhbmQgdGFpbAoJZnJhbWVfYnVyeSAyIC8vIGxpc3RpbmdLZXk6IExpc3RpbmcKCgkvLyBjb250cmFjdHMvQWxnb0RpcmVjdG9yeS5hbGdvLnRzOjk5CgkvLyB0aGlzLmxpc3RpbmdzKGxpc3RpbmdLZXkpLnZhbHVlID0gdGhpcy50eG4uc2VuZGVyCglmcmFtZV9kaWcgMiAvLyBsaXN0aW5nS2V5OiBMaXN0aW5nCgl0eG4gU2VuZGVyCglib3hfcHV0CgoJLy8gY29udHJhY3RzL0FsZ29EaXJlY3RvcnkuYWxnby50czoxMDIKCS8vIHRoaXMubGlzdGVkTkZEYXBwSURzKG5mZEFwcElEKS52YWx1ZSA9IGxpc3RpbmdLZXkKCWZyYW1lX2RpZyAtMiAvLyBuZmRBcHBJRDogdWludDY0CglpdG9iCglkdXAKCWJveF9kZWwKCXBvcAoJZnJhbWVfZGlnIDIgLy8gbGlzdGluZ0tleTogTGlzdGluZwoJYm94X3B1dAoKCS8vIGNvbnRyYWN0cy9BbGdvRGlyZWN0b3J5LmFsZ28udHM6MTA0CgkvLyByZXR1cm4gbGlzdGluZ0tleTsKCWZyYW1lX2RpZyAyIC8vIGxpc3RpbmdLZXk6IExpc3RpbmcKCgkvLyBzZXQgdGhlIHN1YnJvdXRpbmUgcmV0dXJuIHZhbHVlCglmcmFtZV9idXJ5IDAKCgkvLyBwb3AgYWxsIGxvY2FsIHZhcmlhYmxlcyBmcm9tIHRoZSBzdGFjawoJcG9wbiAyCglyZXRzdWIKCi8vIHJlZnJlc2hMaXN0aW5nKHVpbnQ2NCkodWludDY0LHVpbnQ2NCx1aW50NjQsYnl0ZVsxM10sc3RyaW5nKQoqYWJpX3JvdXRlX3JlZnJlc2hMaXN0aW5nOgoJLy8gVGhlIEFCSSByZXR1cm4gcHJlZml4CglieXRlIDB4MTUxZjdjNzUKCgkvLyBuZmRBcHBJRDogdWludDY0Cgl0eG5hIEFwcGxpY2F0aW9uQXJncyAxCglidG9pCgoJLy8gZXhlY3V0ZSByZWZyZXNoTGlzdGluZyh1aW50NjQpKHVpbnQ2NCx1aW50NjQsdWludDY0LGJ5dGVbMTNdLHN0cmluZykKCWNhbGxzdWIgcmVmcmVzaExpc3RpbmcKCWNvbmNhdAoJbG9nCglpbnQgMQoJcmV0dXJuCgovLyByZWZyZXNoTGlzdGluZyhuZmRBcHBJRDogdWludDY0KTogTGlzdGluZwovLwovLyBSZWZyZXNoZXMgYSBsaXN0aW5nIGluIHRoZSBkaXJlY3RvcnkgYW5kIHVwZGF0ZXMgaXRzIGxhc3QgdG91Y2hlZCB0aW1lc3RhbXAuCi8vCi8vIEBwYXJhbSBuZmRBcHBJRCBUaGUgdWludDY0IGFwcGxpY2F0aW9uIElEIG9mIHRoZSBORkQgdGhhdCB3aWxsIGJlIHJlZnJlc2hlZApyZWZyZXNoTGlzdGluZzoKCXByb3RvIDEgMQoKCS8vIFB1c2ggZW1wdHkgYnl0ZXMgYWZ0ZXIgdGhlIGZyYW1lIHBvaW50ZXIgdG8gcmVzZXJ2ZSBzcGFjZSBmb3IgbG9jYWwgdmFyaWFibGVzCglieXRlIDB4CglkdXAKCgkvLyBjb250cmFjdHMvQWxnb0RpcmVjdG9yeS5hbGdvLnRzOjExNAoJLy8gdGhpcy5jaGVja0NhbGxlcklzTGlzdGluZ093bmVyKG5mZEFwcElEKQoJZnJhbWVfZGlnIC0xIC8vIG5mZEFwcElEOiB1aW50NjQKCWNhbGxzdWIgY2hlY2tDYWxsZXJJc0xpc3RpbmdPd25lcgoKCS8vIGNvbnRyYWN0cy9BbGdvRGlyZWN0b3J5LmFsZ28udHM6MTE1CgkvLyB0aGlzLmNoZWNrQ2FsbGVySXNORkRPd25lcihuZmRBcHBJRCkKCWZyYW1lX2RpZyAtMSAvLyBuZmRBcHBJRDogdWludDY0CgljYWxsc3ViIGNoZWNrQ2FsbGVySXNORkRPd25lcgoKCS8vIGNvbnRyYWN0cy9BbGdvRGlyZWN0b3J5LmFsZ28udHM6MTE2CgkvLyB0aGlzLmNoZWNrTkZETm90RXhwaXJlZChuZmRBcHBJRCkKCWZyYW1lX2RpZyAtMSAvLyBuZmRBcHBJRDogdWludDY0CgljYWxsc3ViIGNoZWNrTkZETm90RXhwaXJlZAoKCS8vIGNvbnRyYWN0cy9BbGdvRGlyZWN0b3J5LmFsZ28udHM6MTE5CgkvLyBvbGRMaXN0aW5nS2V5ID0gdGhpcy5saXN0ZWRORkRhcHBJRHMobmZkQXBwSUQpLnZhbHVlCglmcmFtZV9kaWcgLTEgLy8gbmZkQXBwSUQ6IHVpbnQ2NAoJaXRvYgoJZnJhbWVfYnVyeSAwIC8vIHN0b3JhZ2Uga2V5Ly9vbGRMaXN0aW5nS2V5CgoJLy8gY29udHJhY3RzL0FsZ29EaXJlY3RvcnkuYWxnby50czoxMjAKCS8vIG5ld0xpc3RpbmdLZXk6IExpc3RpbmcgPSB7CgkvLyAgICAgICB0aW1lc3RhbXA6IHRoaXMuZ2V0Um91bmRlZFRpbWVzdGFtcCgpLCAvLyBSb3VuZCB0aGUgdGltZXN0YW1wCgkvLyAgICAgICB2b3VjaEFtb3VudDogb2xkTGlzdGluZ0tleS52b3VjaEFtb3VudCwKCS8vICAgICAgIG5mZEFwcElEOiBvbGRMaXN0aW5nS2V5Lm5mZEFwcElELAoJLy8gICAgICAgdGFnczogb2xkTGlzdGluZ0tleS50YWdzLAoJLy8gICAgICAgbmFtZTogb2xkTGlzdGluZ0tleS5uYW1lLAoJLy8gICAgIH0KCWJ5dGUgMHggLy8gaW5pdGlhbCBoZWFkCglieXRlIDB4IC8vIGluaXRpYWwgdGFpbAoJYnl0ZSAweDAwMjcgLy8gaW5pdGlhbCBoZWFkIG9mZnNldAoJY2FsbHN1YiBnZXRSb3VuZGVkVGltZXN0YW1wCglpdG9iCgljYWxsc3ViICpwcm9jZXNzX3N0YXRpY190dXBsZV9lbGVtZW50CglmcmFtZV9kaWcgMCAvLyBzdG9yYWdlIGtleS8vb2xkTGlzdGluZ0tleQoJYm94X2dldAoKCS8vIGJveCB2YWx1ZSBkb2VzIG5vdCBleGlzdDogdGhpcy5saXN0ZWRORkRhcHBJRHMobmZkQXBwSUQpLnZhbHVlCglhc3NlcnQKCXN0b3JlIDI1NSAvLyBmdWxsIGFycmF5Cglsb2FkIDI1NSAvLyBmdWxsIGFycmF5CglleHRyYWN0IDggOAoJYnRvaQoJaXRvYgoJY2FsbHN1YiAqcHJvY2Vzc19zdGF0aWNfdHVwbGVfZWxlbWVudAoJZnJhbWVfZGlnIDAgLy8gc3RvcmFnZSBrZXkvL29sZExpc3RpbmdLZXkKCWJveF9nZXQKCgkvLyBib3ggdmFsdWUgZG9lcyBub3QgZXhpc3Q6IHRoaXMubGlzdGVkTkZEYXBwSURzKG5mZEFwcElEKS52YWx1ZQoJYXNzZXJ0CglzdG9yZSAyNTUgLy8gZnVsbCBhcnJheQoJbG9hZCAyNTUgLy8gZnVsbCBhcnJheQoJZXh0cmFjdCAxNiA4CglidG9pCglpdG9iCgljYWxsc3ViICpwcm9jZXNzX3N0YXRpY190dXBsZV9lbGVtZW50CglmcmFtZV9kaWcgMCAvLyBzdG9yYWdlIGtleS8vb2xkTGlzdGluZ0tleQoJYm94X2dldAoKCS8vIGJveCB2YWx1ZSBkb2VzIG5vdCBleGlzdDogdGhpcy5saXN0ZWRORkRhcHBJRHMobmZkQXBwSUQpLnZhbHVlCglhc3NlcnQKCXN0b3JlIDI1NSAvLyBmdWxsIGFycmF5Cglsb2FkIDI1NSAvLyBmdWxsIGFycmF5CglleHRyYWN0IDI0IDEzCgljYWxsc3ViICpwcm9jZXNzX3N0YXRpY190dXBsZV9lbGVtZW50CglmcmFtZV9kaWcgMCAvLyBzdG9yYWdlIGtleS8vb2xkTGlzdGluZ0tleQoJYm94X2dldAoKCS8vIGJveCB2YWx1ZSBkb2VzIG5vdCBleGlzdDogdGhpcy5saXN0ZWRORkRhcHBJRHMobmZkQXBwSUQpLnZhbHVlCglhc3NlcnQKCXN0b3JlIDI1NSAvLyBmdWxsIGFycmF5CglpbnQgMzcKCWxvYWQgMjU1IC8vIGZ1bGwgYXJyYXkKCWxvYWQgMjU1IC8vIGZ1bGwgYXJyYXkKCXVuY292ZXIgMgoJZXh0cmFjdF91aW50MTYKCWR1cCAvLyBkdXBsaWNhdGUgc3RhcnQgb2YgZWxlbWVudAoJbG9hZCAyNTUgLy8gZnVsbCBhcnJheQoJc3dhcAoJZXh0cmFjdF91aW50MTYgLy8gZ2V0IG51bWJlciBvZiBlbGVtZW50cwoJaW50IDEgLy8gZ2V0IHR5cGUgbGVuZ3RoCgkqIC8vIG11bHRpcGx5IGJ5IHR5cGUgbGVuZ3RoCglpbnQgMgoJKyAvLyBhZGQgdHdvIGZvciBsZW5ndGgKCWV4dHJhY3QzCglleHRyYWN0IDIgMAoJZHVwCglsZW4KCWl0b2IKCWV4dHJhY3QgNiAyCglzd2FwCgljb25jYXQKCWNhbGxzdWIgKnByb2Nlc3NfZHluYW1pY190dXBsZV9lbGVtZW50Cglwb3AgLy8gcG9wIGhlYWQgb2Zmc2V0Cgljb25jYXQgLy8gY29uY2F0IGhlYWQgYW5kIHRhaWwKCWZyYW1lX2J1cnkgMSAvLyBuZXdMaXN0aW5nS2V5OiBMaXN0aW5nCgoJLy8gY29udHJhY3RzL0FsZ29EaXJlY3RvcnkuYWxnby50czoxMjkKCS8vIHRoaXMubGlzdGluZ3Mob2xkTGlzdGluZ0tleSkuZGVsZXRlKCkKCWZyYW1lX2RpZyAwIC8vIHN0b3JhZ2Uga2V5Ly9vbGRMaXN0aW5nS2V5Cglib3hfZ2V0CgoJLy8gYm94IHZhbHVlIGRvZXMgbm90IGV4aXN0OiB0aGlzLmxpc3RlZE5GRGFwcElEcyhuZmRBcHBJRCkudmFsdWUKCWFzc2VydAoJYm94X2RlbAoKCS8vIGNvbnRyYWN0cy9BbGdvRGlyZWN0b3J5LmFsZ28udHM6MTMyCgkvLyB0aGlzLmxpc3RpbmdzKG5ld0xpc3RpbmdLZXkpLnZhbHVlID0gdGhpcy50eG4uc2VuZGVyCglmcmFtZV9kaWcgMSAvLyBuZXdMaXN0aW5nS2V5OiBMaXN0aW5nCgl0eG4gU2VuZGVyCglib3hfcHV0CgoJLy8gY29udHJhY3RzL0FsZ29EaXJlY3RvcnkuYWxnby50czoxMzUKCS8vIHRoaXMubGlzdGVkTkZEYXBwSURzKG5mZEFwcElEKS52YWx1ZSA9IG5ld0xpc3RpbmdLZXkKCWZyYW1lX2RpZyAtMSAvLyBuZmRBcHBJRDogdWludDY0CglpdG9iCglkdXAKCWJveF9kZWwKCXBvcAoJZnJhbWVfZGlnIDEgLy8gbmV3TGlzdGluZ0tleTogTGlzdGluZwoJYm94X3B1dAoKCS8vIGNvbnRyYWN0cy9BbGdvRGlyZWN0b3J5LmFsZ28udHM6MTM3CgkvLyByZXR1cm4gbmV3TGlzdGluZ0tleTsKCWZyYW1lX2RpZyAxIC8vIG5ld0xpc3RpbmdLZXk6IExpc3RpbmcKCgkvLyBzZXQgdGhlIHN1YnJvdXRpbmUgcmV0dXJuIHZhbHVlCglmcmFtZV9idXJ5IDAKCgkvLyBwb3AgYWxsIGxvY2FsIHZhcmlhYmxlcyBmcm9tIHRoZSBzdGFjawoJcG9wbiAxCglyZXRzdWIKCi8vIGFiYW5kb25MaXN0aW5nKHVpbnQ2NCl2b2lkCiphYmlfcm91dGVfYWJhbmRvbkxpc3Rpbmc6CgkvLyBuZmRBcHBJRDogdWludDY0Cgl0eG5hIEFwcGxpY2F0aW9uQXJncyAxCglidG9pCgoJLy8gZXhlY3V0ZSBhYmFuZG9uTGlzdGluZyh1aW50NjQpdm9pZAoJY2FsbHN1YiBhYmFuZG9uTGlzdGluZwoJaW50IDEKCXJldHVybgoKLy8gYWJhbmRvbkxpc3RpbmcobmZkQXBwSUQ6IHVpbnQ2NCk6IHZvaWQKLy8KLy8gQWJhbmRvbnMgYSBsaXN0aW5nIGluIHRoZSBkaXJlY3RvcnkgYW5kIHJldHVybnMgdGhlIHZvdWNoZWQgY29sbGF0ZXJhbC4KLy8KLy8gQHBhcmFtIG5mZEFwcElEIFRoZSB1aW50NjQgYXBwbGljYXRpb24gSUQgb2YgdGhlIE5GRCB0aGF0IHdpbGwgYmUgYWJhbmRvbmVkCmFiYW5kb25MaXN0aW5nOgoJcHJvdG8gMSAwCgoJLy8gUHVzaCBlbXB0eSBieXRlcyBhZnRlciB0aGUgZnJhbWUgcG9pbnRlciB0byByZXNlcnZlIHNwYWNlIGZvciBsb2NhbCB2YXJpYWJsZXMKCWJ5dGUgMHgKCgkvLyBjb250cmFjdHMvQWxnb0RpcmVjdG9yeS5hbGdvLnRzOjE0NgoJLy8gbGlzdGluZ0tleSA9IHRoaXMubGlzdGVkTkZEYXBwSURzKG5mZEFwcElEKS52YWx1ZQoJZnJhbWVfZGlnIC0xIC8vIG5mZEFwcElEOiB1aW50NjQKCWl0b2IKCWZyYW1lX2J1cnkgMCAvLyBzdG9yYWdlIGtleS8vbGlzdGluZ0tleQoKCS8vIGNvbnRyYWN0cy9BbGdvRGlyZWN0b3J5LmFsZ28udHM6MTQ3CgkvLyB0aGlzLmNoZWNrQ2FsbGVySXNMaXN0aW5nT3duZXIobmZkQXBwSUQpCglmcmFtZV9kaWcgLTEgLy8gbmZkQXBwSUQ6IHVpbnQ2NAoJY2FsbHN1YiBjaGVja0NhbGxlcklzTGlzdGluZ093bmVyCgoJLy8gY29udHJhY3RzL0FsZ29EaXJlY3RvcnkuYWxnby50czoxNTAKCS8vIHNlbmRQYXltZW50KHsKCS8vICAgICAgIHNlbmRlcjogdGhpcy5hcHAuYWRkcmVzcywKCS8vICAgICAgIHJlY2VpdmVyOiB0aGlzLmxpc3RpbmdzKGxpc3RpbmdLZXkpLnZhbHVlLAoJLy8gICAgICAgYW1vdW50OiBsaXN0aW5nS2V5LnZvdWNoQW1vdW50LAoJLy8gICAgICAgZmVlOiAwLAoJLy8gICAgIH0pCglpdHhuX2JlZ2luCglpbnQgcGF5CglpdHhuX2ZpZWxkIFR5cGVFbnVtCgoJLy8gY29udHJhY3RzL0FsZ29EaXJlY3RvcnkuYWxnby50czoxNTEKCS8vIHNlbmRlcjogdGhpcy5hcHAuYWRkcmVzcwoJZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MKCWl0eG5fZmllbGQgU2VuZGVyCgoJLy8gY29udHJhY3RzL0FsZ29EaXJlY3RvcnkuYWxnby50czoxNTIKCS8vIHJlY2VpdmVyOiB0aGlzLmxpc3RpbmdzKGxpc3RpbmdLZXkpLnZhbHVlCglmcmFtZV9kaWcgMCAvLyBzdG9yYWdlIGtleS8vbGlzdGluZ0tleQoJYm94X2dldAoKCS8vIGJveCB2YWx1ZSBkb2VzIG5vdCBleGlzdDogdGhpcy5saXN0ZWRORkRhcHBJRHMobmZkQXBwSUQpLnZhbHVlCglhc3NlcnQKCWJveF9nZXQKCgkvLyBib3ggdmFsdWUgZG9lcyBub3QgZXhpc3Q6IHRoaXMubGlzdGluZ3MobGlzdGluZ0tleSkudmFsdWUKCWFzc2VydAoJaXR4bl9maWVsZCBSZWNlaXZlcgoKCS8vIGNvbnRyYWN0cy9BbGdvRGlyZWN0b3J5LmFsZ28udHM6MTUzCgkvLyBhbW91bnQ6IGxpc3RpbmdLZXkudm91Y2hBbW91bnQKCWZyYW1lX2RpZyAwIC8vIHN0b3JhZ2Uga2V5Ly9saXN0aW5nS2V5Cglib3hfZ2V0CgoJLy8gYm94IHZhbHVlIGRvZXMgbm90IGV4aXN0OiB0aGlzLmxpc3RlZE5GRGFwcElEcyhuZmRBcHBJRCkudmFsdWUKCWFzc2VydAoJc3RvcmUgMjU1IC8vIGZ1bGwgYXJyYXkKCWxvYWQgMjU1IC8vIGZ1bGwgYXJyYXkKCWV4dHJhY3QgOCA4CglidG9pCglpdHhuX2ZpZWxkIEFtb3VudAoKCS8vIGNvbnRyYWN0cy9BbGdvRGlyZWN0b3J5LmFsZ28udHM6MTU0CgkvLyBmZWU6IDAKCWludCAwCglpdHhuX2ZpZWxkIEZlZQoKCS8vIFN1Ym1pdCBpbm5lciB0cmFuc2FjdGlvbgoJaXR4bl9zdWJtaXQKCgkvLyBjb250cmFjdHMvQWxnb0RpcmVjdG9yeS5hbGdvLnRzOjE1OAoJLy8gdGhpcy5saXN0aW5ncyhsaXN0aW5nS2V5KS5kZWxldGUoKQoJZnJhbWVfZGlnIDAgLy8gc3RvcmFnZSBrZXkvL2xpc3RpbmdLZXkKCWJveF9nZXQKCgkvLyBib3ggdmFsdWUgZG9lcyBub3QgZXhpc3Q6IHRoaXMubGlzdGVkTkZEYXBwSURzKG5mZEFwcElEKS52YWx1ZQoJYXNzZXJ0Cglib3hfZGVsCgoJLy8gY29udHJhY3RzL0FsZ29EaXJlY3RvcnkuYWxnby50czoxNTkKCS8vIHRoaXMubGlzdGVkTkZEYXBwSURzKG5mZEFwcElEKS5kZWxldGUoKQoJZnJhbWVfZGlnIC0xIC8vIG5mZEFwcElEOiB1aW50NjQKCWl0b2IKCWJveF9kZWwKCXJldHN1YgoKLy8gZGVsZXRlTGlzdGluZyh1aW50NjQpdm9pZAoqYWJpX3JvdXRlX2RlbGV0ZUxpc3Rpbmc6CgkvLyBuZmRBcHBJRDogdWludDY0Cgl0eG5hIEFwcGxpY2F0aW9uQXJncyAxCglidG9pCgoJLy8gZXhlY3V0ZSBkZWxldGVMaXN0aW5nKHVpbnQ2NCl2b2lkCgljYWxsc3ViIGRlbGV0ZUxpc3RpbmcKCWludCAxCglyZXR1cm4KCi8vIGRlbGV0ZUxpc3RpbmcobmZkQXBwSUQ6IHVpbnQ2NCk6IHZvaWQKLy8KLy8gRGVsZXRlcyBhIGxpc3RpbmcgZnJvbSB0aGUgZGlyZWN0b3J5ICYgc2VuZHMgdGhlIGNvbGxhdGVyYWwgdG8gdGhlIGZlZSBzaW5rLgovLwovLyBAcGFyYW0gbmZkQXBwSUQgVGhlIHVpbnQ2NCBhcHBsaWNhdGlvbiBJRCBvZiB0aGUgTkZEIHRoYXQgd2lsbCBiZSBkZWxldGVkCmRlbGV0ZUxpc3Rpbmc6Cglwcm90byAxIDAKCgkvLyBQdXNoIGVtcHR5IGJ5dGVzIGFmdGVyIHRoZSBmcmFtZSBwb2ludGVyIHRvIHJlc2VydmUgc3BhY2UgZm9yIGxvY2FsIHZhcmlhYmxlcwoJYnl0ZSAweAoKCS8vIGNvbnRyYWN0cy9BbGdvRGlyZWN0b3J5LmFsZ28udHM6MTY5CgkvLyBhc3NlcnQodGhpcy50eG4uc2VuZGVyLmFzc2V0QmFsYW5jZSh0aGlzLmFkbWluVG9rZW4udmFsdWUpID4gMCwgJ0NhbGxlciBtdXN0IGhhdmUgdGhlIGFkbWluIHRva2VuJykKCXR4biBTZW5kZXIKCWJ5dGUgMHg2MTY0NmQ2OTZlNTQ2ZjZiNjU2ZSAvLyAiYWRtaW5Ub2tlbiIKCWFwcF9nbG9iYWxfZ2V0Cglhc3NldF9ob2xkaW5nX2dldCBBc3NldEJhbGFuY2UKCXBvcAoJaW50IDAKCT4KCgkvLyBDYWxsZXIgbXVzdCBoYXZlIHRoZSBhZG1pbiB0b2tlbgoJYXNzZXJ0CgoJLy8gY29udHJhY3RzL0FsZ29EaXJlY3RvcnkuYWxnby50czoxNzEKCS8vIGxpc3RpbmdLZXkgPSB0aGlzLmxpc3RlZE5GRGFwcElEcyhuZmRBcHBJRCkudmFsdWUKCWZyYW1lX2RpZyAtMSAvLyBuZmRBcHBJRDogdWludDY0CglpdG9iCglmcmFtZV9idXJ5IDAgLy8gc3RvcmFnZSBrZXkvL2xpc3RpbmdLZXkKCgkvLyBjb250cmFjdHMvQWxnb0RpcmVjdG9yeS5hbGdvLnRzOjE3NAoJLy8gc2VuZFBheW1lbnQoewoJLy8gICAgICAgc2VuZGVyOiB0aGlzLmFwcC5hZGRyZXNzLAoJLy8gICAgICAgcmVjZWl2ZXI6IEFkZHJlc3MuZnJvbUFkZHJlc3MoJ0E3Tk1XUzNOVDNJVURNTFZPMjZVTEdYR0lJT1VRM05EMlRYU0VSNkVCR1JaTk9CT1VJUVhISUJHREUnKSwgLy8gVGVzdG5ldCBmZWUgc2luayAvIE1haW5uZXQgWTc2TTNNU1k2REtCUkhCTDdDM05ORFhHUzVJSU1RVlFWVUFCNk1QNFhFTU1HVkYyUVdOUEwyMjZDQQoJLy8gICAgICAgYW1vdW50OiBsaXN0aW5nS2V5LnZvdWNoQW1vdW50LAoJLy8gICAgICAgZmVlOiAwLAoJLy8gICAgIH0pCglpdHhuX2JlZ2luCglpbnQgcGF5CglpdHhuX2ZpZWxkIFR5cGVFbnVtCgoJLy8gY29udHJhY3RzL0FsZ29EaXJlY3RvcnkuYWxnby50czoxNzUKCS8vIHNlbmRlcjogdGhpcy5hcHAuYWRkcmVzcwoJZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MKCWl0eG5fZmllbGQgU2VuZGVyCgoJLy8gY29udHJhY3RzL0FsZ29EaXJlY3RvcnkuYWxnby50czoxNzYKCS8vIHJlY2VpdmVyOiBBZGRyZXNzLmZyb21BZGRyZXNzKCdBN05NV1MzTlQzSVVETUxWTzI2VUxHWEdJSU9VUTNORDJUWFNFUjZFQkdSWk5PQk9VSVFYSElCR0RFJykKCWFkZHIgQTdOTVdTM05UM0lVRE1MVk8yNlVMR1hHSUlPVVEzTkQyVFhTRVI2RUJHUlpOT0JPVUlRWEhJQkdERQoJaXR4bl9maWVsZCBSZWNlaXZlcgoKCS8vIGNvbnRyYWN0cy9BbGdvRGlyZWN0b3J5LmFsZ28udHM6MTc3CgkvLyBhbW91bnQ6IGxpc3RpbmdLZXkudm91Y2hBbW91bnQKCWZyYW1lX2RpZyAwIC8vIHN0b3JhZ2Uga2V5Ly9saXN0aW5nS2V5Cglib3hfZ2V0CgoJLy8gYm94IHZhbHVlIGRvZXMgbm90IGV4aXN0OiB0aGlzLmxpc3RlZE5GRGFwcElEcyhuZmRBcHBJRCkudmFsdWUKCWFzc2VydAoJc3RvcmUgMjU1IC8vIGZ1bGwgYXJyYXkKCWxvYWQgMjU1IC8vIGZ1bGwgYXJyYXkKCWV4dHJhY3QgOCA4CglidG9pCglpdHhuX2ZpZWxkIEFtb3VudAoKCS8vIGNvbnRyYWN0cy9BbGdvRGlyZWN0b3J5LmFsZ28udHM6MTc4CgkvLyBmZWU6IDAKCWludCAwCglpdHhuX2ZpZWxkIEZlZQoKCS8vIFN1Ym1pdCBpbm5lciB0cmFuc2FjdGlvbgoJaXR4bl9zdWJtaXQKCgkvLyBjb250cmFjdHMvQWxnb0RpcmVjdG9yeS5hbGdvLnRzOjE4MgoJLy8gdGhpcy5saXN0aW5ncyhsaXN0aW5nS2V5KS5kZWxldGUoKQoJZnJhbWVfZGlnIDAgLy8gc3RvcmFnZSBrZXkvL2xpc3RpbmdLZXkKCWJveF9nZXQKCgkvLyBib3ggdmFsdWUgZG9lcyBub3QgZXhpc3Q6IHRoaXMubGlzdGVkTkZEYXBwSURzKG5mZEFwcElEKS52YWx1ZQoJYXNzZXJ0Cglib3hfZGVsCgoJLy8gY29udHJhY3RzL0FsZ29EaXJlY3RvcnkuYWxnby50czoxODMKCS8vIHRoaXMubGlzdGVkTkZEYXBwSURzKG5mZEFwcElEKS5kZWxldGUoKQoJZnJhbWVfZGlnIC0xIC8vIG5mZEFwcElEOiB1aW50NjQKCWl0b2IKCWJveF9kZWwKCXJldHN1YgoKLy8gY3JlYXRlQXBwbGljYXRpb24oKXZvaWQKKmFiaV9yb3V0ZV9jcmVhdGVBcHBsaWNhdGlvbjoKCS8vIGV4ZWN1dGUgY3JlYXRlQXBwbGljYXRpb24oKXZvaWQKCWNhbGxzdWIgY3JlYXRlQXBwbGljYXRpb24KCWludCAxCglyZXR1cm4KCi8vIGNyZWF0ZUFwcGxpY2F0aW9uKCk6IHZvaWQKY3JlYXRlQXBwbGljYXRpb246Cglwcm90byAwIDAKCXJldHN1YgoKLy8gc2V0QWRtaW5Ub2tlbih1aW50NjQpdm9pZAoqYWJpX3JvdXRlX3NldEFkbWluVG9rZW46CgkvLyBhc2FJRDogdWludDY0Cgl0eG5hIEFwcGxpY2F0aW9uQXJncyAxCglidG9pCgoJLy8gZXhlY3V0ZSBzZXRBZG1pblRva2VuKHVpbnQ2NCl2b2lkCgljYWxsc3ViIHNldEFkbWluVG9rZW4KCWludCAxCglyZXR1cm4KCi8vIHNldEFkbWluVG9rZW4oYXNhSUQ6IEFzc2V0SUQpOiB2b2lkCnNldEFkbWluVG9rZW46Cglwcm90byAxIDAKCgkvLyBjb250cmFjdHMvQWxnb0RpcmVjdG9yeS5hbGdvLnRzOjE4OQoJLy8gYXNzZXJ0KHRoaXMudHhuLnNlbmRlciA9PT0gdGhpcy5hcHAuY3JlYXRvciwgJ09ubHkgdGhlIGNyZWF0b3IgY2FuIHNldCB0aGUgYWRtaW4gdG9rZW4nKQoJdHhuIFNlbmRlcgoJdHhuYSBBcHBsaWNhdGlvbnMgMAoJYXBwX3BhcmFtc19nZXQgQXBwQ3JlYXRvcgoJcG9wCgk9PQoKCS8vIE9ubHkgdGhlIGNyZWF0b3IgY2FuIHNldCB0aGUgYWRtaW4gdG9rZW4KCWFzc2VydAoKCS8vIGNvbnRyYWN0cy9BbGdvRGlyZWN0b3J5LmFsZ28udHM6MTkwCgkvLyB0aGlzLmFkbWluVG9rZW4udmFsdWUgPSBhc2FJRAoJYnl0ZSAweDYxNjQ2ZDY5NmU1NDZmNmI2NTZlIC8vICJhZG1pblRva2VuIgoJZnJhbWVfZGlnIC0xIC8vIGFzYUlEOiBBc3NldElECglhcHBfZ2xvYmFsX3B1dAoJcmV0c3ViCgovLyB1cGRhdGVBcHBsaWNhdGlvbigpdm9pZAoqYWJpX3JvdXRlX3VwZGF0ZUFwcGxpY2F0aW9uOgoJLy8gZXhlY3V0ZSB1cGRhdGVBcHBsaWNhdGlvbigpdm9pZAoJY2FsbHN1YiB1cGRhdGVBcHBsaWNhdGlvbgoJaW50IDEKCXJldHVybgoKLy8gdXBkYXRlQXBwbGljYXRpb24oKTogdm9pZAp1cGRhdGVBcHBsaWNhdGlvbjoKCXByb3RvIDAgMAoKCS8vIGNvbnRyYWN0cy9BbGdvRGlyZWN0b3J5LmFsZ28udHM6MTk0CgkvLyBhc3NlcnQodGhpcy50eG4uc2VuZGVyID09PSB0aGlzLmFwcC5jcmVhdG9yLCAnT25seSB0aGUgY3JlYXRvciBjYW4gdXBkYXRlIHRoZSBhcHBsaWNhdGlvbicpCgl0eG4gU2VuZGVyCgl0eG5hIEFwcGxpY2F0aW9ucyAwCglhcHBfcGFyYW1zX2dldCBBcHBDcmVhdG9yCglwb3AKCT09CgoJLy8gT25seSB0aGUgY3JlYXRvciBjYW4gdXBkYXRlIHRoZSBhcHBsaWNhdGlvbgoJYXNzZXJ0CglyZXRzdWIKCipjcmVhdGVfTm9PcDoKCW1ldGhvZCAiY3JlYXRlQXBwbGljYXRpb24oKXZvaWQiCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAwCgltYXRjaCAqYWJpX3JvdXRlX2NyZWF0ZUFwcGxpY2F0aW9uCgoJLy8gdGhpcyBjb250cmFjdCBkb2VzIG5vdCBpbXBsZW1lbnQgdGhlIGdpdmVuIEFCSSBtZXRob2QgZm9yIGNyZWF0ZSBOb09wCgllcnIKCipjYWxsX05vT3A6CgltZXRob2QgImNyZWF0ZUxpc3RpbmcocGF5LHVpbnQ2NCxieXRlWzEzXSkodWludDY0LHVpbnQ2NCx1aW50NjQsYnl0ZVsxM10sc3RyaW5nKSIKCW1ldGhvZCAicmVmcmVzaExpc3RpbmcodWludDY0KSh1aW50NjQsdWludDY0LHVpbnQ2NCxieXRlWzEzXSxzdHJpbmcpIgoJbWV0aG9kICJhYmFuZG9uTGlzdGluZyh1aW50NjQpdm9pZCIKCW1ldGhvZCAiZGVsZXRlTGlzdGluZyh1aW50NjQpdm9pZCIKCW1ldGhvZCAic2V0QWRtaW5Ub2tlbih1aW50NjQpdm9pZCIKCXR4bmEgQXBwbGljYXRpb25BcmdzIDAKCW1hdGNoICphYmlfcm91dGVfY3JlYXRlTGlzdGluZyAqYWJpX3JvdXRlX3JlZnJlc2hMaXN0aW5nICphYmlfcm91dGVfYWJhbmRvbkxpc3RpbmcgKmFiaV9yb3V0ZV9kZWxldGVMaXN0aW5nICphYmlfcm91dGVfc2V0QWRtaW5Ub2tlbgoKCS8vIHRoaXMgY29udHJhY3QgZG9lcyBub3QgaW1wbGVtZW50IHRoZSBnaXZlbiBBQkkgbWV0aG9kIGZvciBjYWxsIE5vT3AKCWVycgoKKmNhbGxfVXBkYXRlQXBwbGljYXRpb246CgltZXRob2QgInVwZGF0ZUFwcGxpY2F0aW9uKCl2b2lkIgoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAoJbWF0Y2ggKmFiaV9yb3V0ZV91cGRhdGVBcHBsaWNhdGlvbgoKCS8vIHRoaXMgY29udHJhY3QgZG9lcyBub3QgaW1wbGVtZW50IHRoZSBnaXZlbiBBQkkgbWV0aG9kIGZvciBjYWxsIFVwZGF0ZUFwcGxpY2F0aW9uCgllcnIKCipwcm9jZXNzX3N0YXRpY190dXBsZV9lbGVtZW50OgoJcHJvdG8gNCAzCglmcmFtZV9kaWcgLTQgLy8gdHVwbGUgaGVhZAoJZnJhbWVfZGlnIC0xIC8vIGVsZW1lbnQKCWNvbmNhdAoJZnJhbWVfZGlnIC0zIC8vIHR1cGxlIHRhaWwKCWZyYW1lX2RpZyAtMiAvLyBoZWFkIG9mZnNldAoJcmV0c3ViCgoqcHJvY2Vzc19keW5hbWljX3R1cGxlX2VsZW1lbnQ6Cglwcm90byA0IDMKCWZyYW1lX2RpZyAtNCAvLyB0dXBsZSBoZWFkCglmcmFtZV9kaWcgLTIgLy8gaGVhZCBvZmZzZXQKCWNvbmNhdAoJZnJhbWVfYnVyeSAtNCAvLyB0dXBsZSBoZWFkCglmcmFtZV9kaWcgLTEgLy8gZWxlbWVudAoJZHVwCglsZW4KCWZyYW1lX2RpZyAtMiAvLyBoZWFkIG9mZnNldAoJYnRvaQoJKwoJaXRvYgoJZXh0cmFjdCA2IDIKCWZyYW1lX2J1cnkgLTIgLy8gaGVhZCBvZmZzZXQKCWZyYW1lX2RpZyAtMyAvLyB0dXBsZSB0YWlsCglzd2FwCgljb25jYXQKCWZyYW1lX2J1cnkgLTMgLy8gdHVwbGUgdGFpbAoJZnJhbWVfZGlnIC00IC8vIHR1cGxlIGhlYWQKCWZyYW1lX2RpZyAtMyAvLyB0dXBsZSB0YWlsCglmcmFtZV9kaWcgLTIgLy8gaGVhZCBvZmZzZXQKCXJldHN1Yg==",
+    "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCgovLyBUaGlzIFRFQUwgd2FzIGdlbmVyYXRlZCBieSBURUFMU2NyaXB0IHYwLjEwMi4wCi8vIGh0dHBzOi8vZ2l0aHViLmNvbS9hbGdvcmFuZGZvdW5kYXRpb24vVEVBTFNjcmlwdAoKLy8gVGhpcyBjb250cmFjdCBpcyBjb21wbGlhbnQgd2l0aCBhbmQvb3IgaW1wbGVtZW50cyB0aGUgZm9sbG93aW5nIEFSQ3M6IFsgQVJDNCBdCgovLyBUaGUgZm9sbG93aW5nIGxpbmVzIG9mIFRFQUwgYXJlIHVzZWQgdG8gaW5pdGlhbGl6ZSB0ZW1wbGF0ZSB2YXJpYWJsZXMgaW4gc2NyYXRjaCBzbG90cwpwdXNoYnl0ZXMgVE1QTF9uZmRSZWdpc3RyeUFwcElECmJ0b2kKc3RvcmUgMjAyCnB1c2hieXRlcyBUTVBMX2RpcmVjdG9yeURvdEFsZ29BcHBJRApidG9pCnN0b3JlIDIwMQpwdXNoYnl0ZXMgVE1QTF9mZWVTaW5rQWRkcmVzcwpzdG9yZSAyMDAKCi8vIFRoZSBmb2xsb3dpbmcgdGVuIGxpbmVzIG9mIFRFQUwgaGFuZGxlIGluaXRpYWwgcHJvZ3JhbSBmbG93Ci8vIFRoaXMgcGF0dGVybiBpcyB1c2VkIHRvIG1ha2UgaXQgZWFzeSBmb3IgYW55b25lIHRvIHBhcnNlIHRoZSBzdGFydCBvZiB0aGUgcHJvZ3JhbSBhbmQgZGV0ZXJtaW5lIGlmIGEgc3BlY2lmaWMgYWN0aW9uIGlzIGFsbG93ZWQKLy8gSGVyZSwgYWN0aW9uIHJlZmVycyB0byB0aGUgT25Db21wbGV0ZSBpbiBjb21iaW5hdGlvbiB3aXRoIHdoZXRoZXIgdGhlIGFwcCBpcyBiZWluZyBjcmVhdGVkIG9yIGNhbGxlZAovLyBFdmVyeSBwb3NzaWJsZSBhY3Rpb24gZm9yIHRoaXMgY29udHJhY3QgaXMgcmVwcmVzZW50ZWQgaW4gdGhlIHN3aXRjaCBzdGF0ZW1lbnQKLy8gSWYgdGhlIGFjdGlvbiBpcyBub3QgaW1wbGVtZW50ZWQgaW4gdGhlIGNvbnRyYWN0LCBpdHMgcmVzcGVjdGl2ZSBicmFuY2ggd2lsbCBiZSAiKk5PVF9JTVBMRU1FTlRFRCIgd2hpY2gganVzdCBjb250YWlucyAiZXJyIgp0eG4gQXBwbGljYXRpb25JRAohCmludCA2CioKdHhuIE9uQ29tcGxldGlvbgorCnN3aXRjaCAqY2FsbF9Ob09wICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpjYWxsX1VwZGF0ZUFwcGxpY2F0aW9uICpOT1RfSU1QTEVNRU5URUQgKmNyZWF0ZV9Ob09wICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRAoKKk5PVF9JTVBMRU1FTlRFRDoKCS8vIFRoZSByZXF1ZXN0ZWQgYWN0aW9uIGlzIG5vdCBpbXBsZW1lbnRlZCBpbiB0aGlzIGNvbnRyYWN0LiBBcmUgeW91IHVzaW5nIHRoZSBjb3JyZWN0IE9uQ29tcGxldGU/IERpZCB5b3Ugc2V0IHlvdXIgYXBwIElEPwoJZXJyCgovLyBjaGVja0NhbGxlcklzTGlzdGluZ093bmVyKG5mZEFwcElEOiB1aW50NjQpOiB2b2lkCmNoZWNrQ2FsbGVySXNMaXN0aW5nT3duZXI6Cglwcm90byAxIDAKCgkvLyBQdXNoIGVtcHR5IGJ5dGVzIGFmdGVyIHRoZSBmcmFtZSBwb2ludGVyIHRvIHJlc2VydmUgc3BhY2UgZm9yIGxvY2FsIHZhcmlhYmxlcwoJYnl0ZSAweAoKCS8vIGNvbnRyYWN0cy9BbGdvRGlyZWN0b3J5LmFsZ28udHM6MzEKCS8vIGxpc3RpbmdLZXkgPSB0aGlzLmxpc3RlZE5GRGFwcElEcyhuZmRBcHBJRCkudmFsdWUKCWZyYW1lX2RpZyAtMSAvLyBuZmRBcHBJRDogdWludDY0CglpdG9iCglmcmFtZV9idXJ5IDAgLy8gc3RvcmFnZSBrZXkvL2xpc3RpbmdLZXkKCgkvLyBjb250cmFjdHMvQWxnb0RpcmVjdG9yeS5hbGdvLnRzOjMyCgkvLyBhc3NlcnQodGhpcy50eG4uc2VuZGVyID09PSB0aGlzLmxpc3RpbmdzKGxpc3RpbmdLZXkpLnZhbHVlLCAnQ2FsbGVyIG11c3QgYmUgbGlzdGluZyBvd25lcicpCgl0eG4gU2VuZGVyCglmcmFtZV9kaWcgMCAvLyBzdG9yYWdlIGtleS8vbGlzdGluZ0tleQoJYm94X2dldAoKCS8vIGJveCB2YWx1ZSBkb2VzIG5vdCBleGlzdDogdGhpcy5saXN0ZWRORkRhcHBJRHMobmZkQXBwSUQpLnZhbHVlCglhc3NlcnQKCWJveF9nZXQKCgkvLyBib3ggdmFsdWUgZG9lcyBub3QgZXhpc3Q6IHRoaXMubGlzdGluZ3MobGlzdGluZ0tleSkudmFsdWUKCWFzc2VydAoJPT0KCgkvLyBDYWxsZXIgbXVzdCBiZSBsaXN0aW5nIG93bmVyCglhc3NlcnQKCXJldHN1YgoKLy8gY2hlY2tORkRJc1NlZ21lbnRPZkRpcmVjdG9yeShuZmRBcHBJRDogdWludDY0KTogdm9pZApjaGVja05GRElzU2VnbWVudE9mRGlyZWN0b3J5OgoJcHJvdG8gMSAwCgoJLy8gY29udHJhY3RzL0FsZ29EaXJlY3RvcnkuYWxnby50czozNwoJLy8gYXNzZXJ0KAoJLy8gICAgICAgYnRvaShBcHBJRC5mcm9tVWludDY0KG5mZEFwcElEKS5nbG9iYWxTdGF0ZSgnaS5wYXJlbnRBcHBJRCcpIGFzIGJ5dGVzKSA9PT0gdGhpcy5kaXJlY3RvcnlEb3RBbGdvQXBwSUQuaWQsCgkvLyAgICAgICAnTkZEIG11c3QgYmUgYSBzZWdtZW50IG9mIGRpcmVjdG9yeS5hbGdvJwoJLy8gICAgICkKCWZyYW1lX2RpZyAtMSAvLyBuZmRBcHBJRDogdWludDY0CglieXRlIDB4NjkyZTcwNjE3MjY1NmU3NDQxNzA3MDQ5NDQgLy8gImkucGFyZW50QXBwSUQiCglhcHBfZ2xvYmFsX2dldF9leAoKCS8vIGdsb2JhbCBzdGF0ZSB2YWx1ZSBkb2VzIG5vdCBleGlzdDogQXBwSUQuZnJvbVVpbnQ2NChuZmRBcHBJRCkuZ2xvYmFsU3RhdGUoJ2kucGFyZW50QXBwSUQnKQoJYXNzZXJ0CglidG9pCglsb2FkIDIwMSAvLyBUTVBMX2RpcmVjdG9yeURvdEFsZ29BcHBJRAoJPT0KCgkvLyBORkQgbXVzdCBiZSBhIHNlZ21lbnQgb2YgZGlyZWN0b3J5LmFsZ28KCWFzc2VydAoJcmV0c3ViCgovLyBjaGVja0NhbGxlcklzTkZET3duZXIobmZkQXBwSUQ6IHVpbnQ2NCk6IHZvaWQKY2hlY2tDYWxsZXJJc05GRE93bmVyOgoJcHJvdG8gMSAwCgoJLy8gY29udHJhY3RzL0FsZ29EaXJlY3RvcnkuYWxnby50czo0NQoJLy8gYXNzZXJ0KAoJLy8gICAgICAgdGhpcy50eG4uc2VuZGVyID09PSAoQXBwSUQuZnJvbVVpbnQ2NChuZmRBcHBJRCkuZ2xvYmFsU3RhdGUoJ2kub3duZXIuYScpIGFzIEFkZHJlc3MpLAoJLy8gICAgICAgJ0xpc3RpbmcgY3JlYXRvciBtdXN0IGJlIHRoZSBORkQgYXBwIGkub3duZXIuYScKCS8vICAgICApCgl0eG4gU2VuZGVyCglmcmFtZV9kaWcgLTEgLy8gbmZkQXBwSUQ6IHVpbnQ2NAoJYnl0ZSAweDY5MmU2Zjc3NmU2NTcyMmU2MSAvLyAiaS5vd25lci5hIgoJYXBwX2dsb2JhbF9nZXRfZXgKCgkvLyBnbG9iYWwgc3RhdGUgdmFsdWUgZG9lcyBub3QgZXhpc3Q6IEFwcElELmZyb21VaW50NjQobmZkQXBwSUQpLmdsb2JhbFN0YXRlKCdpLm93bmVyLmEnKQoJYXNzZXJ0Cgk9PQoKCS8vIExpc3RpbmcgY3JlYXRvciBtdXN0IGJlIHRoZSBORkQgYXBwIGkub3duZXIuYQoJYXNzZXJ0CglyZXRzdWIKCi8vIGNoZWNrTkZETm90RXhwaXJlZChuZmRBcHBJRDogdWludDY0KTogdm9pZApjaGVja05GRE5vdEV4cGlyZWQ6Cglwcm90byAxIDAKCgkvLyBjb250cmFjdHMvQWxnb0RpcmVjdG9yeS5hbGdvLnRzOjUzCgkvLyBhc3NlcnQoCgkvLyAgICAgICBnbG9iYWxzLmxhdGVzdFRpbWVzdGFtcCA8PSBidG9pKEFwcElELmZyb21VaW50NjQobmZkQXBwSUQpLmdsb2JhbFN0YXRlKCdpLmV4cGlyYXRpb25UaW1lJykgYXMgYnl0ZXMpLAoJLy8gICAgICAgJ05GRCBzZWdtZW50IG11c3Qgbm90IGJlIGV4cGlyZWQnCgkvLyAgICAgKQoJZ2xvYmFsIExhdGVzdFRpbWVzdGFtcAoJZnJhbWVfZGlnIC0xIC8vIG5mZEFwcElEOiB1aW50NjQKCWJ5dGUgMHg2OTJlNjU3ODcwNjk3MjYxNzQ2OTZmNmU1NDY5NmQ2NSAvLyAiaS5leHBpcmF0aW9uVGltZSIKCWFwcF9nbG9iYWxfZ2V0X2V4CgoJLy8gZ2xvYmFsIHN0YXRlIHZhbHVlIGRvZXMgbm90IGV4aXN0OiBBcHBJRC5mcm9tVWludDY0KG5mZEFwcElEKS5nbG9iYWxTdGF0ZSgnaS5leHBpcmF0aW9uVGltZScpCglhc3NlcnQKCWJ0b2kKCTw9CgoJLy8gTkZEIHNlZ21lbnQgbXVzdCBub3QgYmUgZXhwaXJlZAoJYXNzZXJ0CglyZXRzdWIKCi8vIGdldFJvdW5kZWRUaW1lc3RhbXAoKTogdWludDY0CmdldFJvdW5kZWRUaW1lc3RhbXA6Cglwcm90byAwIDEKCgkvLyBjb250cmFjdHMvQWxnb0RpcmVjdG9yeS5hbGdvLnRzOjYwCgkvLyByZXR1cm4gYnRvaShyZXBsYWNlMyhpdG9iKGdsb2JhbHMubGF0ZXN0VGltZXN0YW1wKSwgNywgYnplcm8oMSkpKTsKCWdsb2JhbCBMYXRlc3RUaW1lc3RhbXAKCWl0b2IKCWJ5dGUgMHgwMAoJcmVwbGFjZTIgNwoJYnRvaQoJcmV0c3ViCgovLyBjcmVhdGVMaXN0aW5nKHBheSx1aW50NjQsYnl0ZVsxM10pKHVpbnQ2NCx1aW50NjQsdWludDY0LGJ5dGVbMTNdLHN0cmluZykKKmFiaV9yb3V0ZV9jcmVhdGVMaXN0aW5nOgoJLy8gVGhlIEFCSSByZXR1cm4gcHJlZml4CglieXRlIDB4MTUxZjdjNzUKCgkvLyBsaXN0aW5nVGFnczogYnl0ZVsxM10KCXR4bmEgQXBwbGljYXRpb25BcmdzIDIKCWR1cAoJbGVuCglpbnQgMTMKCT09CgoJLy8gYXJndW1lbnQgMCAobGlzdGluZ1RhZ3MpIGZvciBjcmVhdGVMaXN0aW5nIG11c3QgYmUgYSBieXRlWzEzXQoJYXNzZXJ0CgoJLy8gbmZkQXBwSUQ6IHVpbnQ2NAoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQoJYnRvaQoKCS8vIGNvbGxhdGVyYWxQYXltZW50OiBwYXkKCXR4biBHcm91cEluZGV4CglpbnQgMQoJLQoJZHVwCglndHhucyBUeXBlRW51bQoJaW50IHBheQoJPT0KCgkvLyBhcmd1bWVudCAyIChjb2xsYXRlcmFsUGF5bWVudCkgZm9yIGNyZWF0ZUxpc3RpbmcgbXVzdCBiZSBhIHBheSB0cmFuc2FjdGlvbgoJYXNzZXJ0CgoJLy8gZXhlY3V0ZSBjcmVhdGVMaXN0aW5nKHBheSx1aW50NjQsYnl0ZVsxM10pKHVpbnQ2NCx1aW50NjQsdWludDY0LGJ5dGVbMTNdLHN0cmluZykKCWNhbGxzdWIgY3JlYXRlTGlzdGluZwoJY29uY2F0Cglsb2cKCWludCAxCglyZXR1cm4KCi8vIGNyZWF0ZUxpc3RpbmcoY29sbGF0ZXJhbFBheW1lbnQ6IFBheVR4biwgbmZkQXBwSUQ6IHVpbnQ2NCwgbGlzdGluZ1RhZ3M6IFN0YXRpY0FycmF5PGJ5dGUsIDEzPik6IExpc3RpbmcKLy8KLy8gQ3JlYXRlcyBhIGxpc3RpbmcgaW4gdGhlIGRpcmVjdG9yeSBieSB2b3VjaGluZyBmb3IgYW4gTkZEIHJvb3Qgb3Igc2VnbWVudCBvZiBkaXJlY3RvcnkuYWxnby4KLy8KLy8gQHBhcmFtIGNvbGxhdGVyYWxQYXltZW50IFRoZSBBbGdvIHBheW1lbnQgb2YgY29sbGF0ZXJhbCB0byB2b3VjaCBmb3IgdGhlIGxpc3RpbmcKLy8gQHBhcmFtIG5mZEFwcElEIFRoZSB1aW50NjQgYXBwbGljYXRpb24gSUQgb2YgdGhlIE5GRCB0aGF0IHdpbGwgYmUgbGlzdGVkCi8vIEBwYXJhbSBsaXN0aW5nVGFncyBBcnJheSBvZiAxMyBieXRlcyBlYWNoIHJlcHJlc2VudGluZyBhIHRhZyBmb3IgdGhlIGxpc3RpbmcKY3JlYXRlTGlzdGluZzoKCXByb3RvIDMgMQoKCS8vIFB1c2ggZW1wdHkgYnl0ZXMgYWZ0ZXIgdGhlIGZyYW1lIHBvaW50ZXIgdG8gcmVzZXJ2ZSBzcGFjZSBmb3IgbG9jYWwgdmFyaWFibGVzCglieXRlIDB4CglkdXBuIDIKCgkvLyBjb250cmFjdHMvQWxnb0RpcmVjdG9yeS5hbGdvLnRzOjcyCgkvLyB2ZXJpZnlQYXlUeG4oY29sbGF0ZXJhbFBheW1lbnQsIHsKCS8vICAgICAgIHNlbmRlcjogdGhpcy50eG4uc2VuZGVyLAoJLy8gICAgICAgcmVjZWl2ZXI6IHRoaXMuYXBwLmFkZHJlc3MsCgkvLyAgICAgICBhbW91bnQ6IHsgZ3JlYXRlclRoYW5FcXVhbFRvOiBUT1RBTF9MSVNUSU5HX0JPWEVTX0NPU1QgfSwKCS8vICAgICB9KQoJLy8gdmVyaWZ5IHNlbmRlcgoJZnJhbWVfZGlnIC0xIC8vIGNvbGxhdGVyYWxQYXltZW50OiBQYXlUeG4KCWd0eG5zIFNlbmRlcgoJdHhuIFNlbmRlcgoJPT0KCgkvLyB0cmFuc2FjdGlvbiB2ZXJpZmljYXRpb24gZmFpbGVkOiB7InR4biI6ImNvbGxhdGVyYWxQYXltZW50IiwiZmllbGQiOiJzZW5kZXIiLCJleHBlY3RlZCI6InRoaXMudHhuLnNlbmRlciJ9Cglhc3NlcnQKCgkvLyB2ZXJpZnkgcmVjZWl2ZXIKCWZyYW1lX2RpZyAtMSAvLyBjb2xsYXRlcmFsUGF5bWVudDogUGF5VHhuCglndHhucyBSZWNlaXZlcgoJZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MKCT09CgoJLy8gdHJhbnNhY3Rpb24gdmVyaWZpY2F0aW9uIGZhaWxlZDogeyJ0eG4iOiJjb2xsYXRlcmFsUGF5bWVudCIsImZpZWxkIjoicmVjZWl2ZXIiLCJleHBlY3RlZCI6InRoaXMuYXBwLmFkZHJlc3MifQoJYXNzZXJ0CgoJLy8gdmVyaWZ5IGFtb3VudAoJZnJhbWVfZGlnIC0xIC8vIGNvbGxhdGVyYWxQYXltZW50OiBQYXlUeG4KCWd0eG5zIEFtb3VudAoJaW50IDcyMjAwCgk+PQoKCS8vIHRyYW5zYWN0aW9uIHZlcmlmaWNhdGlvbiBmYWlsZWQ6IHsidHhuIjoiY29sbGF0ZXJhbFBheW1lbnQiLCJmaWVsZCI6ImFtb3VudCIsImNvbmRpdGlvbiI6ImdyZWF0ZXJUaGFuRXF1YWxUbyIsImV4cGVjdGVkIjoiPj1UT1RBTF9MSVNUSU5HX0JPWEVTX0NPU1QifQoJYXNzZXJ0CgoJLy8gY29udHJhY3RzL0FsZ29EaXJlY3RvcnkuYWxnby50czo3OQoJLy8gdGhpcy5jaGVja05GRElzU2VnbWVudE9mRGlyZWN0b3J5KG5mZEFwcElEKQoJZnJhbWVfZGlnIC0yIC8vIG5mZEFwcElEOiB1aW50NjQKCWNhbGxzdWIgY2hlY2tORkRJc1NlZ21lbnRPZkRpcmVjdG9yeQoKCS8vIGNvbnRyYWN0cy9BbGdvRGlyZWN0b3J5LmFsZ28udHM6ODAKCS8vIHRoaXMuY2hlY2tDYWxsZXJJc05GRE93bmVyKG5mZEFwcElEKQoJZnJhbWVfZGlnIC0yIC8vIG5mZEFwcElEOiB1aW50NjQKCWNhbGxzdWIgY2hlY2tDYWxsZXJJc05GRE93bmVyCgoJLy8gY29udHJhY3RzL0FsZ29EaXJlY3RvcnkuYWxnby50czo4MQoJLy8gdGhpcy5jaGVja05GRE5vdEV4cGlyZWQobmZkQXBwSUQpCglmcmFtZV9kaWcgLTIgLy8gbmZkQXBwSUQ6IHVpbnQ2NAoJY2FsbHN1YiBjaGVja05GRE5vdEV4cGlyZWQKCgkvLyBjb250cmFjdHMvQWxnb0RpcmVjdG9yeS5hbGdvLnRzOjg0CgkvLyBuZmRMb25nTmFtZSA9IEFwcElELmZyb21VaW50NjQobmZkQXBwSUQpLmdsb2JhbFN0YXRlKCdpLm5hbWUnKSBhcyBieXRlcwoJZnJhbWVfZGlnIC0yIC8vIG5mZEFwcElEOiB1aW50NjQKCWJ5dGUgMHg2OTJlNmU2MTZkNjUgLy8gImkubmFtZSIKCWFwcF9nbG9iYWxfZ2V0X2V4CgoJLy8gZ2xvYmFsIHN0YXRlIHZhbHVlIGRvZXMgbm90IGV4aXN0OiBBcHBJRC5mcm9tVWludDY0KG5mZEFwcElEKS5nbG9iYWxTdGF0ZSgnaS5uYW1lJykKCWFzc2VydAoJZnJhbWVfYnVyeSAwIC8vIG5mZExvbmdOYW1lOiBieXRlW10KCgkvLyBjb250cmFjdHMvQWxnb0RpcmVjdG9yeS5hbGdvLnRzOjg2CgkvLyBzZW5kQXBwQ2FsbCh7CgkvLyAgICAgICBhcHBsaWNhdGlvbklEOiB0aGlzLm5mZFJlZ2lzdHJ5QXBwSUQsCgkvLyAgICAgICBhcHBsaWNhdGlvbkFyZ3M6IFsnaXNfdmFsaWRfbmZkX2FwcGlkJywgbmZkTG9uZ05hbWUsIGl0b2IobmZkQXBwSUQpXSwKCS8vICAgICAgIGZlZTogMCwKCS8vICAgICB9KQoJaXR4bl9iZWdpbgoJaW50IGFwcGwKCWl0eG5fZmllbGQgVHlwZUVudW0KCgkvLyBjb250cmFjdHMvQWxnb0RpcmVjdG9yeS5hbGdvLnRzOjg3CgkvLyBhcHBsaWNhdGlvbklEOiB0aGlzLm5mZFJlZ2lzdHJ5QXBwSUQKCWxvYWQgMjAyIC8vIFRNUExfbmZkUmVnaXN0cnlBcHBJRAoJaXR4bl9maWVsZCBBcHBsaWNhdGlvbklECgoJLy8gY29udHJhY3RzL0FsZ29EaXJlY3RvcnkuYWxnby50czo4OAoJLy8gYXBwbGljYXRpb25BcmdzOiBbJ2lzX3ZhbGlkX25mZF9hcHBpZCcsIG5mZExvbmdOYW1lLCBpdG9iKG5mZEFwcElEKV0KCWJ5dGUgMHg2OTczNWY3NjYxNmM2OTY0NWY2ZTY2NjQ1ZjYxNzA3MDY5NjQgLy8gImlzX3ZhbGlkX25mZF9hcHBpZCIKCWl0eG5fZmllbGQgQXBwbGljYXRpb25BcmdzCglmcmFtZV9kaWcgMCAvLyBuZmRMb25nTmFtZTogYnl0ZVtdCglpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uQXJncwoJZnJhbWVfZGlnIC0yIC8vIG5mZEFwcElEOiB1aW50NjQKCWl0b2IKCWl0eG5fZmllbGQgQXBwbGljYXRpb25BcmdzCgoJLy8gY29udHJhY3RzL0FsZ29EaXJlY3RvcnkuYWxnby50czo4OQoJLy8gZmVlOiAwCglpbnQgMAoJaXR4bl9maWVsZCBGZWUKCgkvLyBTdWJtaXQgaW5uZXIgdHJhbnNhY3Rpb24KCWl0eG5fc3VibWl0CgoJLy8gY29udHJhY3RzL0FsZ29EaXJlY3RvcnkuYWxnby50czo5MQoJLy8gYXNzZXJ0KGJ0b2kodGhpcy5pdHhuLmxhc3RMb2cpID09PSAxLCAnTkZEIGFwcCBJRCBtdXN0IGJlIHZhbGlkIGF0IHRoZSBORkQgcmVnaXN0cnknKQoJaXR4biBMYXN0TG9nCglidG9pCglpbnQgMQoJPT0KCgkvLyBORkQgYXBwIElEIG11c3QgYmUgdmFsaWQgYXQgdGhlIE5GRCByZWdpc3RyeQoJYXNzZXJ0CgoJLy8gY29udHJhY3RzL0FsZ29EaXJlY3RvcnkuYWxnby50czo5NAoJLy8gYXNzZXJ0KCF0aGlzLmxpc3RlZE5GRGFwcElEcyhuZmRBcHBJRCkuZXhpc3RzLCAnTGlzdGluZyBmb3IgdGhpcyBORkQgbXVzdCBub3QgYWxyZWFkeSBleGlzdCcpCglmcmFtZV9kaWcgLTIgLy8gbmZkQXBwSUQ6IHVpbnQ2NAoJaXRvYgoJYm94X2xlbgoJc3dhcAoJcG9wCgkhCgoJLy8gTGlzdGluZyBmb3IgdGhpcyBORkQgbXVzdCBub3QgYWxyZWFkeSBleGlzdAoJYXNzZXJ0CgoJLy8gY29udHJhY3RzL0FsZ29EaXJlY3RvcnkuYWxnby50czo5NwoJLy8gbmZkU2VnbWVudE5hbWUgPSBzdWJzdHJpbmczKG5mZExvbmdOYW1lLCAwLCBsZW4obmZkTG9uZ05hbWUpIC0gMTUpCglmcmFtZV9kaWcgMCAvLyBuZmRMb25nTmFtZTogYnl0ZVtdCglpbnQgMAoJZnJhbWVfZGlnIDAgLy8gbmZkTG9uZ05hbWU6IGJ5dGVbXQoJbGVuCglpbnQgMTUKCS0KCXN1YnN0cmluZzMKCWZyYW1lX2J1cnkgMSAvLyBuZmRTZWdtZW50TmFtZTogYnl0ZVtdCgoJLy8gY29udHJhY3RzL0FsZ29EaXJlY3RvcnkuYWxnby50czo5OQoJLy8gbGlzdGluZ0tleTogTGlzdGluZyA9IHsKCS8vICAgICAgIHRpbWVzdGFtcDogdGhpcy5nZXRSb3VuZGVkVGltZXN0YW1wKCksIC8vIFJvdW5kIHRoZSB0aW1lc3RhbXAKCS8vICAgICAgIHZvdWNoQW1vdW50OiBjb2xsYXRlcmFsUGF5bWVudC5hbW91bnQsCgkvLyAgICAgICBuZmRBcHBJRDogbmZkQXBwSUQsCgkvLyAgICAgICB0YWdzOiBsaXN0aW5nVGFncywKCS8vICAgICAgIG5hbWU6IG5mZFNlZ21lbnROYW1lLAoJLy8gICAgIH0KCWJ5dGUgMHggLy8gaW5pdGlhbCBoZWFkCglieXRlIDB4IC8vIGluaXRpYWwgdGFpbAoJYnl0ZSAweDAwMjcgLy8gaW5pdGlhbCBoZWFkIG9mZnNldAoJY2FsbHN1YiBnZXRSb3VuZGVkVGltZXN0YW1wCglpdG9iCgljYWxsc3ViICpwcm9jZXNzX3N0YXRpY190dXBsZV9lbGVtZW50CglmcmFtZV9kaWcgLTEgLy8gY29sbGF0ZXJhbFBheW1lbnQ6IFBheVR4bgoJZ3R4bnMgQW1vdW50CglpdG9iCgljYWxsc3ViICpwcm9jZXNzX3N0YXRpY190dXBsZV9lbGVtZW50CglmcmFtZV9kaWcgLTIgLy8gbmZkQXBwSUQ6IHVpbnQ2NAoJaXRvYgoJY2FsbHN1YiAqcHJvY2Vzc19zdGF0aWNfdHVwbGVfZWxlbWVudAoJZnJhbWVfZGlnIC0zIC8vIGxpc3RpbmdUYWdzOiBTdGF0aWNBcnJheTxieXRlLCAxMz4KCWNhbGxzdWIgKnByb2Nlc3Nfc3RhdGljX3R1cGxlX2VsZW1lbnQKCWZyYW1lX2RpZyAxIC8vIG5mZFNlZ21lbnROYW1lOiBieXRlW10KCWR1cAoJbGVuCglpdG9iCglleHRyYWN0IDYgMgoJc3dhcAoJY29uY2F0CgljYWxsc3ViICpwcm9jZXNzX2R5bmFtaWNfdHVwbGVfZWxlbWVudAoJcG9wIC8vIHBvcCBoZWFkIG9mZnNldAoJY29uY2F0IC8vIGNvbmNhdCBoZWFkIGFuZCB0YWlsCglmcmFtZV9idXJ5IDIgLy8gbGlzdGluZ0tleTogTGlzdGluZwoKCS8vIGNvbnRyYWN0cy9BbGdvRGlyZWN0b3J5LmFsZ28udHM6MTA4CgkvLyB0aGlzLmxpc3RpbmdzKGxpc3RpbmdLZXkpLnZhbHVlID0gdGhpcy50eG4uc2VuZGVyCglmcmFtZV9kaWcgMiAvLyBsaXN0aW5nS2V5OiBMaXN0aW5nCgl0eG4gU2VuZGVyCglib3hfcHV0CgoJLy8gY29udHJhY3RzL0FsZ29EaXJlY3RvcnkuYWxnby50czoxMTEKCS8vIHRoaXMubGlzdGVkTkZEYXBwSURzKG5mZEFwcElEKS52YWx1ZSA9IGxpc3RpbmdLZXkKCWZyYW1lX2RpZyAtMiAvLyBuZmRBcHBJRDogdWludDY0CglpdG9iCglkdXAKCWJveF9kZWwKCXBvcAoJZnJhbWVfZGlnIDIgLy8gbGlzdGluZ0tleTogTGlzdGluZwoJYm94X3B1dAoKCS8vIGNvbnRyYWN0cy9BbGdvRGlyZWN0b3J5LmFsZ28udHM6MTEzCgkvLyByZXR1cm4gbGlzdGluZ0tleTsKCWZyYW1lX2RpZyAyIC8vIGxpc3RpbmdLZXk6IExpc3RpbmcKCgkvLyBzZXQgdGhlIHN1YnJvdXRpbmUgcmV0dXJuIHZhbHVlCglmcmFtZV9idXJ5IDAKCgkvLyBwb3AgYWxsIGxvY2FsIHZhcmlhYmxlcyBmcm9tIHRoZSBzdGFjawoJcG9wbiAyCglyZXRzdWIKCi8vIHJlZnJlc2hMaXN0aW5nKHVpbnQ2NCkodWludDY0LHVpbnQ2NCx1aW50NjQsYnl0ZVsxM10sc3RyaW5nKQoqYWJpX3JvdXRlX3JlZnJlc2hMaXN0aW5nOgoJLy8gVGhlIEFCSSByZXR1cm4gcHJlZml4CglieXRlIDB4MTUxZjdjNzUKCgkvLyBuZmRBcHBJRDogdWludDY0Cgl0eG5hIEFwcGxpY2F0aW9uQXJncyAxCglidG9pCgoJLy8gZXhlY3V0ZSByZWZyZXNoTGlzdGluZyh1aW50NjQpKHVpbnQ2NCx1aW50NjQsdWludDY0LGJ5dGVbMTNdLHN0cmluZykKCWNhbGxzdWIgcmVmcmVzaExpc3RpbmcKCWNvbmNhdAoJbG9nCglpbnQgMQoJcmV0dXJuCgovLyByZWZyZXNoTGlzdGluZyhuZmRBcHBJRDogdWludDY0KTogTGlzdGluZwovLwovLyBSZWZyZXNoZXMgYSBsaXN0aW5nIGluIHRoZSBkaXJlY3RvcnkgYW5kIHVwZGF0ZXMgaXRzIGxhc3QgdG91Y2hlZCB0aW1lc3RhbXAuCi8vCi8vIEBwYXJhbSBuZmRBcHBJRCBUaGUgdWludDY0IGFwcGxpY2F0aW9uIElEIG9mIHRoZSBORkQgdGhhdCB3aWxsIGJlIHJlZnJlc2hlZApyZWZyZXNoTGlzdGluZzoKCXByb3RvIDEgMQoKCS8vIFB1c2ggZW1wdHkgYnl0ZXMgYWZ0ZXIgdGhlIGZyYW1lIHBvaW50ZXIgdG8gcmVzZXJ2ZSBzcGFjZSBmb3IgbG9jYWwgdmFyaWFibGVzCglieXRlIDB4CglkdXAKCgkvLyBjb250cmFjdHMvQWxnb0RpcmVjdG9yeS5hbGdvLnRzOjEyMwoJLy8gdGhpcy5jaGVja0NhbGxlcklzTGlzdGluZ093bmVyKG5mZEFwcElEKQoJZnJhbWVfZGlnIC0xIC8vIG5mZEFwcElEOiB1aW50NjQKCWNhbGxzdWIgY2hlY2tDYWxsZXJJc0xpc3RpbmdPd25lcgoKCS8vIGNvbnRyYWN0cy9BbGdvRGlyZWN0b3J5LmFsZ28udHM6MTI0CgkvLyB0aGlzLmNoZWNrQ2FsbGVySXNORkRPd25lcihuZmRBcHBJRCkKCWZyYW1lX2RpZyAtMSAvLyBuZmRBcHBJRDogdWludDY0CgljYWxsc3ViIGNoZWNrQ2FsbGVySXNORkRPd25lcgoKCS8vIGNvbnRyYWN0cy9BbGdvRGlyZWN0b3J5LmFsZ28udHM6MTI1CgkvLyB0aGlzLmNoZWNrTkZETm90RXhwaXJlZChuZmRBcHBJRCkKCWZyYW1lX2RpZyAtMSAvLyBuZmRBcHBJRDogdWludDY0CgljYWxsc3ViIGNoZWNrTkZETm90RXhwaXJlZAoKCS8vIGNvbnRyYWN0cy9BbGdvRGlyZWN0b3J5LmFsZ28udHM6MTI4CgkvLyBvbGRMaXN0aW5nS2V5ID0gdGhpcy5saXN0ZWRORkRhcHBJRHMobmZkQXBwSUQpLnZhbHVlCglmcmFtZV9kaWcgLTEgLy8gbmZkQXBwSUQ6IHVpbnQ2NAoJaXRvYgoJZnJhbWVfYnVyeSAwIC8vIHN0b3JhZ2Uga2V5Ly9vbGRMaXN0aW5nS2V5CgoJLy8gY29udHJhY3RzL0FsZ29EaXJlY3RvcnkuYWxnby50czoxMjkKCS8vIG5ld0xpc3RpbmdLZXk6IExpc3RpbmcgPSB7CgkvLyAgICAgICB0aW1lc3RhbXA6IHRoaXMuZ2V0Um91bmRlZFRpbWVzdGFtcCgpLCAvLyBSb3VuZCB0aGUgdGltZXN0YW1wCgkvLyAgICAgICB2b3VjaEFtb3VudDogb2xkTGlzdGluZ0tleS52b3VjaEFtb3VudCwKCS8vICAgICAgIG5mZEFwcElEOiBvbGRMaXN0aW5nS2V5Lm5mZEFwcElELAoJLy8gICAgICAgdGFnczogb2xkTGlzdGluZ0tleS50YWdzLAoJLy8gICAgICAgbmFtZTogb2xkTGlzdGluZ0tleS5uYW1lLAoJLy8gICAgIH0KCWJ5dGUgMHggLy8gaW5pdGlhbCBoZWFkCglieXRlIDB4IC8vIGluaXRpYWwgdGFpbAoJYnl0ZSAweDAwMjcgLy8gaW5pdGlhbCBoZWFkIG9mZnNldAoJY2FsbHN1YiBnZXRSb3VuZGVkVGltZXN0YW1wCglpdG9iCgljYWxsc3ViICpwcm9jZXNzX3N0YXRpY190dXBsZV9lbGVtZW50CglmcmFtZV9kaWcgMCAvLyBzdG9yYWdlIGtleS8vb2xkTGlzdGluZ0tleQoJYm94X2dldAoKCS8vIGJveCB2YWx1ZSBkb2VzIG5vdCBleGlzdDogdGhpcy5saXN0ZWRORkRhcHBJRHMobmZkQXBwSUQpLnZhbHVlCglhc3NlcnQKCXN0b3JlIDI1NSAvLyBmdWxsIGFycmF5Cglsb2FkIDI1NSAvLyBmdWxsIGFycmF5CglleHRyYWN0IDggOAoJYnRvaQoJaXRvYgoJY2FsbHN1YiAqcHJvY2Vzc19zdGF0aWNfdHVwbGVfZWxlbWVudAoJZnJhbWVfZGlnIDAgLy8gc3RvcmFnZSBrZXkvL29sZExpc3RpbmdLZXkKCWJveF9nZXQKCgkvLyBib3ggdmFsdWUgZG9lcyBub3QgZXhpc3Q6IHRoaXMubGlzdGVkTkZEYXBwSURzKG5mZEFwcElEKS52YWx1ZQoJYXNzZXJ0CglzdG9yZSAyNTUgLy8gZnVsbCBhcnJheQoJbG9hZCAyNTUgLy8gZnVsbCBhcnJheQoJZXh0cmFjdCAxNiA4CglidG9pCglpdG9iCgljYWxsc3ViICpwcm9jZXNzX3N0YXRpY190dXBsZV9lbGVtZW50CglmcmFtZV9kaWcgMCAvLyBzdG9yYWdlIGtleS8vb2xkTGlzdGluZ0tleQoJYm94X2dldAoKCS8vIGJveCB2YWx1ZSBkb2VzIG5vdCBleGlzdDogdGhpcy5saXN0ZWRORkRhcHBJRHMobmZkQXBwSUQpLnZhbHVlCglhc3NlcnQKCXN0b3JlIDI1NSAvLyBmdWxsIGFycmF5Cglsb2FkIDI1NSAvLyBmdWxsIGFycmF5CglleHRyYWN0IDI0IDEzCgljYWxsc3ViICpwcm9jZXNzX3N0YXRpY190dXBsZV9lbGVtZW50CglmcmFtZV9kaWcgMCAvLyBzdG9yYWdlIGtleS8vb2xkTGlzdGluZ0tleQoJYm94X2dldAoKCS8vIGJveCB2YWx1ZSBkb2VzIG5vdCBleGlzdDogdGhpcy5saXN0ZWRORkRhcHBJRHMobmZkQXBwSUQpLnZhbHVlCglhc3NlcnQKCXN0b3JlIDI1NSAvLyBmdWxsIGFycmF5CglpbnQgMzcKCWxvYWQgMjU1IC8vIGZ1bGwgYXJyYXkKCWxvYWQgMjU1IC8vIGZ1bGwgYXJyYXkKCXVuY292ZXIgMgoJZXh0cmFjdF91aW50MTYKCWR1cCAvLyBkdXBsaWNhdGUgc3RhcnQgb2YgZWxlbWVudAoJbG9hZCAyNTUgLy8gZnVsbCBhcnJheQoJc3dhcAoJZXh0cmFjdF91aW50MTYgLy8gZ2V0IG51bWJlciBvZiBlbGVtZW50cwoJaW50IDEgLy8gZ2V0IHR5cGUgbGVuZ3RoCgkqIC8vIG11bHRpcGx5IGJ5IHR5cGUgbGVuZ3RoCglpbnQgMgoJKyAvLyBhZGQgdHdvIGZvciBsZW5ndGgKCWV4dHJhY3QzCglleHRyYWN0IDIgMAoJZHVwCglsZW4KCWl0b2IKCWV4dHJhY3QgNiAyCglzd2FwCgljb25jYXQKCWNhbGxzdWIgKnByb2Nlc3NfZHluYW1pY190dXBsZV9lbGVtZW50Cglwb3AgLy8gcG9wIGhlYWQgb2Zmc2V0Cgljb25jYXQgLy8gY29uY2F0IGhlYWQgYW5kIHRhaWwKCWZyYW1lX2J1cnkgMSAvLyBuZXdMaXN0aW5nS2V5OiBMaXN0aW5nCgoJLy8gY29udHJhY3RzL0FsZ29EaXJlY3RvcnkuYWxnby50czoxMzgKCS8vIHRoaXMubGlzdGluZ3Mob2xkTGlzdGluZ0tleSkuZGVsZXRlKCkKCWZyYW1lX2RpZyAwIC8vIHN0b3JhZ2Uga2V5Ly9vbGRMaXN0aW5nS2V5Cglib3hfZ2V0CgoJLy8gYm94IHZhbHVlIGRvZXMgbm90IGV4aXN0OiB0aGlzLmxpc3RlZE5GRGFwcElEcyhuZmRBcHBJRCkudmFsdWUKCWFzc2VydAoJYm94X2RlbAoKCS8vIGNvbnRyYWN0cy9BbGdvRGlyZWN0b3J5LmFsZ28udHM6MTQxCgkvLyB0aGlzLmxpc3RpbmdzKG5ld0xpc3RpbmdLZXkpLnZhbHVlID0gdGhpcy50eG4uc2VuZGVyCglmcmFtZV9kaWcgMSAvLyBuZXdMaXN0aW5nS2V5OiBMaXN0aW5nCgl0eG4gU2VuZGVyCglib3hfcHV0CgoJLy8gY29udHJhY3RzL0FsZ29EaXJlY3RvcnkuYWxnby50czoxNDQKCS8vIHRoaXMubGlzdGVkTkZEYXBwSURzKG5mZEFwcElEKS52YWx1ZSA9IG5ld0xpc3RpbmdLZXkKCWZyYW1lX2RpZyAtMSAvLyBuZmRBcHBJRDogdWludDY0CglpdG9iCglkdXAKCWJveF9kZWwKCXBvcAoJZnJhbWVfZGlnIDEgLy8gbmV3TGlzdGluZ0tleTogTGlzdGluZwoJYm94X3B1dAoKCS8vIGNvbnRyYWN0cy9BbGdvRGlyZWN0b3J5LmFsZ28udHM6MTQ2CgkvLyByZXR1cm4gbmV3TGlzdGluZ0tleTsKCWZyYW1lX2RpZyAxIC8vIG5ld0xpc3RpbmdLZXk6IExpc3RpbmcKCgkvLyBzZXQgdGhlIHN1YnJvdXRpbmUgcmV0dXJuIHZhbHVlCglmcmFtZV9idXJ5IDAKCgkvLyBwb3AgYWxsIGxvY2FsIHZhcmlhYmxlcyBmcm9tIHRoZSBzdGFjawoJcG9wbiAxCglyZXRzdWIKCi8vIGFiYW5kb25MaXN0aW5nKHVpbnQ2NCl2b2lkCiphYmlfcm91dGVfYWJhbmRvbkxpc3Rpbmc6CgkvLyBuZmRBcHBJRDogdWludDY0Cgl0eG5hIEFwcGxpY2F0aW9uQXJncyAxCglidG9pCgoJLy8gZXhlY3V0ZSBhYmFuZG9uTGlzdGluZyh1aW50NjQpdm9pZAoJY2FsbHN1YiBhYmFuZG9uTGlzdGluZwoJaW50IDEKCXJldHVybgoKLy8gYWJhbmRvbkxpc3RpbmcobmZkQXBwSUQ6IHVpbnQ2NCk6IHZvaWQKLy8KLy8gQWJhbmRvbnMgYSBsaXN0aW5nIGluIHRoZSBkaXJlY3RvcnkgYW5kIHJldHVybnMgdGhlIHZvdWNoZWQgY29sbGF0ZXJhbC4KLy8KLy8gQHBhcmFtIG5mZEFwcElEIFRoZSB1aW50NjQgYXBwbGljYXRpb24gSUQgb2YgdGhlIE5GRCB0aGF0IHdpbGwgYmUgYWJhbmRvbmVkCmFiYW5kb25MaXN0aW5nOgoJcHJvdG8gMSAwCgoJLy8gUHVzaCBlbXB0eSBieXRlcyBhZnRlciB0aGUgZnJhbWUgcG9pbnRlciB0byByZXNlcnZlIHNwYWNlIGZvciBsb2NhbCB2YXJpYWJsZXMKCWJ5dGUgMHgKCgkvLyBjb250cmFjdHMvQWxnb0RpcmVjdG9yeS5hbGdvLnRzOjE1NQoJLy8gbGlzdGluZ0tleSA9IHRoaXMubGlzdGVkTkZEYXBwSURzKG5mZEFwcElEKS52YWx1ZQoJZnJhbWVfZGlnIC0xIC8vIG5mZEFwcElEOiB1aW50NjQKCWl0b2IKCWZyYW1lX2J1cnkgMCAvLyBzdG9yYWdlIGtleS8vbGlzdGluZ0tleQoKCS8vIGNvbnRyYWN0cy9BbGdvRGlyZWN0b3J5LmFsZ28udHM6MTU2CgkvLyB0aGlzLmNoZWNrQ2FsbGVySXNMaXN0aW5nT3duZXIobmZkQXBwSUQpCglmcmFtZV9kaWcgLTEgLy8gbmZkQXBwSUQ6IHVpbnQ2NAoJY2FsbHN1YiBjaGVja0NhbGxlcklzTGlzdGluZ093bmVyCgoJLy8gY29udHJhY3RzL0FsZ29EaXJlY3RvcnkuYWxnby50czoxNTkKCS8vIHNlbmRQYXltZW50KHsKCS8vICAgICAgIHNlbmRlcjogdGhpcy5hcHAuYWRkcmVzcywKCS8vICAgICAgIHJlY2VpdmVyOiB0aGlzLmxpc3RpbmdzKGxpc3RpbmdLZXkpLnZhbHVlLAoJLy8gICAgICAgYW1vdW50OiBsaXN0aW5nS2V5LnZvdWNoQW1vdW50LAoJLy8gICAgICAgZmVlOiAwLAoJLy8gICAgIH0pCglpdHhuX2JlZ2luCglpbnQgcGF5CglpdHhuX2ZpZWxkIFR5cGVFbnVtCgoJLy8gY29udHJhY3RzL0FsZ29EaXJlY3RvcnkuYWxnby50czoxNjAKCS8vIHNlbmRlcjogdGhpcy5hcHAuYWRkcmVzcwoJZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MKCWl0eG5fZmllbGQgU2VuZGVyCgoJLy8gY29udHJhY3RzL0FsZ29EaXJlY3RvcnkuYWxnby50czoxNjEKCS8vIHJlY2VpdmVyOiB0aGlzLmxpc3RpbmdzKGxpc3RpbmdLZXkpLnZhbHVlCglmcmFtZV9kaWcgMCAvLyBzdG9yYWdlIGtleS8vbGlzdGluZ0tleQoJYm94X2dldAoKCS8vIGJveCB2YWx1ZSBkb2VzIG5vdCBleGlzdDogdGhpcy5saXN0ZWRORkRhcHBJRHMobmZkQXBwSUQpLnZhbHVlCglhc3NlcnQKCWJveF9nZXQKCgkvLyBib3ggdmFsdWUgZG9lcyBub3QgZXhpc3Q6IHRoaXMubGlzdGluZ3MobGlzdGluZ0tleSkudmFsdWUKCWFzc2VydAoJaXR4bl9maWVsZCBSZWNlaXZlcgoKCS8vIGNvbnRyYWN0cy9BbGdvRGlyZWN0b3J5LmFsZ28udHM6MTYyCgkvLyBhbW91bnQ6IGxpc3RpbmdLZXkudm91Y2hBbW91bnQKCWZyYW1lX2RpZyAwIC8vIHN0b3JhZ2Uga2V5Ly9saXN0aW5nS2V5Cglib3hfZ2V0CgoJLy8gYm94IHZhbHVlIGRvZXMgbm90IGV4aXN0OiB0aGlzLmxpc3RlZE5GRGFwcElEcyhuZmRBcHBJRCkudmFsdWUKCWFzc2VydAoJc3RvcmUgMjU1IC8vIGZ1bGwgYXJyYXkKCWxvYWQgMjU1IC8vIGZ1bGwgYXJyYXkKCWV4dHJhY3QgOCA4CglidG9pCglpdHhuX2ZpZWxkIEFtb3VudAoKCS8vIGNvbnRyYWN0cy9BbGdvRGlyZWN0b3J5LmFsZ28udHM6MTYzCgkvLyBmZWU6IDAKCWludCAwCglpdHhuX2ZpZWxkIEZlZQoKCS8vIFN1Ym1pdCBpbm5lciB0cmFuc2FjdGlvbgoJaXR4bl9zdWJtaXQKCgkvLyBjb250cmFjdHMvQWxnb0RpcmVjdG9yeS5hbGdvLnRzOjE2NwoJLy8gdGhpcy5saXN0aW5ncyhsaXN0aW5nS2V5KS5kZWxldGUoKQoJZnJhbWVfZGlnIDAgLy8gc3RvcmFnZSBrZXkvL2xpc3RpbmdLZXkKCWJveF9nZXQKCgkvLyBib3ggdmFsdWUgZG9lcyBub3QgZXhpc3Q6IHRoaXMubGlzdGVkTkZEYXBwSURzKG5mZEFwcElEKS52YWx1ZQoJYXNzZXJ0Cglib3hfZGVsCgoJLy8gY29udHJhY3RzL0FsZ29EaXJlY3RvcnkuYWxnby50czoxNjgKCS8vIHRoaXMubGlzdGVkTkZEYXBwSURzKG5mZEFwcElEKS5kZWxldGUoKQoJZnJhbWVfZGlnIC0xIC8vIG5mZEFwcElEOiB1aW50NjQKCWl0b2IKCWJveF9kZWwKCXJldHN1YgoKLy8gZGVsZXRlTGlzdGluZyh1aW50NjQpdm9pZAoqYWJpX3JvdXRlX2RlbGV0ZUxpc3Rpbmc6CgkvLyBuZmRBcHBJRDogdWludDY0Cgl0eG5hIEFwcGxpY2F0aW9uQXJncyAxCglidG9pCgoJLy8gZXhlY3V0ZSBkZWxldGVMaXN0aW5nKHVpbnQ2NCl2b2lkCgljYWxsc3ViIGRlbGV0ZUxpc3RpbmcKCWludCAxCglyZXR1cm4KCi8vIGRlbGV0ZUxpc3RpbmcobmZkQXBwSUQ6IHVpbnQ2NCk6IHZvaWQKLy8KLy8gRGVsZXRlcyBhIGxpc3RpbmcgZnJvbSB0aGUgZGlyZWN0b3J5ICYgc2VuZHMgdGhlIGNvbGxhdGVyYWwgdG8gdGhlIGZlZSBzaW5rLgovLwovLyBAcGFyYW0gbmZkQXBwSUQgVGhlIHVpbnQ2NCBhcHBsaWNhdGlvbiBJRCBvZiB0aGUgTkZEIHRoYXQgd2lsbCBiZSBkZWxldGVkCmRlbGV0ZUxpc3Rpbmc6Cglwcm90byAxIDAKCgkvLyBQdXNoIGVtcHR5IGJ5dGVzIGFmdGVyIHRoZSBmcmFtZSBwb2ludGVyIHRvIHJlc2VydmUgc3BhY2UgZm9yIGxvY2FsIHZhcmlhYmxlcwoJYnl0ZSAweAoKCS8vIGNvbnRyYWN0cy9BbGdvRGlyZWN0b3J5LmFsZ28udHM6MTc4CgkvLyBhc3NlcnQodGhpcy50eG4uc2VuZGVyLmFzc2V0QmFsYW5jZSh0aGlzLmFkbWluVG9rZW4udmFsdWUpID4gMCwgJ0NhbGxlciBtdXN0IGhhdmUgdGhlIGFkbWluIHRva2VuJykKCXR4biBTZW5kZXIKCWJ5dGUgMHg2MTY0NmQ2OTZlNTQ2ZjZiNjU2ZSAvLyAiYWRtaW5Ub2tlbiIKCWFwcF9nbG9iYWxfZ2V0Cglhc3NldF9ob2xkaW5nX2dldCBBc3NldEJhbGFuY2UKCXBvcAoJaW50IDAKCT4KCgkvLyBDYWxsZXIgbXVzdCBoYXZlIHRoZSBhZG1pbiB0b2tlbgoJYXNzZXJ0CgoJLy8gY29udHJhY3RzL0FsZ29EaXJlY3RvcnkuYWxnby50czoxODAKCS8vIGxpc3RpbmdLZXkgPSB0aGlzLmxpc3RlZE5GRGFwcElEcyhuZmRBcHBJRCkudmFsdWUKCWZyYW1lX2RpZyAtMSAvLyBuZmRBcHBJRDogdWludDY0CglpdG9iCglmcmFtZV9idXJ5IDAgLy8gc3RvcmFnZSBrZXkvL2xpc3RpbmdLZXkKCgkvLyBjb250cmFjdHMvQWxnb0RpcmVjdG9yeS5hbGdvLnRzOjE4MwoJLy8gc2VuZFBheW1lbnQoewoJLy8gICAgICAgc2VuZGVyOiB0aGlzLmFwcC5hZGRyZXNzLAoJLy8gICAgICAgcmVjZWl2ZXI6IHRoaXMuZmVlU2lua0FkZHJlc3MsCgkvLyAgICAgICBhbW91bnQ6IGxpc3RpbmdLZXkudm91Y2hBbW91bnQsCgkvLyAgICAgICBmZWU6IDAsCgkvLyAgICAgICBub3RlOiAnWWVldGVkICcgKyBsaXN0aW5nS2V5Lm5hbWUsCgkvLyAgICAgfSkKCWl0eG5fYmVnaW4KCWludCBwYXkKCWl0eG5fZmllbGQgVHlwZUVudW0KCgkvLyBjb250cmFjdHMvQWxnb0RpcmVjdG9yeS5hbGdvLnRzOjE4NAoJLy8gc2VuZGVyOiB0aGlzLmFwcC5hZGRyZXNzCglnbG9iYWwgQ3VycmVudEFwcGxpY2F0aW9uQWRkcmVzcwoJaXR4bl9maWVsZCBTZW5kZXIKCgkvLyBjb250cmFjdHMvQWxnb0RpcmVjdG9yeS5hbGdvLnRzOjE4NQoJLy8gcmVjZWl2ZXI6IHRoaXMuZmVlU2lua0FkZHJlc3MKCWxvYWQgMjAwIC8vIFRNUExfZmVlU2lua0FkZHJlc3MKCWl0eG5fZmllbGQgUmVjZWl2ZXIKCgkvLyBjb250cmFjdHMvQWxnb0RpcmVjdG9yeS5hbGdvLnRzOjE4NgoJLy8gYW1vdW50OiBsaXN0aW5nS2V5LnZvdWNoQW1vdW50CglmcmFtZV9kaWcgMCAvLyBzdG9yYWdlIGtleS8vbGlzdGluZ0tleQoJYm94X2dldAoKCS8vIGJveCB2YWx1ZSBkb2VzIG5vdCBleGlzdDogdGhpcy5saXN0ZWRORkRhcHBJRHMobmZkQXBwSUQpLnZhbHVlCglhc3NlcnQKCXN0b3JlIDI1NSAvLyBmdWxsIGFycmF5Cglsb2FkIDI1NSAvLyBmdWxsIGFycmF5CglleHRyYWN0IDggOAoJYnRvaQoJaXR4bl9maWVsZCBBbW91bnQKCgkvLyBjb250cmFjdHMvQWxnb0RpcmVjdG9yeS5hbGdvLnRzOjE4NwoJLy8gZmVlOiAwCglpbnQgMAoJaXR4bl9maWVsZCBGZWUKCgkvLyBjb250cmFjdHMvQWxnb0RpcmVjdG9yeS5hbGdvLnRzOjE4OAoJLy8gbm90ZTogJ1llZXRlZCAnICsgbGlzdGluZ0tleS5uYW1lCglieXRlIDB4NTk2NTY1NzQ2NTY0MjAgLy8gIlllZXRlZCAiCglmcmFtZV9kaWcgMCAvLyBzdG9yYWdlIGtleS8vbGlzdGluZ0tleQoJYm94X2dldAoKCS8vIGJveCB2YWx1ZSBkb2VzIG5vdCBleGlzdDogdGhpcy5saXN0ZWRORkRhcHBJRHMobmZkQXBwSUQpLnZhbHVlCglhc3NlcnQKCXN0b3JlIDI1NSAvLyBmdWxsIGFycmF5CglpbnQgMzcKCWxvYWQgMjU1IC8vIGZ1bGwgYXJyYXkKCWxvYWQgMjU1IC8vIGZ1bGwgYXJyYXkKCXVuY292ZXIgMgoJZXh0cmFjdF91aW50MTYKCWR1cCAvLyBkdXBsaWNhdGUgc3RhcnQgb2YgZWxlbWVudAoJbG9hZCAyNTUgLy8gZnVsbCBhcnJheQoJc3dhcAoJZXh0cmFjdF91aW50MTYgLy8gZ2V0IG51bWJlciBvZiBlbGVtZW50cwoJaW50IDEgLy8gZ2V0IHR5cGUgbGVuZ3RoCgkqIC8vIG11bHRpcGx5IGJ5IHR5cGUgbGVuZ3RoCglpbnQgMgoJKyAvLyBhZGQgdHdvIGZvciBsZW5ndGgKCWV4dHJhY3QzCglleHRyYWN0IDIgMAoJY29uY2F0CglpdHhuX2ZpZWxkIE5vdGUKCgkvLyBTdWJtaXQgaW5uZXIgdHJhbnNhY3Rpb24KCWl0eG5fc3VibWl0CgoJLy8gY29udHJhY3RzL0FsZ29EaXJlY3RvcnkuYWxnby50czoxOTIKCS8vIHRoaXMubGlzdGluZ3MobGlzdGluZ0tleSkuZGVsZXRlKCkKCWZyYW1lX2RpZyAwIC8vIHN0b3JhZ2Uga2V5Ly9saXN0aW5nS2V5Cglib3hfZ2V0CgoJLy8gYm94IHZhbHVlIGRvZXMgbm90IGV4aXN0OiB0aGlzLmxpc3RlZE5GRGFwcElEcyhuZmRBcHBJRCkudmFsdWUKCWFzc2VydAoJYm94X2RlbAoKCS8vIGNvbnRyYWN0cy9BbGdvRGlyZWN0b3J5LmFsZ28udHM6MTkzCgkvLyB0aGlzLmxpc3RlZE5GRGFwcElEcyhuZmRBcHBJRCkuZGVsZXRlKCkKCWZyYW1lX2RpZyAtMSAvLyBuZmRBcHBJRDogdWludDY0CglpdG9iCglib3hfZGVsCglyZXRzdWIKCi8vIHNldEFkbWluVG9rZW4odWludDY0KXZvaWQKKmFiaV9yb3V0ZV9zZXRBZG1pblRva2VuOgoJLy8gYXNhSUQ6IHVpbnQ2NAoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQoJYnRvaQoKCS8vIGV4ZWN1dGUgc2V0QWRtaW5Ub2tlbih1aW50NjQpdm9pZAoJY2FsbHN1YiBzZXRBZG1pblRva2VuCglpbnQgMQoJcmV0dXJuCgovLyBzZXRBZG1pblRva2VuKGFzYUlEOiBBc3NldElEKTogdm9pZAovLwovLyBTdG9yZXMgYW4gQVNBIElEIGluIGdsb2JhbCBzdGF0ZSB0aGF0IHdpbGwgY29udHJvbCBhZG1pbmlzdHJhdGlvbiByaWdodHMKLy8KLy8gQHBhcmFtIGFzYUlEIFRoZSB1aW50NjQgYXNzZXQgSUQgb2YgdGhlIEFTQSB0byBiZSB0aGUgYWRtaW4gdG9rZW4Kc2V0QWRtaW5Ub2tlbjoKCXByb3RvIDEgMAoKCS8vIGNvbnRyYWN0cy9BbGdvRGlyZWN0b3J5LmFsZ28udHM6MjAyCgkvLyBhc3NlcnQodGhpcy50eG4uc2VuZGVyID09PSB0aGlzLmFwcC5jcmVhdG9yLCAnT25seSB0aGUgY3JlYXRvciBjYW4gc2V0IHRoZSBhZG1pbiB0b2tlbicpCgl0eG4gU2VuZGVyCgl0eG5hIEFwcGxpY2F0aW9ucyAwCglhcHBfcGFyYW1zX2dldCBBcHBDcmVhdG9yCglwb3AKCT09CgoJLy8gT25seSB0aGUgY3JlYXRvciBjYW4gc2V0IHRoZSBhZG1pbiB0b2tlbgoJYXNzZXJ0CgoJLy8gY29udHJhY3RzL0FsZ29EaXJlY3RvcnkuYWxnby50czoyMDMKCS8vIHRoaXMuYWRtaW5Ub2tlbi52YWx1ZSA9IGFzYUlECglieXRlIDB4NjE2NDZkNjk2ZTU0NmY2YjY1NmUgLy8gImFkbWluVG9rZW4iCglmcmFtZV9kaWcgLTEgLy8gYXNhSUQ6IEFzc2V0SUQKCWFwcF9nbG9iYWxfcHV0CglyZXRzdWIKCi8vIGNyZWF0ZUFwcGxpY2F0aW9uKCl2b2lkCiphYmlfcm91dGVfY3JlYXRlQXBwbGljYXRpb246CgkvLyBleGVjdXRlIGNyZWF0ZUFwcGxpY2F0aW9uKCl2b2lkCgljYWxsc3ViIGNyZWF0ZUFwcGxpY2F0aW9uCglpbnQgMQoJcmV0dXJuCgovLyBjcmVhdGVBcHBsaWNhdGlvbigpOiB2b2lkCmNyZWF0ZUFwcGxpY2F0aW9uOgoJcHJvdG8gMCAwCglyZXRzdWIKCi8vIHVwZGF0ZUFwcGxpY2F0aW9uKCl2b2lkCiphYmlfcm91dGVfdXBkYXRlQXBwbGljYXRpb246CgkvLyBleGVjdXRlIHVwZGF0ZUFwcGxpY2F0aW9uKCl2b2lkCgljYWxsc3ViIHVwZGF0ZUFwcGxpY2F0aW9uCglpbnQgMQoJcmV0dXJuCgovLyB1cGRhdGVBcHBsaWNhdGlvbigpOiB2b2lkCnVwZGF0ZUFwcGxpY2F0aW9uOgoJcHJvdG8gMCAwCgoJLy8gY29udHJhY3RzL0FsZ29EaXJlY3RvcnkuYWxnby50czoyMDkKCS8vIGFzc2VydCh0aGlzLnR4bi5zZW5kZXIgPT09IHRoaXMuYXBwLmNyZWF0b3IsICdPbmx5IHRoZSBjcmVhdG9yIGNhbiB1cGRhdGUgdGhlIGFwcGxpY2F0aW9uJykKCXR4biBTZW5kZXIKCXR4bmEgQXBwbGljYXRpb25zIDAKCWFwcF9wYXJhbXNfZ2V0IEFwcENyZWF0b3IKCXBvcAoJPT0KCgkvLyBPbmx5IHRoZSBjcmVhdG9yIGNhbiB1cGRhdGUgdGhlIGFwcGxpY2F0aW9uCglhc3NlcnQKCXJldHN1YgoKKmNyZWF0ZV9Ob09wOgoJbWV0aG9kICJjcmVhdGVBcHBsaWNhdGlvbigpdm9pZCIKCXR4bmEgQXBwbGljYXRpb25BcmdzIDAKCW1hdGNoICphYmlfcm91dGVfY3JlYXRlQXBwbGljYXRpb24KCgkvLyB0aGlzIGNvbnRyYWN0IGRvZXMgbm90IGltcGxlbWVudCB0aGUgZ2l2ZW4gQUJJIG1ldGhvZCBmb3IgY3JlYXRlIE5vT3AKCWVycgoKKmNhbGxfTm9PcDoKCW1ldGhvZCAiY3JlYXRlTGlzdGluZyhwYXksdWludDY0LGJ5dGVbMTNdKSh1aW50NjQsdWludDY0LHVpbnQ2NCxieXRlWzEzXSxzdHJpbmcpIgoJbWV0aG9kICJyZWZyZXNoTGlzdGluZyh1aW50NjQpKHVpbnQ2NCx1aW50NjQsdWludDY0LGJ5dGVbMTNdLHN0cmluZykiCgltZXRob2QgImFiYW5kb25MaXN0aW5nKHVpbnQ2NCl2b2lkIgoJbWV0aG9kICJkZWxldGVMaXN0aW5nKHVpbnQ2NCl2b2lkIgoJbWV0aG9kICJzZXRBZG1pblRva2VuKHVpbnQ2NCl2b2lkIgoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAoJbWF0Y2ggKmFiaV9yb3V0ZV9jcmVhdGVMaXN0aW5nICphYmlfcm91dGVfcmVmcmVzaExpc3RpbmcgKmFiaV9yb3V0ZV9hYmFuZG9uTGlzdGluZyAqYWJpX3JvdXRlX2RlbGV0ZUxpc3RpbmcgKmFiaV9yb3V0ZV9zZXRBZG1pblRva2VuCgoJLy8gdGhpcyBjb250cmFjdCBkb2VzIG5vdCBpbXBsZW1lbnQgdGhlIGdpdmVuIEFCSSBtZXRob2QgZm9yIGNhbGwgTm9PcAoJZXJyCgoqY2FsbF9VcGRhdGVBcHBsaWNhdGlvbjoKCW1ldGhvZCAidXBkYXRlQXBwbGljYXRpb24oKXZvaWQiCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAwCgltYXRjaCAqYWJpX3JvdXRlX3VwZGF0ZUFwcGxpY2F0aW9uCgoJLy8gdGhpcyBjb250cmFjdCBkb2VzIG5vdCBpbXBsZW1lbnQgdGhlIGdpdmVuIEFCSSBtZXRob2QgZm9yIGNhbGwgVXBkYXRlQXBwbGljYXRpb24KCWVycgoKKnByb2Nlc3Nfc3RhdGljX3R1cGxlX2VsZW1lbnQ6Cglwcm90byA0IDMKCWZyYW1lX2RpZyAtNCAvLyB0dXBsZSBoZWFkCglmcmFtZV9kaWcgLTEgLy8gZWxlbWVudAoJY29uY2F0CglmcmFtZV9kaWcgLTMgLy8gdHVwbGUgdGFpbAoJZnJhbWVfZGlnIC0yIC8vIGhlYWQgb2Zmc2V0CglyZXRzdWIKCipwcm9jZXNzX2R5bmFtaWNfdHVwbGVfZWxlbWVudDoKCXByb3RvIDQgMwoJZnJhbWVfZGlnIC00IC8vIHR1cGxlIGhlYWQKCWZyYW1lX2RpZyAtMiAvLyBoZWFkIG9mZnNldAoJY29uY2F0CglmcmFtZV9idXJ5IC00IC8vIHR1cGxlIGhlYWQKCWZyYW1lX2RpZyAtMSAvLyBlbGVtZW50CglkdXAKCWxlbgoJZnJhbWVfZGlnIC0yIC8vIGhlYWQgb2Zmc2V0CglidG9pCgkrCglpdG9iCglleHRyYWN0IDYgMgoJZnJhbWVfYnVyeSAtMiAvLyBoZWFkIG9mZnNldAoJZnJhbWVfZGlnIC0zIC8vIHR1cGxlIHRhaWwKCXN3YXAKCWNvbmNhdAoJZnJhbWVfYnVyeSAtMyAvLyB0dXBsZSB0YWlsCglmcmFtZV9kaWcgLTQgLy8gdHVwbGUgaGVhZAoJZnJhbWVfZGlnIC0zIC8vIHR1cGxlIHRhaWwKCWZyYW1lX2RpZyAtMiAvLyBoZWFkIG9mZnNldAoJcmV0c3Vi",
     "clear": "I3ByYWdtYSB2ZXJzaW9uIDEw"
   },
-  "byteCode": {
-    "approval": "CiADAQAGJgQABBUffHUCACcKYWRtaW5Ub2tlbjEYFCQLMRkIjQwC7gAAAAAAAAMcAAAC4AAAAAAAAAAAAAAAigEAKIv/FowAMQCLAL5EvkQSRImKAQCL/4ANaS5wYXJlbnRBcHBJRGVEF4H1uuKSAhJEiYoBADEAi/+ACWkub3duZXIuYWVEEkSJigEAMgeL/4AQaS5leHBpcmF0aW9uVGltZWVEFw5EiYoAATIHFoABAFwHF4kpNhoCSRWBDRJENhoBFzEWIglJOBAiEkSIAARQsCJDigMBKEcCi/84ADEAEkSL/zgHMgoSRIv/OAiBiLQED0SL/oj/WYv+iP90i/6I/4aL/oAGaS5uYW1lZUSMALEkshCB6audKLIYgBJpc192YWxpZF9uZmRfYXBwaWSyGosAshqL/hayGiOyAbO0PhciEkSL/ha9TEgURIsAI4sAFYEPCVKMASgoKoj/SRaIAgSL/zgIFogB/Iv+FogB9ov9iAHxiwFJFRZXBgJMUIgB8UhQjAKLAjEAv4v+Fkm8SIsCv4sCjABGAokpNhoBF4gABFCwIkOKAQEoSYv/iP6Mi/+I/ruL/4j+zYv/FowAKCgqiP7hFogBnIsAvkQ1/zT/VwgIFxaIAYyLAL5ENf80/1cQCBcWiAF8iwC+RDX/NP9XGA2IAW6LAL5ENf+BJTT/NP9PAllJNP9MWSILgQIIWFcCAEkVFlcGAkxQiAFTSFCMAYsAvkS8iwExAL+L/xZJvEiLAb+LAYwARgGJNhoBF4gAAiJDigEAKIv/FowAi/+I/eixIrIQMgqyAIsAvkS+RLIHiwC+RDX/NP9XCAgXsggjsgGziwC+RLyL/xa8iTYaAReIAAIiQ4oBACgxACtkcABIIw1Ei/8WjACxIrIQMgqyAIAgB9rLS22e0UGxdXa9RZrmQh1IbaPU7yJHxAmjlrguoiGyB4sAvkQ1/zT/VwgIF7III7IBs4sAvkS8i/8WvImIAAIiQ4oAAIk2GgEXiAACIkOKAQAxADYyAHIHSBJEK4v/Z4mIAAIiQ4oAADEANjIAcgdIEkSJgAS4RHs2NhoAjgH/vACABM6I0lWABG/B0tKABLKb57iABHj7L0mABCskibc2GgCOBf1d/kT+5/8q/5cAgARG92UzNhoAjgH/pACKBAOL/Iv/UIv9i/6JigQDi/yL/lCM/Iv/SRWL/hcIFlcGAoz+i/1MUIz9i/yL/Yv+iQ==",
-    "clear": "Cg=="
+  "templateVariables": {
+    "feeSinkAddress": {
+      "type": "address"
+    },
+    "directoryDotAlgoAppID": {
+      "type": "uint64"
+    },
+    "nfdRegistryAppID": {
+      "type": "uint64"
+    }
+  },
+  "scratchVariables": {
+    "feeSinkAddress": {
+      "type": "address",
+      "slot": 200
+    },
+    "directoryDotAlgoAppID": {
+      "type": "uint64",
+      "slot": 201
+    },
+    "nfdRegistryAppID": {
+      "type": "uint64",
+      "slot": 202
+    }
   },
   "compilerInfo": {
     "compiler": "algod",

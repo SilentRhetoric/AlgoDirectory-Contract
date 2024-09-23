@@ -1,83 +1,117 @@
 /* eslint-disable no-console */
 import { describe, test, expect, beforeAll } from '@jest/globals';
 import { AlgorandClient } from '@algorandfoundation/algokit-utils';
-import { ClientManager } from '@algorandfoundation/algokit-utils/types/client-manager';
-import { makePaymentTxnWithSuggestedParamsFromObject } from 'algosdk';
-import { AccountManager } from '@algorandfoundation/algokit-utils/types/account-manager';
+import { encodeUint64 } from 'algosdk';
 import { AlgoAmount } from '@algorandfoundation/algokit-utils/types/amount';
-import { AlgoDirectoryClient, APP_SPEC } from '../contracts/clients/AlgoDirectoryClient';
+import { AlgoDirectoryFactory } from '../contracts/clients/AlgoDirectoryClient';
 
+// Get env vars from .env, defaulting to testnet values
+
+// For network-based template variables substitution at compile time
+const FEE_SINK_ADDRESS = process.env.FEE_SINK_ADDRESS || 'A7NMWS3NT3IUDMLVO26ULGXGIIOUQ3ND2TXSER6EBGRZNOBOUIQXHIBGDE'; // Testnet A7NMWS3NT3IUDMLVO26ULGXGIIOUQ3ND2TXSER6EBGRZNOBOUIQXHIBGDE / Mainnet Y76M3MSY6DKBRHBL7C3NNDXGS5IIMQVQVUAB6MP4XEMMGVF2QWNPL226CA
+const NFD_REGISTRY_APP_ID = Number(process.env.NFD_REGISTRY_APP_ID); // Testnet 84366825 / Mainnet 760937186
+const DIRECTORY_DOT_ALGO_APP_ID = Number(process.env.DIRECTORY_DOT_ALGO_APP_ID); // Testnet 576232821 / Mainnet 766401564
+
+// For testing purposes
 const CREATOR = 'CREATOR';
-const CREATOR_SEGMENT_APPID = (process.env.CREATOR_SEGMENT_APP_ID || 576232891) as number; // test.directory.algo
+const CREATOR_SEGMENT_APPID = Number(process.env.CREATOR_SEGMENT_APP_ID); // test.directory.algo
 const DAVE = 'DAVE';
-const DAVE_SEGEMENT_APPID = (process.env.DAVE_SEGMENT_APP_ID || 673442367) as number; // test.directory.algo
+const DAVE_SEGEMENT_APPID = Number(process.env.DAVE_SEGMENT_APP_ID); // test.directory.algo
 const BETH = 'BETH';
-const BETH_SEGMENT_APPID = (process.env.DAVE_SEGMENT_APP_ID || 606016435) as number; // beth.directory.algo
+const BETH_SEGMENT_APPID = Number(process.env.DAVE_SEGMENT_APP_ID); // beth.directory.algo
+
+// Put an existing admin asset held by CREATOR & BETH in .env to use that, else a new one will be created
+const ADMIN_TOKEN_ASAID = Number(process.env.ADMIN_TOKEN_ASAID); // Testnet 721940792 / Mainnet TBD
 
 const algorand = AlgorandClient.testNet();
 
 describe('AlgoDirectory', () => {
   beforeAll(async () => {
     const creator = await algorand.account.fromEnvironment(CREATOR, new AlgoAmount({ algos: 0 }));
-    const factory = algorand.client.getAppFactory({
-      appSpec: APP_SPEC,
+    const typedFactory = algorand.client.getTypedAppFactory(AlgoDirectoryFactory, {
       defaultSender: creator.addr,
+      deployTimeParams: {
+        feeSinkAddress: FEE_SINK_ADDRESS,
+        nfdRegistryAppID: encodeUint64(NFD_REGISTRY_APP_ID),
+        directoryDotAlgoAppID: encodeUint64(DIRECTORY_DOT_ALGO_APP_ID),
+      },
     });
-    const { result, app } = await factory.deploy({
-      createParams: {
-        method: 'createApplication',
-        args: [],
+
+    const { result, app: typedAppClient } = await typedFactory.deploy({
+      createParams: { method: 'createApplication', args: [] },
+      updateParams: { method: 'updateApplication', args: [] },
+      onSchemaBreak: 'replace',
+      onUpdate: 'append',
+      deployTimeParams: {
+        feeSinkAddress: FEE_SINK_ADDRESS,
+        nfdRegistryAppID: encodeUint64(NFD_REGISTRY_APP_ID),
+        directoryDotAlgoAppID: encodeUint64(DIRECTORY_DOT_ALGO_APP_ID),
       },
     });
     console.debug('Deploy result operation: ', result.operationPerformed);
-    console.debug(`Deployed app ${app.appId} at address: ${app.appAddress}`);
+    console.debug(`Deployed app ${typedAppClient.appClient.appId} at address: ${typedAppClient.appClient.appAddress}`);
 
-    // Fund the app MBR
-    const fundResult = await app.fundAppAccount({ amount: (0.1).algos() });
-    console.debug('Fund app result: ', fundResult.txIds);
+    // If a new app was created, fund the app MBR
+    if (result.operationPerformed === 'create') {
+      const fundResult = await typedAppClient.appClient.fundAppAccount({ amount: (0.1).algos() });
+      console.debug('Fund app result: ', fundResult.txIds);
+    }
 
-    // Create the admin token
-    const createAssetResult = await algorand.send.assetCreate({
-      sender: creator.addr,
-      assetName: 'directoryAdmin',
-      unitName: 'DA',
-      total: 10n,
-      decimals: 0,
-      url: 'directory.algo.xyz',
-      defaultFrozen: false,
-      manager: creator.addr,
-      reserve: creator.addr,
-      freeze: creator.addr,
-      clawback: creator.addr,
-    });
-    const createdAsset = createAssetResult.confirmation.assetIndex;
-    console.debug('Asset send result: ', createAssetResult.txIds);
-    console.debug('Asset created: ', createdAsset);
+    // Very simple idempotent approach to checking if CREATOR already
+    // holds the admin token from .env and creating one, if not
+    const creatorAccountInfo = await algorand.account.getInformation(creator.addr);
+    console.debug('Account info: ', creatorAccountInfo);
+    const existingAdminToken = creatorAccountInfo.assets?.find((asset) => asset.assetId === ADMIN_TOKEN_ASAID);
+    console.debug('Existing admin token found: ', existingAdminToken);
 
-    // // Set the admin token in the contract
-    // const setAdminTokenResult = await creatorAppClient.setAdminToken({
-    //   asaId: createdAsset!,
-    // });
-    // console.debug('Set admin token result: ', setAdminTokenResult.transaction.txID());
+    // Create a new admin token if the one from .env isn't found in CREATOR's account
+    let adminAsset: bigint;
+    if (!existingAdminToken) {
+      const createAssetResult = await algorand.send.assetCreate({
+        sender: creator.addr,
+        assetName: `Directory Admin (App ${typedAppClient.appClient.appId})`,
+        unitName: 'DA',
+        total: 10n,
+        decimals: 0,
+        url: 'directory.algo.xyz',
+        defaultFrozen: false,
+        manager: creator.addr,
+        reserve: creator.addr,
+        freeze: creator.addr,
+        clawback: creator.addr,
+      });
+      adminAsset = createAssetResult.assetId;
+      console.debug('Asset send result: ', createAssetResult.txIds);
+      console.debug('Asset created: ', adminAsset);
 
-    // // Beth opts into the admin token
-    // const bethAccount = (await accountManager.fromEnvironment(BETH, new AlgoAmount({ algos: 0 }))).account;
-    // algorand.setSignerFromAccount(bethAccount);
-    // const optInResult = await algorand.send.assetOptIn({
-    //   sender: bethAccount.addr,
-    //   assetId: BigInt(createdAsset!),
-    // });
-    // console.debug('Asset send result: ', optInResult.txIds);
+      // Very simple idempotent approach to checking if the admin asset is
+      // already set in the contract state and setting it, if not
+      const contractAdminAsset = await typedAppClient.state.global.adminToken();
+      // If contract has an old admin asset ID in storage, overwrite it with the new asset
+      if (contractAdminAsset !== adminAsset) {
+        const setAdminTokenResult = await typedAppClient.send.setAdminToken({ args: { asaId: adminAsset } });
+        console.debug('Set admin token in contract result: ', setAdminTokenResult.transaction.txID());
+      }
 
-    // // Send one of the admin tokens to Beth
-    // algorand.setSignerFromAccount(creatorAccount);
-    // const sendAssetResult = await algorand.send.assetTransfer({
-    //   sender: creatorAccount.addr,
-    //   receiver: bethAccount.addr,
-    //   assetId: BigInt(createdAsset!),
-    //   amount: 1n,
-    // });
-    // console.debug('Asset send result: ', sendAssetResult.txIds);
+      // BETH opts into the new admin asset
+      const beth = await algorand.account.fromEnvironment(BETH, new AlgoAmount({ algos: 0 }));
+      algorand.setSignerFromAccount(beth);
+      const optInResult = await algorand.send.assetOptIn({
+        sender: beth.addr,
+        assetId: adminAsset,
+      });
+      console.debug('Beth opt into new admin asset result: ', optInResult.txIds);
+
+      // CREATOR sends one of the admin tokens to BETH
+      algorand.setSignerFromAccount(creator);
+      const sendAssetResult = await algorand.send.assetTransfer({
+        sender: creator.addr,
+        receiver: beth.addr,
+        assetId: BigInt(adminAsset),
+        amount: 1n,
+      });
+      console.debug('Send new admin asset to Beth result: ', sendAssetResult.txIds);
+    }
   });
 
   // Blank test to run beforeAll

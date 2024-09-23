@@ -7,10 +7,18 @@ import { AccountManager } from '@algorandfoundation/algokit-utils/types/account-
 import { AlgoAmount } from '@algorandfoundation/algokit-utils/types/amount';
 import { AlgoDirectoryClient } from '../contracts/clients/AlgoDirectoryClient';
 
+// Get env vars from .env, defaulting to testnet values
+
+// For network-based template variables substitution at compile time
+const NFD_REGISTRY_APP_ID = (process.env.NFD_REGISTRY_APP_ID || 84366825) as number; // Testnet 84366825 / Mainnet 760937186
+const FEE_SINK_ADDRESS = (process.env.FEE_SINK_ADDRESS ||
+  'A7NMWS3NT3IUDMLVO26ULGXGIIOUQ3ND2TXSER6EBGRZNOBOUIQXHIBGDE') as string; // Testnet A7NMWS3NT3IUDMLVO26ULGXGIIOUQ3ND2TXSER6EBGRZNOBOUIQXHIBGDE / Mainnet Y76M3MSY6DKBRHBL7C3NNDXGS5IIMQVQVUAB6MP4XEMMGVF2QWNPL226CA
+
+// For testing purposes
 const CREATOR = 'CREATOR';
 const CREATOR_SEGMENT_APPID = (process.env.CREATOR_SEGMENT_APP_ID || 576232891) as number; // test.directory.algo
 const DAVE = 'DAVE';
-const DAVE_SEGEMENT_APPID = (process.env.DAVE_SEGMENT_APP_ID || 673442367) as number; // test.directory.algo
+const DAVE_SEGEMENT_APPID = (process.env.DAVE_SEGMENT_APP_ID || 673442367) as number; // dave.directory.algo
 const BETH = 'BETH';
 const BETH_SEGMENT_APPID = (process.env.DAVE_SEGMENT_APP_ID || 606016435) as number; // beth.directory.algo
 
@@ -29,6 +37,8 @@ describe('AlgoDirectory', () => {
     const accountManager = new AccountManager(new ClientManager({ algod: algorand.client.algod }));
     const creatorAccount = (await accountManager.fromEnvironment(CREATOR, new AlgoAmount({ algos: 0 }))).account;
     algorand.setSignerFromAccount(creatorAccount);
+
+    const appClient = algorand.appD;
 
     // TODO: Convert this to an idempotent deployment approach so it updates the app in place
     const creatorAppClient = new AlgoDirectoryClient(

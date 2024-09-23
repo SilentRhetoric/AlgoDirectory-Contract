@@ -18,7 +18,8 @@
         },
         {
           "name": "listingTags",
-          "type": "byte[13]"
+          "type": "byte[13]",
+          "desc": "Array of 13 bytes each representing a tag for the listing"
         }
       ],
       "returns": {
@@ -68,20 +69,22 @@
       }
     },
     {
-      "name": "createApplication",
-      "args": [],
+      "name": "setAdminToken",
+      "desc": "Stores an ASA ID in global state that will control administration rights",
+      "args": [
+        {
+          "name": "asaID",
+          "type": "uint64",
+          "desc": "The uint64 asset ID of the ASA to be the admin token"
+        }
+      ],
       "returns": {
         "type": "void"
       }
     },
     {
-      "name": "setAdminToken",
-      "args": [
-        {
-          "name": "asaID",
-          "type": "uint64"
-        }
-      ],
+      "name": "createApplication",
+      "args": [],
       "returns": {
         "type": "void"
       }
