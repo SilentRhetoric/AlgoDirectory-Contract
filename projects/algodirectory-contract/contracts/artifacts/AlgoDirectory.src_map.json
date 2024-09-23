@@ -375,7 +375,7 @@
   {
     "teal": 80,
     "source": 38,
-    "errorMessage": "global state value does not exist: AppID.fromUint64(nfdAppID).globalState('i.parentAppID')",
+    "errorMessage": "global state value does not exist: nfdAppID.globalState('i.parentAppID')",
     "pc": [
       159
     ]
@@ -469,7 +469,7 @@
   {
     "teal": 104,
     "source": 46,
-    "errorMessage": "global state value does not exist: AppID.fromUint64(nfdAppID).globalState('i.owner.a')",
+    "errorMessage": "global state value does not exist: nfdAppID.globalState('i.owner.a')",
     "pc": [
       185
     ]
@@ -555,7 +555,7 @@
   {
     "teal": 126,
     "source": 54,
-    "errorMessage": "global state value does not exist: AppID.fromUint64(nfdAppID).globalState('i.expirationTime')",
+    "errorMessage": "global state value does not exist: nfdAppID.globalState('i.expirationTime')",
     "pc": [
       215
     ]
@@ -1035,7 +1035,7 @@
   {
     "teal": 254,
     "source": 84,
-    "errorMessage": "global state value does not exist: AppID.fromUint64(nfdAppID).globalState('i.name')",
+    "errorMessage": "global state value does not exist: nfdAppID.globalState('i.name')",
     "pc": [
       322
     ]

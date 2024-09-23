@@ -3,7 +3,7 @@ import { Contract } from '@algorandfoundation/tealscript';
 type Listing = {
   timestamp: uint64; // 8 bytes
   vouchAmount: uint64; // 8 bytes
-  nfdAppID: uint64; // 8 bytes
+  nfdAppID: AppID; // 8 bytes
   tags: StaticArray<byte, 13>; // 13 bytes, each representing one of 255 possible tags
   name: string; // NFD names are up to 27 characters
 }; // 64 bytes total
@@ -17,41 +17,41 @@ export class AlgoDirectory extends Contract {
   // Mainnet Y76M3MSY6DKBRHBL7C3NNDXGS5IIMQVQVUAB6MP4XEMMGVF2QWNPL226CA
   feeSinkAddress = TemplateVar<Address>();
 
-  directoryDotAlgoAppID = TemplateVar<AppID>(); // Testnet 576232821 / Mainnet 766401564
+  directoryAppID = TemplateVar<AppID>(); // Testnet 576232821 / Mainnet 766401564
 
   nfdRegistryAppID = TemplateVar<AppID>(); // Testnet 84366825 / Mainnet 760937186
 
   adminToken = GlobalStateKey<AssetID>(); // The ASA ID of the token which gates the ability to delete listings
 
-  listedNFDappIDs = BoxMap<uint64, Listing>(); // 8 byte key + 0 byte value =  8 bytes total
+  listedNFDappIDs = BoxMap<AppID, Listing>(); // 8 byte key + 0 byte value =  8 bytes total
 
   listings = BoxMap<Listing, Address>(); // 64 byte key + 32 byte value = 96 bytes total
 
-  private checkCallerIsListingOwner(nfdAppID: uint64): void {
+  private checkCallerIsListingOwner(nfdAppID: AppID): void {
     const listingKey = this.listedNFDappIDs(nfdAppID).value;
     assert(this.txn.sender === this.listings(listingKey).value, 'Caller must be listing owner');
   }
 
-  private checkNFDIsSegmentOfDirectory(nfdAppID: uint64): void {
+  private checkNFDIsSegmentOfDirectory(nfdAppID: AppID): void {
     // Ensure the NFD is a segment of directory.algo by checking the parent appID
     assert(
-      btoi(AppID.fromUint64(nfdAppID).globalState('i.parentAppID') as bytes) === this.directoryDotAlgoAppID.id,
+      btoi(nfdAppID.globalState('i.parentAppID') as bytes) === this.directoryAppID.id,
       'NFD must be a segment of directory.algo'
     );
   }
 
-  private checkCallerIsNFDOwner(nfdAppID: uint64): void {
+  private checkCallerIsNFDOwner(nfdAppID: AppID): void {
     // Check in the NFD instance app that the sender is the owner of the NFD
     assert(
-      this.txn.sender === (AppID.fromUint64(nfdAppID).globalState('i.owner.a') as Address),
+      this.txn.sender === (nfdAppID.globalState('i.owner.a') as Address),
       'Listing creator must be the NFD app i.owner.a'
     );
   }
 
-  private checkNFDNotExpired(nfdAppID: uint64): void {
+  private checkNFDNotExpired(nfdAppID: AppID): void {
     // Check that the segment is current and not expired
     assert(
-      globals.latestTimestamp <= btoi(AppID.fromUint64(nfdAppID).globalState('i.expirationTime') as bytes),
+      globals.latestTimestamp <= btoi(nfdAppID.globalState('i.expirationTime') as bytes),
       'NFD segment must not be expired'
     );
   }
@@ -67,7 +67,7 @@ export class AlgoDirectory extends Contract {
    * @param nfdAppID The uint64 application ID of the NFD that will be listed
    * @param listingTags Array of 13 bytes each representing a tag for the listing
    */
-  createListing(collateralPayment: PayTxn, nfdAppID: uint64, listingTags: StaticArray<byte, 13>): Listing {
+  createListing(collateralPayment: PayTxn, nfdAppID: AppID, listingTags: StaticArray<byte, 13>): Listing {
     // Check that the caller is paying a mimimum amount of collateral to vouch for the listing
     verifyPayTxn(collateralPayment, {
       sender: this.txn.sender,
@@ -81,7 +81,7 @@ export class AlgoDirectory extends Contract {
     this.checkNFDNotExpired(nfdAppID);
 
     // Check in the NFD registry that this is a valid NFD app ID (not a fake NFD)
-    const nfdLongName = AppID.fromUint64(nfdAppID).globalState('i.name') as bytes;
+    const nfdLongName = nfdAppID.globalState('i.name') as bytes;
 
     sendAppCall({
       applicationID: this.nfdRegistryAppID,
@@ -118,7 +118,7 @@ export class AlgoDirectory extends Contract {
    *
    * @param nfdAppID The uint64 application ID of the NFD that will be refreshed
    */
-  refreshListing(nfdAppID: uint64): Listing {
+  refreshListing(nfdAppID: AppID): Listing {
     // Ensure the caller owns this listing, owns the NFD, and the NFD has not expired
     this.checkCallerIsListingOwner(nfdAppID);
     this.checkCallerIsNFDOwner(nfdAppID);
@@ -151,7 +151,7 @@ export class AlgoDirectory extends Contract {
    *
    * @param nfdAppID The uint64 application ID of the NFD that will be abandoned
    */
-  abandonListing(nfdAppID: uint64): void {
+  abandonListing(nfdAppID: AppID): void {
     const listingKey = this.listedNFDappIDs(nfdAppID).value;
     this.checkCallerIsListingOwner(nfdAppID);
 
@@ -173,7 +173,7 @@ export class AlgoDirectory extends Contract {
    *
    * @param nfdAppID The uint64 application ID of the NFD that will be deleted
    */
-  deleteListing(nfdAppID: uint64): void {
+  deleteListing(nfdAppID: AppID): void {
     // This method is restricted to only holders of the admin asset
     assert(this.txn.sender.assetBalance(this.adminToken.value) > 0, 'Caller must have the admin token');
 

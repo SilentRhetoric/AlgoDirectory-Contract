@@ -9,7 +9,7 @@
 pushbytes TMPL_nfdRegistryAppID
 btoi
 store 202
-pushbytes TMPL_directoryDotAlgoAppID
+pushbytes TMPL_directoryAppID
 btoi
 store 201
 pushbytes TMPL_feeSinkAddress
@@ -32,7 +32,7 @@ switch *call_NoOp *NOT_IMPLEMENTED *NOT_IMPLEMENTED *NOT_IMPLEMENTED *call_Updat
 	// The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?
 	err
 
-// checkCallerIsListingOwner(nfdAppID: uint64): void
+// checkCallerIsListingOwner(nfdAppID: AppID): void
 checkCallerIsListingOwner:
 	proto 1 0
 
@@ -41,7 +41,7 @@ checkCallerIsListingOwner:
 
 	// contracts/AlgoDirectory.algo.ts:31
 	// listingKey = this.listedNFDappIDs(nfdAppID).value
-	frame_dig -1 // nfdAppID: uint64
+	frame_dig -1 // nfdAppID: AppID
 	itob
 	frame_bury 0 // storage key//listingKey
 
@@ -63,44 +63,44 @@ checkCallerIsListingOwner:
 	assert
 	retsub
 
-// checkNFDIsSegmentOfDirectory(nfdAppID: uint64): void
+// checkNFDIsSegmentOfDirectory(nfdAppID: AppID): void
 checkNFDIsSegmentOfDirectory:
 	proto 1 0
 
 	// contracts/AlgoDirectory.algo.ts:37
 	// assert(
-	//       btoi(AppID.fromUint64(nfdAppID).globalState('i.parentAppID') as bytes) === this.directoryDotAlgoAppID.id,
+	//       btoi(nfdAppID.globalState('i.parentAppID') as bytes) === this.directoryAppID.id,
 	//       'NFD must be a segment of directory.algo'
 	//     )
-	frame_dig -1 // nfdAppID: uint64
+	frame_dig -1 // nfdAppID: AppID
 	byte 0x692e706172656e744170704944 // "i.parentAppID"
 	app_global_get_ex
 
-	// global state value does not exist: AppID.fromUint64(nfdAppID).globalState('i.parentAppID')
+	// global state value does not exist: nfdAppID.globalState('i.parentAppID')
 	assert
 	btoi
-	load 201 // TMPL_directoryDotAlgoAppID
+	load 201 // TMPL_directoryAppID
 	==
 
 	// NFD must be a segment of directory.algo
 	assert
 	retsub
 
-// checkCallerIsNFDOwner(nfdAppID: uint64): void
+// checkCallerIsNFDOwner(nfdAppID: AppID): void
 checkCallerIsNFDOwner:
 	proto 1 0
 
 	// contracts/AlgoDirectory.algo.ts:45
 	// assert(
-	//       this.txn.sender === (AppID.fromUint64(nfdAppID).globalState('i.owner.a') as Address),
+	//       this.txn.sender === (nfdAppID.globalState('i.owner.a') as Address),
 	//       'Listing creator must be the NFD app i.owner.a'
 	//     )
 	txn Sender
-	frame_dig -1 // nfdAppID: uint64
+	frame_dig -1 // nfdAppID: AppID
 	byte 0x692e6f776e65722e61 // "i.owner.a"
 	app_global_get_ex
 
-	// global state value does not exist: AppID.fromUint64(nfdAppID).globalState('i.owner.a')
+	// global state value does not exist: nfdAppID.globalState('i.owner.a')
 	assert
 	==
 
@@ -108,21 +108,21 @@ checkCallerIsNFDOwner:
 	assert
 	retsub
 
-// checkNFDNotExpired(nfdAppID: uint64): void
+// checkNFDNotExpired(nfdAppID: AppID): void
 checkNFDNotExpired:
 	proto 1 0
 
 	// contracts/AlgoDirectory.algo.ts:53
 	// assert(
-	//       globals.latestTimestamp <= btoi(AppID.fromUint64(nfdAppID).globalState('i.expirationTime') as bytes),
+	//       globals.latestTimestamp <= btoi(nfdAppID.globalState('i.expirationTime') as bytes),
 	//       'NFD segment must not be expired'
 	//     )
 	global LatestTimestamp
-	frame_dig -1 // nfdAppID: uint64
+	frame_dig -1 // nfdAppID: AppID
 	byte 0x692e65787069726174696f6e54696d65 // "i.expirationTime"
 	app_global_get_ex
 
-	// global state value does not exist: AppID.fromUint64(nfdAppID).globalState('i.expirationTime')
+	// global state value does not exist: nfdAppID.globalState('i.expirationTime')
 	assert
 	btoi
 	<=
@@ -182,7 +182,7 @@ getRoundedTimestamp:
 	int 1
 	return
 
-// createListing(collateralPayment: PayTxn, nfdAppID: uint64, listingTags: StaticArray<byte, 13>): Listing
+// createListing(collateralPayment: PayTxn, nfdAppID: AppID, listingTags: StaticArray<byte, 13>): Listing
 //
 // Creates a listing in the directory by vouching for an NFD root or segment of directory.algo.
 //
@@ -231,26 +231,26 @@ createListing:
 
 	// contracts/AlgoDirectory.algo.ts:79
 	// this.checkNFDIsSegmentOfDirectory(nfdAppID)
-	frame_dig -2 // nfdAppID: uint64
+	frame_dig -2 // nfdAppID: AppID
 	callsub checkNFDIsSegmentOfDirectory
 
 	// contracts/AlgoDirectory.algo.ts:80
 	// this.checkCallerIsNFDOwner(nfdAppID)
-	frame_dig -2 // nfdAppID: uint64
+	frame_dig -2 // nfdAppID: AppID
 	callsub checkCallerIsNFDOwner
 
 	// contracts/AlgoDirectory.algo.ts:81
 	// this.checkNFDNotExpired(nfdAppID)
-	frame_dig -2 // nfdAppID: uint64
+	frame_dig -2 // nfdAppID: AppID
 	callsub checkNFDNotExpired
 
 	// contracts/AlgoDirectory.algo.ts:84
-	// nfdLongName = AppID.fromUint64(nfdAppID).globalState('i.name') as bytes
-	frame_dig -2 // nfdAppID: uint64
+	// nfdLongName = nfdAppID.globalState('i.name') as bytes
+	frame_dig -2 // nfdAppID: AppID
 	byte 0x692e6e616d65 // "i.name"
 	app_global_get_ex
 
-	// global state value does not exist: AppID.fromUint64(nfdAppID).globalState('i.name')
+	// global state value does not exist: nfdAppID.globalState('i.name')
 	assert
 	frame_bury 0 // nfdLongName: byte[]
 
@@ -275,7 +275,7 @@ createListing:
 	itxn_field ApplicationArgs
 	frame_dig 0 // nfdLongName: byte[]
 	itxn_field ApplicationArgs
-	frame_dig -2 // nfdAppID: uint64
+	frame_dig -2 // nfdAppID: AppID
 	itob
 	itxn_field ApplicationArgs
 
@@ -299,7 +299,7 @@ createListing:
 
 	// contracts/AlgoDirectory.algo.ts:94
 	// assert(!this.listedNFDappIDs(nfdAppID).exists, 'Listing for this NFD must not already exist')
-	frame_dig -2 // nfdAppID: uint64
+	frame_dig -2 // nfdAppID: AppID
 	itob
 	box_len
 	swap
@@ -338,7 +338,7 @@ createListing:
 	gtxns Amount
 	itob
 	callsub *process_static_tuple_element
-	frame_dig -2 // nfdAppID: uint64
+	frame_dig -2 // nfdAppID: AppID
 	itob
 	callsub *process_static_tuple_element
 	frame_dig -3 // listingTags: StaticArray<byte, 13>
@@ -363,7 +363,7 @@ createListing:
 
 	// contracts/AlgoDirectory.algo.ts:111
 	// this.listedNFDappIDs(nfdAppID).value = listingKey
-	frame_dig -2 // nfdAppID: uint64
+	frame_dig -2 // nfdAppID: AppID
 	itob
 	dup
 	box_del
@@ -398,7 +398,7 @@ createListing:
 	int 1
 	return
 
-// refreshListing(nfdAppID: uint64): Listing
+// refreshListing(nfdAppID: AppID): Listing
 //
 // Refreshes a listing in the directory and updates its last touched timestamp.
 //
@@ -412,22 +412,22 @@ refreshListing:
 
 	// contracts/AlgoDirectory.algo.ts:123
 	// this.checkCallerIsListingOwner(nfdAppID)
-	frame_dig -1 // nfdAppID: uint64
+	frame_dig -1 // nfdAppID: AppID
 	callsub checkCallerIsListingOwner
 
 	// contracts/AlgoDirectory.algo.ts:124
 	// this.checkCallerIsNFDOwner(nfdAppID)
-	frame_dig -1 // nfdAppID: uint64
+	frame_dig -1 // nfdAppID: AppID
 	callsub checkCallerIsNFDOwner
 
 	// contracts/AlgoDirectory.algo.ts:125
 	// this.checkNFDNotExpired(nfdAppID)
-	frame_dig -1 // nfdAppID: uint64
+	frame_dig -1 // nfdAppID: AppID
 	callsub checkNFDNotExpired
 
 	// contracts/AlgoDirectory.algo.ts:128
 	// oldListingKey = this.listedNFDappIDs(nfdAppID).value
-	frame_dig -1 // nfdAppID: uint64
+	frame_dig -1 // nfdAppID: AppID
 	itob
 	frame_bury 0 // storage key//oldListingKey
 
@@ -525,7 +525,7 @@ refreshListing:
 
 	// contracts/AlgoDirectory.algo.ts:144
 	// this.listedNFDappIDs(nfdAppID).value = newListingKey
-	frame_dig -1 // nfdAppID: uint64
+	frame_dig -1 // nfdAppID: AppID
 	itob
 	dup
 	box_del
@@ -555,7 +555,7 @@ refreshListing:
 	int 1
 	return
 
-// abandonListing(nfdAppID: uint64): void
+// abandonListing(nfdAppID: AppID): void
 //
 // Abandons a listing in the directory and returns the vouched collateral.
 //
@@ -568,13 +568,13 @@ abandonListing:
 
 	// contracts/AlgoDirectory.algo.ts:155
 	// listingKey = this.listedNFDappIDs(nfdAppID).value
-	frame_dig -1 // nfdAppID: uint64
+	frame_dig -1 // nfdAppID: AppID
 	itob
 	frame_bury 0 // storage key//listingKey
 
 	// contracts/AlgoDirectory.algo.ts:156
 	// this.checkCallerIsListingOwner(nfdAppID)
-	frame_dig -1 // nfdAppID: uint64
+	frame_dig -1 // nfdAppID: AppID
 	callsub checkCallerIsListingOwner
 
 	// contracts/AlgoDirectory.algo.ts:159
@@ -638,7 +638,7 @@ abandonListing:
 
 	// contracts/AlgoDirectory.algo.ts:168
 	// this.listedNFDappIDs(nfdAppID).delete()
-	frame_dig -1 // nfdAppID: uint64
+	frame_dig -1 // nfdAppID: AppID
 	itob
 	box_del
 	retsub
@@ -654,7 +654,7 @@ abandonListing:
 	int 1
 	return
 
-// deleteListing(nfdAppID: uint64): void
+// deleteListing(nfdAppID: AppID): void
 //
 // Deletes a listing from the directory & sends the collateral to the fee sink.
 //
@@ -680,7 +680,7 @@ deleteListing:
 
 	// contracts/AlgoDirectory.algo.ts:180
 	// listingKey = this.listedNFDappIDs(nfdAppID).value
-	frame_dig -1 // nfdAppID: uint64
+	frame_dig -1 // nfdAppID: AppID
 	itob
 	frame_bury 0 // storage key//listingKey
 
@@ -765,7 +765,7 @@ deleteListing:
 
 	// contracts/AlgoDirectory.algo.ts:193
 	// this.listedNFDappIDs(nfdAppID).delete()
-	frame_dig -1 // nfdAppID: uint64
+	frame_dig -1 // nfdAppID: AppID
 	itob
 	box_del
 	retsub

@@ -10,7 +10,7 @@ import { AlgoDirectoryFactory } from '../contracts/clients/AlgoDirectoryClient';
 // For network-based template variables substitution at compile time
 const FEE_SINK_ADDRESS = process.env.FEE_SINK_ADDRESS || 'A7NMWS3NT3IUDMLVO26ULGXGIIOUQ3ND2TXSER6EBGRZNOBOUIQXHIBGDE'; // Testnet A7NMWS3NT3IUDMLVO26ULGXGIIOUQ3ND2TXSER6EBGRZNOBOUIQXHIBGDE / Mainnet Y76M3MSY6DKBRHBL7C3NNDXGS5IIMQVQVUAB6MP4XEMMGVF2QWNPL226CA
 const NFD_REGISTRY_APP_ID = Number(process.env.NFD_REGISTRY_APP_ID); // Testnet 84366825 / Mainnet 760937186
-const DIRECTORY_DOT_ALGO_APP_ID = Number(process.env.DIRECTORY_DOT_ALGO_APP_ID); // Testnet 576232821 / Mainnet 766401564
+const DIRECTORY_APP_ID = Number(process.env.DIRECTORY_DOT_ALGO_APP_ID); // Testnet 576232821 / Mainnet 766401564
 
 // For testing purposes
 const CREATOR = 'CREATOR';
@@ -32,7 +32,7 @@ describe('AlgoDirectory', () => {
       deployTimeParams: {
         feeSinkAddress: FEE_SINK_ADDRESS,
         nfdRegistryAppID: encodeUint64(NFD_REGISTRY_APP_ID),
-        directoryDotAlgoAppID: encodeUint64(DIRECTORY_DOT_ALGO_APP_ID),
+        directoryDotAlgoAppID: encodeUint64(DIRECTORY_APP_ID),
       },
     });
 
@@ -44,7 +44,7 @@ describe('AlgoDirectory', () => {
       deployTimeParams: {
         feeSinkAddress: FEE_SINK_ADDRESS,
         nfdRegistryAppID: encodeUint64(NFD_REGISTRY_APP_ID),
-        directoryDotAlgoAppID: encodeUint64(DIRECTORY_DOT_ALGO_APP_ID),
+        directoryAppID: encodeUint64(DIRECTORY_APP_ID),
       },
     });
     console.debug('Deploy result operation: ', result.operationPerformed);
@@ -59,7 +59,7 @@ describe('AlgoDirectory', () => {
     // Very simple idempotent approach to checking if CREATOR already
     // holds the admin token from .env and creating one, if not
     const creatorAccountInfo = await algorand.account.getInformation(creator.addr);
-    console.debug('Account info: ', creatorAccountInfo);
+    // console.debug('Account info: ', creatorAccountInfo);
     const existingAdminToken = creatorAccountInfo.assets?.find((asset) => asset.assetId === ADMIN_TOKEN_ASAID);
     console.debug('Existing admin token found: ', existingAdminToken);
 
