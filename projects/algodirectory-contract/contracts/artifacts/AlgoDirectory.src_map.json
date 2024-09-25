@@ -3154,203 +3154,148 @@
     "source": 188,
     "pc": [
       786,
-      787
+      787,
+      788,
+      789,
+      790,
+      791,
+      792,
+      793,
+      794,
+      795,
+      796,
+      797,
+      798,
+      799,
+      800,
+      801,
+      802,
+      803
     ]
   },
   {
-    "teal": 755,
+    "teal": 753,
+    "source": 188,
+    "pc": [
+      804
+    ]
+  },
+  {
+    "teal": 754,
+    "source": 188,
+    "pc": [
+      805,
+      806
+    ]
+  },
+  {
+    "teal": 757,
     "source": 183,
     "pc": [
-      788
+      807
     ]
   },
   {
-    "teal": 759,
+    "teal": 761,
     "source": 180,
     "pc": [
-      789,
-      790
+      808,
+      809
     ]
   },
   {
-    "teal": 760,
+    "teal": 762,
     "source": 180,
     "pc": [
-      791
+      810
     ]
   },
   {
-    "teal": 763,
+    "teal": 765,
     "source": 180,
     "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
     "pc": [
-      792
+      811
     ]
   },
   {
-    "teal": 764,
+    "teal": 766,
     "source": 192,
     "pc": [
-      793
-    ]
-  },
-  {
-    "teal": 768,
-    "source": 193,
-    "pc": [
-      794,
-      795
-    ]
-  },
-  {
-    "teal": 769,
-    "source": 193,
-    "pc": [
-      796
+      812
     ]
   },
   {
     "teal": 770,
     "source": 193,
     "pc": [
-      797
+      813,
+      814
     ]
   },
   {
     "teal": 771,
+    "source": 193,
+    "pc": [
+      815
+    ]
+  },
+  {
+    "teal": 772,
+    "source": 193,
+    "pc": [
+      816
+    ]
+  },
+  {
+    "teal": 773,
     "source": 176,
     "pc": [
-      798
+      817
     ]
   },
   {
-    "teal": 776,
+    "teal": 778,
     "source": 201,
     "pc": [
-      799,
-      800,
-      801
+      818,
+      819,
+      820
     ]
   },
   {
-    "teal": 777,
+    "teal": 779,
     "source": 201,
     "pc": [
-      802
-    ]
-  },
-  {
-    "teal": 780,
-    "source": 201,
-    "pc": [
-      803,
-      804,
-      805
-    ]
-  },
-  {
-    "teal": 781,
-    "source": 201,
-    "pc": [
-      806
+      821
     ]
   },
   {
     "teal": 782,
     "source": 201,
     "pc": [
-      807
-    ]
-  },
-  {
-    "teal": 790,
-    "source": 201,
-    "pc": [
-      808,
-      809,
-      810
-    ]
-  },
-  {
-    "teal": 794,
-    "source": 202,
-    "pc": [
-      811,
-      812
-    ]
-  },
-  {
-    "teal": 795,
-    "source": 202,
-    "pc": [
-      813,
-      814,
-      815
-    ]
-  },
-  {
-    "teal": 796,
-    "source": 202,
-    "pc": [
-      816,
-      817
-    ]
-  },
-  {
-    "teal": 797,
-    "source": 202,
-    "pc": [
-      818
-    ]
-  },
-  {
-    "teal": 798,
-    "source": 202,
-    "pc": [
-      819
-    ]
-  },
-  {
-    "teal": 801,
-    "source": 202,
-    "errorMessage": "Only the creator can set the admin token",
-    "pc": [
-      820
-    ]
-  },
-  {
-    "teal": 805,
-    "source": 203,
-    "pc": [
-      821,
-      822
-    ]
-  },
-  {
-    "teal": 806,
-    "source": 203,
-    "pc": [
+      822,
       823,
       824
     ]
   },
   {
-    "teal": 807,
-    "source": 203,
+    "teal": 783,
+    "source": 201,
     "pc": [
       825
     ]
   },
   {
-    "teal": 808,
+    "teal": 784,
     "source": 201,
     "pc": [
       826
     ]
   },
   {
-    "teal": 813,
-    "source": 206,
+    "teal": 792,
+    "source": 201,
     "pc": [
       827,
       828,
@@ -3358,22 +3303,16 @@
     ]
   },
   {
-    "teal": 814,
-    "source": 206,
+    "teal": 796,
+    "source": 202,
     "pc": [
-      830
-    ]
-  },
-  {
-    "teal": 815,
-    "source": 206,
-    "pc": [
+      830,
       831
     ]
   },
   {
-    "teal": 819,
-    "source": 206,
+    "teal": 797,
+    "source": 202,
     "pc": [
       832,
       833,
@@ -3381,55 +3320,68 @@
     ]
   },
   {
-    "teal": 820,
-    "source": 206,
+    "teal": 798,
+    "source": 202,
     "pc": [
-      835
+      835,
+      836
     ]
   },
   {
-    "teal": 825,
-    "source": 208,
+    "teal": 799,
+    "source": 202,
     "pc": [
-      836,
-      837,
+      837
+    ]
+  },
+  {
+    "teal": 800,
+    "source": 202,
+    "pc": [
       838
     ]
   },
   {
-    "teal": 826,
-    "source": 208,
+    "teal": 803,
+    "source": 202,
+    "errorMessage": "Only the creator can set the admin token",
     "pc": [
       839
     ]
   },
   {
-    "teal": 827,
-    "source": 208,
+    "teal": 807,
+    "source": 203,
     "pc": [
-      840
+      840,
+      841
     ]
   },
   {
-    "teal": 831,
-    "source": 208,
+    "teal": 808,
+    "source": 203,
     "pc": [
-      841,
       842,
       843
     ]
   },
   {
-    "teal": 835,
-    "source": 209,
+    "teal": 809,
+    "source": 203,
     "pc": [
-      844,
+      844
+    ]
+  },
+  {
+    "teal": 810,
+    "source": 201,
+    "pc": [
       845
     ]
   },
   {
-    "teal": 836,
-    "source": 209,
+    "teal": 815,
+    "source": 206,
     "pc": [
       846,
       847,
@@ -3437,111 +3389,146 @@
     ]
   },
   {
+    "teal": 816,
+    "source": 206,
+    "pc": [
+      849
+    ]
+  },
+  {
+    "teal": 817,
+    "source": 206,
+    "pc": [
+      850
+    ]
+  },
+  {
+    "teal": 821,
+    "source": 206,
+    "pc": [
+      851,
+      852,
+      853
+    ]
+  },
+  {
+    "teal": 822,
+    "source": 206,
+    "pc": [
+      854
+    ]
+  },
+  {
+    "teal": 827,
+    "source": 208,
+    "pc": [
+      855,
+      856,
+      857
+    ]
+  },
+  {
+    "teal": 828,
+    "source": 208,
+    "pc": [
+      858
+    ]
+  },
+  {
+    "teal": 829,
+    "source": 208,
+    "pc": [
+      859
+    ]
+  },
+  {
+    "teal": 833,
+    "source": 208,
+    "pc": [
+      860,
+      861,
+      862
+    ]
+  },
+  {
     "teal": 837,
     "source": 209,
     "pc": [
-      849,
-      850
+      863,
+      864
     ]
   },
   {
     "teal": 838,
     "source": 209,
     "pc": [
-      851
-    ]
-  },
-  {
-    "teal": 839,
-    "source": 209,
-    "pc": [
-      852
-    ]
-  },
-  {
-    "teal": 842,
-    "source": 209,
-    "errorMessage": "Only the creator can update the application",
-    "pc": [
-      853
-    ]
-  },
-  {
-    "teal": 843,
-    "source": 208,
-    "pc": [
-      854
-    ]
-  },
-  {
-    "teal": 846,
-    "source": 15,
-    "pc": [
-      855,
-      856,
-      857,
-      858,
-      859,
-      860
-    ]
-  },
-  {
-    "teal": 847,
-    "source": 15,
-    "pc": [
-      861,
-      862,
-      863
-    ]
-  },
-  {
-    "teal": 848,
-    "source": 15,
-    "pc": [
-      864,
       865,
       866,
       867
     ]
   },
   {
-    "teal": 851,
-    "source": 15,
-    "errorMessage": "this contract does not implement the given ABI method for create NoOp",
+    "teal": 839,
+    "source": 209,
     "pc": [
-      868
+      868,
+      869
     ]
   },
   {
-    "teal": 854,
-    "source": 15,
+    "teal": 840,
+    "source": 209,
     "pc": [
-      869,
-      870,
-      871,
-      872,
-      873,
-      874
+      870
     ]
   },
   {
-    "teal": 855,
+    "teal": 841,
+    "source": 209,
+    "pc": [
+      871
+    ]
+  },
+  {
+    "teal": 844,
+    "source": 209,
+    "errorMessage": "Only the creator can update the application",
+    "pc": [
+      872
+    ]
+  },
+  {
+    "teal": 845,
+    "source": 208,
+    "pc": [
+      873
+    ]
+  },
+  {
+    "teal": 848,
     "source": 15,
     "pc": [
+      874,
       875,
       876,
       877,
       878,
-      879,
-      880
+      879
     ]
   },
   {
-    "teal": 856,
+    "teal": 849,
     "source": 15,
     "pc": [
+      880,
       881,
-      882,
+      882
+    ]
+  },
+  {
+    "teal": 850,
+    "source": 15,
+    "pc": [
       883,
       884,
       885,
@@ -3549,222 +3536,181 @@
     ]
   },
   {
-    "teal": 857,
+    "teal": 853,
+    "source": 15,
+    "errorMessage": "this contract does not implement the given ABI method for create NoOp",
+    "pc": [
+      887
+    ]
+  },
+  {
+    "teal": 856,
     "source": 15,
     "pc": [
-      887,
       888,
       889,
       890,
       891,
-      892
+      892,
+      893
+    ]
+  },
+  {
+    "teal": 857,
+    "source": 15,
+    "pc": [
+      894,
+      895,
+      896,
+      897,
+      898,
+      899
     ]
   },
   {
     "teal": 858,
     "source": 15,
     "pc": [
-      893,
-      894,
-      895,
-      896,
-      897,
-      898
+      900,
+      901,
+      902,
+      903,
+      904,
+      905
     ]
   },
   {
     "teal": 859,
     "source": 15,
     "pc": [
-      899,
-      900,
-      901
+      906,
+      907,
+      908,
+      909,
+      910,
+      911
     ]
   },
   {
     "teal": 860,
     "source": 15,
     "pc": [
-      902,
-      903,
-      904,
-      905,
-      906,
-      907,
-      908,
-      909,
-      910,
-      911,
       912,
-      913
-    ]
-  },
-  {
-    "teal": 863,
-    "source": 15,
-    "errorMessage": "this contract does not implement the given ABI method for call NoOp",
-    "pc": [
-      914
-    ]
-  },
-  {
-    "teal": 866,
-    "source": 15,
-    "pc": [
+      913,
+      914,
       915,
       916,
-      917,
+      917
+    ]
+  },
+  {
+    "teal": 861,
+    "source": 15,
+    "pc": [
       918,
       919,
       920
     ]
   },
   {
-    "teal": 867,
+    "teal": 862,
     "source": 15,
     "pc": [
       921,
       922,
-      923
+      923,
+      924,
+      925,
+      926,
+      927,
+      928,
+      929,
+      930,
+      931,
+      932
+    ]
+  },
+  {
+    "teal": 865,
+    "source": 15,
+    "errorMessage": "this contract does not implement the given ABI method for call NoOp",
+    "pc": [
+      933
     ]
   },
   {
     "teal": 868,
     "source": 15,
     "pc": [
-      924,
-      925,
-      926,
-      927
+      934,
+      935,
+      936,
+      937,
+      938,
+      939
     ]
   },
   {
-    "teal": 871,
+    "teal": 869,
+    "source": 15,
+    "pc": [
+      940,
+      941,
+      942
+    ]
+  },
+  {
+    "teal": 870,
+    "source": 15,
+    "pc": [
+      943,
+      944,
+      945,
+      946
+    ]
+  },
+  {
+    "teal": 873,
     "source": 15,
     "errorMessage": "this contract does not implement the given ABI method for call UpdateApplication",
     "pc": [
-      928
-    ]
-  },
-  {
-    "teal": 874,
-    "source": 15,
-    "pc": [
-      929,
-      930,
-      931
-    ]
-  },
-  {
-    "teal": 875,
-    "source": 15,
-    "pc": [
-      932,
-      933
+      947
     ]
   },
   {
     "teal": 876,
     "source": 15,
     "pc": [
-      934,
-      935
+      948,
+      949,
+      950
     ]
   },
   {
     "teal": 877,
     "source": 15,
     "pc": [
-      936
+      951,
+      952
     ]
   },
   {
     "teal": 878,
     "source": 15,
     "pc": [
-      937,
-      938
+      953,
+      954
     ]
   },
   {
     "teal": 879,
     "source": 15,
     "pc": [
-      939,
-      940
-    ]
-  },
-  {
-    "teal": 880,
-    "source": 15,
-    "pc": [
-      941
-    ]
-  },
-  {
-    "teal": 883,
-    "source": 15,
-    "pc": [
-      942,
-      943,
-      944
-    ]
-  },
-  {
-    "teal": 884,
-    "source": 15,
-    "pc": [
-      945,
-      946
-    ]
-  },
-  {
-    "teal": 885,
-    "source": 15,
-    "pc": [
-      947,
-      948
-    ]
-  },
-  {
-    "teal": 886,
-    "source": 15,
-    "pc": [
-      949
-    ]
-  },
-  {
-    "teal": 887,
-    "source": 15,
-    "pc": [
-      950,
-      951
-    ]
-  },
-  {
-    "teal": 888,
-    "source": 15,
-    "pc": [
-      952,
-      953
-    ]
-  },
-  {
-    "teal": 889,
-    "source": 15,
-    "pc": [
-      954
-    ]
-  },
-  {
-    "teal": 890,
-    "source": 15,
-    "pc": [
       955
     ]
   },
   {
-    "teal": 891,
+    "teal": 880,
     "source": 15,
     "pc": [
       956,
@@ -3772,28 +3718,22 @@
     ]
   },
   {
-    "teal": 892,
+    "teal": 881,
     "source": 15,
     "pc": [
-      958
-    ]
-  },
-  {
-    "teal": 893,
-    "source": 15,
-    "pc": [
+      958,
       959
     ]
   },
   {
-    "teal": 894,
+    "teal": 882,
     "source": 15,
     "pc": [
       960
     ]
   },
   {
-    "teal": 895,
+    "teal": 885,
     "source": 15,
     "pc": [
       961,
@@ -3802,7 +3742,7 @@
     ]
   },
   {
-    "teal": 896,
+    "teal": 886,
     "source": 15,
     "pc": [
       964,
@@ -3810,7 +3750,7 @@
     ]
   },
   {
-    "teal": 897,
+    "teal": 887,
     "source": 15,
     "pc": [
       966,
@@ -3818,56 +3758,147 @@
     ]
   },
   {
-    "teal": 898,
+    "teal": 888,
     "source": 15,
     "pc": [
       968
     ]
   },
   {
+    "teal": 889,
+    "source": 15,
+    "pc": [
+      969,
+      970
+    ]
+  },
+  {
+    "teal": 890,
+    "source": 15,
+    "pc": [
+      971,
+      972
+    ]
+  },
+  {
+    "teal": 891,
+    "source": 15,
+    "pc": [
+      973
+    ]
+  },
+  {
+    "teal": 892,
+    "source": 15,
+    "pc": [
+      974
+    ]
+  },
+  {
+    "teal": 893,
+    "source": 15,
+    "pc": [
+      975,
+      976
+    ]
+  },
+  {
+    "teal": 894,
+    "source": 15,
+    "pc": [
+      977
+    ]
+  },
+  {
+    "teal": 895,
+    "source": 15,
+    "pc": [
+      978
+    ]
+  },
+  {
+    "teal": 896,
+    "source": 15,
+    "pc": [
+      979
+    ]
+  },
+  {
+    "teal": 897,
+    "source": 15,
+    "pc": [
+      980,
+      981,
+      982
+    ]
+  },
+  {
+    "teal": 898,
+    "source": 15,
+    "pc": [
+      983,
+      984
+    ]
+  },
+  {
     "teal": 899,
     "source": 15,
     "pc": [
-      969
+      985,
+      986
     ]
   },
   {
     "teal": 900,
     "source": 15,
     "pc": [
-      970,
-      971
+      987
     ]
   },
   {
     "teal": 901,
     "source": 15,
     "pc": [
-      972,
-      973
+      988
     ]
   },
   {
     "teal": 902,
     "source": 15,
     "pc": [
-      974,
-      975
+      989,
+      990
     ]
   },
   {
     "teal": 903,
     "source": 15,
     "pc": [
-      976,
-      977
+      991,
+      992
     ]
   },
   {
     "teal": 904,
     "source": 15,
     "pc": [
-      978
+      993,
+      994
+    ]
+  },
+  {
+    "teal": 905,
+    "source": 15,
+    "pc": [
+      995,
+      996
+    ]
+  },
+  {
+    "teal": 906,
+    "source": 15,
+    "pc": [
+      997
     ]
   }
 ]

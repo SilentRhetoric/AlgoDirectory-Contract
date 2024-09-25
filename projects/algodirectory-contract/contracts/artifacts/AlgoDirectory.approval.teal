@@ -690,7 +690,7 @@ deleteListing:
 	//       receiver: this.feeSinkAddress,
 	//       amount: listingKey.vouchAmount,
 	//       fee: 0,
-	//       note: 'Yeeted ' + listingKey.name,
+	//       note: 'Yeeted ' + listingKey.name + ' to the fee sink',
 	//     })
 	itxn_begin
 	int pay
@@ -725,7 +725,7 @@ deleteListing:
 	itxn_field Fee
 
 	// contracts/AlgoDirectory.algo.ts:188
-	// note: 'Yeeted ' + listingKey.name
+	// note: 'Yeeted ' + listingKey.name + ' to the fee sink'
 	byte 0x59656574656420 // "Yeeted "
 	frame_dig 0 // storage key//listingKey
 	box_get
@@ -748,6 +748,8 @@ deleteListing:
 	+ // add two for length
 	extract3
 	extract 2 0
+	concat
+	byte 0x20746f20746865206665652073696e6b // " to the fee sink"
 	concat
 	itxn_field Note
 

@@ -1,9 +1,9 @@
 /* eslint-disable no-console */
 import { describe, test, expect, beforeAll } from '@jest/globals';
 import { AlgorandClient } from '@algorandfoundation/algokit-utils';
-import { encodeUint64 } from 'algosdk';
+import { decodeAddress, encodeAddress, encodeUint64 } from 'algosdk';
 import { AlgoAmount } from '@algorandfoundation/algokit-utils/types/amount';
-import { AlgoDirectoryFactory } from '../contracts/clients/AlgoDirectoryClient';
+import { AlgoDirectoryClient, AlgoDirectoryFactory } from '../contracts/clients/AlgoDirectoryClient';
 
 // Get env vars from .env, defaulting to testnet values
 
@@ -15,44 +15,52 @@ const DIRECTORY_APP_ID = Number(process.env.DIRECTORY_DOT_ALGO_APP_ID); // Testn
 // For testing purposes
 const CREATOR = 'CREATOR';
 const DAVE = 'DAVE';
-const DAVE_SEGMENT_APPID = Number(process.env.DAVE_SEGMENT_APP_ID); // test.directory.algo
+const DAVE_SEGMENT_APP_ID = Number(process.env.DAVE_SEGMENT_APP_ID); // dave.directory.algo
 const BETH = 'BETH';
-const BETH_SEGMENT_APPID = Number(process.env.DAVE_SEGMENT_APP_ID); // beth.directory.algo
+// const BETH_SEGMENT_APP_ID = Number(process.env.BETH_SEGMENT_APP_ID); // beth.directory.algo
 
 // Put an existing admin asset held by CREATOR & BETH in .env to use that, else a new one will be created
-const ADMIN_TOKEN_ASAID = Number(process.env.ADMIN_TOKEN_ASAID); // Testnet 721940792 / Mainnet TBD
+const ADMIN_TOKEN_ASAID = Number(process.env.ADMIN_TOKEN_ASA_ID); // Testnet 721940792 / Mainnet TBD
 
 const algorand = AlgorandClient.testNet();
+
+let deployedAppID: bigint;
+let deployedAppAddress: string;
 
 describe('AlgoDirectory', () => {
   beforeAll(async () => {
     const creator = await algorand.account.fromEnvironment(CREATOR, new AlgoAmount({ algos: 0 }));
     const typedFactory = algorand.client.getTypedAppFactory(AlgoDirectoryFactory, {
       defaultSender: creator.addr,
-      deployTimeParams: {
-        feeSinkAddress: FEE_SINK_ADDRESS,
-        nfdRegistryAppID: encodeUint64(NFD_REGISTRY_APP_ID),
-        directoryDotAlgoAppID: encodeUint64(DIRECTORY_APP_ID),
-      },
+      // deployTimeParams: {
+      //   feeSinkAddress: FEE_SINK_ADDRESS,
+      //   nfdRegistryAppID: encodeUint64(NFD_REGISTRY_APP_ID),
+      //   directoryDotAlgoAppID: encodeUint64(DIRECTORY_APP_ID),
+      // },
     });
 
-    const { result, app: typedAppClient } = await typedFactory.deploy({
+    const { result, app: creatorTypedAppClient } = await typedFactory.deploy({
       createParams: { method: 'createApplication', args: [] },
       updateParams: { method: 'updateApplication', args: [] },
       onSchemaBreak: 'replace',
-      onUpdate: 'append',
+      onUpdate: 'update',
       deployTimeParams: {
-        feeSinkAddress: FEE_SINK_ADDRESS,
+        feeSinkAddress: decodeAddress(FEE_SINK_ADDRESS).publicKey,
         nfdRegistryAppID: encodeUint64(NFD_REGISTRY_APP_ID),
         directoryAppID: encodeUint64(DIRECTORY_APP_ID),
       },
     });
+
+    deployedAppID = creatorTypedAppClient.appClient.appId;
+    deployedAppAddress = creatorTypedAppClient.appClient.appAddress;
     console.debug('Deploy result operation: ', result.operationPerformed);
-    console.debug(`Deployed app ${typedAppClient.appClient.appId} at address: ${typedAppClient.appClient.appAddress}`);
+    console.debug(
+      `Deployed app ${creatorTypedAppClient.appClient.appId} at address: ${creatorTypedAppClient.appClient.appAddress}`
+    );
 
     // If a new app was created, fund the app MBR
     if (result.operationPerformed === 'create') {
-      const fundResult = await typedAppClient.appClient.fundAppAccount({ amount: (0.1).algos() });
+      const fundResult = await creatorTypedAppClient.appClient.fundAppAccount({ amount: (0.1).algos() });
       console.debug('Fund app result: ', fundResult.txIds);
     }
 
@@ -68,7 +76,7 @@ describe('AlgoDirectory', () => {
     if (!existingAdminToken) {
       const createAssetResult = await algorand.send.assetCreate({
         sender: creator.addr,
-        assetName: `Directory Admin (App ${typedAppClient.appClient.appId})`,
+        assetName: `Directory Admin (App ${creatorTypedAppClient.appClient.appId})`,
         unitName: 'DA',
         total: 10n,
         decimals: 0,
@@ -85,10 +93,10 @@ describe('AlgoDirectory', () => {
 
       // Very simple idempotent approach to checking if the admin asset is
       // already set in the contract state and setting it, if not
-      const contractAdminAsset = await typedAppClient.state.global.adminToken();
+      const contractAdminAsset = await creatorTypedAppClient.state.global.adminToken();
       // If contract has an old admin asset ID in storage, overwrite it with the new asset
       if (contractAdminAsset !== adminAsset) {
-        const setAdminTokenResult = await typedAppClient.send.setAdminToken({ args: { asaId: adminAsset } });
+        const setAdminTokenResult = await creatorTypedAppClient.send.setAdminToken({ args: { asaId: adminAsset } });
         console.debug('Set admin token in contract result: ', setAdminTokenResult.transaction.txID());
       }
 
@@ -114,171 +122,142 @@ describe('AlgoDirectory', () => {
   });
 
   // Blank test to run beforeAll
-  test('blank test', () => {});
+  // test('blank test', () => {});
 
   /* ****************
   Positive test cases
   **************** */
 
-  // // Create a listing and confirm that the two boxes are created as we expect
-  // test('createListing', async () => {
-  //   // Dave is going to create a listing for dave.directory.algo
-  //   const accountManager = new AccountManager(new ClientManager({ algod: algorand.client.algod }));
-  //   const daveAccount = (await accountManager.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }))).account;
-  //   algorand.setSignerFromAccount(daveAccount);
-  //   const daveAppClient = new AlgoDirectoryClient(
-  //     {
-  //       sender: daveAccount,
-  //       resolveBy: 'id',
-  //       id: deployedAppID,
-  //     },
-  //     algorand.client.algod
-  //   );
+  // Create a listing and confirm that the two boxes are created as we expect
+  test('createListing', async () => {
+    // Dave is going to create a listing for dave.directory.algo
+    const dave = await algorand.account.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }));
+    algorand.setSignerFromAccount(dave);
+    const daveTypedClient = algorand.client.getTypedAppClientById(AlgoDirectoryClient, {
+      appId: deployedAppID,
+      defaultSender: dave.addr,
+    });
 
-  //   const suggestedParams = await algorand.getSuggestedParams();
-  //   const payTxn = makePaymentTxnWithSuggestedParamsFromObject({
-  //     from: daveAccount.addr,
-  //     to: deployedAppAddress,
-  //     amount: new AlgoAmount({ microAlgos: 72200 }).microAlgos, // Each listing 72_200 uA
-  //     suggestedParams,
-  //   });
+    const payTxn = await algorand.transactions.payment({
+      sender: dave.addr,
+      receiver: deployedAppAddress,
+      amount: (72200).microAlgo(), // Each listing 72_200 uA
+    });
 
-  //   const result = await daveAppClient.createListing(
-  //     {
-  //       collateralPayment: payTxn,
-  //       nfdAppId: DAVE_SEGMENT_APPID,
-  //       listingTags: new Uint8Array(13),
-  //     },
-  //     {
-  //       sendParams: { fee: new AlgoAmount({ microAlgos: 2000 }) },
-  //     }
-  //   );
-  //   console.debug('Create txID: ', result.transaction.txID());
-  //   console.debug('Create return: ', result.return);
+    const result = await daveTypedClient.send.createListing({
+      args: {
+        collateralPayment: payTxn,
+        nfdAppId: DAVE_SEGMENT_APP_ID,
+        listingTags: new Uint8Array(13),
+      },
+      extraFee: (1000).microAlgo(),
+      populateAppCallResources: true,
+    });
+    console.debug('Create listing txID: ', result.transaction.txID());
+    console.debug('Create listing return: ', result.return);
 
-  //   expect(result.confirmations?.length).toBe(2);
-  //   expect(result.confirmation?.confirmedRound).toBeGreaterThan(0);
-  // });
+    expect(result.confirmations?.length).toBe(2);
+    expect(result.confirmation?.confirmedRound).toBeGreaterThan(0);
+  });
 
-  // // Refresh an existing listing and confirm that the timestamp has been updated
-  // test('refreshListing', async () => {
-  //   // Dave is going to refresh his listing for dave.directory.algo
-  //   const accountManager = new AccountManager(new ClientManager({ algod: algorand.client.algod }));
-  //   const daveAccount = (await accountManager.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }))).account;
-  //   algorand.setSignerFromAccount(daveAccount);
-  //   const daveAppClient = new AlgoDirectoryClient(
-  //     {
-  //       sender: daveAccount,
-  //       resolveBy: 'id',
-  //       id: deployedAppID,
-  //     },
-  //     algorand.client.algod
-  //   );
+  // Refresh an existing listing and confirm that the timestamp has been updated
+  test('refreshListing', async () => {
+    // Dave is going to refresh his listing for dave.directory.algo
+    const dave = await algorand.account.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }));
+    algorand.setSignerFromAccount(dave);
+    const daveAppClient = algorand.client.getTypedAppClientById(AlgoDirectoryClient, {
+      appId: deployedAppID,
+      defaultSender: dave.addr,
+    });
 
-  //   const result = await daveAppClient.refreshListing({
-  //     nfdAppId: DAVE_SEGMENT_APPID,
-  //   });
-  //   console.debug('Refresh txID: ', result.transaction.txID());
-  //   console.debug('Refresh return: ', result.return);
+    const result = await daveAppClient.send.refreshListing({
+      args: {
+        nfdAppId: DAVE_SEGMENT_APP_ID,
+      },
+      populateAppCallResources: true,
+    });
+    console.debug('Refresh txID: ', result.transaction.txID());
+    console.debug('Refresh return: ', result.return);
 
-  //   expect(result.confirmations?.length).toBe(1);
-  //   expect(result.confirmation?.confirmedRound).toBeGreaterThan(0);
-  // });
+    expect(result.confirmations?.length).toBe(1);
+    expect(result.confirmation?.confirmedRound).toBeGreaterThan(0);
+  });
 
-  // // Abandon a listing and confirm that the vouched collateral is returned
-  // test('abandonListing', async () => {
-  //   // Dave is going to abandon his listing for dave.directory.algo
-  //   const accountManager = new AccountManager(new ClientManager({ algod: algorand.client.algod }));
-  //   const daveAccount = (await accountManager.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }))).account;
-  //   algorand.setSignerFromAccount(daveAccount);
-  //   const daveAppClient = new AlgoDirectoryClient(
-  //     {
-  //       sender: daveAccount,
-  //       resolveBy: 'id',
-  //       id: deployedAppID,
-  //     },
-  //     algorand.client.algod
-  //   );
+  // Abandon a listing and confirm that the vouched collateral is returned
+  test('abandonListing', async () => {
+    // Dave is going to abandon his listing for dave.directory.algo
+    const dave = await algorand.account.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }));
+    algorand.setSignerFromAccount(dave);
+    const daveAppClient = algorand.client.getTypedAppClientById(AlgoDirectoryClient, {
+      appId: deployedAppID,
+      defaultSender: dave.addr,
+    });
 
-  //   const result = await daveAppClient.abandonListing(
-  //     {
-  //       nfdAppId: DAVE_SEGMENT_APPID,
-  //     },
-  //     {
-  //       sendParams: { fee: new AlgoAmount({ microAlgos: 2000 }) },
-  //     }
-  //   );
-  //   console.debug('Abandon txID: ', result.transaction.txID());
+    const result = await daveAppClient.send.abandonListing({
+      args: {
+        nfdAppId: DAVE_SEGMENT_APP_ID,
+      },
+      extraFee: (1000).microAlgo(),
+      populateAppCallResources: true,
+    });
+    console.debug('Abandon txID: ', result.transaction.txID());
 
-  //   expect(result.confirmations?.length).toBe(1);
-  //   expect(result.confirmation?.confirmedRound).toBeGreaterThan(0);
-  // });
+    expect(result.confirmations?.length).toBe(1);
+    expect(result.confirmation?.confirmedRound).toBeGreaterThan(0);
+  });
 
-  // // Create a listing, then delete it and confirm that the collateral is sent to the fee sink
-  // test('creatorDeleteListing', async () => {
-  //   // Step 1: Dave is going to create a listing for dave.directory.algo
-  //   const accountManager = new AccountManager(new ClientManager({ algod: algorand.client.algod }));
-  //   const daveAccount = (await accountManager.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }))).account;
-  //   algorand.setSignerFromAccount(daveAccount);
-  //   const daveAppClient = new AlgoDirectoryClient(
-  //     {
-  //       sender: daveAccount,
-  //       resolveBy: 'id',
-  //       id: deployedAppID,
-  //     },
-  //     algorand.client.algod
-  //   );
+  // Create a listing, then delete it and confirm that the collateral is sent to the fee sink
+  test('creatorDeleteListing', async () => {
+    // Step 1: Dave is going to create a listing for dave.directory.algo
+    const dave = await algorand.account.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }));
+    algorand.setSignerFromAccount(dave);
+    const daveTypedClient = algorand.client.getTypedAppClientById(AlgoDirectoryClient, {
+      appId: deployedAppID,
+      defaultSender: dave.addr,
+    });
 
-  //   const suggestedParams = await algorand.getSuggestedParams();
-  //   const payTxn = makePaymentTxnWithSuggestedParamsFromObject({
-  //     from: daveAccount.addr,
-  //     to: deployedAppAddress,
-  //     amount: new AlgoAmount({ microAlgos: 72200 }).microAlgos, // Each listing 72_200 uA
-  //     suggestedParams,
-  //   });
+    const payTxn = await algorand.transactions.payment({
+      sender: dave.addr,
+      receiver: deployedAppAddress,
+      amount: (72200).microAlgo(), // Each listing 72_200 uA
+    });
 
-  //   const createResult = await daveAppClient.createListing(
-  //     {
-  //       collateralPayment: payTxn,
-  //       nfdAppId: DAVE_SEGMENT_APPID,
-  //       listingTags: new Uint8Array(13),
-  //     },
-  //     {
-  //       sendParams: { fee: new AlgoAmount({ microAlgos: 2000 }) },
-  //     }
-  //   );
-  //   console.debug('Create txID: ', createResult.transaction.txID());
-  //   console.debug('Create return: ', createResult.return);
+    const result = await daveTypedClient.send.createListing({
+      args: {
+        collateralPayment: payTxn,
+        nfdAppId: DAVE_SEGMENT_APP_ID,
+        listingTags: new Uint8Array(13),
+      },
+      extraFee: (1000).microAlgo(),
+      populateAppCallResources: true,
+    });
+    console.debug('Create listing txID: ', result.transaction.txID());
+    console.debug('Create listing return: ', result.return);
 
-  //   expect(createResult.confirmations?.length).toBe(2);
-  //   expect(createResult.confirmation?.confirmedRound).toBeGreaterThan(0);
+    expect(result.confirmations?.length).toBe(2);
+    expect(result.confirmation?.confirmedRound).toBeGreaterThan(0);
 
-  //   // Step 2: Creator is now going to delete Dave's listing for dave.directory.algo
-  //   const creatorAccount = (await accountManager.fromEnvironment(CREATOR, new AlgoAmount({ algos: 0 }))).account;
-  //   algorand.setSignerFromAccount(creatorAccount);
-  //   const creatorAppClient = new AlgoDirectoryClient(
-  //     {
-  //       sender: creatorAccount,
-  //       resolveBy: 'id',
-  //       id: deployedAppID,
-  //     },
-  //     algorand.client.algod
-  //   );
+    // Step 2: Creator is now going to delete Dave's listing for dave.directory.algo
+    const creator = await algorand.account.fromEnvironment(CREATOR, new AlgoAmount({ algos: 0 }));
+    algorand.setSignerFromAccount(creator);
+    const creatorTypedClient = algorand.client.getTypedAppClientById(AlgoDirectoryClient, {
+      appId: deployedAppID,
+      defaultSender: creator.addr,
+    });
 
-  //   const deleteResult = await creatorAppClient.deleteListing(
-  //     {
-  //       nfdAppId: DAVE_SEGMENT_APPID,
-  //     },
-  //     {
-  //       sendParams: { fee: new AlgoAmount({ microAlgos: 2000 }) },
-  //     }
-  //   );
-  //   console.debug('Creator delete txID: ', deleteResult.transaction.txID());
+    const deleteResult = await creatorTypedClient.send.deleteListing({
+      args: {
+        nfdAppId: DAVE_SEGMENT_APP_ID,
+      },
+      extraFee: (1000).microAlgo(),
+      populateAppCallResources: true,
+    });
+    console.debug('Creator delete txID: ', deleteResult.transaction.txID());
 
-  //   expect(deleteResult.confirmations?.length).toBe(1);
-  //   expect(deleteResult.confirmation?.confirmedRound).toBeGreaterThan(0);
-  //   // TODO: expect the innerTxn receiver to be the fee sink
-  // });
+    expect(deleteResult.confirmations?.length).toBe(1);
+    expect(deleteResult.confirmation?.confirmedRound).toBeGreaterThan(0);
+    // TODO: expect the innerTxn receiver to be the fee sink
+  });
 
   /* ****************
   Negative test cases

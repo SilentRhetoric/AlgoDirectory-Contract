@@ -185,7 +185,7 @@ export class AlgoDirectory extends Contract {
       receiver: this.feeSinkAddress,
       amount: listingKey.vouchAmount,
       fee: 0,
-      note: 'Yeeted ' + listingKey.name,
+      note: 'Yeeted ' + listingKey.name + ' to the fee sink',
     });
 
     // Remove both boxes for the listing
