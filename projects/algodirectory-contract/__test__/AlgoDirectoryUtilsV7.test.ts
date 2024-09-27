@@ -252,11 +252,12 @@ describe('AlgoDirectory', () => {
       extraFee: (1000).microAlgo(),
       populateAppCallResources: true,
     });
-    console.debug('Creator delete txID: ', deleteResult.transaction.txID());
 
     expect(deleteResult.confirmations?.length).toBe(1);
     expect(deleteResult.confirmation?.confirmedRound).toBeGreaterThan(0);
-    // TODO: expect the innerTxn receiver to be the fee sink
+    expect(encodeAddress(Uint8Array.from(deleteResult.confirmation!.innerTxns![0].txn.txn.rcv!))).toBe(
+      FEE_SINK_ADDRESS
+    );
   });
 
   /* ****************
