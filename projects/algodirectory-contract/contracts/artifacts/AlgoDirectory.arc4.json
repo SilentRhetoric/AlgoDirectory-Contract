@@ -4,22 +4,22 @@
   "methods": [
     {
       "name": "createListing",
-      "desc": "Creates a listing in the directory by vouching for an NFD root or segment of directory.algo.",
+      "desc": "Creates a listing in the directory by vouching for an NFD root or segment of directory.algo",
       "args": [
         {
           "name": "collateralPayment",
           "type": "pay",
-          "desc": "The Algo payment of collateral to vouch for the listing"
+          "desc": "The Algo payment transaction of collateral to vouch for the listing"
         },
         {
           "name": "nfdAppID",
           "type": "uint64",
-          "desc": "The uint64 application ID of the NFD that will be listed"
+          "desc": "The Application ID of the NFD that will be listed"
         },
         {
           "name": "listingTags",
           "type": "byte[13]",
-          "desc": "Array of 13 bytes each representing a tag for the listing"
+          "desc": "An array of 13 bytes with each representing a tag for the listing"
         }
       ],
       "returns": {
@@ -28,12 +28,12 @@
     },
     {
       "name": "refreshListing",
-      "desc": "Refreshes a listing in the directory and updates its last touched timestamp.",
+      "desc": "Refreshes a listing in the directory and updates its last touched timestamp",
       "args": [
         {
           "name": "nfdAppID",
           "type": "uint64",
-          "desc": "The uint64 application ID of the NFD that will be refreshed"
+          "desc": "The Application ID of the NFD that will be refreshed"
         }
       ],
       "returns": {
@@ -42,12 +42,12 @@
     },
     {
       "name": "abandonListing",
-      "desc": "Abandons a listing in the directory and returns the vouched collateral.",
+      "desc": "Abandons a listing in the directory and returns the vouched collateral",
       "args": [
         {
           "name": "nfdAppID",
           "type": "uint64",
-          "desc": "The uint64 application ID of the NFD that will be abandoned"
+          "desc": "The Application ID of the NFD that will be abandoned"
         }
       ],
       "returns": {
@@ -56,16 +56,16 @@
     },
     {
       "name": "deleteListing",
-      "desc": "Deletes a listing from the directory & sends the collateral to the fee sink.",
+      "desc": "Deletes a listing from the directory & sends the collateral to the fee sink",
       "args": [
         {
           "name": "nfdAppID",
           "type": "uint64",
-          "desc": "The uint64 application ID of the NFD that will be deleted"
+          "desc": "The Application ID of the NFD that will be deleted"
         }
       ],
       "returns": {
-        "type": "void"
+        "type": "string"
       }
     },
     {
@@ -75,7 +75,7 @@
         {
           "name": "asaID",
           "type": "uint64",
-          "desc": "The uint64 asset ID of the ASA to be the admin token"
+          "desc": "The Asset ID of the ASA to be the admin token"
         }
       ],
       "returns": {
@@ -83,14 +83,15 @@
       }
     },
     {
-      "name": "createApplication",
+      "name": "updateApplication",
+      "desc": "Enables the application to be updated by the creator",
       "args": [],
       "returns": {
         "type": "void"
       }
     },
     {
-      "name": "updateApplication",
+      "name": "createApplication",
       "args": [],
       "returns": {
         "type": "void"

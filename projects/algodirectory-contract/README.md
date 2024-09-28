@@ -10,6 +10,8 @@ For TEALScript documentation, go to https://tealscript.algo.xyz
 
 This contract integrates with NFD, which means that it can only be tested against public networks as there is no NFD registry on Localnet. In order to configure the project for testing against Testnet, update .env.template with account mnemonics and Testnet NFD segment App IDs for three accounts, CREATOR, DAVE, and BETH.
 
+If CREATOR is deploying the contract for the first time, CREATOR may not have an admin token, so let the test run and create an admin asset. Note this ID and add it to the .env file so that it is automatically picked up for subsequent tests.
+
 ### Algokit
 
 This template assumes you have a local network running on your machine. The easiet way to setup a local network is with [algokit](https://github.com/algorandfoundation/algokit-cli). If you don't have Algokit or its dependencies installed locally you can open this repository in a GitHub codespace via https://codespaces.new and choosing this repo.

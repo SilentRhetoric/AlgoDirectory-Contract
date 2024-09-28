@@ -32,11 +32,6 @@ describe('AlgoDirectory', () => {
     const creator = await algorand.account.fromEnvironment(CREATOR, new AlgoAmount({ algos: 0 }));
     const typedFactory = algorand.client.getTypedAppFactory(AlgoDirectoryFactory, {
       defaultSender: creator.addr,
-      // deployTimeParams: {
-      //   feeSinkAddress: FEE_SINK_ADDRESS,
-      //   nfdRegistryAppID: encodeUint64(NFD_REGISTRY_APP_ID),
-      //   directoryDotAlgoAppID: encodeUint64(DIRECTORY_APP_ID),
-      // },
     });
 
     const { result, app: creatorTypedAppClient } = await typedFactory.deploy({
@@ -129,7 +124,7 @@ describe('AlgoDirectory', () => {
   **************** */
 
   // Create a listing and confirm that the two boxes are created as we expect
-  test('createListing', async () => {
+  test('daveCreateListing', async () => {
     // Dave is going to create a listing for dave.directory.algo
     const dave = await algorand.account.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }));
     algorand.setSignerFromAccount(dave);
@@ -153,7 +148,6 @@ describe('AlgoDirectory', () => {
       extraFee: (1000).microAlgo(),
       populateAppCallResources: true,
     });
-    console.debug('Create listing txID: ', result.transaction.txID());
     console.debug('Create listing return: ', result.return);
 
     expect(result.confirmations?.length).toBe(2);
@@ -161,7 +155,7 @@ describe('AlgoDirectory', () => {
   });
 
   // Refresh an existing listing and confirm that the timestamp has been updated
-  test('refreshListing', async () => {
+  test('daveRefreshListing', async () => {
     // Dave is going to refresh his listing for dave.directory.algo
     const dave = await algorand.account.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }));
     algorand.setSignerFromAccount(dave);
@@ -176,7 +170,6 @@ describe('AlgoDirectory', () => {
       },
       populateAppCallResources: true,
     });
-    console.debug('Refresh txID: ', result.transaction.txID());
     console.debug('Refresh return: ', result.return);
 
     expect(result.confirmations?.length).toBe(1);
@@ -184,7 +177,7 @@ describe('AlgoDirectory', () => {
   });
 
   // Abandon a listing and confirm that the vouched collateral is returned
-  test('abandonListing', async () => {
+  test('daveAbandonListing', async () => {
     // Dave is going to abandon his listing for dave.directory.algo
     const dave = await algorand.account.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }));
     algorand.setSignerFromAccount(dave);
@@ -199,15 +192,14 @@ describe('AlgoDirectory', () => {
       },
       extraFee: (1000).microAlgo(),
       populateAppCallResources: true,
-    });
-    console.debug('Abandon txID: ', result.transaction.txID());
+    }); // No return value expected
 
     expect(result.confirmations?.length).toBe(1);
     expect(result.confirmation?.confirmedRound).toBeGreaterThan(0);
   });
 
   // Create a listing, then delete it and confirm that the collateral is sent to the fee sink
-  test('creatorDeleteListing', async () => {
+  test('daveCreateThenCreatorDelete', async () => {
     // Step 1: Dave is going to create a listing for dave.directory.algo
     const dave = await algorand.account.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }));
     algorand.setSignerFromAccount(dave);
@@ -222,7 +214,7 @@ describe('AlgoDirectory', () => {
       amount: (72200).microAlgo(), // Each listing 72_200 uA
     });
 
-    const result = await daveTypedClient.send.createListing({
+    const createResult = await daveTypedClient.send.createListing({
       args: {
         collateralPayment: payTxn,
         nfdAppId: DAVE_SEGMENT_APP_ID,
@@ -231,11 +223,10 @@ describe('AlgoDirectory', () => {
       extraFee: (1000).microAlgo(),
       populateAppCallResources: true,
     });
-    console.debug('Create listing txID: ', result.transaction.txID());
-    console.debug('Create listing return: ', result.return);
+    console.debug('Create listing return: ', createResult.return);
 
-    expect(result.confirmations?.length).toBe(2);
-    expect(result.confirmation?.confirmedRound).toBeGreaterThan(0);
+    expect(createResult.confirmations?.length).toBe(2);
+    expect(createResult.confirmation?.confirmedRound).toBeGreaterThan(0);
 
     // Step 2: Creator is now going to delete Dave's listing for dave.directory.algo
     const creator = await algorand.account.fromEnvironment(CREATOR, new AlgoAmount({ algos: 0 }));
@@ -252,6 +243,7 @@ describe('AlgoDirectory', () => {
       extraFee: (1000).microAlgo(),
       populateAppCallResources: true,
     });
+    console.debug('Delete listing return: ', deleteResult.return);
 
     expect(deleteResult.confirmations?.length).toBe(1);
     expect(deleteResult.confirmation?.confirmedRound).toBeGreaterThan(0);
@@ -264,7 +256,7 @@ describe('AlgoDirectory', () => {
   Negative test cases
   **************** */
 
-  // Attempt to create a listing with insufficient payment; expect failure
+  // Attempt to CREATE a listing with insufficient payment; expect failure
   // test("Test description", () => {
   //   const t = () => {
   //     throw new TypeError();
@@ -283,6 +275,7 @@ describe('AlgoDirectory', () => {
   // Attempt to REFRESH a listing with expired NFD; expect failure (TBD how to achieve this on testnet with V3 being so new and all NFDs having just been bought)
 
   // Attempt to ABANDON a listing that the caller doesn't own; expect failure (DAVE create listing and BETH attempt to abandon it)
+  // If an NFD has expired, let the new owner abandon the old listing and refund the original listing owner
 
   // Attempt to DELETE a listing without having the admin token; expect failure (BETH create listing and DAVE attempt to delete it)
 });

@@ -61,11 +61,11 @@ export class AlgoDirectory extends Contract {
   }
 
   /**
-   * Creates a listing in the directory by vouching for an NFD root or segment of directory.algo.
+   * Creates a listing in the directory by vouching for an NFD root or segment of directory.algo
    *
-   * @param collateralPayment The Algo payment of collateral to vouch for the listing
-   * @param nfdAppID The uint64 application ID of the NFD that will be listed
-   * @param listingTags Array of 13 bytes each representing a tag for the listing
+   * @param collateralPayment The Algo payment transaction of collateral to vouch for the listing
+   * @param nfdAppID The Application ID of the NFD that will be listed
+   * @param listingTags An array of 13 bytes with each representing a tag for the listing
    */
   createListing(collateralPayment: PayTxn, nfdAppID: AppID, listingTags: StaticArray<byte, 13>): Listing {
     // Check that the caller is paying a mimimum amount of collateral to vouch for the listing
@@ -114,12 +114,16 @@ export class AlgoDirectory extends Contract {
   }
 
   /**
-   * Refreshes a listing in the directory and updates its last touched timestamp.
+   * Refreshes a listing in the directory and updates its last touched timestamp
    *
-   * @param nfdAppID The uint64 application ID of the NFD that will be refreshed
+   * @param nfdAppID The Application ID of the NFD that will be refreshed
    */
   refreshListing(nfdAppID: AppID): Listing {
-    // Ensure the caller owns this listing, owns the NFD, and the NFD has not expired
+    // Ensure the caller owns this listing, owns the NFD, and the NFD has not expired.
+    // Note that if the NFD has been transferred, the new owner will not be able to
+    // refresh as they will not be both the current NFD owner and the original listing owner.
+    // The new owner of a transferred NFD must abandon the old listing and create a new one
+    // with their own collateral.
     this.checkCallerIsListingOwner(nfdAppID);
     this.checkCallerIsNFDOwner(nfdAppID);
     this.checkNFDNotExpired(nfdAppID);
@@ -147,15 +151,19 @@ export class AlgoDirectory extends Contract {
   }
 
   /**
-   * Abandons a listing in the directory and returns the vouched collateral.
+   * Abandons a listing in the directory and returns the vouched collateral
    *
-   * @param nfdAppID The uint64 application ID of the NFD that will be abandoned
+   * @param nfdAppID The Application ID of the NFD that will be abandoned
    */
   abandonListing(nfdAppID: AppID): void {
     const listingKey = this.listedNFDappIDs(nfdAppID).value;
-    this.checkCallerIsListingOwner(nfdAppID);
 
-    // Return the vouched collateral to the listing owner
+    // Check that the caller is the owner of the NFD
+    // The caller need not be the listing owner in case they purchased the NFD
+    // from a previous owner who created the listing
+    this.checkCallerIsNFDOwner(nfdAppID);
+
+    // Return the vouched collateral to the original listing owner
     sendPayment({
       sender: this.app.address,
       receiver: this.listings(listingKey).value,
@@ -169,15 +177,16 @@ export class AlgoDirectory extends Contract {
   }
 
   /**
-   * Deletes a listing from the directory & sends the collateral to the fee sink.
+   * Deletes a listing from the directory & sends the collateral to the fee sink
    *
-   * @param nfdAppID The uint64 application ID of the NFD that will be deleted
+   * @param nfdAppID The Application ID of the NFD that will be deleted
    */
-  deleteListing(nfdAppID: AppID): void {
+  deleteListing(nfdAppID: AppID): string {
     // This method is restricted to only holders of the admin asset
     assert(this.txn.sender.assetBalance(this.adminToken.value) > 0, 'Caller must have the admin token');
 
     const listingKey = this.listedNFDappIDs(nfdAppID).value;
+    const deleteNote = 'Yeeted ' + listingKey.name + ' to the fee sink';
 
     // Yeet the vouched collateral into the fee sink as punishment
     sendPayment({
@@ -185,27 +194,33 @@ export class AlgoDirectory extends Contract {
       receiver: this.feeSinkAddress,
       amount: listingKey.vouchAmount,
       fee: 0,
-      note: 'Yeeted ' + listingKey.name + ' to the fee sink',
+      note: deleteNote,
     });
 
     // Remove both boxes for the listing
     this.listings(listingKey).delete();
     this.listedNFDappIDs(nfdAppID).delete();
+
+    return deleteNote;
   }
 
   /**
    * Stores an ASA ID in global state that will control administration rights
    *
-   * @param asaID The uint64 asset ID of the ASA to be the admin token
+   * @param asaID The Asset ID of the ASA to be the admin token
    */
   setAdminToken(asaID: AssetID): void {
     assert(this.txn.sender === this.app.creator, 'Only the creator can set the admin token');
     this.adminToken.value = asaID;
   }
 
-  createApplication(): void {}
-
+  /**
+   * Enables the application to be updated by the creator
+   *
+   */
   updateApplication(): void {
     assert(this.txn.sender === this.app.creator, 'Only the creator can update the application');
   }
+
+  createApplication(): void {}
 }
