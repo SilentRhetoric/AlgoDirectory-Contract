@@ -50,10 +50,17 @@ export class AlgoDirectory extends Contract {
 
   private checkNFDNotExpired(nfdAppID: AppID): void {
     // Check that the segment is current and not expired
+    // Because directory.algo is V3, there are no lifetime ownership segments
     assert(
       globals.latestTimestamp <= btoi(nfdAppID.globalState('i.expirationTime') as bytes),
       'NFD segment must not be expired'
     );
+  }
+
+  private checkNFDNotForSale(nfdAppID: AppID): void {
+    // Check that the segment is not listed for sale, which wipes properties and
+    // would essentially invalidate a Directory listing
+    assert(!nfdAppID.globalStateExists('i.sellAmount'), 'NFD segment must not be listed for sale');
   }
 
   private getRoundedTimestamp(): uint64 {
@@ -79,6 +86,7 @@ export class AlgoDirectory extends Contract {
     this.checkNFDIsSegmentOfDirectory(nfdAppID);
     this.checkCallerIsNFDOwner(nfdAppID);
     this.checkNFDNotExpired(nfdAppID);
+    this.checkNFDNotForSale(nfdAppID);
 
     // Check in the NFD registry that this is a valid NFD app ID (not a fake NFD)
     const nfdLongName = nfdAppID.globalState('i.name') as bytes;
@@ -127,6 +135,7 @@ export class AlgoDirectory extends Contract {
     this.checkCallerIsListingOwner(nfdAppID);
     this.checkCallerIsNFDOwner(nfdAppID);
     this.checkNFDNotExpired(nfdAppID);
+    this.checkNFDNotForSale(nfdAppID);
 
     // The new listing box will be swapped for one with a new timestamp in the key struct
     const oldListingKey = this.listedNFDappIDs(nfdAppID).value;

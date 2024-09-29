@@ -10,7 +10,7 @@ import { AlgoDirectoryClient, AlgoDirectoryFactory } from '../contracts/clients/
 // For network-based template variables substitution at compile time
 const FEE_SINK_ADDRESS = process.env.FEE_SINK_ADDRESS || 'A7NMWS3NT3IUDMLVO26ULGXGIIOUQ3ND2TXSER6EBGRZNOBOUIQXHIBGDE'; // Testnet A7NMWS3NT3IUDMLVO26ULGXGIIOUQ3ND2TXSER6EBGRZNOBOUIQXHIBGDE / Mainnet Y76M3MSY6DKBRHBL7C3NNDXGS5IIMQVQVUAB6MP4XEMMGVF2QWNPL226CA
 const NFD_REGISTRY_APP_ID = Number(process.env.NFD_REGISTRY_APP_ID); // Testnet 84366825 / Mainnet 760937186
-const DIRECTORY_APP_ID = Number(process.env.DIRECTORY_DOT_ALGO_APP_ID); // Testnet 576232821 / Mainnet 766401564
+const DIRECTORY_DOT_ALGO_APP_ID = Number(process.env.DIRECTORY_DOT_ALGO_APP_ID); // Testnet 576232821 / Mainnet 766401564
 
 // For testing purposes
 const CREATOR = 'CREATOR';
@@ -20,7 +20,7 @@ const BETH = 'BETH';
 // const BETH_SEGMENT_APP_ID = Number(process.env.BETH_SEGMENT_APP_ID); // beth.directory.algo
 
 // Put an existing admin asset held by CREATOR & BETH in .env to use that, else a new one will be created
-const ADMIN_TOKEN_ASAID = Number(process.env.ADMIN_TOKEN_ASA_ID); // Testnet 721940792 / Mainnet TBD
+const ADMIN_TOKEN_ASA_ID = BigInt(Number(process.env.ADMIN_TOKEN_ASA_ID)); // Testnet 721940792 / Mainnet TBD
 
 const algorand = AlgorandClient.testNet();
 
@@ -42,7 +42,7 @@ describe('AlgoDirectory', () => {
       deployTimeParams: {
         feeSinkAddress: decodeAddress(FEE_SINK_ADDRESS).publicKey,
         nfdRegistryAppID: encodeUint64(NFD_REGISTRY_APP_ID),
-        directoryAppID: encodeUint64(DIRECTORY_APP_ID),
+        directoryAppID: encodeUint64(DIRECTORY_DOT_ALGO_APP_ID),
       },
     });
 
@@ -61,14 +61,18 @@ describe('AlgoDirectory', () => {
 
     // Very simple idempotent approach to checking if CREATOR already
     // holds the admin token from .env and creating one, if not
+    let adminAsset: bigint = ADMIN_TOKEN_ASA_ID;
+    console.debug('Admin token from .env: ', adminAsset);
     const creatorAccountInfo = await algorand.account.getInformation(creator.addr);
     // console.debug('Account info: ', creatorAccountInfo);
-    const existingAdminToken = creatorAccountInfo.assets?.find((asset) => asset.assetId === ADMIN_TOKEN_ASAID);
-    console.debug('Existing admin token found: ', existingAdminToken);
+    const existingAdminTokenFound = creatorAccountInfo.assets?.find(
+      (asset) => BigInt(asset.assetId) === ADMIN_TOKEN_ASA_ID
+    );
+    console.debug('Existing admin token found: ', existingAdminTokenFound);
 
     // Create a new admin token if the one from .env isn't found in CREATOR's account
-    let adminAsset: bigint;
-    if (!existingAdminToken) {
+
+    if (!existingAdminTokenFound) {
       const createAssetResult = await algorand.send.assetCreate({
         sender: creator.addr,
         assetName: `Directory Admin (App ${creatorTypedAppClient.appClient.appId})`,
@@ -86,15 +90,6 @@ describe('AlgoDirectory', () => {
       console.debug('Asset send result: ', createAssetResult.txIds);
       console.debug('Asset created: ', adminAsset);
 
-      // Very simple idempotent approach to checking if the admin asset is
-      // already set in the contract state and setting it, if not
-      const contractAdminAsset = await creatorTypedAppClient.state.global.adminToken();
-      // If contract has an old admin asset ID in storage, overwrite it with the new asset
-      if (contractAdminAsset !== adminAsset) {
-        const setAdminTokenResult = await creatorTypedAppClient.send.setAdminToken({ args: { asaId: adminAsset } });
-        console.debug('Set admin token in contract result: ', setAdminTokenResult.transaction.txID());
-      }
-
       // BETH opts into the new admin asset
       const beth = await algorand.account.fromEnvironment(BETH, new AlgoAmount({ algos: 0 }));
       algorand.setSignerFromAccount(beth);
@@ -109,15 +104,24 @@ describe('AlgoDirectory', () => {
       const sendAssetResult = await algorand.send.assetTransfer({
         sender: creator.addr,
         receiver: beth.addr,
-        assetId: BigInt(adminAsset),
+        assetId: adminAsset,
         amount: 1n,
       });
       console.debug('Send new admin asset to Beth result: ', sendAssetResult.txIds);
     }
+
+    // Very simple idempotent approach to checking if the admin asset is
+    // already set in the contract state and setting it, if not
+    const contractAdminAsset = await creatorTypedAppClient.state.global.adminToken();
+    // If contract has an old admin asset ID in storage, overwrite it with the new asset
+    if (contractAdminAsset !== adminAsset) {
+      const setAdminTokenResult = await creatorTypedAppClient.send.setAdminToken({ args: { asaId: adminAsset } });
+      console.debug('Set admin token in contract result: ', setAdminTokenResult.transaction.txID());
+    }
   });
 
   // Blank test to run beforeAll
-  // test('blank test', () => {});
+  test('runBeforeAll', () => {});
 
   /* ****************
   Positive test cases
@@ -270,9 +274,13 @@ describe('AlgoDirectory', () => {
 
   // Attempt to CREATE a listing for an expired NFD; expect failure (TBD how to achieve this on testnet with V3 being so new and all NFDs having just been bought)
 
+  // Attempt to CREATE a listing for an NFD that is listed for sale; expect failure
+
   // Attempt to REFRESH a listing for an NFD the caller doesn't own; expect failure (DAVE create listing and BETH attempt to refresh it)
 
   // Attempt to REFRESH a listing with expired NFD; expect failure (TBD how to achieve this on testnet with V3 being so new and all NFDs having just been bought)
+
+  // Attempt to REFRESH a listing for an NFD that is listed for sale; expect failure
 
   // Attempt to ABANDON a listing that the caller doesn't own; expect failure (DAVE create listing and BETH attempt to abandon it)
   // If an NFD has expired, let the new owner abandon the old listing and refund the original listing owner
