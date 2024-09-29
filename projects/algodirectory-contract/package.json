@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@algorandfoundation/algokit-client-generator": "^v4.0.0-beta.2",
-    "@algorandfoundation/algokit-utils": "^7.0.0-beta.4",
+    "@algorandfoundation/algokit-utils": "^7.0.0-beta.6",
     "@types/json-bigint": "^1.0.4",
     "algosdk": "^2.7.0"
   },

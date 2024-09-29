@@ -17,7 +17,7 @@ const CREATOR = 'CREATOR';
 const DAVE = 'DAVE';
 const DAVE_SEGMENT_APP_ID = Number(process.env.DAVE_SEGMENT_APP_ID); // dave.directory.algo
 const BETH = 'BETH';
-// const BETH_SEGMENT_APP_ID = Number(process.env.BETH_SEGMENT_APP_ID); // beth.directory.algo
+const BETH_SEGMENT_APP_ID = Number(process.env.BETH_SEGMENT_APP_ID); // beth.directory.algo
 
 // Put an existing admin asset held by CREATOR & BETH in .env to use that, else a new one will be created
 const ADMIN_TOKEN_ASA_ID = BigInt(Number(process.env.ADMIN_TOKEN_ASA_ID)); // Testnet 721940792 / Mainnet TBD
@@ -254,6 +254,39 @@ describe('AlgoDirectory', () => {
     expect(encodeAddress(Uint8Array.from(deleteResult.confirmation!.innerTxns![0].txn.txn.rcv!))).toBe(
       FEE_SINK_ADDRESS
     );
+  });
+
+  // Create a listing for each scenario in the nested array
+  test.each([
+    [DAVE, DAVE_SEGMENT_APP_ID],
+    [BETH, BETH_SEGMENT_APP_ID],
+  ])('%s create listing for app %s', async (name, segmentAppID) => {
+    const account = await algorand.account.fromEnvironment(name, new AlgoAmount({ algos: 0 }));
+    algorand.setSignerFromAccount(account);
+    const typedClient = algorand.client.getTypedAppClientById(AlgoDirectoryClient, {
+      appId: deployedAppID,
+      defaultSender: account.addr,
+    });
+
+    const payTxn = await algorand.transactions.payment({
+      sender: account.addr,
+      receiver: deployedAppAddress,
+      amount: (72200).microAlgo(), // Each listing 72_200 uA
+    });
+
+    const result = await typedClient.send.createListing({
+      args: {
+        collateralPayment: payTxn,
+        nfdAppId: segmentAppID,
+        listingTags: new Uint8Array(13),
+      },
+      extraFee: (1000).microAlgo(),
+      populateAppCallResources: true,
+    });
+    console.debug(`${name} create listing return: `, result.return);
+
+    expect(result.confirmations?.length).toBe(2);
+    expect(result.confirmation?.confirmedRound).toBeGreaterThan(0);
   });
 
   /* ****************
