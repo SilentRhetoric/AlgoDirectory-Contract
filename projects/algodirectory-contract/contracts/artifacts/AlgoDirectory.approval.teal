@@ -136,9 +136,9 @@ checkNFDNotForSale:
 	proto 1 0
 
 	// contracts/AlgoDirectory.algo.ts:63
-	// assert(!nfdAppID.globalStateExists('i.sellAmount'), 'NFD segment must not be listed for sale')
+	// assert(!nfdAppID.globalStateExists('i.sellamt'), 'NFD segment must not be listed for sale')
 	frame_dig -1 // nfdAppID: AppID
-	byte 0x692e73656c6c416d6f756e74 // "i.sellAmount"
+	byte 0x692e73656c6c616d74 // "i.sellamt"
 	app_global_get_ex
 	swap
 	pop

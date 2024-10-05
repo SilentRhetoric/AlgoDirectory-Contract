@@ -60,7 +60,7 @@ export class AlgoDirectory extends Contract {
   private checkNFDNotForSale(nfdAppID: AppID): void {
     // Check that the segment is not listed for sale, which wipes properties and
     // would essentially invalidate a Directory listing
-    assert(!nfdAppID.globalStateExists('i.sellAmount'), 'NFD segment must not be listed for sale');
+    assert(!nfdAppID.globalStateExists('i.sellamt'), 'NFD segment must not be listed for sale');
   }
 
   private getRoundedTimestamp(): uint64 {
