@@ -9,11 +9,11 @@ importers:
   .:
     dependencies:
       '@algorandfoundation/algokit-client-generator':
-        specifier: ^v4.0.0-beta.2
-        version: 4.0.0-beta.2
+        specifier: ^v4.0.0-beta.5
+        version: 4.0.0-beta.5
       '@algorandfoundation/algokit-utils':
-        specifier: ^7.0.0-beta.6
-        version: 7.0.0-beta.6(algosdk@2.9.0)
+        specifier: ^7.0.0-beta.10
+        version: 7.0.0-beta.10(algosdk@2.9.0)
       '@types/json-bigint':
         specifier: ^1.0.4
         version: 1.0.4
@@ -72,13 +72,13 @@ importers:
 
 packages:
 
-  '@algorandfoundation/algokit-client-generator@4.0.0-beta.2':
-    resolution: {integrity: sha512-qMzc+F1+QVVn53zObVYUgku0XldTf78gKcXGgjL+IRBZVswjc1CLwrKE3DLy6ev4Q989RkKvoU1PGvNb992ZeA==}
+  '@algorandfoundation/algokit-client-generator@4.0.0-beta.5':
+    resolution: {integrity: sha512-XV0HX0ZNgKrqaVE3HDkZ6LmzdR3NW0zJP/lh661TA7KeONGvFOlaAM6HZ0d7nbL0rLsuIZAKJ6ZAvG89bCW1Hw==}
     engines: {node: '>=18.0'}
     hasBin: true
 
-  '@algorandfoundation/algokit-utils@7.0.0-beta.6':
-    resolution: {integrity: sha512-PeAecyhLbvB1tfCAtcRAMTjCH/bgqDIGLKGt4T2xUFdetg+67nmTaB3+rzDVc/Emq4d/Z0I2d3pohel3Hkco3A==}
+  '@algorandfoundation/algokit-utils@7.0.0-beta.10':
+    resolution: {integrity: sha512-KpdPeCxaH3Nwm07oEfRJdWPg5tcFoUrKzSPswRrYfDwQHC8HL/TUY33u/ov6dGaRiL06sRobn6b9ZLMTsEeZlA==}
     engines: {node: '>=18.0'}
     peerDependencies:
       algosdk: ^2.7.0
@@ -2303,16 +2303,16 @@ packages:
 
 snapshots:
 
-  '@algorandfoundation/algokit-client-generator@4.0.0-beta.2':
+  '@algorandfoundation/algokit-client-generator@4.0.0-beta.5':
     dependencies:
-      '@algorandfoundation/algokit-utils': 7.0.0-beta.6(algosdk@2.9.0)
+      '@algorandfoundation/algokit-utils': 7.0.0-beta.10(algosdk@2.9.0)
       algosdk: 2.9.0
       chalk: 4.1.2
       change-case: 4.1.2
       commander: 11.1.0
       jsonschema: 1.4.1
 
-  '@algorandfoundation/algokit-utils@7.0.0-beta.6(algosdk@2.9.0)':
+  '@algorandfoundation/algokit-utils@7.0.0-beta.10(algosdk@2.9.0)':
     dependencies:
       algosdk: 2.9.0
       buffer: 6.0.3

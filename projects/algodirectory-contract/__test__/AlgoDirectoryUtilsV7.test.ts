@@ -37,7 +37,7 @@ describe('AlgoDirectory', () => {
       defaultSender: creator.addr,
     });
 
-    const { result, app: creatorTypedAppClient } = await typedFactory.deploy({
+    const { result, appClient: creatorTypedAppClient } = await typedFactory.deploy({
       createParams: { method: 'createApplication', args: [] },
       updateParams: { method: 'updateApplication', args: [] },
       onSchemaBreak: 'replace',
@@ -140,7 +140,7 @@ describe('AlgoDirectory', () => {
       defaultSender: dave.addr,
     });
 
-    const payTxn = await algorand.transactions.payment({
+    const payTxn = await algorand.createTransaction.payment({
       sender: dave.addr,
       receiver: deployedAppAddress,
       amount: (72200).microAlgo(), // Each listing 72_200 uA
@@ -215,7 +215,7 @@ describe('AlgoDirectory', () => {
       defaultSender: beth.addr,
     });
 
-    const payTxn = await algorand.transactions.payment({
+    const payTxn = await algorand.createTransaction.payment({
       sender: beth.addr,
       receiver: deployedAppAddress,
       amount: (72200).microAlgo(), // Each listing 72_200 uA
@@ -290,7 +290,7 @@ describe('AlgoDirectory', () => {
       defaultSender: dave.addr,
     });
 
-    const payTxn = await algorand.transactions.payment({
+    const payTxn = await algorand.createTransaction.payment({
       sender: dave.addr,
       receiver: deployedAppAddress,
       amount: (72200).microAlgo(), // Each listing 72_200 uA
@@ -346,7 +346,7 @@ describe('AlgoDirectory', () => {
       defaultSender: account.addr,
     });
 
-    const payTxn = await algorand.transactions.payment({
+    const payTxn = await algorand.createTransaction.payment({
       sender: account.addr,
       receiver: deployedAppAddress,
       amount: (72200).microAlgo(), // Each listing 72_200 uA
@@ -395,7 +395,7 @@ describe('AlgoDirectory', () => {
       defaultSender: dave.addr,
     });
 
-    const payTxn = await algorand.transactions.payment({
+    const payTxn = await algorand.createTransaction.payment({
       sender: dave.addr,
       receiver: deployedAppAddress,
       amount: (72100).microAlgo(), // Each listing 72_200 uA so fund it 100 less
@@ -438,7 +438,7 @@ describe('AlgoDirectory', () => {
       defaultSender: dave.addr,
     });
 
-    const payTxn = await algorand.transactions.payment({
+    const payTxn = await algorand.createTransaction.payment({
       sender: dave.addr,
       receiver: deployedAppAddress,
       amount: (72200).microAlgo(), // Each listing 72_200 uA
@@ -482,7 +482,7 @@ describe('AlgoDirectory', () => {
       defaultSender: dave.addr,
     });
 
-    const payTxn = await algorand.transactions.payment({
+    const payTxn = await algorand.createTransaction.payment({
       sender: dave.addr,
       receiver: deployedAppAddress,
       amount: (72200).microAlgo(), // Each listing 72_200 uA
@@ -593,7 +593,7 @@ describe('AlgoDirectory', () => {
       defaultSender: beth.addr,
     });
 
-    const payTxn = await algorand.transactions.payment({
+    const payTxn = await algorand.createTransaction.payment({
       sender: beth.addr,
       receiver: deployedAppAddress,
       amount: (72200).microAlgo(), // Each listing 72_200 uA
@@ -637,7 +637,7 @@ describe('AlgoDirectory', () => {
       defaultSender: beth.addr,
     });
 
-    const payTxn = await algorand.transactions.payment({
+    const payTxn = await algorand.createTransaction.payment({
       sender: beth.addr,
       receiver: deployedAppAddress,
       amount: (72200).microAlgo(), // Each listing 72_200 uA
@@ -719,7 +719,7 @@ describe('AlgoDirectory', () => {
       defaultSender: beth.addr,
     });
 
-    const payTxn = await algorand.transactions.payment({
+    const payTxn = await algorand.createTransaction.payment({
       sender: beth.addr,
       receiver: deployedAppAddress,
       amount: (72200).microAlgo(), // Each listing 72_200 uA
@@ -847,7 +847,7 @@ describe('AlgoDirectory', () => {
       defaultSender: beth.addr,
     });
 
-    const payTxn = await algorand.transactions.payment({
+    const payTxn = await algorand.createTransaction.payment({
       sender: beth.addr,
       receiver: deployedAppAddress,
       amount: (72200).microAlgo(), // Each listing 72_200 uA
@@ -920,7 +920,7 @@ describe('AlgoDirectory', () => {
       defaultSender: beth.addr,
     });
 
-    const payTxn = await algorand.transactions.payment({
+    const payTxn = await algorand.createTransaction.payment({
       sender: beth.addr,
       receiver: deployedAppAddress,
       amount: (72200).microAlgo(), // Each listing 72_200 uA
