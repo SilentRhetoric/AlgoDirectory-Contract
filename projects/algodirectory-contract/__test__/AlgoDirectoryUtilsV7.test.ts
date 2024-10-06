@@ -19,8 +19,8 @@ const DAVE_SEGMENT_APP_ID = Number(process.env.DAVE_SEGMENT_APP_ID); // dave.dir
 const BETH = 'BETH';
 const BETH_SEGMENT_APP_ID = Number(process.env.BETH_SEGMENT_APP_ID); // beth.directory.algo
 const DAVE_NOT_SEGMENT_APP_ID = Number(process.env.DAVE_NOT_SEGMENT_APP_ID); // bob.directory.algo
-const FORSALE_SEGMENT_APP_ID = Number(process.env.FORSALE_SEGMENT_APP_ID); // forsale.directory.algo
-const FORSALE_WITH_LISTING_SEGMENT_APP_ID = Number(process.env.FORSALE_WITH_LISTING_SEGMENT_APP_ID); // forsalewithlisting.directory.algo
+const FOR_SALE_SEGMENT_APP_ID = Number(process.env.FOR_SALE_SEGMENT_APP_ID); // forsale.directory.algo
+const FOR_SALE_WITH_LISTING_SEGMENT_APP_ID = Number(process.env.FOR_SALE_WITH_LISTING_SEGMENT_APP_ID); // forsalewithlisting.directory.algo
 
 // Put an existing admin asset held by CREATOR & BETH in .env to use that, else a new one will be created
 const ADMIN_TOKEN_ASA_ID = BigInt(Number(process.env.ADMIN_TOKEN_ASA_ID)); // Testnet 721940792 / Mainnet TBD
@@ -131,7 +131,7 @@ describe('AlgoDirectory', () => {
   **************** */
 
   // Create a listing and confirm that the two boxes are created as we expect
-  test('daveCreateListing', async () => {
+  test('Dave creates listing', async () => {
     // Dave is going to create a listing for dave.directory.algo
     const dave = await algorand.account.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }));
     algorand.setSignerFromAccount(dave);
@@ -162,8 +162,8 @@ describe('AlgoDirectory', () => {
   });
 
   // Refresh an existing listing and confirm that the timestamp has been updated
-  test('daveRefreshListing', async () => {
-    // Dave is going to refresh his listing for dave.directory.algo
+  test('Dave refreshes listing', async () => {
+    // Dave is going to refresh the listing for dave.directory.algo
     const dave = await algorand.account.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }));
     algorand.setSignerFromAccount(dave);
     const daveAppClient = algorand.client.getTypedAppClientById(AlgoDirectoryClient, {
@@ -184,8 +184,8 @@ describe('AlgoDirectory', () => {
   });
 
   // Abandon a listing and confirm that the vouched collateral is returned
-  test('daveAbandonListing', async () => {
-    // Dave is going to abandon his listing for dave.directory.algo
+  test('Dave abandons listing', async () => {
+    // Dave is going to abandon the listing for dave.directory.algo
     const dave = await algorand.account.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }));
     algorand.setSignerFromAccount(dave);
     const daveAppClient = algorand.client.getTypedAppClientById(AlgoDirectoryClient, {
@@ -205,8 +205,83 @@ describe('AlgoDirectory', () => {
     expect(result.confirmation?.confirmedRound).toBeGreaterThan(0);
   });
 
+  // Create a listing and confirm that the two boxes are created as we expect
+  test('Beth creates listing', async () => {
+    // Beth is going to create a listing for beth.directory.algo
+    const beth = await algorand.account.fromEnvironment(BETH, new AlgoAmount({ algos: 0 }));
+    algorand.setSignerFromAccount(beth);
+    const bethTypedClient = algorand.client.getTypedAppClientById(AlgoDirectoryClient, {
+      appId: deployedAppID,
+      defaultSender: beth.addr,
+    });
+
+    const payTxn = await algorand.transactions.payment({
+      sender: beth.addr,
+      receiver: deployedAppAddress,
+      amount: (72200).microAlgo(), // Each listing 72_200 uA
+    });
+
+    const result = await bethTypedClient.send.createListing({
+      args: {
+        collateralPayment: payTxn,
+        nfdAppId: BETH_SEGMENT_APP_ID,
+        listingTags: new Uint8Array(13),
+      },
+      extraFee: (1000).microAlgo(),
+      populateAppCallResources: true,
+    });
+    console.debug('Create listing return: ', result.return);
+
+    expect(result.confirmations?.length).toBe(2);
+    expect(result.confirmation?.confirmedRound).toBeGreaterThan(0);
+  });
+
+  // Refresh an existing listing and confirm that the timestamp has been updated
+  test('Beth refreshes listing', async () => {
+    // Beth is going to refresh the listing for beth.directory.algo
+    const beth = await algorand.account.fromEnvironment(BETH, new AlgoAmount({ algos: 0 }));
+    algorand.setSignerFromAccount(beth);
+    const bethAppClient = algorand.client.getTypedAppClientById(AlgoDirectoryClient, {
+      appId: deployedAppID,
+      defaultSender: beth.addr,
+    });
+
+    const result = await bethAppClient.send.refreshListing({
+      args: {
+        nfdAppId: BETH_SEGMENT_APP_ID,
+      },
+      populateAppCallResources: true,
+    });
+    console.debug('Refresh return: ', result.return);
+
+    expect(result.confirmations?.length).toBe(1);
+    expect(result.confirmation?.confirmedRound).toBeGreaterThan(0);
+  });
+
+  // Abandon a listing and confirm that the vouched collateral is returned
+  test('Beth abandons listing', async () => {
+    // BETH is going to abandon the listing for beth.directory.algo
+    const beth = await algorand.account.fromEnvironment(BETH, new AlgoAmount({ algos: 0 }));
+    algorand.setSignerFromAccount(beth);
+    const bethAppClient = algorand.client.getTypedAppClientById(AlgoDirectoryClient, {
+      appId: deployedAppID,
+      defaultSender: beth.addr,
+    });
+
+    const result = await bethAppClient.send.abandonListing({
+      args: {
+        nfdAppId: BETH_SEGMENT_APP_ID,
+      },
+      extraFee: (1000).microAlgo(),
+      populateAppCallResources: true,
+    }); // No return value expected
+
+    expect(result.confirmations?.length).toBe(1);
+    expect(result.confirmation?.confirmedRound).toBeGreaterThan(0);
+  });
+
   // Create a listing, then delete it and confirm that the collateral is sent to the fee sink
-  test('daveCreateThenCreatorDelete', async () => {
+  test('Dave creates listing then Creator deletes it', async () => {
     // Step 1: Dave is going to create a listing for dave.directory.algo
     const dave = await algorand.account.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }));
     algorand.setSignerFromAccount(dave);
@@ -263,7 +338,7 @@ describe('AlgoDirectory', () => {
   test.each([
     [DAVE, DAVE_SEGMENT_APP_ID],
     [BETH, BETH_SEGMENT_APP_ID],
-  ])('%s create listing for app %s', async (name, segmentAppID) => {
+  ])('%s creates listing for app ID %s then abandons it', async (name, segmentAppID) => {
     const account = await algorand.account.fromEnvironment(name, new AlgoAmount({ algos: 0 }));
     algorand.setSignerFromAccount(account);
     const typedClient = algorand.client.getTypedAppClientById(AlgoDirectoryClient, {
@@ -277,7 +352,7 @@ describe('AlgoDirectory', () => {
       amount: (72200).microAlgo(), // Each listing 72_200 uA
     });
 
-    const result = await typedClient.send.createListing({
+    const createResult = await typedClient.send.createListing({
       args: {
         collateralPayment: payTxn,
         nfdAppId: segmentAppID,
@@ -286,10 +361,21 @@ describe('AlgoDirectory', () => {
       extraFee: (1000).microAlgo(),
       populateAppCallResources: true,
     });
-    console.debug(`${name} create listing return: `, result.return);
+    console.debug(`${name} create listing return: `, createResult.return);
 
-    expect(result.confirmations?.length).toBe(2);
-    expect(result.confirmation?.confirmedRound).toBeGreaterThan(0);
+    expect(createResult.confirmations?.length).toBe(2);
+    expect(createResult.confirmation?.confirmedRound).toBeGreaterThan(0);
+
+    const abandonResult = await typedClient.send.abandonListing({
+      args: {
+        nfdAppId: segmentAppID,
+      },
+      extraFee: (1000).microAlgo(),
+      populateAppCallResources: true,
+    }); // No return value expected
+
+    expect(abandonResult.confirmations?.length).toBe(1);
+    expect(abandonResult.confirmation?.confirmedRound).toBeGreaterThan(0);
   });
 
   /* ****************
@@ -297,13 +383,7 @@ describe('AlgoDirectory', () => {
   **************** */
 
   // Attempt to CREATE a listing with insufficient payment; expect failure
-  // test("Test description", () => {
-  //   const t = () => {
-  //     throw new TypeError();
-  //   };
-  //   expect(t).toThrow(TypeError);
-  // });
-  test('daveCreatesListingWithInsufficeintFunds', async () => {
+  test('Dave attempts create listing with insufficient collateral', async () => {
     // Get Daves account and NFD ready for creating a new dave.directory.algo listing
     const dave = await algorand.account.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }));
     algorand.setSignerFromAccount(dave);
@@ -321,7 +401,7 @@ describe('AlgoDirectory', () => {
       amount: (72100).microAlgo(), // Each listing 72_200 uA so fund it 100 less
     });
 
-    const t = async () => {
+    const negativeTest = async () => {
       try {
         await daveTypedClient.send.createListing({
           args: {
@@ -342,12 +422,12 @@ describe('AlgoDirectory', () => {
       }
     };
     // We expect the error message to be thrown
-    await expect(t).rejects.toThrow('Caller is not paying enough to vouch for the listing');
+    await expect(negativeTest).rejects.toThrow('Caller is not paying enough to vouch for the listing');
     console.debug('Caller is not paying enough to vouch for the listing, expected error thrown!');
   });
 
-  // Attempt to CREATE a listing that is not a segment of directory.algo; expect failure
-  test('daveCreatesListingWithoutSegment', async () => {
+  // Attempt to CREATE a listing that is not a segment at all but some root NFD; expect failure
+  test('Dave attempts to create listing for root NFD (not segment)', async () => {
     // Dave is going to create a listing for notdirectory.algo, but it's not a segment of directory.algo
     // For this test just provide an NFD that's not a segment of directory.algo with any account as DAVE
     // Make sure DAVE_NOT_SEGMENT_APP_ID is not a segment of directory.algo, but is owned by DAVE and not for sale
@@ -364,7 +444,7 @@ describe('AlgoDirectory', () => {
       amount: (72200).microAlgo(), // Each listing 72_200 uA
     });
 
-    const t = async () => {
+    const negativeTest = async () => {
       try {
         await daveTypedClient.send.createListing({
           args: {
@@ -385,12 +465,15 @@ describe('AlgoDirectory', () => {
         }
       }
     };
-    await expect(t).rejects.toThrow('NFD must be a segment of directory.algo');
+    await expect(negativeTest).rejects.toThrow('NFD must be a segment of directory.algo');
     console.debug('NFD must be a segment of directory.algo, expected error thrown!');
   });
 
+  // TODO: Attempt to CREATE a listing for an NFD that is a segment but of some other root; expect failure
+  // Note additional .env.template var DAVE_WRONG_SEGMENT_APP_ID
+
   // Attempt to CREATE a listing for an NFD the caller doesn't own; expect failure (DAVE create for beth.directory.algo)
-  test('daveCreateListingForBethAndFails', async () => {
+  test('Dave attempts to create listing for Beth', async () => {
     // Dave is going to create a listing for beth.directory.algo
     const dave = await algorand.account.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }));
     algorand.setSignerFromAccount(dave);
@@ -435,11 +518,11 @@ describe('AlgoDirectory', () => {
   /** Just need to figure out the betanet and expired NFD creation */
 
   // Attempt to CREATE a listing for an NFD that is listed for sale; expect failure
-  test('bethCreatesListingWithForSaleSegment', async () => {
+  test('Beth attempts to create listing for segment listed for sale', async () => {
     // Beth is going to create a listing for forsale.directory.algo, she currently owns the segment, but
     // it is listed for sale. First we need to make sure the segment is listed for sale
     const nfdInfo = await fetch(
-      `https://api.testnet.nf.domains/nfd/${FORSALE_SEGMENT_APP_ID}?view=brief&poll=false&nocache=false`,
+      `https://api.testnet.nf.domains/nfd/${FOR_SALE_SEGMENT_APP_ID}?view=brief&poll=false&nocache=false`,
       {
         method: 'GET',
         headers: {
@@ -517,12 +600,12 @@ describe('AlgoDirectory', () => {
     });
 
     // Attempt to create a listing for forsale.directory.algo
-    const t = async () => {
+    const negativeTest = async () => {
       try {
         await bethTypedClient.send.createListing({
           args: {
             collateralPayment: payTxn,
-            nfdAppId: FORSALE_SEGMENT_APP_ID,
+            nfdAppId: FOR_SALE_SEGMENT_APP_ID,
             listingTags: new Uint8Array(13),
           },
           extraFee: (1000).microAlgo(),
@@ -539,12 +622,12 @@ describe('AlgoDirectory', () => {
       }
     };
     // We expect the error message to be thrown
-    await expect(t).rejects.toThrow('NFD segment must not be listed for sale');
+    await expect(negativeTest).rejects.toThrow('NFD segment must not be listed for sale');
     console.debug('NFD segment must not be listed for sale, expected error thrown!');
   });
 
   // Attempt to REFRESH a listing for an NFD the caller doesn't own; expect failure (BETH create listing and DAVE attempt to refresh it)
-  test('daveRefreshesListingForBethAndFails', async () => {
+  test('Dave attempts to refresh listing for Beth', async () => {
     // Create a listing for beth.directory.algo
     const beth = await algorand.account.fromEnvironment(BETH, new AlgoAmount({ algos: 0 }));
     algorand.setSignerFromAccount(beth);
@@ -584,7 +667,7 @@ describe('AlgoDirectory', () => {
 
     // Dave is going to attempt to refresh beth's listing for beth.directory.algo, but will fail
     // on checkCallerIsListingOwner()
-    const t = async () => {
+    const negativeTest = async () => {
       try {
         await daveTypedClient.send.refreshListing({
           args: {
@@ -600,7 +683,7 @@ describe('AlgoDirectory', () => {
           throw e;
         }
       } finally {
-        // Beth is going to abandon her listing that dave tried to refresh even if the error thrown isnt
+        // Beth is going to abandon her listing that Dave tried to refresh even if the error thrown isnt
         // the one we expected
         const abandonResult = await bethTypedClient.send.abandonListing({
           args: {
@@ -614,7 +697,7 @@ describe('AlgoDirectory', () => {
         console.debug('Clean Up: Successfully abandoned listing for beth.directory.algo');
       }
     };
-    await expect(t).rejects.toThrow('Caller must be listing owner');
+    await expect(negativeTest).rejects.toThrow('Caller must be listing owner');
     console.debug('Caller must be listing owner, expected error thrown!');
   });
 
@@ -622,11 +705,11 @@ describe('AlgoDirectory', () => {
   /** Need to figure out the expired NFD part first */
 
   // Attempt to REFRESH a listing for an NFD that is listed for sale; expect failure
-  test('bethRefreshesListingWithForSaleSegment', async () => {
+  test('Beth attempts to refresh listing for segment listed for sale', async () => {
     // Beth has a listing for forsalewithlisting.directory.algo and will try to refresh it
 
     // We'll check to see if the segment has a directory listing first, and if it doesn't we'll create a listing
-    // Setup beth and daves account in case we need to create a listing and/or put the segment for sale
+    // Setup Beth's and Dave's accounts in case we need to create a listing and/or put the segment for sale
     const beth = await algorand.account.fromEnvironment(BETH, new AlgoAmount({ algos: 0 }));
     const dave = await algorand.account.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }));
     algorand.setSignerFromAccount(beth);
@@ -645,7 +728,7 @@ describe('AlgoDirectory', () => {
     // Check if the segment has a directory listing
     try {
       // Check the directory listing for forsalewithlisting.directory.algo
-      const encodedAppId = encodeUint64(FORSALE_WITH_LISTING_SEGMENT_APP_ID);
+      const encodedAppId = encodeUint64(FOR_SALE_WITH_LISTING_SEGMENT_APP_ID);
       await algorand.app.getBoxValue(deployedAppID, encodedAppId);
       throw new TypeError('Segment has a directory listing');
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -656,7 +739,7 @@ describe('AlgoDirectory', () => {
         const createResult = await bethTypedClient.send.createListing({
           args: {
             collateralPayment: payTxn,
-            nfdAppId: FORSALE_WITH_LISTING_SEGMENT_APP_ID,
+            nfdAppId: FOR_SALE_WITH_LISTING_SEGMENT_APP_ID,
             listingTags: new Uint8Array(13),
           },
           extraFee: (1000).microAlgo(),
@@ -667,13 +750,13 @@ describe('AlgoDirectory', () => {
         expect(createResult.confirmations?.length).toBe(2);
         expect(createResult.confirmation?.confirmedRound).toBeGreaterThan(0);
       } else {
-        console.debug(`${FORSALE_WITH_LISTING_SEGMENT_APP_ID} app ID has a directory listing`);
+        console.debug(`${FOR_SALE_WITH_LISTING_SEGMENT_APP_ID} app ID has a directory listing`);
       }
     } // end of checking if the segment has a directory listing
 
     // Check if the segment is listed for sale, if it's not listed for sale, we'll list it
     const nfdInfo = await fetch(
-      `https://api.testnet.nf.domains/nfd/${FORSALE_WITH_LISTING_SEGMENT_APP_ID}?view=brief&poll=false&nocache=false`,
+      `https://api.testnet.nf.domains/nfd/${FOR_SALE_WITH_LISTING_SEGMENT_APP_ID}?view=brief&poll=false&nocache=false`,
       {
         method: 'GET',
         headers: {
@@ -733,11 +816,11 @@ describe('AlgoDirectory', () => {
     } // end of listing the segment for sale
 
     // Have Beth refresh the listing for forsalewithlisting.directory.algo
-    const t = async () => {
+    const negativeTest = async () => {
       try {
         await bethTypedClient.send.refreshListing({
           args: {
-            nfdAppId: FORSALE_WITH_LISTING_SEGMENT_APP_ID,
+            nfdAppId: FOR_SALE_WITH_LISTING_SEGMENT_APP_ID,
           },
           populateAppCallResources: true,
         });
@@ -749,12 +832,12 @@ describe('AlgoDirectory', () => {
       }
     };
     // We expect an error message to be thrown
-    await expect(t).rejects.toThrow('NFD segment must not be listed for sale');
+    await expect(negativeTest).rejects.toThrow('NFD segment must not be listed for sale');
     console.debug('NFD segment must not be listed for sale, expected error thrown!');
   });
 
   // Attempt to ABANDON a listing that the caller doesn't own; expect failure (BETH create listing and DAVE attempt to abandon it)
-  test('daveAbandonsListingForBethAndFails', async () => {
+  test('Dave attempts to abandon listing by Beth', async () => {
     // Create a listing for beth.directory.algo
     const beth = await algorand.account.fromEnvironment(BETH, new AlgoAmount({ algos: 0 }));
     algorand.setSignerFromAccount(beth);
@@ -794,7 +877,7 @@ describe('AlgoDirectory', () => {
 
     // Dave is going to attempt to abandon beth's listing for beth.directory.algo, but will fail
     // on checkCallerIsListingOwner()
-    const t = async () => {
+    const negativeTest = async () => {
       try {
         await daveTypedClient.send.abandonListing({
           args: {
@@ -809,7 +892,7 @@ describe('AlgoDirectory', () => {
           throw new TypeError('Caller must be listing owner');
         } else throw e;
       } finally {
-        // Beth is going to abandon her listing that dave tried to abandon even if the error thrown isnt
+        // Beth is going to abandon her listing that Dave tried to abandon even if the error thrown isnt
         // the one we expected
         const abandonResult = await bethTypedClient.send.abandonListing({
           args: {
@@ -823,12 +906,12 @@ describe('AlgoDirectory', () => {
         console.debug('Clean Up: Successfully abandoned listing for beth.directory.algo');
       }
     };
-    await expect(t).rejects.toThrow('Caller must be listing owner');
+    await expect(negativeTest).rejects.toThrow('Caller must be listing owner');
     console.debug('Caller must be listing owner, expected error thrown!');
   });
 
   // Attempt to DELETE a listing without having the admin token; expect failure (BETH create listing and DAVE attempt to delete it)
-  test('bethCreatesListingThenDaveAttemptsDelete', async () => {
+  test('Beth creates listing and Dave attempts to delete it', async () => {
     // Step 1: Beth is going to create a listing for beth.directory.algo
     const beth = await algorand.account.fromEnvironment(BETH, new AlgoAmount({ algos: 0 }));
     algorand.setSignerFromAccount(beth);
@@ -864,7 +947,7 @@ describe('AlgoDirectory', () => {
       appId: deployedAppID,
       defaultSender: dave.addr,
     });
-    const t = async () => {
+    const negativeTest = async () => {
       try {
         await daveTypedClient.send.deleteListing({
           args: {
@@ -881,7 +964,7 @@ describe('AlgoDirectory', () => {
           throw e;
         }
       } finally {
-        // Beth is going to abandon her listing that dave tried to delete even if the error thrown isnt
+        // Beth is going to abandon her listing that Dave tried to delete even if the error thrown isnt
         // the one we expected, clean up the listing
         const abandonResult = await bethTypedClient.send.abandonListing({
           args: {
@@ -896,7 +979,7 @@ describe('AlgoDirectory', () => {
       }
     };
     // Expect the error message to be thrown
-    await expect(t).rejects.toThrow('Caller must have the admin token');
+    await expect(negativeTest).rejects.toThrow('Caller must have the admin token');
     console.debug('Caller must have the admin token, expected error thrown!');
   });
 
