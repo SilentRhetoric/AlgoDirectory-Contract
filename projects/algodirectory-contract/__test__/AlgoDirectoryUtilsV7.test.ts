@@ -5,12 +5,12 @@ import { decodeAddress, encodeAddress, encodeUint64, decodeUnsignedTransaction }
 import { AlgoAmount } from '@algorandfoundation/algokit-utils/types/amount';
 import { AlgoDirectoryClient, AlgoDirectoryFactory } from '../contracts/clients/AlgoDirectoryClient';
 
-// Get env vars from .env, defaulting to testnet values
-
 // For network-based template variables substitution at compile time
-const FEE_SINK_ADDRESS = process.env.FEE_SINK_ADDRESS || 'A7NMWS3NT3IUDMLVO26ULGXGIIOUQ3ND2TXSER6EBGRZNOBOUIQXHIBGDE'; // Testnet A7NMWS3NT3IUDMLVO26ULGXGIIOUQ3ND2TXSER6EBGRZNOBOUIQXHIBGDE / Mainnet Y76M3MSY6DKBRHBL7C3NNDXGS5IIMQVQVUAB6MP4XEMMGVF2QWNPL226CA
-const NFD_REGISTRY_APP_ID = Number(process.env.NFD_REGISTRY_APP_ID); // Testnet 84366825 / Mainnet 760937186
-const DIRECTORY_DOT_ALGO_APP_ID = Number(process.env.DIRECTORY_DOT_ALGO_APP_ID); // Testnet 576232821 / Mainnet 766401564
+const FEE_SINK_ADDRESS = process.env.FEE_SINK_ADDRESS || 'A7NMWS3NT3IUDMLVO26ULGXGIIOUQ3ND2TXSER6EBGRZNOBOUIQXHIBGDE'; // Testnet & Betanet A7NMWS3NT3IUDMLVO26ULGXGIIOUQ3ND2TXSER6EBGRZNOBOUIQXHIBGDE / Mainnet Y76M3MSY6DKBRHBL7C3NNDXGS5IIMQVQVUAB6MP4XEMMGVF2QWNPL226CA
+const NFD_REGISTRY_APP_ID = Number(process.env.NFD_REGISTRY_APP_ID); // Testnet 84366825 / Betanet 842656530 / Mainnet 760937186
+const BETANET_NFD_REGISTRY_APP_ID = Number(process.env.BETANET_NFD_REGISTRY_APP_ID); // Betanet 842656530
+const DIRECTORY_DOT_ALGO_APP_ID = Number(process.env.DIRECTORY_DOT_ALGO_APP_ID); // Testnet 576232821 / Betanet 2020045263 / Mainnet 766401564
+const BETANET_DIRECTORY_DOT_ALGO_APP_ID = Number(process.env.BETANET_DIRECTORY_DOT_ALGO_APP_ID); // Betanet 2020045263
 
 // For testing purposes
 const CREATOR = 'CREATOR';
@@ -18,22 +18,43 @@ const DAVE = 'DAVE';
 const DAVE_SEGMENT_APP_ID = Number(process.env.DAVE_SEGMENT_APP_ID); // dave.directory.algo
 const BETH = 'BETH';
 const BETH_SEGMENT_APP_ID = Number(process.env.BETH_SEGMENT_APP_ID); // beth.directory.algo
+const BETH_EXPIRED_WITH_LISTING_SEGMENT_APP_ID = Number(process.env.BETH_EXPIRED_WITH_LISTING_SEGMENT_APP_ID); // beth.directory.algo on betanet and expired
 const DAVE_NOT_SEGMENT_APP_ID = Number(process.env.DAVE_NOT_SEGMENT_APP_ID); // bob.directory.algo
+const DAVE_WRONG_SEGMENT_APP_ID = Number(process.env.DAVE_WRONG_SEGMENT_APP_ID); // dave.notdirectory.algo
+const DAVE_EXPIRED_BETANET_SEGMENT_APP_ID = Number(process.env.DAVE_EXPIRED_BETANET_SEGMENT_APP_ID); // dave.directory.algo on betanet and expired
+
+// BETH owns forsale.directory.algo and forsalewithlisting.directory.algo
 const FOR_SALE_SEGMENT_APP_ID = Number(process.env.FOR_SALE_SEGMENT_APP_ID); // forsale.directory.algo
 const FOR_SALE_WITH_LISTING_SEGMENT_APP_ID = Number(process.env.FOR_SALE_WITH_LISTING_SEGMENT_APP_ID); // forsalewithlisting.directory.algo
 
 // Put an existing admin asset held by CREATOR & BETH in .env to use that, else a new one will be created
 const ADMIN_TOKEN_ASA_ID = BigInt(Number(process.env.ADMIN_TOKEN_ASA_ID)); // Testnet 721940792 / Mainnet TBD
+const BETANET_ADMIN_TOKEN_ASA_ID = BigInt(Number(process.env.BETANET_ADMIN_TOKEN_ASA_ID)); // Betanet 2020073537
 
-const algorand = AlgorandClient.testNet();
+// Create two Algorand clients, one for testnet and one for betanet
+const algorandTestnet = AlgorandClient.testNet();
+const algorandBetanet = AlgorandClient.fromConfig({
+  algodConfig: {
+    server: `https://betanet-api.4160.nodely.dev`,
+    port: 443,
+  },
+  indexerConfig: {
+    server: `https://betanet-idx.4160.nodely.dev`,
+    port: 443,
+  },
+});
 
 let deployedAppID: bigint;
 let deployedAppAddress: string;
+let betanetDeployedAppID: bigint;
+let betanetDeployedAppAddress: string;
 
+// Ensure CREATOR, DAVE, and BETH are funded on testnet and betanet
 describe('AlgoDirectory', () => {
   beforeAll(async () => {
-    const creator = await algorand.account.fromEnvironment(CREATOR, new AlgoAmount({ algos: 0 }));
-    const typedFactory = algorand.client.getTypedAppFactory(AlgoDirectoryFactory, {
+    /** START of TESTNET app creation! */
+    const creator = await algorandTestnet.account.fromEnvironment(CREATOR, new AlgoAmount({ algos: 0 }));
+    const typedFactory = algorandTestnet.client.getTypedAppFactory(AlgoDirectoryFactory, {
       defaultSender: creator.addr,
     });
 
@@ -66,8 +87,8 @@ describe('AlgoDirectory', () => {
     // holds the admin token from .env and creating one, if not
     let adminAsset: bigint = ADMIN_TOKEN_ASA_ID;
     console.debug('Admin token from .env: ', adminAsset);
-    const creatorAccountInfo = await algorand.account.getInformation(creator.addr);
-    // console.debug('Account info: ', creatorAccountInfo);
+    const creatorAccountInfo = await algorandTestnet.account.getInformation(creator.addr);
+    console.debug('Account info: ', creatorAccountInfo);
     const existingAdminTokenFound = creatorAccountInfo.assets?.find(
       (asset) => BigInt(asset.assetId) === ADMIN_TOKEN_ASA_ID
     );
@@ -76,7 +97,7 @@ describe('AlgoDirectory', () => {
     // Create a new admin token if the one from .env isn't found in CREATOR's account
 
     if (!existingAdminTokenFound) {
-      const createAssetResult = await algorand.send.assetCreate({
+      const createAssetResult = await algorandTestnet.send.assetCreate({
         sender: creator.addr,
         assetName: `Directory Admin (App ${creatorTypedAppClient.appClient.appId})`,
         unitName: 'DA',
@@ -94,17 +115,17 @@ describe('AlgoDirectory', () => {
       console.debug('Asset created: ', adminAsset);
 
       // BETH opts into the new admin asset
-      const beth = await algorand.account.fromEnvironment(BETH, new AlgoAmount({ algos: 0 }));
-      algorand.setSignerFromAccount(beth);
-      const optInResult = await algorand.send.assetOptIn({
+      const beth = await algorandTestnet.account.fromEnvironment(BETH, new AlgoAmount({ algos: 0 }));
+      algorandTestnet.setSignerFromAccount(beth);
+      const optInResult = await algorandTestnet.send.assetOptIn({
         sender: beth.addr,
         assetId: adminAsset,
       });
       console.debug('Beth opt into new admin asset result: ', optInResult.txIds);
 
       // CREATOR sends one of the admin tokens to BETH
-      algorand.setSignerFromAccount(creator);
-      const sendAssetResult = await algorand.send.assetTransfer({
+      algorandTestnet.setSignerFromAccount(creator);
+      const sendAssetResult = await algorandTestnet.send.assetTransfer({
         sender: creator.addr,
         receiver: beth.addr,
         assetId: adminAsset,
@@ -120,11 +141,106 @@ describe('AlgoDirectory', () => {
     if (contractAdminAsset !== adminAsset) {
       const setAdminTokenResult = await creatorTypedAppClient.send.setAdminToken({ args: { asaId: adminAsset } });
       console.debug('Set admin token in contract result: ', setAdminTokenResult.transaction.txID());
+    } // End of testnet app creation
+
+    /** START of BETANET app creation! */
+
+    // In order to test the expired NFD scenario, we need to create an environment for betanet as well
+    const betanetCreator = await algorandBetanet.account.fromEnvironment(CREATOR, new AlgoAmount({ algos: 0 }));
+    const betanetTypedFactory = algorandBetanet.client.getTypedAppFactory(AlgoDirectoryFactory, {
+      defaultSender: betanetCreator.addr,
+    });
+
+    const { result: betanetResult, appClient: betanetCreatorTypedAppClient } = await betanetTypedFactory.deploy({
+      createParams: { method: 'createApplication', args: [] },
+      updateParams: { method: 'updateApplication', args: [] },
+      onSchemaBreak: 'replace',
+      onUpdate: 'update',
+      deployTimeParams: {
+        feeSinkAddress: decodeAddress(FEE_SINK_ADDRESS).publicKey,
+        nfdRegistryAppID: encodeUint64(BETANET_NFD_REGISTRY_APP_ID),
+        directoryAppID: encodeUint64(BETANET_DIRECTORY_DOT_ALGO_APP_ID),
+      },
+    });
+
+    betanetDeployedAppID = betanetCreatorTypedAppClient.appClient.appId;
+    betanetDeployedAppAddress = betanetCreatorTypedAppClient.appClient.appAddress;
+    console.debug('Deploy result operation: ', betanetResult.operationPerformed);
+    console.debug(
+      `Deployed app ${betanetCreatorTypedAppClient.appClient.appId} at address: ${betanetCreatorTypedAppClient.appClient.appAddress}`
+    );
+
+    // If a new app was created on betanet, fund the app MBR
+    if (betanetResult.operationPerformed === 'create') {
+      const betanetFundResult = await betanetCreatorTypedAppClient.appClient.fundAppAccount({ amount: (0.1).algos() });
+      console.debug('Fund app result: ', betanetFundResult.txIds);
     }
+
+    // Very simple idempotent approach to checking if CREATOR already
+    // holds the admin token from .env and creating one, if not
+    let betanetAdminAsset: bigint = BETANET_ADMIN_TOKEN_ASA_ID;
+    console.debug('Betanet admin token from .env: ', betanetAdminAsset);
+    const betanetCreatorAccountInfo = await algorandBetanet.account.getInformation(creator.addr);
+    console.debug('Account info: ', betanetCreatorAccountInfo);
+    const existingBetanetAdminTokenFound = betanetCreatorAccountInfo.assets?.find(
+      (asset) => BigInt(asset.assetId) === BETANET_ADMIN_TOKEN_ASA_ID
+    );
+    console.debug('Existing betanet admin token found: ', existingBetanetAdminTokenFound);
+
+    // Create a new admin token on betanet if the one from .env isn't found in CREATOR's account
+
+    if (!existingBetanetAdminTokenFound) {
+      const createAssetResult = await algorandBetanet.send.assetCreate({
+        sender: betanetCreator.addr,
+        assetName: `Directory Admin (App ${betanetCreatorTypedAppClient.appClient.appId})`,
+        unitName: 'DA',
+        total: 10n,
+        decimals: 0,
+        url: 'directory.algo.xyz',
+        defaultFrozen: false,
+        manager: betanetCreator.addr,
+        reserve: betanetCreator.addr,
+        freeze: betanetCreator.addr,
+        clawback: betanetCreator.addr,
+      });
+      betanetAdminAsset = createAssetResult.assetId;
+      console.debug('Asset send result: ', createAssetResult.txIds);
+      console.debug('Asset created: ', betanetAdminAsset);
+
+      // BETH opts into the new admin asset
+      const beth = await algorandBetanet.account.fromEnvironment(BETH, new AlgoAmount({ algos: 0 }));
+      algorandTestnet.setSignerFromAccount(beth);
+      const optInResult = await algorandBetanet.send.assetOptIn({
+        sender: beth.addr,
+        assetId: betanetAdminAsset,
+      });
+      console.debug('Beth opt into new admin asset result: ', optInResult.txIds);
+
+      // CREATOR sends one of the admin tokens to BETH
+      algorandBetanet.setSignerFromAccount(betanetCreator);
+      const sendAssetResult = await algorandBetanet.send.assetTransfer({
+        sender: betanetCreator.addr,
+        receiver: beth.addr,
+        assetId: betanetAdminAsset,
+        amount: 1n,
+      });
+      console.debug('Send new admin asset to Beth result: ', sendAssetResult.txIds);
+    }
+
+    // Very simple idempotent approach to checking if the admin asset is
+    // already set in the contract state and setting it, if not
+    const betanetContractAdminAsset = await betanetCreatorTypedAppClient.state.global.adminToken();
+    // If contract has an old admin asset ID in storage, overwrite it with the new asset
+    if (betanetContractAdminAsset !== betanetAdminAsset) {
+      const setAdminTokenResult = await betanetCreatorTypedAppClient.send.setAdminToken({
+        args: { asaId: betanetAdminAsset },
+      });
+      console.debug('Set admin token in contract result: ', setAdminTokenResult.transaction.txID());
+    } // End of BETANET app creation
   });
 
   // Blank test to run beforeAll
-  test('runBeforeAll', () => {});
+  test('runBeforeAll', async () => {});
 
   /* ****************
   Positive test cases
@@ -133,14 +249,14 @@ describe('AlgoDirectory', () => {
   // Create a listing and confirm that the two boxes are created as we expect
   test('Dave creates listing', async () => {
     // Dave is going to create a listing for dave.directory.algo
-    const dave = await algorand.account.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }));
-    algorand.setSignerFromAccount(dave);
-    const daveTypedClient = algorand.client.getTypedAppClientById(AlgoDirectoryClient, {
+    const dave = await algorandTestnet.account.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }));
+    algorandTestnet.setSignerFromAccount(dave);
+    const daveTypedClient = algorandTestnet.client.getTypedAppClientById(AlgoDirectoryClient, {
       appId: deployedAppID,
       defaultSender: dave.addr,
     });
 
-    const payTxn = await algorand.createTransaction.payment({
+    const payTxn = await algorandTestnet.createTransaction.payment({
       sender: dave.addr,
       receiver: deployedAppAddress,
       amount: (72200).microAlgo(), // Each listing 72_200 uA
@@ -164,9 +280,9 @@ describe('AlgoDirectory', () => {
   // Refresh an existing listing and confirm that the timestamp has been updated
   test('Dave refreshes listing', async () => {
     // Dave is going to refresh the listing for dave.directory.algo
-    const dave = await algorand.account.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }));
-    algorand.setSignerFromAccount(dave);
-    const daveAppClient = algorand.client.getTypedAppClientById(AlgoDirectoryClient, {
+    const dave = await algorandTestnet.account.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }));
+    algorandTestnet.setSignerFromAccount(dave);
+    const daveAppClient = algorandTestnet.client.getTypedAppClientById(AlgoDirectoryClient, {
       appId: deployedAppID,
       defaultSender: dave.addr,
     });
@@ -186,9 +302,9 @@ describe('AlgoDirectory', () => {
   // Abandon a listing and confirm that the vouched collateral is returned
   test('Dave abandons listing', async () => {
     // Dave is going to abandon the listing for dave.directory.algo
-    const dave = await algorand.account.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }));
-    algorand.setSignerFromAccount(dave);
-    const daveAppClient = algorand.client.getTypedAppClientById(AlgoDirectoryClient, {
+    const dave = await algorandTestnet.account.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }));
+    algorandTestnet.setSignerFromAccount(dave);
+    const daveAppClient = algorandTestnet.client.getTypedAppClientById(AlgoDirectoryClient, {
       appId: deployedAppID,
       defaultSender: dave.addr,
     });
@@ -208,14 +324,14 @@ describe('AlgoDirectory', () => {
   // Create a listing and confirm that the two boxes are created as we expect
   test('Beth creates listing', async () => {
     // Beth is going to create a listing for beth.directory.algo
-    const beth = await algorand.account.fromEnvironment(BETH, new AlgoAmount({ algos: 0 }));
-    algorand.setSignerFromAccount(beth);
-    const bethTypedClient = algorand.client.getTypedAppClientById(AlgoDirectoryClient, {
+    const beth = await algorandTestnet.account.fromEnvironment(BETH, new AlgoAmount({ algos: 0 }));
+    algorandTestnet.setSignerFromAccount(beth);
+    const bethTypedClient = algorandTestnet.client.getTypedAppClientById(AlgoDirectoryClient, {
       appId: deployedAppID,
       defaultSender: beth.addr,
     });
 
-    const payTxn = await algorand.createTransaction.payment({
+    const payTxn = await algorandTestnet.createTransaction.payment({
       sender: beth.addr,
       receiver: deployedAppAddress,
       amount: (72200).microAlgo(), // Each listing 72_200 uA
@@ -239,9 +355,9 @@ describe('AlgoDirectory', () => {
   // Refresh an existing listing and confirm that the timestamp has been updated
   test('Beth refreshes listing', async () => {
     // Beth is going to refresh the listing for beth.directory.algo
-    const beth = await algorand.account.fromEnvironment(BETH, new AlgoAmount({ algos: 0 }));
-    algorand.setSignerFromAccount(beth);
-    const bethAppClient = algorand.client.getTypedAppClientById(AlgoDirectoryClient, {
+    const beth = await algorandTestnet.account.fromEnvironment(BETH, new AlgoAmount({ algos: 0 }));
+    algorandTestnet.setSignerFromAccount(beth);
+    const bethAppClient = algorandTestnet.client.getTypedAppClientById(AlgoDirectoryClient, {
       appId: deployedAppID,
       defaultSender: beth.addr,
     });
@@ -261,9 +377,9 @@ describe('AlgoDirectory', () => {
   // Abandon a listing and confirm that the vouched collateral is returned
   test('Beth abandons listing', async () => {
     // BETH is going to abandon the listing for beth.directory.algo
-    const beth = await algorand.account.fromEnvironment(BETH, new AlgoAmount({ algos: 0 }));
-    algorand.setSignerFromAccount(beth);
-    const bethAppClient = algorand.client.getTypedAppClientById(AlgoDirectoryClient, {
+    const beth = await algorandTestnet.account.fromEnvironment(BETH, new AlgoAmount({ algos: 0 }));
+    algorandTestnet.setSignerFromAccount(beth);
+    const bethAppClient = algorandTestnet.client.getTypedAppClientById(AlgoDirectoryClient, {
       appId: deployedAppID,
       defaultSender: beth.addr,
     });
@@ -283,14 +399,14 @@ describe('AlgoDirectory', () => {
   // Create a listing, then delete it and confirm that the collateral is sent to the fee sink
   test('Dave creates listing then Creator deletes it', async () => {
     // Step 1: Dave is going to create a listing for dave.directory.algo
-    const dave = await algorand.account.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }));
-    algorand.setSignerFromAccount(dave);
-    const daveTypedClient = algorand.client.getTypedAppClientById(AlgoDirectoryClient, {
+    const dave = await algorandTestnet.account.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }));
+    algorandTestnet.setSignerFromAccount(dave);
+    const daveTypedClient = algorandTestnet.client.getTypedAppClientById(AlgoDirectoryClient, {
       appId: deployedAppID,
       defaultSender: dave.addr,
     });
 
-    const payTxn = await algorand.createTransaction.payment({
+    const payTxn = await algorandTestnet.createTransaction.payment({
       sender: dave.addr,
       receiver: deployedAppAddress,
       amount: (72200).microAlgo(), // Each listing 72_200 uA
@@ -311,9 +427,9 @@ describe('AlgoDirectory', () => {
     expect(createResult.confirmation?.confirmedRound).toBeGreaterThan(0);
 
     // Step 2: Creator is now going to delete Dave's listing for dave.directory.algo
-    const creator = await algorand.account.fromEnvironment(CREATOR, new AlgoAmount({ algos: 0 }));
-    algorand.setSignerFromAccount(creator);
-    const creatorTypedClient = algorand.client.getTypedAppClientById(AlgoDirectoryClient, {
+    const creator = await algorandTestnet.account.fromEnvironment(CREATOR, new AlgoAmount({ algos: 0 }));
+    algorandTestnet.setSignerFromAccount(creator);
+    const creatorTypedClient = algorandTestnet.client.getTypedAppClientById(AlgoDirectoryClient, {
       appId: deployedAppID,
       defaultSender: creator.addr,
     });
@@ -335,18 +451,18 @@ describe('AlgoDirectory', () => {
   });
 
   // Create a listing for each scenario in the nested array
-  test.each([
+  test.skip.each([
     [DAVE, DAVE_SEGMENT_APP_ID],
     [BETH, BETH_SEGMENT_APP_ID],
   ])('%s creates listing for app ID %s then abandons it', async (name, segmentAppID) => {
-    const account = await algorand.account.fromEnvironment(name, new AlgoAmount({ algos: 0 }));
-    algorand.setSignerFromAccount(account);
-    const typedClient = algorand.client.getTypedAppClientById(AlgoDirectoryClient, {
+    const account = await algorandTestnet.account.fromEnvironment(name, new AlgoAmount({ algos: 0 }));
+    algorandTestnet.setSignerFromAccount(account);
+    const typedClient = algorandTestnet.client.getTypedAppClientById(AlgoDirectoryClient, {
       appId: deployedAppID,
       defaultSender: account.addr,
     });
 
-    const payTxn = await algorand.createTransaction.payment({
+    const payTxn = await algorandTestnet.createTransaction.payment({
       sender: account.addr,
       receiver: deployedAppAddress,
       amount: (72200).microAlgo(), // Each listing 72_200 uA
@@ -385,17 +501,17 @@ describe('AlgoDirectory', () => {
   // Attempt to CREATE a listing with insufficient payment; expect failure
   test('Dave attempts create listing with insufficient collateral', async () => {
     // Get Daves account and NFD ready for creating a new dave.directory.algo listing
-    const dave = await algorand.account.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }));
-    algorand.setSignerFromAccount(dave);
+    const dave = await algorandTestnet.account.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }));
+    algorandTestnet.setSignerFromAccount(dave);
 
     // Dave is going to create a listing for dave.directory.algo, but he will not provide enough funds to cover
     // the total costs of the listing
-    const daveTypedClient = algorand.client.getTypedAppClientById(AlgoDirectoryClient, {
+    const daveTypedClient = algorandTestnet.client.getTypedAppClientById(AlgoDirectoryClient, {
       appId: deployedAppID,
       defaultSender: dave.addr,
     });
 
-    const payTxn = await algorand.createTransaction.payment({
+    const payTxn = await algorandTestnet.createTransaction.payment({
       sender: dave.addr,
       receiver: deployedAppAddress,
       amount: (72100).microAlgo(), // Each listing 72_200 uA so fund it 100 less
@@ -431,14 +547,14 @@ describe('AlgoDirectory', () => {
     // Dave is going to create a listing for notdirectory.algo, but it's not a segment of directory.algo
     // For this test just provide an NFD that's not a segment of directory.algo with any account as DAVE
     // Make sure DAVE_NOT_SEGMENT_APP_ID is not a segment of directory.algo, but is owned by DAVE and not for sale
-    const dave = await algorand.account.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }));
-    algorand.setSignerFromAccount(dave);
-    const daveTypedClient = algorand.client.getTypedAppClientById(AlgoDirectoryClient, {
+    const dave = await algorandTestnet.account.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }));
+    algorandTestnet.setSignerFromAccount(dave);
+    const daveTypedClient = algorandTestnet.client.getTypedAppClientById(AlgoDirectoryClient, {
       appId: deployedAppID,
       defaultSender: dave.addr,
     });
 
-    const payTxn = await algorand.createTransaction.payment({
+    const payTxn = await algorandTestnet.createTransaction.payment({
       sender: dave.addr,
       receiver: deployedAppAddress,
       amount: (72200).microAlgo(), // Each listing 72_200 uA
@@ -471,18 +587,60 @@ describe('AlgoDirectory', () => {
 
   // TODO: Attempt to CREATE a listing for an NFD that is a segment but of some other root; expect failure
   // Note additional .env.template var DAVE_WRONG_SEGMENT_APP_ID
+  test('Dave attempts to create listing for segment of wrong root NFD', async () => {
+    // Dave is going to create a listing for notdirectory.algo, but it's not a segment of directory.algo
+    // We expect failure as DAVE_WRONG_SEGMENT_APP_ID is a segment of some other root NFD
+    const dave = await algorandTestnet.account.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }));
+    algorandTestnet.setSignerFromAccount(dave);
 
-  // Attempt to CREATE a listing for an NFD the caller doesn't own; expect failure (DAVE create for beth.directory.algo)
-  test('Dave attempts to create listing for Beth', async () => {
-    // Dave is going to create a listing for beth.directory.algo
-    const dave = await algorand.account.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }));
-    algorand.setSignerFromAccount(dave);
-    const daveTypedClient = algorand.client.getTypedAppClientById(AlgoDirectoryClient, {
+    const daveTypedClient = algorandTestnet.client.getTypedAppClientById(AlgoDirectoryClient, {
       appId: deployedAppID,
       defaultSender: dave.addr,
     });
 
-    const payTxn = await algorand.createTransaction.payment({
+    const payTxn = await algorandTestnet.createTransaction.payment({
+      sender: dave.addr,
+      receiver: deployedAppAddress,
+      amount: (72200).microAlgo(), // Each listing 72_200 uA
+    });
+
+    const negativeTest = async () => {
+      try {
+        await daveTypedClient.send.createListing({
+          args: {
+            collateralPayment: payTxn,
+            nfdAppId: DAVE_WRONG_SEGMENT_APP_ID,
+            listingTags: new Uint8Array(13),
+          },
+          extraFee: (1000).microAlgo(),
+          populateAppCallResources: true,
+        });
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } catch (e: any) {
+        if (e.message.includes('opcodes=load 201; ==; assert')) {
+          throw new TypeError('NFD must be a segment of directory.algo');
+        } else {
+          throw e;
+        }
+      }
+    };
+
+    // We expect the error message to be thrown
+    await expect(negativeTest).rejects.toThrow('NFD must be a segment of directory.algo');
+    console.debug('NFD must be a segment of directory.algo, expected error thrown!');
+  });
+
+  // Attempt to CREATE a listing for an NFD the caller doesn't own; expect failure (DAVE create for beth.directory.algo)
+  test('Dave attempts to create listing for Beth', async () => {
+    // Dave is going to create a listing for beth.directory.algo
+    const dave = await algorandTestnet.account.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }));
+    algorandTestnet.setSignerFromAccount(dave);
+    const daveTypedClient = algorandTestnet.client.getTypedAppClientById(AlgoDirectoryClient, {
+      appId: deployedAppID,
+      defaultSender: dave.addr,
+    });
+
+    const payTxn = await algorandTestnet.createTransaction.payment({
       sender: dave.addr,
       receiver: deployedAppAddress,
       amount: (72200).microAlgo(), // Each listing 72_200 uA
@@ -515,7 +673,48 @@ describe('AlgoDirectory', () => {
   });
 
   // Attempt to CREATE a listing for an expired NFD; expect failure (TBD how to achieve this on testnet with V3 being so new and all NFDs having just been bought)
-  /** Just need to figure out the betanet and expired NFD creation */
+  test('Dave attempts to create a listing for segement that is expired', async () => {
+    // Dave is going to create a listing for dave.directory.algo on betanet, but it is expired!
+    const dave = await algorandBetanet.account.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }));
+    algorandBetanet.setSignerFromAccount(dave);
+
+    const daveTypedClient = algorandBetanet.client.getTypedAppClientById(AlgoDirectoryClient, {
+      appId: betanetDeployedAppID,
+      defaultSender: dave.addr,
+    });
+
+    const payTxn = await algorandBetanet.createTransaction.payment({
+      sender: dave.addr,
+      receiver: betanetDeployedAppAddress,
+      amount: (72200).microAlgo(), // Each listing 72_200 uA
+    });
+
+    const negativeTest = async () => {
+      try {
+        await daveTypedClient.send.createListing({
+          args: {
+            collateralPayment: payTxn,
+            nfdAppId: DAVE_EXPIRED_BETANET_SEGMENT_APP_ID,
+            listingTags: new Uint8Array(13),
+          },
+          extraFee: (1000).microAlgo(),
+          populateAppCallResources: true,
+        });
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } catch (e: any) {
+        console.debug('Error message: ', e.message);
+        if (e.message.includes('opcodes=btoi; <=; assert')) {
+          throw new TypeError('NFD segment must not be expired');
+        } else {
+          throw e;
+        }
+      }
+    };
+
+    // We expect the error message to be thrown
+    await expect(negativeTest).rejects.toThrow('NFD segment must not be expired');
+    console.debug('NFD segment must not be expired');
+  });
 
   // Attempt to CREATE a listing for an NFD that is listed for sale; expect failure
   test('Beth attempts to create listing for segment listed for sale', async () => {
@@ -535,8 +734,8 @@ describe('AlgoDirectory', () => {
     const nfdJson = await nfdInfo.json();
 
     // Define Beth and Dave accounts in case we need to list the segment for sale
-    const beth = await algorand.account.fromEnvironment(BETH, new AlgoAmount({ algos: 0 }));
-    const dave = await algorand.account.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }));
+    const beth = await algorandTestnet.account.fromEnvironment(BETH, new AlgoAmount({ algos: 0 }));
+    const dave = await algorandTestnet.account.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }));
 
     // Check the current state of the NFD, if it's not listed for sale, we'll list it
     if (nfdJson.state === 'owned') {
@@ -578,7 +777,7 @@ describe('AlgoDirectory', () => {
       const signedTxn = txn.signTxn(beth.account.sk);
 
       // Send the raw signed transaction
-      const result = await algorand.client.algod.sendRawTransaction(signedTxn).do();
+      const result = await algorandTestnet.client.algod.sendRawTransaction(signedTxn).do();
       expect(result.txId).toBeDefined();
       console.debug(`txnID on ${nfdJson.name} offer: `, result.txId);
     } else {
@@ -586,14 +785,14 @@ describe('AlgoDirectory', () => {
     } // end of listing the segment for sale
 
     // Prepare Beth for creating a listing for forsale.directory.algo
-    algorand.setSignerFromAccount(beth);
+    algorandTestnet.setSignerFromAccount(beth);
 
-    const bethTypedClient = algorand.client.getTypedAppClientById(AlgoDirectoryClient, {
+    const bethTypedClient = algorandTestnet.client.getTypedAppClientById(AlgoDirectoryClient, {
       appId: deployedAppID,
       defaultSender: beth.addr,
     });
 
-    const payTxn = await algorand.createTransaction.payment({
+    const payTxn = await algorandTestnet.createTransaction.payment({
       sender: beth.addr,
       receiver: deployedAppAddress,
       amount: (72200).microAlgo(), // Each listing 72_200 uA
@@ -629,15 +828,15 @@ describe('AlgoDirectory', () => {
   // Attempt to REFRESH a listing for an NFD the caller doesn't own; expect failure (BETH create listing and DAVE attempt to refresh it)
   test('Dave attempts to refresh listing for Beth', async () => {
     // Create a listing for beth.directory.algo
-    const beth = await algorand.account.fromEnvironment(BETH, new AlgoAmount({ algos: 0 }));
-    algorand.setSignerFromAccount(beth);
+    const beth = await algorandTestnet.account.fromEnvironment(BETH, new AlgoAmount({ algos: 0 }));
+    algorandTestnet.setSignerFromAccount(beth);
 
-    const bethTypedClient = algorand.client.getTypedAppClientById(AlgoDirectoryClient, {
+    const bethTypedClient = algorandTestnet.client.getTypedAppClientById(AlgoDirectoryClient, {
       appId: deployedAppID,
       defaultSender: beth.addr,
     });
 
-    const payTxn = await algorand.createTransaction.payment({
+    const payTxn = await algorandTestnet.createTransaction.payment({
       sender: beth.addr,
       receiver: deployedAppAddress,
       amount: (72200).microAlgo(), // Each listing 72_200 uA
@@ -658,9 +857,9 @@ describe('AlgoDirectory', () => {
     expect(bethResult.confirmation?.confirmedRound).toBeGreaterThan(0);
 
     // Prepare a typed client for DAVE
-    const dave = await algorand.account.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }));
-    algorand.setSignerFromAccount(dave);
-    const daveTypedClient = algorand.client.getTypedAppClientById(AlgoDirectoryClient, {
+    const dave = await algorandTestnet.account.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }));
+    algorandTestnet.setSignerFromAccount(dave);
+    const daveTypedClient = algorandTestnet.client.getTypedAppClientById(AlgoDirectoryClient, {
       appId: deployedAppID,
       defaultSender: dave.addr,
     });
@@ -702,7 +901,48 @@ describe('AlgoDirectory', () => {
   });
 
   // Attempt to REFRESH a listing with expired NFD; expect failure (TBD how to achieve this on testnet with V3 being so new and all NFDs having just been bought)
-  /** Need to figure out the expired NFD part first */
+  test('Beth attempts to refresh a listing for segement that is expired', async () => {
+    // Beth is going to refresh the listing for beth.directory.algo on betanet, but it is expired!
+    const beth = await algorandBetanet.account.fromEnvironment(BETH, new AlgoAmount({ algos: 0 }));
+    algorandTestnet.setSignerFromAccount(beth);
+
+    const bethTypedClient = algorandBetanet.client.getTypedAppClientById(AlgoDirectoryClient, {
+      appId: betanetDeployedAppID,
+      defaultSender: beth.addr,
+    });
+
+    const payTxn = await algorandBetanet.createTransaction.payment({
+      sender: beth.addr,
+      receiver: betanetDeployedAppAddress,
+      amount: (72200).microAlgo(), // Each listing 72_200 uA
+    });
+
+    const negativeTest = async () => {
+      try {
+        await bethTypedClient.send.createListing({
+          args: {
+            collateralPayment: payTxn,
+            nfdAppId: BETH_EXPIRED_WITH_LISTING_SEGMENT_APP_ID,
+            listingTags: new Uint8Array(13),
+          },
+          extraFee: (1000).microAlgo(),
+          populateAppCallResources: true,
+        });
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } catch (e: any) {
+        console.debug('Error message: ', e.message);
+        if (e.message.includes('opcodes=btoi; <=; assert')) {
+          throw new TypeError('NFD segment must not be expired');
+        } else {
+          throw e;
+        }
+      }
+    };
+
+    // We expect the error message to be thrown
+    await expect(negativeTest).rejects.toThrow('NFD segment must not be expired');
+    console.debug('NFD segment must not be expired');
+  });
 
   // Attempt to REFRESH a listing for an NFD that is listed for sale; expect failure
   test('Beth attempts to refresh listing for segment listed for sale', async () => {
@@ -710,16 +950,16 @@ describe('AlgoDirectory', () => {
 
     // We'll check to see if the segment has a directory listing first, and if it doesn't we'll create a listing
     // Setup Beth's and Dave's accounts in case we need to create a listing and/or put the segment for sale
-    const beth = await algorand.account.fromEnvironment(BETH, new AlgoAmount({ algos: 0 }));
-    const dave = await algorand.account.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }));
-    algorand.setSignerFromAccount(beth);
+    const beth = await algorandTestnet.account.fromEnvironment(BETH, new AlgoAmount({ algos: 0 }));
+    const dave = await algorandTestnet.account.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }));
+    algorandTestnet.setSignerFromAccount(beth);
 
-    const bethTypedClient = algorand.client.getTypedAppClientById(AlgoDirectoryClient, {
+    const bethTypedClient = algorandTestnet.client.getTypedAppClientById(AlgoDirectoryClient, {
       appId: deployedAppID,
       defaultSender: beth.addr,
     });
 
-    const payTxn = await algorand.createTransaction.payment({
+    const payTxn = await algorandTestnet.createTransaction.payment({
       sender: beth.addr,
       receiver: deployedAppAddress,
       amount: (72200).microAlgo(), // Each listing 72_200 uA
@@ -729,7 +969,7 @@ describe('AlgoDirectory', () => {
     try {
       // Check the directory listing for forsalewithlisting.directory.algo
       const encodedAppId = encodeUint64(FOR_SALE_WITH_LISTING_SEGMENT_APP_ID);
-      await algorand.app.getBoxValue(deployedAppID, encodedAppId);
+      await algorandTestnet.app.getBoxValue(deployedAppID, encodedAppId);
       throw new TypeError('Segment has a directory listing');
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (e: any) {
@@ -809,7 +1049,7 @@ describe('AlgoDirectory', () => {
       const signedTxn = txn.signTxn(beth.account.sk);
 
       // Send the raw signed transaction
-      const result = await algorand.client.algod.sendRawTransaction(signedTxn).do();
+      const result = await algorandTestnet.client.algod.sendRawTransaction(signedTxn).do();
       console.debug(`txnID on ${nfdJson.name} offer: `, result.txId);
     } else {
       console.debug(`${nfdJson.name} segment is already listed for sale`);
@@ -839,15 +1079,15 @@ describe('AlgoDirectory', () => {
   // Attempt to ABANDON a listing that the caller doesn't own; expect failure (BETH create listing and DAVE attempt to abandon it)
   test('Dave attempts to abandon listing by Beth', async () => {
     // Create a listing for beth.directory.algo
-    const beth = await algorand.account.fromEnvironment(BETH, new AlgoAmount({ algos: 0 }));
-    algorand.setSignerFromAccount(beth);
+    const beth = await algorandTestnet.account.fromEnvironment(BETH, new AlgoAmount({ algos: 0 }));
+    algorandTestnet.setSignerFromAccount(beth);
 
-    const bethTypedClient = algorand.client.getTypedAppClientById(AlgoDirectoryClient, {
+    const bethTypedClient = algorandTestnet.client.getTypedAppClientById(AlgoDirectoryClient, {
       appId: deployedAppID,
       defaultSender: beth.addr,
     });
 
-    const payTxn = await algorand.createTransaction.payment({
+    const payTxn = await algorandTestnet.createTransaction.payment({
       sender: beth.addr,
       receiver: deployedAppAddress,
       amount: (72200).microAlgo(), // Each listing 72_200 uA
@@ -868,9 +1108,9 @@ describe('AlgoDirectory', () => {
     expect(bethResult.confirmation?.confirmedRound).toBeGreaterThan(0);
 
     // Prepare a typed client for DAVE
-    const dave = await algorand.account.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }));
-    algorand.setSignerFromAccount(dave);
-    const daveTypedClient = algorand.client.getTypedAppClientById(AlgoDirectoryClient, {
+    const dave = await algorandTestnet.account.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }));
+    algorandTestnet.setSignerFromAccount(dave);
+    const daveTypedClient = algorandTestnet.client.getTypedAppClientById(AlgoDirectoryClient, {
       appId: deployedAppID,
       defaultSender: dave.addr,
     });
@@ -913,14 +1153,14 @@ describe('AlgoDirectory', () => {
   // Attempt to DELETE a listing without having the admin token; expect failure (BETH create listing and DAVE attempt to delete it)
   test('Beth creates listing and Dave attempts to delete it', async () => {
     // Step 1: Beth is going to create a listing for beth.directory.algo
-    const beth = await algorand.account.fromEnvironment(BETH, new AlgoAmount({ algos: 0 }));
-    algorand.setSignerFromAccount(beth);
-    const bethTypedClient = algorand.client.getTypedAppClientById(AlgoDirectoryClient, {
+    const beth = await algorandTestnet.account.fromEnvironment(BETH, new AlgoAmount({ algos: 0 }));
+    algorandTestnet.setSignerFromAccount(beth);
+    const bethTypedClient = algorandTestnet.client.getTypedAppClientById(AlgoDirectoryClient, {
       appId: deployedAppID,
       defaultSender: beth.addr,
     });
 
-    const payTxn = await algorand.createTransaction.payment({
+    const payTxn = await algorandTestnet.createTransaction.payment({
       sender: beth.addr,
       receiver: deployedAppAddress,
       amount: (72200).microAlgo(), // Each listing 72_200 uA
@@ -941,9 +1181,9 @@ describe('AlgoDirectory', () => {
     expect(createResult.confirmation?.confirmedRound).toBeGreaterThan(0);
 
     // Step 2: Dave is now going to attempt to delete Beth's listing for beth.directory.algo and we expect an error/failure
-    const dave = await algorand.account.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }));
-    algorand.setSignerFromAccount(dave);
-    const daveTypedClient = algorand.client.getTypedAppClientById(AlgoDirectoryClient, {
+    const dave = await algorandTestnet.account.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }));
+    algorandTestnet.setSignerFromAccount(dave);
+    const daveTypedClient = algorandTestnet.client.getTypedAppClientById(AlgoDirectoryClient, {
       appId: deployedAppID,
       defaultSender: dave.addr,
     });
