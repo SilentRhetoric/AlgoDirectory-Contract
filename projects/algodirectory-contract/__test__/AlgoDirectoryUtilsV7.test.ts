@@ -396,6 +396,10 @@ describe('AlgoDirectory', () => {
     expect(result.confirmation?.confirmedRound).toBeGreaterThan(0);
   });
 
+  // TODO: Create a listing, then transfer the NFD, and then have a third account remove the listing
+  // The test will need to handle both the listing calls and the NFD transfer
+  // test('(+) Dave creates a listing, sells the NFD, then Creator removes the listing', async () => {});
+
   // Create a listing, then delete it and confirm that the collateral is sent to the fee sink
   test('(+) Dave creates listing then Creator deletes it', async () => {
     // Step 1: Dave is going to create a listing for dave.directory.algo
@@ -585,8 +589,6 @@ describe('AlgoDirectory', () => {
     console.debug('NFD must be a segment of directory.algo, expected error thrown!');
   });
 
-  // TODO: Attempt to CREATE a listing for an NFD that is a segment but of some other root; expect failure
-  // Note additional .env.template var DAVE_WRONG_SEGMENT_APP_ID
   test('(-) Dave attempts to create listing for segment of wrong root NFD', async () => {
     // Dave is going to create a listing for notdirectory.algo, but it's not a segment of directory.algo
     // We expect failure as DAVE_WRONG_SEGMENT_APP_ID is a segment of some other root NFD
@@ -900,6 +902,7 @@ describe('AlgoDirectory', () => {
     console.debug('Caller must be listing owner, expected error thrown!');
   });
 
+  // TODO: This test is just creating a listing, but it needs to try to refresh a listing for which the NFD has expired
   // Attempt to REFRESH a listing with expired NFD (on Betanet); expect failure
   test('(-) Beth attempts to refresh a listing for segement that is expired', async () => {
     // Beth is going to refresh the listing for beth.directory.algo on betanet, but it is expired!
