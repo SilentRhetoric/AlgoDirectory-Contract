@@ -48,6 +48,16 @@ export class AlgoDirectory extends Contract {
     );
   }
 
+  private checkNFDOwnerIsNotListingOwner(nfdAppID: AppID): void {
+    // Get the address of the listing owner
+    const listingKey = this.listedNFDappIDs(nfdAppID).value;
+    const listingOwner = this.listings(listingKey).value;
+    // Get the address of the NFD owner
+    const nfdOwner = nfdAppID.globalState('i.owner.a') as Address;
+    // Ensure the NFD owner is not the listing owner, and thus the NFD has been transferred
+    assert(nfdOwner !== listingOwner, 'NFD owner must be different than the listing owner');
+  }
+
   private checkNFDNotExpired(nfdAppID: AppID): void {
     // Check that the segment is current and not expired
     // Because directory.algo is V3, there are no lifetime ownership segments
@@ -186,11 +196,36 @@ export class AlgoDirectory extends Contract {
   }
 
   /**
+   * Removes a listing for which the NFD has been transferred.
+   * Anyone can call this to clean up a listing that is no longer valid.
+   *
+   * @param nfdAppID The Application ID of the NFD that will be removed
+   */
+  removeTransferredListing(nfdAppID: AppID): void {
+    const listingKey = this.listedNFDappIDs(nfdAppID).value;
+
+    // Check that the NFD has changed hands
+    this.checkNFDOwnerIsNotListingOwner(nfdAppID);
+
+    // Return the vouched collateral to the original listing owner
+    sendPayment({
+      sender: this.app.address,
+      receiver: this.listings(listingKey).value,
+      amount: listingKey.vouchAmount,
+      fee: 0,
+    });
+
+    // Remove both boxes for the listing: the NFD App ID and the listing itself
+    this.listings(listingKey).delete();
+    this.listedNFDappIDs(nfdAppID).delete();
+  }
+
+  /**
    * Deletes a listing from the directory & sends the collateral to the fee sink
    *
    * @param nfdAppID The Application ID of the NFD that will be deleted
    */
-  deleteListing(nfdAppID: AppID): string {
+  deleteListingWithPenalty(nfdAppID: AppID): string {
     // This method is restricted to only holders of the admin asset
     assert(this.txn.sender.assetBalance(this.adminToken.value) > 0, 'Caller must have the admin token');
 

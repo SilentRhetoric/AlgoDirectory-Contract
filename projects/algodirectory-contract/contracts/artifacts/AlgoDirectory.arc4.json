@@ -55,7 +55,21 @@
       }
     },
     {
-      "name": "deleteListing",
+      "name": "removeTransferredListing",
+      "desc": "Removes a listing for which the NFD has been transferred.\nAnyone can call this to clean up a listing that is no longer valid.",
+      "args": [
+        {
+          "name": "nfdAppID",
+          "type": "uint64",
+          "desc": "The Application ID of the NFD that will be removed"
+        }
+      ],
+      "returns": {
+        "type": "void"
+      }
+    },
+    {
+      "name": "deleteListingWithPenalty",
       "desc": "Deletes a listing from the directory & sends the collateral to the fee sink",
       "args": [
         {
