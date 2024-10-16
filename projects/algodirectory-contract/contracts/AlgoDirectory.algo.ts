@@ -135,8 +135,11 @@ export class AlgoDirectory extends Contract {
    * Refreshes a listing in the directory and updates its last touched timestamp
    *
    * @param nfdAppID The Application ID of the NFD that will be refreshed
+   * @param listingTags An array of 13 bytes with each representing a tag.
+   *  Used to update the tags of the listing, if no tags are to be updated, pass the existing tags
+   *
    */
-  refreshListing(nfdAppID: AppID): Listing {
+  refreshListing(nfdAppID: AppID, listingTags: StaticArray<byte, 13>): Listing {
     // Ensure the caller owns this listing, owns the NFD, and the NFD has not expired.
     // Note that if the NFD has been transferred, the new owner will not be able to
     // refresh as they will not be both the current NFD owner and the original listing owner.
@@ -153,7 +156,7 @@ export class AlgoDirectory extends Contract {
       timestamp: this.getRoundedTimestamp(), // Round the timestamp
       vouchAmount: oldListingKey.vouchAmount,
       nfdAppID: oldListingKey.nfdAppID,
-      tags: oldListingKey.tags,
+      tags: listingTags,
       name: oldListingKey.name,
     };
 

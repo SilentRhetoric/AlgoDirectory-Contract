@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { describe, test, expect, beforeAll } from '@jest/globals';
 import { AlgorandClient } from '@algorandfoundation/algokit-utils';
-import { decodeAddress, encodeAddress, encodeUint64, decodeUnsignedTransaction } from 'algosdk';
+import { decodeAddress, encodeAddress, encodeUint64, decodeUnsignedTransaction, ABIType } from 'algosdk';
 import { AlgoAmount } from '@algorandfoundation/algokit-utils/types/amount';
 import { AlgoDirectoryClient, AlgoDirectoryFactory } from '../contracts/clients/AlgoDirectoryClient';
 
@@ -290,6 +290,7 @@ describe('AlgoDirectory', () => {
     const result = await daveAppClient.send.refreshListing({
       args: {
         nfdAppId: DAVE_SEGMENT_APP_ID,
+        listingTags: new Uint8Array(13),
       },
       populateAppCallResources: true,
     });
@@ -297,6 +298,67 @@ describe('AlgoDirectory', () => {
 
     expect(result.confirmations?.length).toBe(1);
     expect(result.confirmation?.confirmedRound).toBeGreaterThan(0);
+  });
+
+  // Refresh an existing listing and update the tags to confirm that the tags have been updated
+  test('(+) Dave refreshes listing with new tags', async () => {
+    // Utility function to get random unique numbers/tags
+    const getRandomUniqueTags = (count: number, min: number, max: number): number[] => {
+      const uniqueNumbers = new Set();
+
+      while (uniqueNumbers.size < count) {
+        const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+        uniqueNumbers.add(randomNumber);
+      }
+
+      return Array.from(uniqueNumbers) as number[];
+    };
+
+    // Tests up to this point have only entered all 0 or null entries for tags
+    // We will update the tags with random numbers from 1 to 26 for 5 slots
+    const dave = await algorandTestnet.account.fromEnvironment(DAVE, new AlgoAmount({ algos: 0 }));
+    algorandTestnet.setSignerFromAccount(dave);
+    const daveAppClient = algorandTestnet.client.getTypedAppClientById(AlgoDirectoryClient, {
+      appId: deployedAppID,
+      defaultSender: dave.addr,
+    });
+
+    const refreshTags = new Uint8Array(13);
+    const tagNums = getRandomUniqueTags(5, 1, 26); // Get 5 random numbers from 1 to 26 based on the current tag list
+    refreshTags.set(tagNums);
+
+    const result = await daveAppClient.send.refreshListing({
+      args: {
+        nfdAppId: DAVE_SEGMENT_APP_ID,
+        listingTags: refreshTags,
+      },
+      populateAppCallResources: true,
+    });
+    console.debug('Refresh return: ', result.return);
+
+    // Decode the original uint8array of refreshTags
+    const decodedRefreshTags = ABIType.from('(byte[13])').decode(Buffer.from(refreshTags));
+    const [originalTags] = Object.values(decodedRefreshTags);
+
+    // Check the returned tags from the refreshListing call result matches the orignal tags we sent
+    const returnedTags = result.return?.[3]; // The 4th element in the return value is the tags
+    expect(originalTags).toEqual(returnedTags);
+
+    // Now we'll check the box value to confirm the tags are stored correctly
+    const encodedAppId = encodeUint64(DAVE_SEGMENT_APP_ID);
+    const b64EncodedListing = await algorandTestnet.app.getBoxValue(deployedAppID, encodedAppId);
+
+    // Create the codec for the listing key
+    const listingKeyCodecString = '(uint64,uint64,uint64,byte[13],string)';
+    const listingKeyCodec = ABIType.from(listingKeyCodecString);
+
+    // Let's extract the listing from the box value and decode it
+    const decodedListing = listingKeyCodec.decode(Buffer.from(b64EncodedListing));
+    const [, , , boxListingTags] = Object.values(decodedListing);
+
+    console.debug('Original tags: ', originalTags);
+    console.debug('Box Listing tags: ', boxListingTags);
+    expect(originalTags).toEqual(boxListingTags);
   });
 
   // Abandon a listing and confirm that the vouched collateral is returned
@@ -365,6 +427,7 @@ describe('AlgoDirectory', () => {
     const result = await bethAppClient.send.refreshListing({
       args: {
         nfdAppId: BETH_SEGMENT_APP_ID,
+        listingTags: new Uint8Array(13),
       },
       populateAppCallResources: true,
     });
@@ -873,6 +936,7 @@ describe('AlgoDirectory', () => {
         await daveTypedClient.send.refreshListing({
           args: {
             nfdAppId: BETH_SEGMENT_APP_ID,
+            listingTags: new Uint8Array(13),
           },
           populateAppCallResources: true,
         });
@@ -1064,6 +1128,7 @@ describe('AlgoDirectory', () => {
         await bethTypedClient.send.refreshListing({
           args: {
             nfdAppId: FOR_SALE_WITH_LISTING_SEGMENT_APP_ID,
+            listingTags: new Uint8Array(13),
           },
           populateAppCallResources: true,
         });

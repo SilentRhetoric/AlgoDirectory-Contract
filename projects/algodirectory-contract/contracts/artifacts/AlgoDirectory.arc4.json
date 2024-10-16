@@ -34,6 +34,11 @@
           "name": "nfdAppID",
           "type": "uint64",
           "desc": "The Application ID of the NFD that will be refreshed"
+        },
+        {
+          "name": "listingTags",
+          "type": "byte[13]",
+          "desc": "An array of 13 bytes with each representing a tag for the listing"
         }
       ],
       "returns": {
