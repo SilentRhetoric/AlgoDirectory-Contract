@@ -275,6 +275,8 @@ describe('AlgoDirectory', () => {
 
     expect(result.confirmations?.length).toBe(2);
     expect(result.confirmation?.confirmedRound).toBeGreaterThan(0);
+    // TODO: Check for ARC-28 event log
+    expect(result.confirmation.logs?.length).toBe(2);
   });
 
   // Refresh an existing listing and confirm that the timestamp has been updated
@@ -968,7 +970,7 @@ describe('AlgoDirectory', () => {
 
   // TODO: This test is just creating a listing, but it needs to try to refresh a listing for which the NFD has expired
   // Attempt to REFRESH a listing with expired NFD (on Betanet); expect failure
-  test('(-) Beth attempts to refresh a listing for segement that is expired', async () => {
+  test('(-) Beth attempts to refresh a listing for segment that is expired', async () => {
     // Beth is going to refresh the listing for beth.directory.algo on betanet, but it is expired!
     const beth = await algorandBetanet.account.fromEnvironment(BETH, new AlgoAmount({ algos: 0 }));
     algorandTestnet.setSignerFromAccount(beth);

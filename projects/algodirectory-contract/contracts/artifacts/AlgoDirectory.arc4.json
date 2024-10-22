@@ -24,7 +24,19 @@
       ],
       "returns": {
         "type": "(uint64,uint64,uint64,byte[13],string)"
-      }
+      },
+      "events": [
+        {
+          "name": "CreateListingEvent",
+          "args": [
+            {
+              "name": "listing",
+              "type": "(uint64,uint64,uint64,byte[13],string)"
+            }
+          ],
+          "desc": "Defines an ARC-28 event to be emitted by the createListing method that\ncontains the listing which was created for an NFD segment of directory.algo"
+        }
+      ]
     },
     {
       "name": "refreshListing",
@@ -43,7 +55,19 @@
       ],
       "returns": {
         "type": "(uint64,uint64,uint64,byte[13],string)"
-      }
+      },
+      "events": [
+        {
+          "name": "RefreshListingEvent",
+          "args": [
+            {
+              "name": "listing",
+              "type": "(uint64,uint64,uint64,byte[13],string)"
+            }
+          ],
+          "desc": "Defines an ARC-28 event to be emitted by the refreshListing method that\ncontains the listing which was refreshed"
+        }
+      ]
     },
     {
       "name": "abandonListing",
@@ -57,7 +81,19 @@
       ],
       "returns": {
         "type": "void"
-      }
+      },
+      "events": [
+        {
+          "name": "AbandonListingEvent",
+          "args": [
+            {
+              "name": "listing",
+              "type": "(uint64,uint64,uint64,byte[13],string)"
+            }
+          ],
+          "desc": "Defines an ARC-28 event to be emitted by the abandonListing method that\ncontains the listing which was abandoned"
+        }
+      ]
     },
     {
       "name": "removeTransferredListing",
@@ -71,7 +107,19 @@
       ],
       "returns": {
         "type": "void"
-      }
+      },
+      "events": [
+        {
+          "name": "RemoveTransferredListingEvent",
+          "args": [
+            {
+              "name": "listing",
+              "type": "(uint64,uint64,uint64,byte[13],string)"
+            }
+          ],
+          "desc": "Defines an ARC-28 event to be emitted by the removeTransferredListing method that\ncontains the listing which was removed after the NFD was transferred"
+        }
+      ]
     },
     {
       "name": "deleteListingWithPenalty",
@@ -85,7 +133,19 @@
       ],
       "returns": {
         "type": "string"
-      }
+      },
+      "events": [
+        {
+          "name": "DeleteListingEvent",
+          "args": [
+            {
+              "name": "listing",
+              "type": "(uint64,uint64,uint64,byte[13],string)"
+            }
+          ],
+          "desc": "Defines an ARC-28 event to be emitted by the deleteListing method that\ncontains the listing which was deleted by an admin for inappropriate content"
+        }
+      ]
     },
     {
       "name": "setAdminToken",
@@ -115,6 +175,58 @@
       "returns": {
         "type": "void"
       }
+    }
+  ],
+  "events": [
+    {
+      "name": "CreateListingEvent",
+      "args": [
+        {
+          "name": "listing",
+          "type": "(uint64,uint64,uint64,byte[13],string)"
+        }
+      ],
+      "desc": "Defines an ARC-28 event to be emitted by the createListing method that\ncontains the listing which was created for an NFD segment of directory.algo"
+    },
+    {
+      "name": "RefreshListingEvent",
+      "args": [
+        {
+          "name": "listing",
+          "type": "(uint64,uint64,uint64,byte[13],string)"
+        }
+      ],
+      "desc": "Defines an ARC-28 event to be emitted by the refreshListing method that\ncontains the listing which was refreshed"
+    },
+    {
+      "name": "AbandonListingEvent",
+      "args": [
+        {
+          "name": "listing",
+          "type": "(uint64,uint64,uint64,byte[13],string)"
+        }
+      ],
+      "desc": "Defines an ARC-28 event to be emitted by the abandonListing method that\ncontains the listing which was abandoned"
+    },
+    {
+      "name": "RemoveTransferredListingEvent",
+      "args": [
+        {
+          "name": "listing",
+          "type": "(uint64,uint64,uint64,byte[13],string)"
+        }
+      ],
+      "desc": "Defines an ARC-28 event to be emitted by the removeTransferredListing method that\ncontains the listing which was removed after the NFD was transferred"
+    },
+    {
+      "name": "DeleteListingEvent",
+      "args": [
+        {
+          "name": "listing",
+          "type": "(uint64,uint64,uint64,byte[13],string)"
+        }
+      ],
+      "desc": "Defines an ARC-28 event to be emitted by the deleteListing method that\ncontains the listing which was deleted by an admin for inappropriate content"
     }
   ]
 }

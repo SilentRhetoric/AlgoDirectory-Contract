@@ -12,18 +12,18 @@ importers:
         specifier: ^v4.0.0-beta.5
         version: 4.0.0-beta.5
       '@algorandfoundation/algokit-utils':
-        specifier: ^7.0.0-beta.10
-        version: 7.0.0-beta.10(algosdk@2.9.0)
+        specifier: 7.0.0-beta.16
+        version: 7.0.0-beta.16(algosdk@2.9.0)
       '@types/json-bigint':
         specifier: ^1.0.4
         version: 1.0.4
       algosdk:
-        specifier: ^2.7.0
+        specifier: ^2.9.0
         version: 2.9.0
     devDependencies:
       '@algorandfoundation/tealscript':
-        specifier: ^0.102.0
-        version: 0.102.0
+        specifier: ^0.104.0
+        version: 0.104.0
       '@jest/globals':
         specifier: ^29.5.0
         version: 29.7.0
@@ -44,16 +44,16 @@ importers:
         version: 8.57.1
       eslint-config-airbnb-base:
         specifier: ^15.0.0
-        version: 15.0.0(eslint-plugin-import@2.30.0(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@5.0.2))(eslint@8.57.1))(eslint@8.57.1)
+        version: 15.0.0(eslint-plugin-import@2.31.0(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@5.0.2))(eslint@8.57.1))(eslint@8.57.1)
       eslint-config-airbnb-typescript:
         specifier: ^17.0.0
-        version: 17.1.0(@typescript-eslint/eslint-plugin@5.62.0(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@5.0.2))(eslint@8.57.1)(typescript@5.0.2))(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@5.0.2))(eslint-plugin-import@2.30.0(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@5.0.2))(eslint@8.57.1))(eslint@8.57.1)
+        version: 17.1.0(@typescript-eslint/eslint-plugin@5.62.0(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@5.0.2))(eslint@8.57.1)(typescript@5.0.2))(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@5.0.2))(eslint-plugin-import@2.31.0(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@5.0.2))(eslint@8.57.1))(eslint@8.57.1)
       eslint-config-prettier:
         specifier: ^9.0.0
         version: 9.1.0(eslint@8.57.1)
       eslint-plugin-import:
-        specifier: ^2.25.2
-        version: 2.30.0(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@5.0.2))(eslint@8.57.1)
+        specifier: ^2.31.0
+        version: 2.31.0(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@5.0.2))(eslint@8.57.1)
       eslint-plugin-prettier:
         specifier: ^5.0.1
         version: 5.2.1(eslint-config-prettier@9.1.0(eslint@8.57.1))(eslint@8.57.1)(prettier@3.3.3)
@@ -77,14 +77,14 @@ packages:
     engines: {node: '>=18.0'}
     hasBin: true
 
-  '@algorandfoundation/algokit-utils@7.0.0-beta.10':
-    resolution: {integrity: sha512-KpdPeCxaH3Nwm07oEfRJdWPg5tcFoUrKzSPswRrYfDwQHC8HL/TUY33u/ov6dGaRiL06sRobn6b9ZLMTsEeZlA==}
+  '@algorandfoundation/algokit-utils@7.0.0-beta.16':
+    resolution: {integrity: sha512-5Xm4hkPL607ISzh2QFLPDN4TiRKrAvv+sdeVKF56idmIh8V5DIhHBeQeKj0r3oBNMUYL+0tIMa8zy9ZEDs8EnA==}
     engines: {node: '>=18.0'}
     peerDependencies:
       algosdk: ^2.7.0
 
-  '@algorandfoundation/tealscript@0.102.0':
-    resolution: {integrity: sha512-5xwCO+s9XemBig68v0aopf0bxTBDKJ6czQpbZc0gv0w/DorUqQUcONiNSiI/FplrlEOsCiJH2NOo6L4A5xivwQ==}
+  '@algorandfoundation/tealscript@0.104.0':
+    resolution: {integrity: sha512-xU/CW7+Jt027d/FZXu15IOJCf0+A4aq22vH9gXKiBQfys0P7ispwJCrs0mWsC1B2XrlUcNABe3CxUee/UhLb/g==}
     hasBin: true
 
   '@ampproject/remapping@2.3.0':
@@ -986,8 +986,8 @@ packages:
   eslint-import-resolver-node@0.3.9:
     resolution: {integrity: sha512-WFj2isz22JahUv+B788TlO3N6zL3nNJGU8CcZbPZvVEkBPaJdCV4vy5wyghty5ROFbCRnm132v8BScu5/1BQ8g==}
 
-  eslint-module-utils@2.11.0:
-    resolution: {integrity: sha512-gbBE5Hitek/oG6MUVj6sFuzEjA/ClzNflVrLovHi/JgLdC7fiN5gLAY1WIPW1a0V5I999MnsrvVrCOGmmVqDBQ==}
+  eslint-module-utils@2.12.0:
+    resolution: {integrity: sha512-wALZ0HFoytlyh/1+4wuZ9FJCD/leWHQzzrxJ8+rebyReSLk7LApMyd3WJaLVoN+D5+WIdJyDK1c6JnE65V4Zyg==}
     engines: {node: '>=4'}
     peerDependencies:
       '@typescript-eslint/parser': '*'
@@ -1007,12 +1007,12 @@ packages:
       eslint-import-resolver-webpack:
         optional: true
 
-  eslint-plugin-import@2.30.0:
-    resolution: {integrity: sha512-/mHNE9jINJfiD2EKkg1BKyPyUk4zdnT54YgbOgfjSakWT5oyX/qQLVNTkehyfpcMxZXMy1zyonZ2v7hZTX43Yw==}
+  eslint-plugin-import@2.31.0:
+    resolution: {integrity: sha512-ixmkI62Rbc2/w8Vfxyh1jQRTdRTF52VxwRVHl/ykPAmqG+Nb7/kNn+byLP0LxPgI7zWA16Jt82SybJInmMia3A==}
     engines: {node: '>=4'}
     peerDependencies:
       '@typescript-eslint/parser': '*'
-      eslint: ^2 || ^3 || ^4 || ^5 || ^6 || ^7.2.0 || ^8
+      eslint: ^2 || ^3 || ^4 || ^5 || ^6 || ^7.2.0 || ^8 || ^9
     peerDependenciesMeta:
       '@typescript-eslint/parser':
         optional: true
@@ -2305,25 +2305,26 @@ snapshots:
 
   '@algorandfoundation/algokit-client-generator@4.0.0-beta.5':
     dependencies:
-      '@algorandfoundation/algokit-utils': 7.0.0-beta.10(algosdk@2.9.0)
+      '@algorandfoundation/algokit-utils': 7.0.0-beta.16(algosdk@2.9.0)
       algosdk: 2.9.0
       chalk: 4.1.2
       change-case: 4.1.2
       commander: 11.1.0
       jsonschema: 1.4.1
 
-  '@algorandfoundation/algokit-utils@7.0.0-beta.10(algosdk@2.9.0)':
+  '@algorandfoundation/algokit-utils@7.0.0-beta.16(algosdk@2.9.0)':
     dependencies:
       algosdk: 2.9.0
       buffer: 6.0.3
 
-  '@algorandfoundation/tealscript@0.102.0':
+  '@algorandfoundation/tealscript@0.104.0':
     dependencies:
       '@microsoft/tsdoc': 0.14.2
       '@playwright/test': 1.47.2
       argparse: 2.0.1
       dotenv: 16.4.5
       glob: 10.4.5
+      hi-base32: 0.5.1
       js-sha512: 0.8.0
       node-fetch: 2.7.0
       polytype: 0.17.0
@@ -3473,22 +3474,22 @@ snapshots:
 
   escape-string-regexp@4.0.0: {}
 
-  eslint-config-airbnb-base@15.0.0(eslint-plugin-import@2.30.0(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@5.0.2))(eslint@8.57.1))(eslint@8.57.1):
+  eslint-config-airbnb-base@15.0.0(eslint-plugin-import@2.31.0(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@5.0.2))(eslint@8.57.1))(eslint@8.57.1):
     dependencies:
       confusing-browser-globals: 1.0.11
       eslint: 8.57.1
-      eslint-plugin-import: 2.30.0(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@5.0.2))(eslint@8.57.1)
+      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@5.0.2))(eslint@8.57.1)
       object.assign: 4.1.5
       object.entries: 1.1.8
       semver: 6.3.1
 
-  eslint-config-airbnb-typescript@17.1.0(@typescript-eslint/eslint-plugin@5.62.0(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@5.0.2))(eslint@8.57.1)(typescript@5.0.2))(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@5.0.2))(eslint-plugin-import@2.30.0(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@5.0.2))(eslint@8.57.1))(eslint@8.57.1):
+  eslint-config-airbnb-typescript@17.1.0(@typescript-eslint/eslint-plugin@5.62.0(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@5.0.2))(eslint@8.57.1)(typescript@5.0.2))(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@5.0.2))(eslint-plugin-import@2.31.0(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@5.0.2))(eslint@8.57.1))(eslint@8.57.1):
     dependencies:
       '@typescript-eslint/eslint-plugin': 5.62.0(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@5.0.2))(eslint@8.57.1)(typescript@5.0.2)
       '@typescript-eslint/parser': 5.62.0(eslint@8.57.1)(typescript@5.0.2)
       eslint: 8.57.1
-      eslint-config-airbnb-base: 15.0.0(eslint-plugin-import@2.30.0(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@5.0.2))(eslint@8.57.1))(eslint@8.57.1)
-      eslint-plugin-import: 2.30.0(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@5.0.2))(eslint@8.57.1)
+      eslint-config-airbnb-base: 15.0.0(eslint-plugin-import@2.31.0(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@5.0.2))(eslint@8.57.1))(eslint@8.57.1)
+      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@5.0.2))(eslint@8.57.1)
 
   eslint-config-prettier@9.1.0(eslint@8.57.1):
     dependencies:
@@ -3502,7 +3503,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-module-utils@2.11.0(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@5.0.2))(eslint-import-resolver-node@0.3.9)(eslint@8.57.1):
+  eslint-module-utils@2.12.0(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@5.0.2))(eslint-import-resolver-node@0.3.9)(eslint@8.57.1):
     dependencies:
       debug: 3.2.7
     optionalDependencies:
@@ -3512,7 +3513,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-import@2.30.0(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@5.0.2))(eslint@8.57.1):
+  eslint-plugin-import@2.31.0(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@5.0.2))(eslint@8.57.1):
     dependencies:
       '@rtsao/scc': 1.1.0
       array-includes: 3.1.8
@@ -3523,7 +3524,7 @@ snapshots:
       doctrine: 2.1.0
       eslint: 8.57.1
       eslint-import-resolver-node: 0.3.9
-      eslint-module-utils: 2.11.0(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@5.0.2))(eslint-import-resolver-node@0.3.9)(eslint@8.57.1)
+      eslint-module-utils: 2.12.0(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@5.0.2))(eslint-import-resolver-node@0.3.9)(eslint@8.57.1)
       hasown: 2.0.2
       is-core-module: 2.15.1
       is-glob: 4.0.3
@@ -3532,6 +3533,7 @@ snapshots:
       object.groupby: 1.0.3
       object.values: 1.2.0
       semver: 6.3.1
+      string.prototype.trimend: 1.0.8
       tsconfig-paths: 3.15.0
     optionalDependencies:
       '@typescript-eslint/parser': 5.62.0(eslint@8.57.1)(typescript@5.0.2)
