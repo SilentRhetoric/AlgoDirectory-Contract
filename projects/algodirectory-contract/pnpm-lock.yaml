@@ -22,8 +22,8 @@ importers:
         version: 2.9.0
     devDependencies:
       '@algorandfoundation/tealscript':
-        specifier: ^0.104.0
-        version: 0.104.0
+        specifier: ^0.105.4
+        version: 0.105.4
       '@jest/globals':
         specifier: ^29.5.0
         version: 29.7.0
@@ -40,7 +40,7 @@ importers:
         specifier: ^7.3.0
         version: 7.4.2
       eslint:
-        specifier: ^7.32.0 || ^8.2.0
+        specifier: ^8.57.1
         version: 8.57.1
       eslint-config-airbnb-base:
         specifier: ^15.0.0
@@ -83,8 +83,8 @@ packages:
     peerDependencies:
       algosdk: ^2.7.0
 
-  '@algorandfoundation/tealscript@0.104.0':
-    resolution: {integrity: sha512-xU/CW7+Jt027d/FZXu15IOJCf0+A4aq22vH9gXKiBQfys0P7ispwJCrs0mWsC1B2XrlUcNABe3CxUee/UhLb/g==}
+  '@algorandfoundation/tealscript@0.105.4':
+    resolution: {integrity: sha512-+9mXBrn5g1RJpVxmF4UZ9uk94868IZGBb4KmsRlRrjgFjA0OQohC6DMkaV9eScbERfcpiIF4U2sjPoxpJTDnWw==}
     hasBin: true
 
   '@ampproject/remapping@2.3.0':
@@ -1046,6 +1046,7 @@ packages:
   eslint@8.57.1:
     resolution: {integrity: sha512-ypowyDxpVSYpkXr9WPv2PAZCtNip1Mv5KTW0SCurXv/9iOpcrH9PaqUElksqEB6pChqHGDRCFTyrZlGhnLNGiA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
 
   espree@9.6.1:
@@ -2317,7 +2318,7 @@ snapshots:
       algosdk: 2.9.0
       buffer: 6.0.3
 
-  '@algorandfoundation/tealscript@0.104.0':
+  '@algorandfoundation/tealscript@0.105.4':
     dependencies:
       '@microsoft/tsdoc': 0.14.2
       '@playwright/test': 1.47.2

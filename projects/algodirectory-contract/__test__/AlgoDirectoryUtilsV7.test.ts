@@ -684,7 +684,7 @@ describe('AlgoDirectory', () => {
         });
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (e: any) {
-        if (e.message.includes('opcodes=load 201; ==; assert')) {
+        if (e.message.includes('// 576232821; ==; assert')) {
           throw new TypeError('NFD must be a segment of directory.algo');
         } else {
           throw e;
@@ -968,39 +968,39 @@ describe('AlgoDirectory', () => {
     console.debug('Caller must be listing owner, expected error thrown!');
   });
 
-  // TODO: This test is just creating a listing, but it needs to try to refresh a listing for which the NFD has expired
   // Attempt to REFRESH a listing with expired NFD (on Betanet); expect failure
   test('(-) Beth attempts to refresh a listing for segment that is expired', async () => {
     // Beth is going to refresh the listing for beth.directory.algo on betanet, but it is expired!
     const beth = await algorandBetanet.account.fromEnvironment(BETH, new AlgoAmount({ algos: 0 }));
-    algorandTestnet.setSignerFromAccount(beth);
+    algorandBetanet.setSignerFromAccount(beth);
 
     const bethTypedClient = algorandBetanet.client.getTypedAppClientById(AlgoDirectoryClient, {
       appId: betanetDeployedAppID,
       defaultSender: beth.addr,
     });
 
-    const payTxn = await algorandBetanet.createTransaction.payment({
-      sender: beth.addr,
-      receiver: betanetDeployedAppAddress,
-      amount: (72200).microAlgo(), // Each listing 72_200 uA
-    });
+    // // Used once to set up the listing for future tests on Betanet
+    // const payTxn = await algorandBetanet.createTransaction.payment({
+    //   sender: beth.addr,
+    //   receiver: betanetDeployedAppAddress,
+    //   amount: (72200).microAlgo(), // Each listing 72_200 uA
+    // });
 
     const negativeTest = async () => {
       try {
-        await bethTypedClient.send.createListing({
+        await bethTypedClient.send.refreshListing({
           args: {
-            collateralPayment: payTxn,
+            // collateralPayment: payTxn,
             nfdAppId: BETH_EXPIRED_WITH_LISTING_SEGMENT_APP_ID,
             listingTags: new Uint8Array(13),
           },
-          extraFee: (1000).microAlgo(),
+          // extraFee: (1000).microAlgo(),
           populateAppCallResources: true,
         });
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (e: any) {
         console.debug('Error message: ', e.message);
-        if (e.message.includes('opcodes=btoi; <=; assert')) {
+        if (e.message.includes('<=; assert')) {
           throw new TypeError('NFD segment must not be expired');
         } else {
           throw e;
@@ -1061,7 +1061,7 @@ describe('AlgoDirectory', () => {
       } else {
         console.debug(`${FOR_SALE_WITH_LISTING_SEGMENT_APP_ID} app ID has a directory listing`);
       }
-    } // end of checking if the segment has a directory listing
+    } // End of checking if the segment has a directory listing
 
     // Check if the segment is listed for sale, if it's not listed for sale, we'll list it
     const nfdInfo = await fetch(

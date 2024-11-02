@@ -4,7 +4,7 @@ type Listing = {
   timestamp: uint64; // 8 bytes
   vouchAmount: uint64; // 8 bytes
   nfdAppID: AppID; // 8 bytes
-  tags: StaticArray<byte, 13>; // 13 bytes, each representing one of 255 possible tags
+  tags: StaticArray<byte, 13>; // 13 bytes, each representing a text tag in the UI
   name: string; // NFD names are up to 27 characters
 }; // 64 bytes total
 
@@ -17,11 +17,9 @@ const TOTAL_LISTING_BOXES_COST = LISTED_NFD_APP_ID_BOX_COST + LISTING_BOX_COST;
  * all listings created for segments of the directory.algo NFD. A listing can be
  * created, refreshed, and abandoned by its owner,
  * removed by anyone if the underlying NFD was sold,
- * or deleted by an administrator with a penalty if it is inappropriate.
+ * or deleted by an administrator with a penalty.
  */
 export class AlgoDirectory extends Contract {
-  // Testnet A7NMWS3NT3IUDMLVO26ULGXGIIOUQ3ND2TXSER6EBGRZNOBOUIQXHIBGDE
-  // Mainnet Y76M3MSY6DKBRHBL7C3NNDXGS5IIMQVQVUAB6MP4XEMMGVF2QWNPL226CA
   feeSinkAddress = TemplateVar<Address>();
 
   directoryAppID = TemplateVar<AppID>(); // Testnet 576232821 / Mainnet 766401564
@@ -163,8 +161,7 @@ export class AlgoDirectory extends Contract {
    * Refreshes a listing in the directory and updates its last touched timestamp
    *
    * @param nfdAppID The Application ID of the NFD that will be refreshed
-   * @param listingTags An array of 13 bytes with each representing a tag.
-   *  Used to update the tags of the listing, if no tags are to be updated, pass the existing tags
+   * @param listingTags An array of 13 bytes with each representing a tag; used to update the tags of the listing, if no tags are to be updated, pass the existing tags
    *
    */
   refreshListing(nfdAppID: AppID, listingTags: StaticArray<byte, 13>): Listing {

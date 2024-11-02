@@ -50,7 +50,7 @@
         {
           "name": "listingTags",
           "type": "byte[13]",
-          "desc": "An array of 13 bytes with each representing a tag.\n Used to update the tags of the listing, if no tags are to be updated, pass the existing tags"
+          "desc": "An array of 13 bytes with each representing a tag; used to update the tags of the listing, if no tags are to be updated, pass the existing tags"
         }
       ],
       "returns": {
