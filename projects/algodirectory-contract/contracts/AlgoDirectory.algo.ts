@@ -146,7 +146,6 @@ export class AlgoDirectory extends Contract {
       listing: listingKey,
     });
 
-    // TODO: This return value can be removed once tests are updated to read ARC-28 events
     return listingKey;
   }
 

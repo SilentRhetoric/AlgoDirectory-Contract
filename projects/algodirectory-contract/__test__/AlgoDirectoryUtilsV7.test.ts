@@ -275,7 +275,6 @@ describe('AlgoDirectory', () => {
 
     expect(result.confirmations?.length).toBe(2);
     expect(result.confirmation?.confirmedRound).toBeGreaterThan(0);
-    // TODO: Check for ARC-28 event log
     expect(result.confirmation.logs?.length).toBe(2);
   });
 
@@ -460,10 +459,6 @@ describe('AlgoDirectory', () => {
     expect(result.confirmations?.length).toBe(1);
     expect(result.confirmation?.confirmedRound).toBeGreaterThan(0);
   });
-
-  // TODO: Create a listing, then transfer the NFD, and then have a third account remove the listing
-  // The test will need to handle both the listing calls and the NFD transfer
-  // test('(+) Dave creates a listing, sells the NFD, then Creator removes the listing', async () => {});
 
   // Create a listing, then delete it and confirm that the collateral is sent to the fee sink
   test('(+) Dave creates listing then Creator deletes it', async () => {
