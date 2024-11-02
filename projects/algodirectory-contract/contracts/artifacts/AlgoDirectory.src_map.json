@@ -1,17 +1,64 @@
 [
   {
     "teal": 1,
-    "source": 15,
+    "source": "contracts/AlgoDirectory.algo.ts:22"
+  },
+  {
+    "teal": 2,
+    "source": "contracts/AlgoDirectory.algo.ts:22"
+  },
+  {
+    "teal": 3,
+    "source": "contracts/AlgoDirectory.algo.ts:22"
+  },
+  {
+    "teal": 15,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
     "pc": [
-      0,
       1,
-      2,
-      3,
-      4,
-      5,
+      2
+    ]
+  },
+  {
+    "teal": 16,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
+      3
+    ]
+  },
+  {
+    "teal": 17,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
+      4
+    ]
+  },
+  {
+    "teal": 18,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
+      5
+    ]
+  },
+  {
+    "teal": 19,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
       6,
-      7,
-      8,
+      7
+    ]
+  },
+  {
+    "teal": 20,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
+      8
+    ]
+  },
+  {
+    "teal": 21,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
       9,
       10,
       11,
@@ -30,402 +77,496 @@
       24,
       25,
       26,
-      27
-    ]
-  },
-  {
-    "teal": 13,
-    "source": 15,
-    "pc": [
+      27,
       28,
-      29
-    ]
-  },
-  {
-    "teal": 14,
-    "source": 15,
-    "pc": [
-      30
-    ]
-  },
-  {
-    "teal": 15,
-    "source": 15,
-    "pc": [
-      31
-    ]
-  },
-  {
-    "teal": 16,
-    "source": 15,
-    "pc": [
-      32
-    ]
-  },
-  {
-    "teal": 17,
-    "source": 15,
-    "pc": [
+      29,
+      30,
+      31,
+      32,
       33,
       34
     ]
   },
   {
-    "teal": 18,
-    "source": 15,
+    "teal": 25,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "errorMessage": "The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?",
     "pc": [
       35
     ]
   },
   {
-    "teal": 19,
-    "source": 15,
+    "teal": 29,
+    "source": "contracts/AlgoDirectory.algo.ts:35",
     "pc": [
       36,
       37,
-      38,
-      39,
-      40,
-      41,
-      42,
-      43,
-      44,
-      45,
-      46,
-      47,
-      48,
-      49,
-      50,
-      51,
-      52,
-      53,
-      54,
-      55,
-      56,
-      57,
-      58,
-      59,
-      60,
-      61
+      38
     ]
   },
   {
-    "teal": 23,
-    "source": 15,
-    "errorMessage": "The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?",
+    "teal": 32,
+    "source": "contracts/AlgoDirectory.algo.ts:35",
     "pc": [
-      62
-    ]
-  },
-  {
-    "teal": 27,
-    "source": 22,
-    "pc": [
-      63,
-      64,
-      65
-    ]
-  },
-  {
-    "teal": 30,
-    "source": 22,
-    "pc": [
-      66
-    ]
-  },
-  {
-    "teal": 34,
-    "source": 23,
-    "pc": [
-      67,
-      68
-    ]
-  },
-  {
-    "teal": 35,
-    "source": 23,
-    "pc": [
-      69
+      39
     ]
   },
   {
     "teal": 36,
-    "source": 23,
+    "source": "contracts/AlgoDirectory.algo.ts:36",
     "pc": [
+      40,
+      41
+    ]
+  },
+  {
+    "teal": 37,
+    "source": "contracts/AlgoDirectory.algo.ts:36",
+    "pc": [
+      42
+    ]
+  },
+  {
+    "teal": 38,
+    "source": "contracts/AlgoDirectory.algo.ts:36",
+    "pc": [
+      43,
+      44
+    ]
+  },
+  {
+    "teal": 42,
+    "source": "contracts/AlgoDirectory.algo.ts:37",
+    "pc": [
+      45,
+      46
+    ]
+  },
+  {
+    "teal": 43,
+    "source": "contracts/AlgoDirectory.algo.ts:36",
+    "pc": [
+      47,
+      48
+    ]
+  },
+  {
+    "teal": 44,
+    "source": "contracts/AlgoDirectory.algo.ts:36",
+    "pc": [
+      49
+    ]
+  },
+  {
+    "teal": 47,
+    "source": "contracts/AlgoDirectory.algo.ts:36",
+    "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
+    "pc": [
+      50
+    ]
+  },
+  {
+    "teal": 48,
+    "source": "contracts/AlgoDirectory.algo.ts:37",
+    "pc": [
+      51
+    ]
+  },
+  {
+    "teal": 51,
+    "source": "contracts/AlgoDirectory.algo.ts:37",
+    "errorMessage": "box value does not exist: this.listings(listingKey).value",
+    "pc": [
+      52
+    ]
+  },
+  {
+    "teal": 52,
+    "source": "contracts/AlgoDirectory.algo.ts:37",
+    "pc": [
+      53
+    ]
+  },
+  {
+    "teal": 55,
+    "source": "contracts/AlgoDirectory.algo.ts:37",
+    "errorMessage": "Caller must be listing owner",
+    "pc": [
+      54
+    ]
+  },
+  {
+    "teal": 56,
+    "source": "contracts/AlgoDirectory.algo.ts:35",
+    "pc": [
+      55
+    ]
+  },
+  {
+    "teal": 60,
+    "source": "contracts/AlgoDirectory.algo.ts:40",
+    "pc": [
+      56,
+      57,
+      58
+    ]
+  },
+  {
+    "teal": 67,
+    "source": "contracts/AlgoDirectory.algo.ts:43",
+    "pc": [
+      59,
+      60
+    ]
+  },
+  {
+    "teal": 68,
+    "source": "contracts/AlgoDirectory.algo.ts:43",
+    "pc": [
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
       70,
-      71
-    ]
-  },
-  {
-    "teal": 40,
-    "source": 24,
-    "pc": [
+      71,
       72,
-      73
-    ]
-  },
-  {
-    "teal": 41,
-    "source": 23,
-    "pc": [
+      73,
       74,
       75
     ]
   },
   {
-    "teal": 42,
-    "source": 23,
+    "teal": 69,
+    "source": "contracts/AlgoDirectory.algo.ts:43",
     "pc": [
       76
     ]
   },
   {
-    "teal": 45,
-    "source": 23,
-    "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
+    "teal": 72,
+    "source": "contracts/AlgoDirectory.algo.ts:43",
+    "errorMessage": "global state value does not exist: nfdAppID.globalState('i.parentAppID')",
     "pc": [
       77
     ]
   },
   {
-    "teal": 46,
-    "source": 24,
+    "teal": 73,
+    "source": "contracts/AlgoDirectory.algo.ts:43",
     "pc": [
       78
     ]
   },
   {
-    "teal": 49,
-    "source": 24,
-    "errorMessage": "box value does not exist: this.listings(listingKey).value",
+    "teal": 74,
+    "source": "contracts/AlgoDirectory.algo.ts:43",
     "pc": [
-      79
-    ]
-  },
-  {
-    "teal": 50,
-    "source": 24,
-    "pc": [
+      79,
       80
     ]
   },
   {
-    "teal": 53,
-    "source": 24,
-    "errorMessage": "Caller must be listing owner",
+    "teal": 75,
+    "source": "contracts/AlgoDirectory.algo.ts:43",
     "pc": [
       81
     ]
   },
   {
-    "teal": 54,
-    "source": 22,
+    "teal": 78,
+    "source": "contracts/AlgoDirectory.algo.ts:42",
+    "errorMessage": "NFD must be a segment of directory.algo",
     "pc": [
       82
     ]
   },
   {
-    "teal": 58,
-    "source": 27,
+    "teal": 79,
+    "source": "contracts/AlgoDirectory.algo.ts:40",
     "pc": [
-      83,
+      83
+    ]
+  },
+  {
+    "teal": 83,
+    "source": "contracts/AlgoDirectory.algo.ts:48",
+    "pc": [
       84,
-      85
+      85,
+      86
     ]
   },
   {
-    "teal": 65,
-    "source": 30,
+    "teal": 90,
+    "source": "contracts/AlgoDirectory.algo.ts:51",
     "pc": [
-      86,
-      87
+      87,
+      88
     ]
   },
   {
-    "teal": 66,
-    "source": 30,
+    "teal": 91,
+    "source": "contracts/AlgoDirectory.algo.ts:51",
     "pc": [
-      88,
       89,
-      90,
+      90
+    ]
+  },
+  {
+    "teal": 92,
+    "source": "contracts/AlgoDirectory.algo.ts:51",
+    "pc": [
       91,
-      92,
-      93,
-      94,
-      95,
-      96,
-      97,
+      92
+    ]
+  },
+  {
+    "teal": 93,
+    "source": "contracts/AlgoDirectory.algo.ts:51",
+    "pc": [
+      93
+    ]
+  },
+  {
+    "teal": 96,
+    "source": "contracts/AlgoDirectory.algo.ts:51",
+    "errorMessage": "global state value does not exist: nfdAppID.globalState('i.owner.a')",
+    "pc": [
+      94
+    ]
+  },
+  {
+    "teal": 97,
+    "source": "contracts/AlgoDirectory.algo.ts:51",
+    "pc": [
+      95
+    ]
+  },
+  {
+    "teal": 100,
+    "source": "contracts/AlgoDirectory.algo.ts:50",
+    "errorMessage": "Listing creator must be the NFD app i.owner.a",
+    "pc": [
+      96
+    ]
+  },
+  {
+    "teal": 101,
+    "source": "contracts/AlgoDirectory.algo.ts:48",
+    "pc": [
+      97
+    ]
+  },
+  {
+    "teal": 105,
+    "source": "contracts/AlgoDirectory.algo.ts:56",
+    "pc": [
       98,
       99,
-      100,
-      101,
-      102
+      100
     ]
   },
   {
-    "teal": 67,
-    "source": 30,
+    "teal": 108,
+    "source": "contracts/AlgoDirectory.algo.ts:56",
     "pc": [
+      101
+    ]
+  },
+  {
+    "teal": 109,
+    "source": "contracts/AlgoDirectory.algo.ts:56",
+    "pc": [
+      102,
       103
     ]
   },
   {
-    "teal": 70,
-    "source": 30,
-    "errorMessage": "global state value does not exist: AppID.fromUint64(nfdAppID).globalState('i.parentAppID')",
+    "teal": 113,
+    "source": "contracts/AlgoDirectory.algo.ts:58",
     "pc": [
-      104
-    ]
-  },
-  {
-    "teal": 71,
-    "source": 30,
-    "pc": [
+      104,
       105
     ]
   },
   {
-    "teal": 72,
-    "source": 30,
+    "teal": 114,
+    "source": "contracts/AlgoDirectory.algo.ts:58",
     "pc": [
-      106,
+      106
+    ]
+  },
+  {
+    "teal": 115,
+    "source": "contracts/AlgoDirectory.algo.ts:58",
+    "pc": [
       107,
-      108,
+      108
+    ]
+  },
+  {
+    "teal": 119,
+    "source": "contracts/AlgoDirectory.algo.ts:58",
+    "pc": [
       109,
-      110,
+      110
+    ]
+  },
+  {
+    "teal": 120,
+    "source": "contracts/AlgoDirectory.algo.ts:58",
+    "pc": [
       111
     ]
   },
   {
-    "teal": 73,
-    "source": 30,
+    "teal": 123,
+    "source": "contracts/AlgoDirectory.algo.ts:58",
+    "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
     "pc": [
       112
     ]
   },
   {
-    "teal": 76,
-    "source": 29,
-    "errorMessage": "NFD must be a segment of directory.algo with parent app ID 576232821",
+    "teal": 124,
+    "source": "contracts/AlgoDirectory.algo.ts:59",
     "pc": [
       113
     ]
   },
   {
-    "teal": 77,
-    "source": 27,
+    "teal": 127,
+    "source": "contracts/AlgoDirectory.algo.ts:59",
+    "errorMessage": "box value does not exist: this.listings(listingKey).value",
     "pc": [
       114
     ]
   },
   {
-    "teal": 81,
-    "source": 35,
+    "teal": 128,
+    "source": "contracts/AlgoDirectory.algo.ts:59",
     "pc": [
       115,
-      116,
-      117
+      116
     ]
   },
   {
-    "teal": 88,
-    "source": 38,
+    "teal": 132,
+    "source": "contracts/AlgoDirectory.algo.ts:61",
     "pc": [
-      118,
-      119
+      117,
+      118
     ]
   },
   {
-    "teal": 89,
-    "source": 38,
+    "teal": 133,
+    "source": "contracts/AlgoDirectory.algo.ts:61",
     "pc": [
-      120,
+      119,
+      120
+    ]
+  },
+  {
+    "teal": 134,
+    "source": "contracts/AlgoDirectory.algo.ts:61",
+    "pc": [
       121
     ]
   },
   {
-    "teal": 90,
-    "source": 38,
+    "teal": 137,
+    "source": "contracts/AlgoDirectory.algo.ts:61",
+    "errorMessage": "global state value does not exist: nfdAppID.globalState('i.owner.a')",
     "pc": [
-      122,
+      122
+    ]
+  },
+  {
+    "teal": 138,
+    "source": "contracts/AlgoDirectory.algo.ts:61",
+    "pc": [
       123,
-      124,
+      124
+    ]
+  },
+  {
+    "teal": 142,
+    "source": "contracts/AlgoDirectory.algo.ts:63",
+    "pc": [
       125,
-      126,
+      126
+    ]
+  },
+  {
+    "teal": 143,
+    "source": "contracts/AlgoDirectory.algo.ts:63",
+    "pc": [
       127,
-      128,
-      129,
-      130,
-      131,
-      132
+      128
     ]
   },
   {
-    "teal": 91,
-    "source": 38,
+    "teal": 144,
+    "source": "contracts/AlgoDirectory.algo.ts:63",
     "pc": [
-      133
+      129
     ]
   },
   {
-    "teal": 94,
-    "source": 38,
-    "errorMessage": "global state value does not exist: AppID.fromUint64(nfdAppID).globalState('i.owner.a')",
+    "teal": 147,
+    "source": "contracts/AlgoDirectory.algo.ts:63",
+    "errorMessage": "NFD owner must be different than the listing owner",
     "pc": [
+      130
+    ]
+  },
+  {
+    "teal": 148,
+    "source": "contracts/AlgoDirectory.algo.ts:56",
+    "pc": [
+      131
+    ]
+  },
+  {
+    "teal": 152,
+    "source": "contracts/AlgoDirectory.algo.ts:66",
+    "pc": [
+      132,
+      133,
       134
     ]
   },
   {
-    "teal": 95,
-    "source": 38,
+    "teal": 159,
+    "source": "contracts/AlgoDirectory.algo.ts:70",
     "pc": [
-      135
-    ]
-  },
-  {
-    "teal": 98,
-    "source": 37,
-    "errorMessage": "Listing creator must be the NFD app i.owner.a",
-    "pc": [
+      135,
       136
     ]
   },
   {
-    "teal": 99,
-    "source": 35,
+    "teal": 160,
+    "source": "contracts/AlgoDirectory.algo.ts:70",
     "pc": [
-      137
+      137,
+      138
     ]
   },
   {
-    "teal": 103,
-    "source": 43,
+    "teal": 161,
+    "source": "contracts/AlgoDirectory.algo.ts:70",
     "pc": [
-      138,
       139,
-      140
-    ]
-  },
-  {
-    "teal": 110,
-    "source": 46,
-    "pc": [
+      140,
       141,
-      142
-    ]
-  },
-  {
-    "teal": 111,
-    "source": 46,
-    "pc": [
+      142,
       143,
-      144
-    ]
-  },
-  {
-    "teal": 112,
-    "source": 46,
-    "pc": [
+      144,
       145,
       146,
       147,
@@ -437,915 +578,928 @@
       153,
       154,
       155,
-      156,
-      157,
-      158,
-      159,
-      160,
-      161,
+      156
+    ]
+  },
+  {
+    "teal": 162,
+    "source": "contracts/AlgoDirectory.algo.ts:70",
+    "pc": [
+      157
+    ]
+  },
+  {
+    "teal": 165,
+    "source": "contracts/AlgoDirectory.algo.ts:70",
+    "errorMessage": "global state value does not exist: nfdAppID.globalState('i.expirationTime')",
+    "pc": [
+      158
+    ]
+  },
+  {
+    "teal": 166,
+    "source": "contracts/AlgoDirectory.algo.ts:70",
+    "pc": [
+      159
+    ]
+  },
+  {
+    "teal": 167,
+    "source": "contracts/AlgoDirectory.algo.ts:70",
+    "pc": [
+      160
+    ]
+  },
+  {
+    "teal": 170,
+    "source": "contracts/AlgoDirectory.algo.ts:69",
+    "errorMessage": "NFD segment must not be expired",
+    "pc": [
+      161
+    ]
+  },
+  {
+    "teal": 171,
+    "source": "contracts/AlgoDirectory.algo.ts:66",
+    "pc": [
       162
     ]
   },
   {
-    "teal": 113,
-    "source": 46,
+    "teal": 175,
+    "source": "contracts/AlgoDirectory.algo.ts:75",
     "pc": [
-      163
-    ]
-  },
-  {
-    "teal": 116,
-    "source": 46,
-    "errorMessage": "global state value does not exist: AppID.fromUint64(nfdAppID).globalState('i.expirationTime')",
-    "pc": [
-      164
-    ]
-  },
-  {
-    "teal": 117,
-    "source": 46,
-    "pc": [
+      163,
+      164,
       165
     ]
   },
   {
-    "teal": 118,
-    "source": 46,
+    "teal": 179,
+    "source": "contracts/AlgoDirectory.algo.ts:78",
     "pc": [
-      166
-    ]
-  },
-  {
-    "teal": 121,
-    "source": 45,
-    "errorMessage": "NFD segment must not be expired",
-    "pc": [
+      166,
       167
     ]
   },
   {
-    "teal": 122,
-    "source": 43,
+    "teal": 180,
+    "source": "contracts/AlgoDirectory.algo.ts:78",
     "pc": [
-      168
-    ]
-  },
-  {
-    "teal": 126,
-    "source": 51,
-    "pc": [
+      168,
       169,
       170,
-      171
-    ]
-  },
-  {
-    "teal": 130,
-    "source": 52,
-    "pc": [
+      171,
       172,
-      173
-    ]
-  },
-  {
-    "teal": 131,
-    "source": 52,
-    "pc": [
-      174
-    ]
-  },
-  {
-    "teal": 132,
-    "source": 52,
-    "pc": [
+      173,
+      174,
       175,
       176,
-      177
+      177,
+      178
     ]
   },
   {
-    "teal": 133,
-    "source": 52,
+    "teal": 181,
+    "source": "contracts/AlgoDirectory.algo.ts:78",
     "pc": [
-      178,
       179
     ]
   },
   {
-    "teal": 134,
-    "source": 52,
+    "teal": 182,
+    "source": "contracts/AlgoDirectory.algo.ts:78",
     "pc": [
       180
     ]
   },
   {
-    "teal": 135,
-    "source": 51,
+    "teal": 183,
+    "source": "contracts/AlgoDirectory.algo.ts:78",
     "pc": [
       181
     ]
   },
   {
-    "teal": 140,
-    "source": 61,
+    "teal": 184,
+    "source": "contracts/AlgoDirectory.algo.ts:78",
     "pc": [
       182
     ]
   },
   {
-    "teal": 143,
-    "source": 61,
+    "teal": 187,
+    "source": "contracts/AlgoDirectory.algo.ts:78",
+    "errorMessage": "NFD segment must not be listed for sale",
     "pc": [
-      183,
-      184,
-      185
+      183
     ]
   },
   {
-    "teal": 144,
-    "source": 61,
+    "teal": 188,
+    "source": "contracts/AlgoDirectory.algo.ts:75",
     "pc": [
-      186
+      184
     ]
   },
   {
-    "teal": 145,
-    "source": 61,
+    "teal": 192,
+    "source": "contracts/AlgoDirectory.algo.ts:81",
     "pc": [
+      185,
+      186,
       187
     ]
   },
   {
-    "teal": 146,
-    "source": 61,
+    "teal": 196,
+    "source": "contracts/AlgoDirectory.algo.ts:82",
     "pc": [
       188,
       189
     ]
   },
   {
-    "teal": 147,
-    "source": 61,
+    "teal": 197,
+    "source": "contracts/AlgoDirectory.algo.ts:82",
     "pc": [
       190
     ]
   },
   {
-    "teal": 150,
-    "source": 61,
-    "errorMessage": "argument 0 (listingTags) for createListing must be a byte[13]",
+    "teal": 198,
+    "source": "contracts/AlgoDirectory.algo.ts:82",
     "pc": [
-      191
-    ]
-  },
-  {
-    "teal": 153,
-    "source": 61,
-    "pc": [
+      191,
       192,
-      193,
-      194
+      193
     ]
   },
   {
-    "teal": 154,
-    "source": 61,
+    "teal": 199,
+    "source": "contracts/AlgoDirectory.algo.ts:82",
     "pc": [
+      194,
       195
     ]
   },
   {
-    "teal": 157,
-    "source": 61,
+    "teal": 200,
+    "source": "contracts/AlgoDirectory.algo.ts:82",
     "pc": [
-      196,
+      196
+    ]
+  },
+  {
+    "teal": 201,
+    "source": "contracts/AlgoDirectory.algo.ts:81",
+    "pc": [
       197
     ]
   },
   {
-    "teal": 158,
-    "source": 61,
+    "teal": 206,
+    "source": "contracts/AlgoDirectory.algo.ts:100",
     "pc": [
       198
     ]
   },
   {
-    "teal": 159,
-    "source": 61,
+    "teal": 209,
+    "source": "contracts/AlgoDirectory.algo.ts:100",
     "pc": [
-      199
+      199,
+      200,
+      201
     ]
   },
   {
-    "teal": 160,
-    "source": 61,
+    "teal": 210,
+    "source": "contracts/AlgoDirectory.algo.ts:100",
     "pc": [
-      200
-    ]
-  },
-  {
-    "teal": 161,
-    "source": 61,
-    "pc": [
-      201,
       202
     ]
   },
   {
-    "teal": 162,
-    "source": 61,
+    "teal": 211,
+    "source": "contracts/AlgoDirectory.algo.ts:100",
     "pc": [
       203
     ]
   },
   {
-    "teal": 163,
-    "source": 61,
+    "teal": 212,
+    "source": "contracts/AlgoDirectory.algo.ts:100",
     "pc": [
-      204
-    ]
-  },
-  {
-    "teal": 166,
-    "source": 61,
-    "errorMessage": "argument 2 (collateralPayment) for createListing must be a pay transaction",
-    "pc": [
+      204,
       205
     ]
   },
   {
-    "teal": 169,
-    "source": 61,
+    "teal": 213,
+    "source": "contracts/AlgoDirectory.algo.ts:100",
     "pc": [
-      206,
-      207,
-      208
+      206
     ]
   },
   {
-    "teal": 170,
-    "source": 61,
+    "teal": 216,
+    "source": "contracts/AlgoDirectory.algo.ts:100",
+    "errorMessage": "argument 0 (listingTags) for createListing must be a byte[13]",
     "pc": [
-      209
+      207
     ]
   },
   {
-    "teal": 171,
-    "source": 61,
+    "teal": 219,
+    "source": "contracts/AlgoDirectory.algo.ts:100",
     "pc": [
+      208,
+      209,
       210
     ]
   },
   {
-    "teal": 172,
-    "source": 61,
+    "teal": 220,
+    "source": "contracts/AlgoDirectory.algo.ts:100",
     "pc": [
       211
     ]
   },
   {
-    "teal": 173,
-    "source": 61,
+    "teal": 223,
+    "source": "contracts/AlgoDirectory.algo.ts:100",
     "pc": [
-      212
+      212,
+      213
     ]
   },
   {
-    "teal": 182,
-    "source": 61,
+    "teal": 224,
+    "source": "contracts/AlgoDirectory.algo.ts:100",
     "pc": [
-      213,
-      214,
+      214
+    ]
+  },
+  {
+    "teal": 225,
+    "source": "contracts/AlgoDirectory.algo.ts:100",
+    "pc": [
       215
     ]
   },
   {
-    "teal": 185,
-    "source": 61,
+    "teal": 226,
+    "source": "contracts/AlgoDirectory.algo.ts:100",
     "pc": [
       216
     ]
   },
   {
-    "teal": 186,
-    "source": 61,
+    "teal": 227,
+    "source": "contracts/AlgoDirectory.algo.ts:100",
     "pc": [
       217,
       218
     ]
   },
   {
-    "teal": 195,
-    "source": 63,
+    "teal": 228,
+    "source": "contracts/AlgoDirectory.algo.ts:100",
     "pc": [
-      219,
+      219
+    ]
+  },
+  {
+    "teal": 229,
+    "source": "contracts/AlgoDirectory.algo.ts:100",
+    "pc": [
       220
     ]
   },
   {
-    "teal": 196,
-    "source": 64,
+    "teal": 232,
+    "source": "contracts/AlgoDirectory.algo.ts:100",
+    "errorMessage": "argument 2 (collateralPayment) for createListing must be a pay transaction",
     "pc": [
-      221,
-      222
+      221
     ]
   },
   {
-    "teal": 197,
-    "source": 64,
+    "teal": 235,
+    "source": "contracts/AlgoDirectory.algo.ts:100",
     "pc": [
+      222,
       223,
       224
     ]
   },
   {
-    "teal": 198,
-    "source": 64,
+    "teal": 236,
+    "source": "contracts/AlgoDirectory.algo.ts:100",
     "pc": [
       225
     ]
   },
   {
-    "teal": 201,
-    "source": 64,
-    "errorMessage": "transaction verification failed: {\"txn\":\"collateralPayment\",\"field\":\"sender\",\"expected\":\"this.txn.sender\"}",
+    "teal": 237,
+    "source": "contracts/AlgoDirectory.algo.ts:100",
     "pc": [
       226
     ]
   },
   {
-    "teal": 204,
-    "source": 63,
+    "teal": 238,
+    "source": "contracts/AlgoDirectory.algo.ts:100",
     "pc": [
-      227,
+      227
+    ]
+  },
+  {
+    "teal": 239,
+    "source": "contracts/AlgoDirectory.algo.ts:100",
+    "pc": [
       228
     ]
   },
   {
-    "teal": 205,
-    "source": 65,
+    "teal": 249,
+    "source": "contracts/AlgoDirectory.algo.ts:100",
     "pc": [
       229,
-      230
+      230,
+      231
     ]
   },
   {
-    "teal": 206,
-    "source": 65,
+    "teal": 252,
+    "source": "contracts/AlgoDirectory.algo.ts:100",
     "pc": [
-      231,
       232
     ]
   },
   {
-    "teal": 207,
-    "source": 65,
+    "teal": 253,
+    "source": "contracts/AlgoDirectory.algo.ts:100",
     "pc": [
-      233
-    ]
-  },
-  {
-    "teal": 210,
-    "source": 65,
-    "errorMessage": "transaction verification failed: {\"txn\":\"collateralPayment\",\"field\":\"receiver\",\"expected\":\"this.app.address\"}",
-    "pc": [
+      233,
       234
     ]
   },
   {
-    "teal": 213,
-    "source": 63,
+    "teal": 262,
+    "source": "contracts/AlgoDirectory.algo.ts:102",
     "pc": [
       235,
       236
     ]
   },
   {
-    "teal": 214,
-    "source": 66,
+    "teal": 263,
+    "source": "contracts/AlgoDirectory.algo.ts:103",
     "pc": [
       237,
       238
     ]
   },
   {
-    "teal": 215,
-    "source": 13,
+    "teal": 264,
+    "source": "contracts/AlgoDirectory.algo.ts:103",
     "pc": [
       239,
-      240,
-      241,
+      240
+    ]
+  },
+  {
+    "teal": 265,
+    "source": "contracts/AlgoDirectory.algo.ts:103",
+    "pc": [
+      241
+    ]
+  },
+  {
+    "teal": 268,
+    "source": "contracts/AlgoDirectory.algo.ts:103",
+    "errorMessage": "transaction verification failed: {\"txn\":\"collateralPayment\",\"field\":\"sender\",\"expected\":\"this.txn.sender\"}",
+    "pc": [
       242
     ]
   },
   {
-    "teal": 216,
-    "source": 66,
+    "teal": 271,
+    "source": "contracts/AlgoDirectory.algo.ts:102",
     "pc": [
-      243
-    ]
-  },
-  {
-    "teal": 219,
-    "source": 66,
-    "errorMessage": "transaction verification failed: {\"txn\":\"collateralPayment\",\"field\":\"amount\",\"condition\":\"greaterThanEqualTo\",\"expected\":\">=TOTAL_LISTING_BOXES_COST\"}",
-    "pc": [
+      243,
       244
     ]
   },
   {
-    "teal": 223,
-    "source": 70,
+    "teal": 272,
+    "source": "contracts/AlgoDirectory.algo.ts:104",
     "pc": [
       245,
       246
     ]
   },
   {
-    "teal": 224,
-    "source": 70,
+    "teal": 273,
+    "source": "contracts/AlgoDirectory.algo.ts:104",
     "pc": [
       247,
-      248,
+      248
+    ]
+  },
+  {
+    "teal": 274,
+    "source": "contracts/AlgoDirectory.algo.ts:104",
+    "pc": [
       249
     ]
   },
   {
-    "teal": 228,
-    "source": 71,
+    "teal": 277,
+    "source": "contracts/AlgoDirectory.algo.ts:104",
+    "errorMessage": "transaction verification failed: {\"txn\":\"collateralPayment\",\"field\":\"receiver\",\"expected\":\"this.app.address\"}",
     "pc": [
-      250,
-      251
+      250
     ]
   },
   {
-    "teal": 229,
-    "source": 71,
+    "teal": 280,
+    "source": "contracts/AlgoDirectory.algo.ts:102",
     "pc": [
-      252,
+      251,
+      252
+    ]
+  },
+  {
+    "teal": 281,
+    "source": "contracts/AlgoDirectory.algo.ts:105",
+    "pc": [
       253,
       254
     ]
   },
   {
-    "teal": 233,
-    "source": 72,
+    "teal": 282,
+    "source": "contracts/AlgoDirectory.algo.ts:13",
     "pc": [
       255,
-      256
+      256,
+      257,
+      258
     ]
   },
   {
-    "teal": 234,
-    "source": 72,
+    "teal": 283,
+    "source": "contracts/AlgoDirectory.algo.ts:105",
     "pc": [
-      257,
-      258,
       259
     ]
   },
   {
-    "teal": 238,
-    "source": 75,
+    "teal": 286,
+    "source": "contracts/AlgoDirectory.algo.ts:105",
+    "errorMessage": "transaction verification failed: {\"txn\":\"collateralPayment\",\"field\":\"amount\",\"condition\":\"greaterThanEqualTo\",\"expected\":\">=TOTAL_LISTING_BOXES_COST\"}",
     "pc": [
-      260,
-      261
+      260
     ]
   },
   {
-    "teal": 239,
-    "source": 75,
+    "teal": 290,
+    "source": "contracts/AlgoDirectory.algo.ts:109",
     "pc": [
-      262,
+      261,
+      262
+    ]
+  },
+  {
+    "teal": 291,
+    "source": "contracts/AlgoDirectory.algo.ts:109",
+    "pc": [
       263,
       264,
-      265,
-      266,
-      267,
-      268,
-      269
+      265
     ]
   },
   {
-    "teal": 240,
-    "source": 75,
+    "teal": 295,
+    "source": "contracts/AlgoDirectory.algo.ts:110",
     "pc": [
+      266,
+      267
+    ]
+  },
+  {
+    "teal": 296,
+    "source": "contracts/AlgoDirectory.algo.ts:110",
+    "pc": [
+      268,
+      269,
       270
     ]
   },
   {
-    "teal": 243,
-    "source": 75,
-    "errorMessage": "global state value does not exist: AppID.fromUint64(nfdAppID).globalState('i.name')",
+    "teal": 300,
+    "source": "contracts/AlgoDirectory.algo.ts:111",
     "pc": [
-      271
+      271,
+      272
     ]
   },
   {
-    "teal": 244,
-    "source": 75,
+    "teal": 301,
+    "source": "contracts/AlgoDirectory.algo.ts:111",
     "pc": [
-      272,
-      273
-    ]
-  },
-  {
-    "teal": 252,
-    "source": 77,
-    "pc": [
-      274
-    ]
-  },
-  {
-    "teal": 253,
-    "source": 77,
-    "pc": [
+      273,
+      274,
       275
     ]
   },
   {
-    "teal": 254,
-    "source": 77,
+    "teal": 305,
+    "source": "contracts/AlgoDirectory.algo.ts:112",
     "pc": [
       276,
       277
     ]
   },
   {
-    "teal": 258,
-    "source": 78,
+    "teal": 306,
+    "source": "contracts/AlgoDirectory.algo.ts:112",
     "pc": [
       278,
       279,
-      280,
+      280
+    ]
+  },
+  {
+    "teal": 310,
+    "source": "contracts/AlgoDirectory.algo.ts:115",
+    "pc": [
       281,
       282
     ]
   },
   {
-    "teal": 259,
-    "source": 78,
+    "teal": 311,
+    "source": "contracts/AlgoDirectory.algo.ts:115",
     "pc": [
       283,
-      284
-    ]
-  },
-  {
-    "teal": 263,
-    "source": 79,
-    "pc": [
+      284,
       285,
       286,
       287,
       288,
       289,
-      290,
-      291,
-      292,
+      290
+    ]
+  },
+  {
+    "teal": 312,
+    "source": "contracts/AlgoDirectory.algo.ts:115",
+    "pc": [
+      291
+    ]
+  },
+  {
+    "teal": 315,
+    "source": "contracts/AlgoDirectory.algo.ts:115",
+    "errorMessage": "global state value does not exist: nfdAppID.globalState('i.name')",
+    "pc": [
+      292
+    ]
+  },
+  {
+    "teal": 316,
+    "source": "contracts/AlgoDirectory.algo.ts:115",
+    "pc": [
       293,
-      294,
-      295,
-      296,
+      294
+    ]
+  },
+  {
+    "teal": 324,
+    "source": "contracts/AlgoDirectory.algo.ts:117",
+    "pc": [
+      295
+    ]
+  },
+  {
+    "teal": 325,
+    "source": "contracts/AlgoDirectory.algo.ts:117",
+    "pc": [
+      296
+    ]
+  },
+  {
+    "teal": 326,
+    "source": "contracts/AlgoDirectory.algo.ts:117",
+    "pc": [
       297,
-      298,
+      298
+    ]
+  },
+  {
+    "teal": 330,
+    "source": "contracts/AlgoDirectory.algo.ts:118",
+    "pc": [
       299,
-      300,
+      300
+    ]
+  },
+  {
+    "teal": 331,
+    "source": "contracts/AlgoDirectory.algo.ts:118",
+    "pc": [
       301,
-      302,
+      302
+    ]
+  },
+  {
+    "teal": 335,
+    "source": "contracts/AlgoDirectory.algo.ts:119",
+    "pc": [
       303,
-      304
-    ]
-  },
-  {
-    "teal": 264,
-    "source": 79,
-    "pc": [
+      304,
       305,
-      306
-    ]
-  },
-  {
-    "teal": 265,
-    "source": 79,
-    "pc": [
+      306,
       307,
-      308
-    ]
-  },
-  {
-    "teal": 266,
-    "source": 79,
-    "pc": [
+      308,
       309,
-      310
-    ]
-  },
-  {
-    "teal": 267,
-    "source": 79,
-    "pc": [
+      310,
       311,
-      312
-    ]
-  },
-  {
-    "teal": 268,
-    "source": 79,
-    "pc": [
-      313
-    ]
-  },
-  {
-    "teal": 269,
-    "source": 79,
-    "pc": [
+      312,
+      313,
       314,
-      315
-    ]
-  },
-  {
-    "teal": 273,
-    "source": 80,
-    "pc": [
-      316
-    ]
-  },
-  {
-    "teal": 274,
-    "source": 80,
-    "pc": [
+      315,
+      316,
       317,
-      318
-    ]
-  },
-  {
-    "teal": 277,
-    "source": 77,
-    "pc": [
-      319
-    ]
-  },
-  {
-    "teal": 281,
-    "source": 82,
-    "pc": [
+      318,
+      319,
       320,
-      321
-    ]
-  },
-  {
-    "teal": 282,
-    "source": 82,
-    "pc": [
+      321,
       322
     ]
   },
   {
-    "teal": 283,
-    "source": 82,
+    "teal": 336,
+    "source": "contracts/AlgoDirectory.algo.ts:119",
     "pc": [
-      323
-    ]
-  },
-  {
-    "teal": 284,
-    "source": 82,
-    "pc": [
+      323,
       324
     ]
   },
   {
-    "teal": 287,
-    "source": 82,
-    "errorMessage": "NFD app ID must be valid at the NFD registry",
+    "teal": 337,
+    "source": "contracts/AlgoDirectory.algo.ts:119",
     "pc": [
-      325
+      325,
+      326
     ]
   },
   {
-    "teal": 291,
-    "source": 85,
+    "teal": 338,
+    "source": "contracts/AlgoDirectory.algo.ts:119",
     "pc": [
-      326,
-      327
-    ]
-  },
-  {
-    "teal": 292,
-    "source": 85,
-    "pc": [
+      327,
       328
     ]
   },
   {
-    "teal": 293,
-    "source": 85,
+    "teal": 339,
+    "source": "contracts/AlgoDirectory.algo.ts:119",
     "pc": [
-      329
-    ]
-  },
-  {
-    "teal": 294,
-    "source": 85,
-    "pc": [
+      329,
       330
     ]
   },
   {
-    "teal": 295,
-    "source": 85,
+    "teal": 340,
+    "source": "contracts/AlgoDirectory.algo.ts:119",
     "pc": [
       331
     ]
   },
   {
-    "teal": 296,
-    "source": 85,
+    "teal": 341,
+    "source": "contracts/AlgoDirectory.algo.ts:119",
     "pc": [
-      332
-    ]
-  },
-  {
-    "teal": 299,
-    "source": 85,
-    "errorMessage": "Listing for this NFD must not already exist",
-    "pc": [
+      332,
       333
     ]
   },
   {
-    "teal": 303,
-    "source": 88,
+    "teal": 345,
+    "source": "contracts/AlgoDirectory.algo.ts:120",
     "pc": [
-      334,
-      335
+      334
     ]
   },
   {
-    "teal": 304,
-    "source": 88,
+    "teal": 346,
+    "source": "contracts/AlgoDirectory.algo.ts:120",
     "pc": [
+      335,
       336
     ]
   },
   {
-    "teal": 305,
-    "source": 88,
+    "teal": 349,
+    "source": "contracts/AlgoDirectory.algo.ts:117",
     "pc": [
-      337,
-      338
+      337
     ]
   },
   {
-    "teal": 306,
-    "source": 88,
+    "teal": 353,
+    "source": "contracts/AlgoDirectory.algo.ts:122",
     "pc": [
+      338,
       339
     ]
   },
   {
-    "teal": 307,
-    "source": 88,
+    "teal": 354,
+    "source": "contracts/AlgoDirectory.algo.ts:122",
     "pc": [
-      340,
+      340
+    ]
+  },
+  {
+    "teal": 355,
+    "source": "contracts/AlgoDirectory.algo.ts:122",
+    "pc": [
       341
     ]
   },
   {
-    "teal": 308,
-    "source": 88,
+    "teal": 356,
+    "source": "contracts/AlgoDirectory.algo.ts:122",
     "pc": [
       342
     ]
   },
   {
-    "teal": 309,
-    "source": 88,
+    "teal": 359,
+    "source": "contracts/AlgoDirectory.algo.ts:122",
+    "errorMessage": "NFD app ID must be valid at the NFD registry",
     "pc": [
       343
     ]
   },
   {
-    "teal": 310,
-    "source": 88,
+    "teal": 363,
+    "source": "contracts/AlgoDirectory.algo.ts:125",
     "pc": [
       344,
       345
     ]
   },
   {
-    "teal": 320,
-    "source": 90,
+    "teal": 364,
+    "source": "contracts/AlgoDirectory.algo.ts:125",
     "pc": [
       346
     ]
   },
   {
-    "teal": 321,
-    "source": 90,
+    "teal": 365,
+    "source": "contracts/AlgoDirectory.algo.ts:125",
     "pc": [
       347
     ]
   },
   {
-    "teal": 322,
-    "source": 90,
+    "teal": 366,
+    "source": "contracts/AlgoDirectory.algo.ts:125",
     "pc": [
       348
     ]
   },
   {
-    "teal": 323,
-    "source": 91,
+    "teal": 367,
+    "source": "contracts/AlgoDirectory.algo.ts:125",
     "pc": [
-      349,
-      350,
+      349
+    ]
+  },
+  {
+    "teal": 368,
+    "source": "contracts/AlgoDirectory.algo.ts:125",
+    "pc": [
+      350
+    ]
+  },
+  {
+    "teal": 371,
+    "source": "contracts/AlgoDirectory.algo.ts:125",
+    "errorMessage": "Listing for this NFD must not already exist",
+    "pc": [
       351
     ]
   },
   {
-    "teal": 324,
-    "source": 91,
+    "teal": 375,
+    "source": "contracts/AlgoDirectory.algo.ts:128",
     "pc": [
-      352
+      352,
+      353
     ]
   },
   {
-    "teal": 325,
-    "source": 91,
+    "teal": 376,
+    "source": "contracts/AlgoDirectory.algo.ts:128",
     "pc": [
-      353,
-      354,
-      355
+      354
     ]
   },
   {
-    "teal": 326,
-    "source": 92,
+    "teal": 377,
+    "source": "contracts/AlgoDirectory.algo.ts:128",
     "pc": [
-      356,
+      355,
+      356
+    ]
+  },
+  {
+    "teal": 378,
+    "source": "contracts/AlgoDirectory.algo.ts:128",
+    "pc": [
       357
     ]
   },
   {
-    "teal": 327,
-    "source": 92,
+    "teal": 379,
+    "source": "contracts/AlgoDirectory.algo.ts:128",
     "pc": [
       358,
       359
     ]
   },
   {
-    "teal": 328,
-    "source": 92,
+    "teal": 380,
+    "source": "contracts/AlgoDirectory.algo.ts:128",
     "pc": [
       360
     ]
   },
   {
-    "teal": 329,
-    "source": 92,
+    "teal": 381,
+    "source": "contracts/AlgoDirectory.algo.ts:128",
     "pc": [
-      361,
+      361
+    ]
+  },
+  {
+    "teal": 382,
+    "source": "contracts/AlgoDirectory.algo.ts:128",
+    "pc": [
       362,
       363
     ]
   },
   {
-    "teal": 330,
-    "source": 93,
+    "teal": 392,
+    "source": "contracts/AlgoDirectory.algo.ts:130",
     "pc": [
-      364,
+      364
+    ]
+  },
+  {
+    "teal": 393,
+    "source": "contracts/AlgoDirectory.algo.ts:130",
+    "pc": [
       365
     ]
   },
   {
-    "teal": 331,
-    "source": 93,
+    "teal": 394,
+    "source": "contracts/AlgoDirectory.algo.ts:130",
     "pc": [
-      366
+      366,
+      367
     ]
   },
   {
-    "teal": 332,
-    "source": 93,
+    "teal": 395,
+    "source": "contracts/AlgoDirectory.algo.ts:131",
     "pc": [
-      367,
       368,
-      369
+      369,
+      370
     ]
   },
   {
-    "teal": 333,
-    "source": 94,
+    "teal": 396,
+    "source": "contracts/AlgoDirectory.algo.ts:131",
     "pc": [
-      370,
       371
     ]
   },
   {
-    "teal": 334,
-    "source": 94,
+    "teal": 397,
+    "source": "contracts/AlgoDirectory.algo.ts:131",
     "pc": [
       372,
       373,
@@ -1353,37 +1507,31 @@
     ]
   },
   {
-    "teal": 335,
-    "source": 95,
+    "teal": 398,
+    "source": "contracts/AlgoDirectory.algo.ts:132",
     "pc": [
       375,
       376
     ]
   },
   {
-    "teal": 336,
-    "source": 95,
+    "teal": 399,
+    "source": "contracts/AlgoDirectory.algo.ts:132",
     "pc": [
-      377
-    ]
-  },
-  {
-    "teal": 337,
-    "source": 95,
-    "pc": [
+      377,
       378
     ]
   },
   {
-    "teal": 338,
-    "source": 95,
+    "teal": 400,
+    "source": "contracts/AlgoDirectory.algo.ts:132",
     "pc": [
       379
     ]
   },
   {
-    "teal": 339,
-    "source": 95,
+    "teal": 401,
+    "source": "contracts/AlgoDirectory.algo.ts:132",
     "pc": [
       380,
       381,
@@ -1391,930 +1539,905 @@
     ]
   },
   {
-    "teal": 340,
-    "source": 95,
+    "teal": 402,
+    "source": "contracts/AlgoDirectory.algo.ts:133",
     "pc": [
-      383
-    ]
-  },
-  {
-    "teal": 341,
-    "source": 95,
-    "pc": [
+      383,
       384
     ]
   },
   {
-    "teal": 342,
-    "source": 95,
+    "teal": 403,
+    "source": "contracts/AlgoDirectory.algo.ts:133",
     "pc": [
-      385,
-      386,
-      387
+      385
     ]
   },
   {
-    "teal": 343,
-    "source": 90,
+    "teal": 404,
+    "source": "contracts/AlgoDirectory.algo.ts:133",
     "pc": [
+      386,
+      387,
       388
     ]
   },
   {
-    "teal": 344,
-    "source": 90,
+    "teal": 405,
+    "source": "contracts/AlgoDirectory.algo.ts:134",
     "pc": [
-      389
+      389,
+      390
     ]
   },
   {
-    "teal": 345,
-    "source": 90,
+    "teal": 406,
+    "source": "contracts/AlgoDirectory.algo.ts:134",
     "pc": [
-      390,
-      391
-    ]
-  },
-  {
-    "teal": 349,
-    "source": 99,
-    "pc": [
+      391,
       392,
       393
     ]
   },
   {
-    "teal": 350,
-    "source": 99,
+    "teal": 407,
+    "source": "contracts/AlgoDirectory.algo.ts:135",
     "pc": [
       394,
       395
     ]
   },
   {
-    "teal": 351,
-    "source": 99,
+    "teal": 408,
+    "source": "contracts/AlgoDirectory.algo.ts:135",
     "pc": [
       396
     ]
   },
   {
-    "teal": 355,
-    "source": 102,
+    "teal": 409,
+    "source": "contracts/AlgoDirectory.algo.ts:135",
     "pc": [
-      397,
+      397
+    ]
+  },
+  {
+    "teal": 410,
+    "source": "contracts/AlgoDirectory.algo.ts:135",
+    "pc": [
       398
     ]
   },
   {
-    "teal": 356,
-    "source": 102,
+    "teal": 411,
+    "source": "contracts/AlgoDirectory.algo.ts:135",
     "pc": [
-      399
-    ]
-  },
-  {
-    "teal": 357,
-    "source": 102,
-    "pc": [
-      400
-    ]
-  },
-  {
-    "teal": 358,
-    "source": 102,
-    "pc": [
+      399,
+      400,
       401
     ]
   },
   {
-    "teal": 359,
-    "source": 102,
+    "teal": 412,
+    "source": "contracts/AlgoDirectory.algo.ts:135",
     "pc": [
       402
     ]
   },
   {
-    "teal": 360,
-    "source": 102,
+    "teal": 413,
+    "source": "contracts/AlgoDirectory.algo.ts:135",
     "pc": [
-      403,
-      404
+      403
     ]
   },
   {
-    "teal": 361,
-    "source": 102,
+    "teal": 414,
+    "source": "contracts/AlgoDirectory.algo.ts:135",
     "pc": [
-      405
+      404,
+      405,
+      406
     ]
   },
   {
-    "teal": 365,
-    "source": 104,
+    "teal": 415,
+    "source": "contracts/AlgoDirectory.algo.ts:130",
     "pc": [
-      406,
       407
     ]
   },
   {
-    "teal": 368,
-    "source": 61,
+    "teal": 416,
+    "source": "contracts/AlgoDirectory.algo.ts:130",
     "pc": [
-      408,
-      409
+      408
     ]
   },
   {
-    "teal": 371,
-    "source": 61,
+    "teal": 417,
+    "source": "contracts/AlgoDirectory.algo.ts:130",
     "pc": [
-      410,
-      411
+      409,
+      410
     ]
   },
   {
-    "teal": 372,
-    "source": 61,
+    "teal": 421,
+    "source": "contracts/AlgoDirectory.algo.ts:139",
     "pc": [
+      411,
       412
     ]
   },
   {
-    "teal": 377,
-    "source": 112,
+    "teal": 422,
+    "source": "contracts/AlgoDirectory.algo.ts:139",
     "pc": [
-      413
+      413,
+      414
     ]
   },
   {
-    "teal": 380,
-    "source": 112,
+    "teal": 423,
+    "source": "contracts/AlgoDirectory.algo.ts:139",
     "pc": [
-      414,
-      415,
-      416
+      415
     ]
   },
   {
-    "teal": 381,
-    "source": 112,
+    "teal": 427,
+    "source": "contracts/AlgoDirectory.algo.ts:142",
     "pc": [
+      416,
       417
     ]
   },
   {
-    "teal": 384,
-    "source": 112,
+    "teal": 428,
+    "source": "contracts/AlgoDirectory.algo.ts:142",
     "pc": [
-      418,
-      419,
+      418
+    ]
+  },
+  {
+    "teal": 429,
+    "source": "contracts/AlgoDirectory.algo.ts:142",
+    "pc": [
+      419
+    ]
+  },
+  {
+    "teal": 430,
+    "source": "contracts/AlgoDirectory.algo.ts:142",
+    "pc": [
       420
     ]
   },
   {
-    "teal": 385,
-    "source": 112,
+    "teal": 431,
+    "source": "contracts/AlgoDirectory.algo.ts:142",
     "pc": [
       421
     ]
   },
   {
-    "teal": 386,
-    "source": 112,
+    "teal": 432,
+    "source": "contracts/AlgoDirectory.algo.ts:142",
     "pc": [
-      422
-    ]
-  },
-  {
-    "teal": 387,
-    "source": 112,
-    "pc": [
+      422,
       423
     ]
   },
   {
-    "teal": 388,
-    "source": 112,
+    "teal": 433,
+    "source": "contracts/AlgoDirectory.algo.ts:142",
     "pc": [
       424
     ]
   },
   {
-    "teal": 396,
-    "source": 112,
+    "teal": 439,
+    "source": "contracts/AlgoDirectory.algo.ts:145",
     "pc": [
       425,
       426,
-      427
+      427,
+      428,
+      429,
+      430
     ]
   },
   {
-    "teal": 399,
-    "source": 112,
+    "teal": 440,
+    "source": "contracts/AlgoDirectory.algo.ts:145",
     "pc": [
-      428
-    ]
-  },
-  {
-    "teal": 400,
-    "source": 112,
-    "pc": [
-      429
-    ]
-  },
-  {
-    "teal": 404,
-    "source": 114,
-    "pc": [
-      430,
       431
     ]
   },
   {
-    "teal": 405,
-    "source": 114,
+    "teal": 441,
+    "source": "contracts/AlgoDirectory.algo.ts:145",
     "pc": [
-      432,
-      433,
-      434
+      432
     ]
   },
   {
-    "teal": 409,
-    "source": 115,
+    "teal": 442,
+    "source": "contracts/AlgoDirectory.algo.ts:145",
     "pc": [
-      435,
-      436
+      433
     ]
   },
   {
-    "teal": 410,
-    "source": 115,
+    "teal": 443,
+    "source": "contracts/AlgoDirectory.algo.ts:146",
     "pc": [
+      434,
+      435
+    ]
+  },
+  {
+    "teal": 444,
+    "source": "contracts/AlgoDirectory.algo.ts:146",
+    "pc": [
+      436,
       437,
-      438,
+      438
+    ]
+  },
+  {
+    "teal": 445,
+    "source": "contracts/AlgoDirectory.algo.ts:145",
+    "pc": [
       439
     ]
   },
   {
-    "teal": 414,
-    "source": 116,
+    "teal": 446,
+    "source": "contracts/AlgoDirectory.algo.ts:145",
     "pc": [
-      440,
+      440
+    ]
+  },
+  {
+    "teal": 447,
+    "source": "contracts/AlgoDirectory.algo.ts:145",
+    "pc": [
       441
     ]
   },
   {
-    "teal": 415,
-    "source": 116,
+    "teal": 448,
+    "source": "contracts/AlgoDirectory.algo.ts:145",
     "pc": [
-      442,
+      442
+    ]
+  },
+  {
+    "teal": 452,
+    "source": "contracts/AlgoDirectory.algo.ts:150",
+    "pc": [
       443,
       444
     ]
   },
   {
-    "teal": 419,
-    "source": 119,
+    "teal": 455,
+    "source": "contracts/AlgoDirectory.algo.ts:100",
     "pc": [
       445,
       446
     ]
   },
   {
-    "teal": 420,
-    "source": 119,
+    "teal": 458,
+    "source": "contracts/AlgoDirectory.algo.ts:100",
     "pc": [
-      447
+      447,
+      448
     ]
   },
   {
-    "teal": 421,
-    "source": 119,
+    "teal": 459,
+    "source": "contracts/AlgoDirectory.algo.ts:100",
     "pc": [
-      448,
       449
     ]
   },
   {
-    "teal": 431,
-    "source": 120,
+    "teal": 464,
+    "source": "contracts/AlgoDirectory.algo.ts:167",
     "pc": [
       450
     ]
   },
   {
-    "teal": 432,
-    "source": 120,
+    "teal": 467,
+    "source": "contracts/AlgoDirectory.algo.ts:167",
     "pc": [
-      451
+      451,
+      452,
+      453
     ]
   },
   {
-    "teal": 433,
-    "source": 120,
+    "teal": 468,
+    "source": "contracts/AlgoDirectory.algo.ts:167",
     "pc": [
-      452
+      454
     ]
   },
   {
-    "teal": 434,
-    "source": 121,
+    "teal": 469,
+    "source": "contracts/AlgoDirectory.algo.ts:167",
     "pc": [
-      453,
-      454,
       455
     ]
   },
   {
-    "teal": 435,
-    "source": 121,
+    "teal": 470,
+    "source": "contracts/AlgoDirectory.algo.ts:167",
     "pc": [
-      456
+      456,
+      457
     ]
   },
   {
-    "teal": 436,
-    "source": 121,
+    "teal": 471,
+    "source": "contracts/AlgoDirectory.algo.ts:167",
     "pc": [
-      457,
-      458,
+      458
+    ]
+  },
+  {
+    "teal": 474,
+    "source": "contracts/AlgoDirectory.algo.ts:167",
+    "errorMessage": "argument 0 (listingTags) for refreshListing must be a byte[13]",
+    "pc": [
       459
     ]
   },
   {
-    "teal": 437,
-    "source": 119,
+    "teal": 477,
+    "source": "contracts/AlgoDirectory.algo.ts:167",
     "pc": [
       460,
-      461
-    ]
-  },
-  {
-    "teal": 438,
-    "source": 119,
-    "pc": [
+      461,
       462
     ]
   },
   {
-    "teal": 441,
-    "source": 119,
-    "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
+    "teal": 478,
+    "source": "contracts/AlgoDirectory.algo.ts:167",
     "pc": [
       463
     ]
   },
   {
-    "teal": 442,
-    "source": 122,
+    "teal": 481,
+    "source": "contracts/AlgoDirectory.algo.ts:167",
     "pc": [
       464,
-      465
+      465,
+      466
     ]
   },
   {
-    "teal": 443,
-    "source": 122,
+    "teal": 482,
+    "source": "contracts/AlgoDirectory.algo.ts:167",
     "pc": [
-      466,
       467
     ]
   },
   {
-    "teal": 444,
-    "source": 122,
+    "teal": 483,
+    "source": "contracts/AlgoDirectory.algo.ts:167",
     "pc": [
-      468,
-      469,
+      468
+    ]
+  },
+  {
+    "teal": 484,
+    "source": "contracts/AlgoDirectory.algo.ts:167",
+    "pc": [
+      469
+    ]
+  },
+  {
+    "teal": 485,
+    "source": "contracts/AlgoDirectory.algo.ts:167",
+    "pc": [
       470
     ]
   },
   {
-    "teal": 445,
-    "source": 122,
+    "teal": 494,
+    "source": "contracts/AlgoDirectory.algo.ts:167",
     "pc": [
-      471
+      471,
+      472,
+      473
     ]
   },
   {
-    "teal": 446,
-    "source": 122,
+    "teal": 497,
+    "source": "contracts/AlgoDirectory.algo.ts:167",
     "pc": [
-      472
+      474
     ]
   },
   {
-    "teal": 447,
-    "source": 122,
+    "teal": 498,
+    "source": "contracts/AlgoDirectory.algo.ts:167",
     "pc": [
-      473,
-      474,
       475
     ]
   },
   {
-    "teal": 448,
-    "source": 119,
+    "teal": 502,
+    "source": "contracts/AlgoDirectory.algo.ts:173",
     "pc": [
       476,
       477
     ]
   },
   {
-    "teal": 449,
-    "source": 119,
+    "teal": 503,
+    "source": "contracts/AlgoDirectory.algo.ts:173",
     "pc": [
-      478
+      478,
+      479,
+      480
     ]
   },
   {
-    "teal": 452,
-    "source": 119,
-    "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
+    "teal": 507,
+    "source": "contracts/AlgoDirectory.algo.ts:174",
     "pc": [
-      479
+      481,
+      482
     ]
   },
   {
-    "teal": 453,
-    "source": 123,
+    "teal": 508,
+    "source": "contracts/AlgoDirectory.algo.ts:174",
     "pc": [
-      480,
-      481
-    ]
-  },
-  {
-    "teal": 454,
-    "source": 123,
-    "pc": [
-      482,
-      483
-    ]
-  },
-  {
-    "teal": 455,
-    "source": 123,
-    "pc": [
+      483,
       484,
-      485,
-      486
+      485
     ]
   },
   {
-    "teal": 456,
-    "source": 123,
+    "teal": 512,
+    "source": "contracts/AlgoDirectory.algo.ts:175",
     "pc": [
+      486,
       487
     ]
   },
   {
-    "teal": 457,
-    "source": 123,
+    "teal": 513,
+    "source": "contracts/AlgoDirectory.algo.ts:175",
     "pc": [
-      488
-    ]
-  },
-  {
-    "teal": 458,
-    "source": 123,
-    "pc": [
+      488,
       489,
-      490,
-      491
+      490
     ]
   },
   {
-    "teal": 459,
-    "source": 119,
+    "teal": 517,
+    "source": "contracts/AlgoDirectory.algo.ts:176",
     "pc": [
-      492,
-      493
+      491,
+      492
     ]
   },
   {
-    "teal": 460,
-    "source": 119,
+    "teal": 518,
+    "source": "contracts/AlgoDirectory.algo.ts:176",
     "pc": [
-      494
-    ]
-  },
-  {
-    "teal": 463,
-    "source": 119,
-    "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
-    "pc": [
+      493,
+      494,
       495
     ]
   },
   {
-    "teal": 464,
-    "source": 124,
+    "teal": 522,
+    "source": "contracts/AlgoDirectory.algo.ts:179",
     "pc": [
       496,
       497
     ]
   },
   {
-    "teal": 465,
-    "source": 124,
+    "teal": 523,
+    "source": "contracts/AlgoDirectory.algo.ts:179",
     "pc": [
-      498,
-      499
+      498
     ]
   },
   {
-    "teal": 466,
-    "source": 124,
+    "teal": 524,
+    "source": "contracts/AlgoDirectory.algo.ts:179",
     "pc": [
-      500,
-      501,
+      499,
+      500
+    ]
+  },
+  {
+    "teal": 534,
+    "source": "contracts/AlgoDirectory.algo.ts:180",
+    "pc": [
+      501
+    ]
+  },
+  {
+    "teal": 535,
+    "source": "contracts/AlgoDirectory.algo.ts:180",
+    "pc": [
       502
     ]
   },
   {
-    "teal": 467,
-    "source": 124,
+    "teal": 536,
+    "source": "contracts/AlgoDirectory.algo.ts:180",
     "pc": [
       503,
-      504,
-      505
+      504
     ]
   },
   {
-    "teal": 468,
-    "source": 119,
+    "teal": 537,
+    "source": "contracts/AlgoDirectory.algo.ts:181",
     "pc": [
+      505,
       506,
       507
     ]
   },
   {
-    "teal": 469,
-    "source": 119,
+    "teal": 538,
+    "source": "contracts/AlgoDirectory.algo.ts:181",
     "pc": [
       508
     ]
   },
   {
-    "teal": 472,
-    "source": 119,
-    "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
+    "teal": 539,
+    "source": "contracts/AlgoDirectory.algo.ts:181",
     "pc": [
-      509
-    ]
-  },
-  {
-    "teal": 473,
-    "source": 125,
-    "pc": [
+      509,
       510,
       511
     ]
   },
   {
-    "teal": 474,
-    "source": 125,
+    "teal": 540,
+    "source": "contracts/AlgoDirectory.algo.ts:179",
     "pc": [
       512,
       513
     ]
   },
   {
-    "teal": 475,
-    "source": 125,
+    "teal": 541,
+    "source": "contracts/AlgoDirectory.algo.ts:179",
     "pc": [
-      514,
+      514
+    ]
+  },
+  {
+    "teal": 544,
+    "source": "contracts/AlgoDirectory.algo.ts:179",
+    "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
+    "pc": [
       515
     ]
   },
   {
-    "teal": 476,
-    "source": 125,
+    "teal": 545,
+    "source": "contracts/AlgoDirectory.algo.ts:182",
     "pc": [
       516,
       517
     ]
   },
   {
-    "teal": 477,
-    "source": 125,
+    "teal": 546,
+    "source": "contracts/AlgoDirectory.algo.ts:182",
     "pc": [
       518,
       519
     ]
   },
   {
-    "teal": 478,
-    "source": 125,
+    "teal": 547,
+    "source": "contracts/AlgoDirectory.algo.ts:182",
     "pc": [
-      520
+      520,
+      521,
+      522
     ]
   },
   {
-    "teal": 479,
-    "source": 125,
+    "teal": 548,
+    "source": "contracts/AlgoDirectory.algo.ts:182",
     "pc": [
-      521
-    ]
-  },
-  {
-    "teal": 480,
-    "source": 125,
-    "pc": [
-      522,
       523
     ]
   },
   {
-    "teal": 481,
-    "source": 125,
+    "teal": 549,
+    "source": "contracts/AlgoDirectory.algo.ts:182",
     "pc": [
       524
     ]
   },
   {
-    "teal": 482,
-    "source": 125,
+    "teal": 550,
+    "source": "contracts/AlgoDirectory.algo.ts:182",
     "pc": [
-      525
-    ]
-  },
-  {
-    "teal": 483,
-    "source": 125,
-    "pc": [
-      526
-    ]
-  },
-  {
-    "teal": 484,
-    "source": 125,
-    "pc": [
+      525,
+      526,
       527
     ]
   },
   {
-    "teal": 485,
-    "source": 125,
+    "teal": 551,
+    "source": "contracts/AlgoDirectory.algo.ts:179",
     "pc": [
       528,
       529
     ]
   },
   {
-    "teal": 486,
-    "source": 125,
+    "teal": 552,
+    "source": "contracts/AlgoDirectory.algo.ts:179",
     "pc": [
       530
     ]
   },
   {
-    "teal": 487,
-    "source": 125,
+    "teal": 555,
+    "source": "contracts/AlgoDirectory.algo.ts:179",
+    "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
     "pc": [
       531
     ]
   },
   {
-    "teal": 488,
-    "source": 125,
+    "teal": 556,
+    "source": "contracts/AlgoDirectory.algo.ts:183",
     "pc": [
       532,
-      533,
-      534
+      533
     ]
   },
   {
-    "teal": 489,
-    "source": 125,
+    "teal": 557,
+    "source": "contracts/AlgoDirectory.algo.ts:183",
     "pc": [
+      534,
       535
     ]
   },
   {
-    "teal": 490,
-    "source": 125,
+    "teal": 558,
+    "source": "contracts/AlgoDirectory.algo.ts:183",
     "pc": [
-      536
+      536,
+      537,
+      538
     ]
   },
   {
-    "teal": 491,
-    "source": 125,
+    "teal": 559,
+    "source": "contracts/AlgoDirectory.algo.ts:183",
     "pc": [
-      537
+      539
     ]
   },
   {
-    "teal": 492,
-    "source": 125,
+    "teal": 560,
+    "source": "contracts/AlgoDirectory.algo.ts:183",
     "pc": [
-      538,
-      539,
       540
     ]
   },
   {
-    "teal": 493,
-    "source": 125,
+    "teal": 561,
+    "source": "contracts/AlgoDirectory.algo.ts:183",
     "pc": [
-      541
+      541,
+      542,
+      543
     ]
   },
   {
-    "teal": 494,
-    "source": 125,
+    "teal": 562,
+    "source": "contracts/AlgoDirectory.algo.ts:184",
     "pc": [
-      542
-    ]
-  },
-  {
-    "teal": 495,
-    "source": 125,
-    "pc": [
-      543,
       544,
       545
     ]
   },
   {
-    "teal": 496,
-    "source": 120,
+    "teal": 563,
+    "source": "contracts/AlgoDirectory.algo.ts:184",
     "pc": [
-      546
+      546,
+      547,
+      548
     ]
   },
   {
-    "teal": 497,
-    "source": 120,
+    "teal": 564,
+    "source": "contracts/AlgoDirectory.algo.ts:179",
     "pc": [
-      547
+      549,
+      550
     ]
   },
   {
-    "teal": 498,
-    "source": 120,
+    "teal": 565,
+    "source": "contracts/AlgoDirectory.algo.ts:179",
     "pc": [
-      548,
-      549
-    ]
-  },
-  {
-    "teal": 502,
-    "source": 119,
-    "pc": [
-      550,
       551
     ]
   },
   {
-    "teal": 503,
-    "source": 119,
+    "teal": 568,
+    "source": "contracts/AlgoDirectory.algo.ts:179",
+    "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
     "pc": [
       552
     ]
   },
   {
-    "teal": 506,
-    "source": 119,
-    "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
+    "teal": 569,
+    "source": "contracts/AlgoDirectory.algo.ts:185",
     "pc": [
-      553
-    ]
-  },
-  {
-    "teal": 507,
-    "source": 129,
-    "pc": [
+      553,
       554
     ]
   },
   {
-    "teal": 511,
-    "source": 132,
+    "teal": 570,
+    "source": "contracts/AlgoDirectory.algo.ts:185",
     "pc": [
       555,
       556
     ]
   },
   {
-    "teal": 512,
-    "source": 132,
+    "teal": 571,
+    "source": "contracts/AlgoDirectory.algo.ts:185",
     "pc": [
       557,
       558
     ]
   },
   {
-    "teal": 513,
-    "source": 132,
+    "teal": 572,
+    "source": "contracts/AlgoDirectory.algo.ts:185",
     "pc": [
-      559
+      559,
+      560
     ]
   },
   {
-    "teal": 517,
-    "source": 135,
+    "teal": 573,
+    "source": "contracts/AlgoDirectory.algo.ts:185",
     "pc": [
-      560,
-      561
-    ]
-  },
-  {
-    "teal": 518,
-    "source": 135,
-    "pc": [
+      561,
       562
     ]
   },
   {
-    "teal": 519,
-    "source": 135,
+    "teal": 574,
+    "source": "contracts/AlgoDirectory.algo.ts:185",
     "pc": [
       563
     ]
   },
   {
-    "teal": 520,
-    "source": 135,
+    "teal": 575,
+    "source": "contracts/AlgoDirectory.algo.ts:185",
     "pc": [
       564
     ]
   },
   {
-    "teal": 521,
-    "source": 135,
+    "teal": 576,
+    "source": "contracts/AlgoDirectory.algo.ts:185",
     "pc": [
-      565
+      565,
+      566
     ]
   },
   {
-    "teal": 522,
-    "source": 135,
+    "teal": 577,
+    "source": "contracts/AlgoDirectory.algo.ts:185",
     "pc": [
-      566,
       567
     ]
   },
   {
-    "teal": 523,
-    "source": 135,
+    "teal": 578,
+    "source": "contracts/AlgoDirectory.algo.ts:185",
     "pc": [
       568
     ]
   },
   {
-    "teal": 527,
-    "source": 137,
+    "teal": 579,
+    "source": "contracts/AlgoDirectory.algo.ts:185",
     "pc": [
-      569,
+      569
+    ]
+  },
+  {
+    "teal": 580,
+    "source": "contracts/AlgoDirectory.algo.ts:185",
+    "pc": [
       570
     ]
   },
   {
-    "teal": 530,
-    "source": 112,
+    "teal": 581,
+    "source": "contracts/AlgoDirectory.algo.ts:185",
     "pc": [
-      571,
+      571
+    ]
+  },
+  {
+    "teal": 582,
+    "source": "contracts/AlgoDirectory.algo.ts:185",
+    "pc": [
       572
     ]
   },
   {
-    "teal": 533,
-    "source": 112,
+    "teal": 583,
+    "source": "contracts/AlgoDirectory.algo.ts:185",
     "pc": [
-      573,
-      574
+      573
     ]
   },
   {
-    "teal": 534,
-    "source": 112,
+    "teal": 584,
+    "source": "contracts/AlgoDirectory.algo.ts:185",
     "pc": [
-      575
+      574,
+      575,
+      576
     ]
   },
   {
-    "teal": 539,
-    "source": 145,
+    "teal": 585,
+    "source": "contracts/AlgoDirectory.algo.ts:185",
     "pc": [
-      576,
-      577,
+      577
+    ]
+  },
+  {
+    "teal": 586,
+    "source": "contracts/AlgoDirectory.algo.ts:185",
+    "pc": [
       578
     ]
   },
   {
-    "teal": 540,
-    "source": 145,
+    "teal": 587,
+    "source": "contracts/AlgoDirectory.algo.ts:185",
     "pc": [
       579
     ]
   },
   {
-    "teal": 543,
-    "source": 145,
+    "teal": 588,
+    "source": "contracts/AlgoDirectory.algo.ts:185",
     "pc": [
       580,
       581,
@@ -2322,22 +2445,22 @@
     ]
   },
   {
-    "teal": 544,
-    "source": 145,
+    "teal": 589,
+    "source": "contracts/AlgoDirectory.algo.ts:185",
     "pc": [
       583
     ]
   },
   {
-    "teal": 545,
-    "source": 145,
+    "teal": 590,
+    "source": "contracts/AlgoDirectory.algo.ts:185",
     "pc": [
       584
     ]
   },
   {
-    "teal": 553,
-    "source": 145,
+    "teal": 591,
+    "source": "contracts/AlgoDirectory.algo.ts:185",
     "pc": [
       585,
       586,
@@ -2345,545 +2468,659 @@
     ]
   },
   {
-    "teal": 556,
-    "source": 145,
+    "teal": 592,
+    "source": "contracts/AlgoDirectory.algo.ts:180",
     "pc": [
       588
     ]
   },
   {
-    "teal": 560,
-    "source": 146,
+    "teal": 593,
+    "source": "contracts/AlgoDirectory.algo.ts:180",
     "pc": [
-      589,
-      590
+      589
     ]
   },
   {
-    "teal": 561,
-    "source": 146,
+    "teal": 594,
+    "source": "contracts/AlgoDirectory.algo.ts:180",
     "pc": [
+      590,
       591
     ]
   },
   {
-    "teal": 562,
-    "source": 146,
+    "teal": 598,
+    "source": "contracts/AlgoDirectory.algo.ts:179",
     "pc": [
       592,
       593
     ]
   },
   {
-    "teal": 566,
-    "source": 147,
+    "teal": 599,
+    "source": "contracts/AlgoDirectory.algo.ts:179",
     "pc": [
-      594,
+      594
+    ]
+  },
+  {
+    "teal": 602,
+    "source": "contracts/AlgoDirectory.algo.ts:179",
+    "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
+    "pc": [
       595
     ]
   },
   {
-    "teal": 567,
-    "source": 147,
+    "teal": 603,
+    "source": "contracts/AlgoDirectory.algo.ts:189",
     "pc": [
-      596,
+      596
+    ]
+  },
+  {
+    "teal": 607,
+    "source": "contracts/AlgoDirectory.algo.ts:192",
+    "pc": [
       597,
       598
     ]
   },
   {
-    "teal": 576,
-    "source": 150,
+    "teal": 608,
+    "source": "contracts/AlgoDirectory.algo.ts:192",
     "pc": [
-      599
-    ]
-  },
-  {
-    "teal": 577,
-    "source": 150,
-    "pc": [
+      599,
       600
     ]
   },
   {
-    "teal": 578,
-    "source": 150,
+    "teal": 609,
+    "source": "contracts/AlgoDirectory.algo.ts:192",
     "pc": [
-      601,
-      602
+      601
     ]
   },
   {
-    "teal": 582,
-    "source": 151,
+    "teal": 613,
+    "source": "contracts/AlgoDirectory.algo.ts:195",
     "pc": [
-      603,
+      602,
+      603
+    ]
+  },
+  {
+    "teal": 614,
+    "source": "contracts/AlgoDirectory.algo.ts:195",
+    "pc": [
       604
     ]
   },
   {
-    "teal": 583,
-    "source": 151,
+    "teal": 615,
+    "source": "contracts/AlgoDirectory.algo.ts:195",
     "pc": [
-      605,
+      605
+    ]
+  },
+  {
+    "teal": 616,
+    "source": "contracts/AlgoDirectory.algo.ts:195",
+    "pc": [
       606
     ]
   },
   {
-    "teal": 587,
-    "source": 146,
+    "teal": 617,
+    "source": "contracts/AlgoDirectory.algo.ts:195",
     "pc": [
-      607,
-      608
+      607
     ]
   },
   {
-    "teal": 588,
-    "source": 146,
+    "teal": 618,
+    "source": "contracts/AlgoDirectory.algo.ts:195",
     "pc": [
+      608,
       609
     ]
   },
   {
-    "teal": 591,
-    "source": 146,
-    "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
+    "teal": 619,
+    "source": "contracts/AlgoDirectory.algo.ts:195",
     "pc": [
       610
     ]
   },
   {
-    "teal": 592,
-    "source": 152,
+    "teal": 625,
+    "source": "contracts/AlgoDirectory.algo.ts:198",
     "pc": [
-      611
-    ]
-  },
-  {
-    "teal": 595,
-    "source": 152,
-    "errorMessage": "box value does not exist: this.listings(listingKey).value",
-    "pc": [
-      612
-    ]
-  },
-  {
-    "teal": 596,
-    "source": 152,
-    "pc": [
+      611,
+      612,
       613,
-      614
-    ]
-  },
-  {
-    "teal": 600,
-    "source": 146,
-    "pc": [
+      614,
       615,
       616
     ]
   },
   {
-    "teal": 601,
-    "source": 146,
+    "teal": 626,
+    "source": "contracts/AlgoDirectory.algo.ts:198",
     "pc": [
       617
     ]
   },
   {
-    "teal": 604,
-    "source": 146,
-    "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
+    "teal": 627,
+    "source": "contracts/AlgoDirectory.algo.ts:198",
     "pc": [
       618
     ]
   },
   {
-    "teal": 605,
-    "source": 153,
+    "teal": 628,
+    "source": "contracts/AlgoDirectory.algo.ts:198",
     "pc": [
-      619,
-      620
+      619
     ]
   },
   {
-    "teal": 606,
-    "source": 153,
+    "teal": 629,
+    "source": "contracts/AlgoDirectory.algo.ts:199",
     "pc": [
-      621,
-      622
+      620,
+      621
     ]
   },
   {
-    "teal": 607,
-    "source": 153,
+    "teal": 630,
+    "source": "contracts/AlgoDirectory.algo.ts:199",
     "pc": [
+      622,
       623,
-      624,
+      624
+    ]
+  },
+  {
+    "teal": 631,
+    "source": "contracts/AlgoDirectory.algo.ts:198",
+    "pc": [
       625
     ]
   },
   {
-    "teal": 608,
-    "source": 153,
+    "teal": 632,
+    "source": "contracts/AlgoDirectory.algo.ts:198",
     "pc": [
       626
     ]
   },
   {
-    "teal": 609,
-    "source": 153,
+    "teal": 633,
+    "source": "contracts/AlgoDirectory.algo.ts:198",
     "pc": [
-      627,
+      627
+    ]
+  },
+  {
+    "teal": 634,
+    "source": "contracts/AlgoDirectory.algo.ts:198",
+    "pc": [
       628
     ]
   },
   {
-    "teal": 613,
-    "source": 154,
+    "teal": 638,
+    "source": "contracts/AlgoDirectory.algo.ts:202",
     "pc": [
-      629
+      629,
+      630
     ]
   },
   {
-    "teal": 614,
-    "source": 154,
+    "teal": 641,
+    "source": "contracts/AlgoDirectory.algo.ts:167",
     "pc": [
-      630,
-      631
-    ]
-  },
-  {
-    "teal": 617,
-    "source": 150,
-    "pc": [
+      631,
       632
     ]
   },
   {
-    "teal": 621,
-    "source": 146,
+    "teal": 644,
+    "source": "contracts/AlgoDirectory.algo.ts:167",
     "pc": [
       633,
       634
     ]
   },
   {
-    "teal": 622,
-    "source": 146,
+    "teal": 645,
+    "source": "contracts/AlgoDirectory.algo.ts:167",
     "pc": [
       635
     ]
   },
   {
-    "teal": 625,
-    "source": 146,
-    "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
+    "teal": 650,
+    "source": "contracts/AlgoDirectory.algo.ts:217",
     "pc": [
-      636
+      636,
+      637,
+      638
     ]
   },
   {
-    "teal": 626,
-    "source": 158,
+    "teal": 651,
+    "source": "contracts/AlgoDirectory.algo.ts:217",
     "pc": [
-      637
-    ]
-  },
-  {
-    "teal": 630,
-    "source": 159,
-    "pc": [
-      638,
       639
     ]
   },
   {
-    "teal": 631,
-    "source": 159,
+    "teal": 654,
+    "source": "contracts/AlgoDirectory.algo.ts:217",
     "pc": [
-      640
-    ]
-  },
-  {
-    "teal": 632,
-    "source": 159,
-    "pc": [
-      641
-    ]
-  },
-  {
-    "teal": 633,
-    "source": 145,
-    "pc": [
+      640,
+      641,
       642
     ]
   },
   {
-    "teal": 638,
-    "source": 167,
+    "teal": 655,
+    "source": "contracts/AlgoDirectory.algo.ts:217",
     "pc": [
-      643,
-      644,
-      645
+      643
     ]
   },
   {
-    "teal": 639,
-    "source": 167,
+    "teal": 656,
+    "source": "contracts/AlgoDirectory.algo.ts:217",
     "pc": [
-      646
+      644
     ]
   },
   {
-    "teal": 642,
-    "source": 167,
+    "teal": 664,
+    "source": "contracts/AlgoDirectory.algo.ts:217",
     "pc": [
-      647,
-      648,
-      649
+      645,
+      646,
+      647
     ]
   },
   {
-    "teal": 643,
-    "source": 167,
+    "teal": 667,
+    "source": "contracts/AlgoDirectory.algo.ts:217",
     "pc": [
+      648
+    ]
+  },
+  {
+    "teal": 671,
+    "source": "contracts/AlgoDirectory.algo.ts:218",
+    "pc": [
+      649,
       650
     ]
   },
   {
-    "teal": 644,
-    "source": 167,
+    "teal": 672,
+    "source": "contracts/AlgoDirectory.algo.ts:218",
     "pc": [
       651
     ]
   },
   {
-    "teal": 652,
-    "source": 167,
+    "teal": 673,
+    "source": "contracts/AlgoDirectory.algo.ts:218",
     "pc": [
       652,
-      653,
-      654
+      653
     ]
   },
   {
-    "teal": 655,
-    "source": 167,
+    "teal": 677,
+    "source": "contracts/AlgoDirectory.algo.ts:223",
     "pc": [
+      654,
       655
     ]
   },
   {
-    "teal": 659,
-    "source": 172,
+    "teal": 678,
+    "source": "contracts/AlgoDirectory.algo.ts:223",
     "pc": [
       656,
-      657
-    ]
-  },
-  {
-    "teal": 660,
-    "source": 172,
-    "pc": [
+      657,
       658
     ]
   },
   {
-    "teal": 661,
-    "source": 172,
+    "teal": 687,
+    "source": "contracts/AlgoDirectory.algo.ts:226",
     "pc": [
       659
     ]
   },
   {
-    "teal": 662,
-    "source": 172,
+    "teal": 688,
+    "source": "contracts/AlgoDirectory.algo.ts:226",
     "pc": [
-      660,
-      661
+      660
     ]
   },
   {
-    "teal": 663,
-    "source": 172,
+    "teal": 689,
+    "source": "contracts/AlgoDirectory.algo.ts:226",
     "pc": [
+      661,
       662
     ]
   },
   {
-    "teal": 664,
-    "source": 172,
+    "teal": 693,
+    "source": "contracts/AlgoDirectory.algo.ts:227",
     "pc": [
-      663
-    ]
-  },
-  {
-    "teal": 665,
-    "source": 172,
-    "pc": [
+      663,
       664
     ]
   },
   {
-    "teal": 668,
-    "source": 172,
-    "errorMessage": "Caller must have the admin token",
+    "teal": 694,
+    "source": "contracts/AlgoDirectory.algo.ts:227",
     "pc": [
-      665
+      665,
+      666
     ]
   },
   {
-    "teal": 672,
-    "source": 174,
+    "teal": 698,
+    "source": "contracts/AlgoDirectory.algo.ts:218",
     "pc": [
-      666,
-      667
-    ]
-  },
-  {
-    "teal": 673,
-    "source": 174,
-    "pc": [
+      667,
       668
     ]
   },
   {
-    "teal": 674,
-    "source": 174,
+    "teal": 699,
+    "source": "contracts/AlgoDirectory.algo.ts:218",
     "pc": [
-      669,
+      669
+    ]
+  },
+  {
+    "teal": 702,
+    "source": "contracts/AlgoDirectory.algo.ts:218",
+    "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
+    "pc": [
       670
     ]
   },
   {
-    "teal": 683,
-    "source": 177,
+    "teal": 703,
+    "source": "contracts/AlgoDirectory.algo.ts:228",
     "pc": [
       671
     ]
   },
   {
-    "teal": 684,
-    "source": 177,
+    "teal": 706,
+    "source": "contracts/AlgoDirectory.algo.ts:228",
+    "errorMessage": "box value does not exist: this.listings(listingKey).value",
     "pc": [
       672
     ]
   },
   {
-    "teal": 685,
-    "source": 177,
+    "teal": 707,
+    "source": "contracts/AlgoDirectory.algo.ts:228",
     "pc": [
       673,
       674
     ]
   },
   {
-    "teal": 689,
-    "source": 178,
+    "teal": 711,
+    "source": "contracts/AlgoDirectory.algo.ts:218",
     "pc": [
       675,
       676
     ]
   },
   {
-    "teal": 690,
-    "source": 178,
+    "teal": 712,
+    "source": "contracts/AlgoDirectory.algo.ts:218",
     "pc": [
-      677,
+      677
+    ]
+  },
+  {
+    "teal": 715,
+    "source": "contracts/AlgoDirectory.algo.ts:218",
+    "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
+    "pc": [
       678
     ]
   },
   {
-    "teal": 694,
-    "source": 179,
+    "teal": 716,
+    "source": "contracts/AlgoDirectory.algo.ts:229",
     "pc": [
       679,
-      680,
+      680
+    ]
+  },
+  {
+    "teal": 717,
+    "source": "contracts/AlgoDirectory.algo.ts:229",
+    "pc": [
       681,
-      682,
+      682
+    ]
+  },
+  {
+    "teal": 718,
+    "source": "contracts/AlgoDirectory.algo.ts:229",
+    "pc": [
       683,
       684,
-      685,
-      686,
+      685
+    ]
+  },
+  {
+    "teal": 719,
+    "source": "contracts/AlgoDirectory.algo.ts:229",
+    "pc": [
+      686
+    ]
+  },
+  {
+    "teal": 720,
+    "source": "contracts/AlgoDirectory.algo.ts:229",
+    "pc": [
       687,
-      688,
-      689,
+      688
+    ]
+  },
+  {
+    "teal": 724,
+    "source": "contracts/AlgoDirectory.algo.ts:230",
+    "pc": [
+      689
+    ]
+  },
+  {
+    "teal": 725,
+    "source": "contracts/AlgoDirectory.algo.ts:230",
+    "pc": [
       690,
-      691,
-      692,
+      691
+    ]
+  },
+  {
+    "teal": 728,
+    "source": "contracts/AlgoDirectory.algo.ts:226",
+    "pc": [
+      692
+    ]
+  },
+  {
+    "teal": 734,
+    "source": "contracts/AlgoDirectory.algo.ts:234",
+    "pc": [
       693,
       694,
       695,
       696,
       697,
-      698,
-      699,
-      700,
-      701,
+      698
+    ]
+  },
+  {
+    "teal": 735,
+    "source": "contracts/AlgoDirectory.algo.ts:234",
+    "pc": [
+      699
+    ]
+  },
+  {
+    "teal": 736,
+    "source": "contracts/AlgoDirectory.algo.ts:234",
+    "pc": [
+      700
+    ]
+  },
+  {
+    "teal": 737,
+    "source": "contracts/AlgoDirectory.algo.ts:234",
+    "pc": [
+      701
+    ]
+  },
+  {
+    "teal": 738,
+    "source": "contracts/AlgoDirectory.algo.ts:218",
+    "pc": [
       702,
-      703,
-      704,
-      705,
+      703
+    ]
+  },
+  {
+    "teal": 739,
+    "source": "contracts/AlgoDirectory.algo.ts:218",
+    "pc": [
+      704
+    ]
+  },
+  {
+    "teal": 742,
+    "source": "contracts/AlgoDirectory.algo.ts:218",
+    "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
+    "pc": [
+      705
+    ]
+  },
+  {
+    "teal": 743,
+    "source": "contracts/AlgoDirectory.algo.ts:235",
+    "pc": [
       706,
       707,
-      708,
-      709,
-      710,
-      711,
+      708
+    ]
+  },
+  {
+    "teal": 744,
+    "source": "contracts/AlgoDirectory.algo.ts:234",
+    "pc": [
+      709
+    ]
+  },
+  {
+    "teal": 745,
+    "source": "contracts/AlgoDirectory.algo.ts:234",
+    "pc": [
+      710
+    ]
+  },
+  {
+    "teal": 746,
+    "source": "contracts/AlgoDirectory.algo.ts:234",
+    "pc": [
+      711
+    ]
+  },
+  {
+    "teal": 747,
+    "source": "contracts/AlgoDirectory.algo.ts:234",
+    "pc": [
       712
     ]
   },
   {
-    "teal": 695,
-    "source": 179,
+    "teal": 751,
+    "source": "contracts/AlgoDirectory.algo.ts:218",
     "pc": [
       713,
       714
     ]
   },
   {
-    "teal": 699,
-    "source": 174,
+    "teal": 752,
+    "source": "contracts/AlgoDirectory.algo.ts:218",
     "pc": [
-      715,
+      715
+    ]
+  },
+  {
+    "teal": 755,
+    "source": "contracts/AlgoDirectory.algo.ts:218",
+    "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
+    "pc": [
       716
     ]
   },
   {
-    "teal": 700,
-    "source": 174,
+    "teal": 756,
+    "source": "contracts/AlgoDirectory.algo.ts:239",
     "pc": [
       717
     ]
   },
   {
-    "teal": 703,
-    "source": 174,
-    "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
+    "teal": 760,
+    "source": "contracts/AlgoDirectory.algo.ts:240",
     "pc": [
-      718
+      718,
+      719
     ]
   },
   {
-    "teal": 704,
-    "source": 180,
+    "teal": 761,
+    "source": "contracts/AlgoDirectory.algo.ts:240",
     "pc": [
-      719,
       720
     ]
   },
   {
-    "teal": 705,
-    "source": 180,
+    "teal": 762,
+    "source": "contracts/AlgoDirectory.algo.ts:240",
     "pc": [
-      721,
+      721
+    ]
+  },
+  {
+    "teal": 763,
+    "source": "contracts/AlgoDirectory.algo.ts:217",
+    "pc": [
       722
     ]
   },
   {
-    "teal": 706,
-    "source": 180,
+    "teal": 768,
+    "source": "contracts/AlgoDirectory.algo.ts:256",
     "pc": [
       723,
       724,
@@ -2891,104 +3128,85 @@
     ]
   },
   {
-    "teal": 707,
-    "source": 180,
+    "teal": 769,
+    "source": "contracts/AlgoDirectory.algo.ts:256",
     "pc": [
       726
     ]
   },
   {
-    "teal": 708,
-    "source": 180,
+    "teal": 772,
+    "source": "contracts/AlgoDirectory.algo.ts:256",
     "pc": [
       727,
-      728
-    ]
-  },
-  {
-    "teal": 712,
-    "source": 181,
-    "pc": [
+      728,
       729
     ]
   },
   {
-    "teal": 713,
-    "source": 181,
+    "teal": 773,
+    "source": "contracts/AlgoDirectory.algo.ts:256",
     "pc": [
-      730,
+      730
+    ]
+  },
+  {
+    "teal": 774,
+    "source": "contracts/AlgoDirectory.algo.ts:256",
+    "pc": [
       731
     ]
   },
   {
-    "teal": 716,
-    "source": 177,
+    "teal": 783,
+    "source": "contracts/AlgoDirectory.algo.ts:256",
     "pc": [
-      732
-    ]
-  },
-  {
-    "teal": 720,
-    "source": 174,
-    "pc": [
+      732,
       733,
       734
     ]
   },
   {
-    "teal": 721,
-    "source": 174,
+    "teal": 786,
+    "source": "contracts/AlgoDirectory.algo.ts:256",
     "pc": [
       735
     ]
   },
   {
-    "teal": 724,
-    "source": 174,
-    "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
+    "teal": 790,
+    "source": "contracts/AlgoDirectory.algo.ts:257",
     "pc": [
-      736
-    ]
-  },
-  {
-    "teal": 725,
-    "source": 185,
-    "pc": [
+      736,
       737
     ]
   },
   {
-    "teal": 729,
-    "source": 186,
+    "teal": 791,
+    "source": "contracts/AlgoDirectory.algo.ts:257",
     "pc": [
-      738,
-      739
+      738
     ]
   },
   {
-    "teal": 730,
-    "source": 186,
+    "teal": 792,
+    "source": "contracts/AlgoDirectory.algo.ts:257",
     "pc": [
+      739,
       740
     ]
   },
   {
-    "teal": 731,
-    "source": 186,
+    "teal": 796,
+    "source": "contracts/AlgoDirectory.algo.ts:260",
     "pc": [
-      741
-    ]
-  },
-  {
-    "teal": 732,
-    "source": 167,
-    "pc": [
+      741,
       742
     ]
   },
   {
-    "teal": 737,
-    "source": 189,
+    "teal": 797,
+    "source": "contracts/AlgoDirectory.algo.ts:260",
     "pc": [
       743,
       744,
@@ -2996,640 +3214,1728 @@
     ]
   },
   {
-    "teal": 738,
-    "source": 189,
+    "teal": 806,
+    "source": "contracts/AlgoDirectory.algo.ts:263",
     "pc": [
       746
     ]
   },
   {
-    "teal": 739,
-    "source": 189,
+    "teal": 807,
+    "source": "contracts/AlgoDirectory.algo.ts:263",
     "pc": [
       747
     ]
   },
   {
-    "teal": 743,
-    "source": 189,
+    "teal": 808,
+    "source": "contracts/AlgoDirectory.algo.ts:263",
     "pc": [
       748,
-      749,
-      750
+      749
     ]
   },
   {
-    "teal": 744,
-    "source": 189,
+    "teal": 812,
+    "source": "contracts/AlgoDirectory.algo.ts:264",
     "pc": [
+      750,
       751
     ]
   },
   {
-    "teal": 749,
-    "source": 191,
+    "teal": 813,
+    "source": "contracts/AlgoDirectory.algo.ts:264",
     "pc": [
       752,
-      753,
-      754
+      753
     ]
   },
   {
-    "teal": 750,
-    "source": 191,
+    "teal": 817,
+    "source": "contracts/AlgoDirectory.algo.ts:257",
     "pc": [
+      754,
       755
     ]
   },
   {
-    "teal": 753,
-    "source": 191,
+    "teal": 818,
+    "source": "contracts/AlgoDirectory.algo.ts:257",
     "pc": [
-      756,
-      757,
+      756
+    ]
+  },
+  {
+    "teal": 821,
+    "source": "contracts/AlgoDirectory.algo.ts:257",
+    "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
+    "pc": [
+      757
+    ]
+  },
+  {
+    "teal": 822,
+    "source": "contracts/AlgoDirectory.algo.ts:265",
+    "pc": [
       758
     ]
   },
   {
-    "teal": 754,
-    "source": 191,
+    "teal": 825,
+    "source": "contracts/AlgoDirectory.algo.ts:265",
+    "errorMessage": "box value does not exist: this.listings(listingKey).value",
     "pc": [
       759
     ]
   },
   {
-    "teal": 755,
-    "source": 191,
+    "teal": 826,
+    "source": "contracts/AlgoDirectory.algo.ts:265",
     "pc": [
-      760
+      760,
+      761
     ]
   },
   {
-    "teal": 759,
-    "source": 191,
+    "teal": 830,
+    "source": "contracts/AlgoDirectory.algo.ts:257",
     "pc": [
-      761,
       762,
       763
     ]
   },
   {
-    "teal": 763,
-    "source": 192,
+    "teal": 831,
+    "source": "contracts/AlgoDirectory.algo.ts:257",
     "pc": [
-      764,
+      764
+    ]
+  },
+  {
+    "teal": 834,
+    "source": "contracts/AlgoDirectory.algo.ts:257",
+    "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
+    "pc": [
       765
     ]
   },
   {
-    "teal": 764,
-    "source": 192,
+    "teal": 835,
+    "source": "contracts/AlgoDirectory.algo.ts:266",
     "pc": [
       766,
-      767,
-      768
+      767
     ]
   },
   {
-    "teal": 765,
-    "source": 192,
+    "teal": 836,
+    "source": "contracts/AlgoDirectory.algo.ts:266",
     "pc": [
-      769,
-      770
+      768,
+      769
     ]
   },
   {
-    "teal": 766,
-    "source": 192,
+    "teal": 837,
+    "source": "contracts/AlgoDirectory.algo.ts:266",
     "pc": [
-      771
-    ]
-  },
-  {
-    "teal": 767,
-    "source": 192,
-    "pc": [
+      770,
+      771,
       772
     ]
   },
   {
-    "teal": 770,
-    "source": 192,
-    "errorMessage": "Only the creator can set the admin token",
+    "teal": 838,
+    "source": "contracts/AlgoDirectory.algo.ts:266",
     "pc": [
       773
     ]
   },
   {
-    "teal": 774,
-    "source": 193,
+    "teal": 839,
+    "source": "contracts/AlgoDirectory.algo.ts:266",
     "pc": [
-      774
+      774,
+      775
     ]
   },
   {
-    "teal": 775,
-    "source": 193,
+    "teal": 843,
+    "source": "contracts/AlgoDirectory.algo.ts:267",
     "pc": [
-      775,
       776
     ]
   },
   {
-    "teal": 776,
-    "source": 193,
+    "teal": 844,
+    "source": "contracts/AlgoDirectory.algo.ts:267",
     "pc": [
-      777
-    ]
-  },
-  {
-    "teal": 777,
-    "source": 191,
-    "pc": [
+      777,
       778
     ]
   },
   {
-    "teal": 782,
-    "source": 196,
+    "teal": 847,
+    "source": "contracts/AlgoDirectory.algo.ts:263",
     "pc": [
-      779,
+      779
+    ]
+  },
+  {
+    "teal": 853,
+    "source": "contracts/AlgoDirectory.algo.ts:271",
+    "pc": [
       780,
-      781
-    ]
-  },
-  {
-    "teal": 783,
-    "source": 196,
-    "pc": [
-      782
-    ]
-  },
-  {
-    "teal": 784,
-    "source": 196,
-    "pc": [
-      783
-    ]
-  },
-  {
-    "teal": 788,
-    "source": 196,
-    "pc": [
+      781,
+      782,
+      783,
       784,
-      785,
+      785
+    ]
+  },
+  {
+    "teal": 854,
+    "source": "contracts/AlgoDirectory.algo.ts:271",
+    "pc": [
       786
     ]
   },
   {
-    "teal": 792,
-    "source": 197,
+    "teal": 855,
+    "source": "contracts/AlgoDirectory.algo.ts:271",
     "pc": [
-      787,
+      787
+    ]
+  },
+  {
+    "teal": 856,
+    "source": "contracts/AlgoDirectory.algo.ts:271",
+    "pc": [
       788
     ]
   },
   {
-    "teal": 793,
-    "source": 197,
+    "teal": 857,
+    "source": "contracts/AlgoDirectory.algo.ts:257",
     "pc": [
       789,
-      790,
+      790
+    ]
+  },
+  {
+    "teal": 858,
+    "source": "contracts/AlgoDirectory.algo.ts:257",
+    "pc": [
       791
     ]
   },
   {
-    "teal": 794,
-    "source": 197,
+    "teal": 861,
+    "source": "contracts/AlgoDirectory.algo.ts:257",
+    "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
     "pc": [
-      792,
-      793
+      792
     ]
   },
   {
-    "teal": 795,
-    "source": 197,
+    "teal": 862,
+    "source": "contracts/AlgoDirectory.algo.ts:272",
     "pc": [
-      794
-    ]
-  },
-  {
-    "teal": 796,
-    "source": 197,
-    "pc": [
+      793,
+      794,
       795
     ]
   },
   {
-    "teal": 799,
-    "source": 197,
-    "errorMessage": "Only the creator can update the application",
+    "teal": 863,
+    "source": "contracts/AlgoDirectory.algo.ts:271",
     "pc": [
       796
     ]
   },
   {
-    "teal": 800,
-    "source": 196,
+    "teal": 864,
+    "source": "contracts/AlgoDirectory.algo.ts:271",
     "pc": [
       797
     ]
   },
   {
-    "teal": 803,
-    "source": 15,
+    "teal": 865,
+    "source": "contracts/AlgoDirectory.algo.ts:271",
     "pc": [
-      798,
-      799,
+      798
+    ]
+  },
+  {
+    "teal": 866,
+    "source": "contracts/AlgoDirectory.algo.ts:271",
+    "pc": [
+      799
+    ]
+  },
+  {
+    "teal": 870,
+    "source": "contracts/AlgoDirectory.algo.ts:257",
+    "pc": [
       800,
-      801,
-      802,
+      801
+    ]
+  },
+  {
+    "teal": 871,
+    "source": "contracts/AlgoDirectory.algo.ts:257",
+    "pc": [
+      802
+    ]
+  },
+  {
+    "teal": 874,
+    "source": "contracts/AlgoDirectory.algo.ts:257",
+    "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
+    "pc": [
       803
     ]
   },
   {
-    "teal": 804,
-    "source": 15,
+    "teal": 875,
+    "source": "contracts/AlgoDirectory.algo.ts:276",
     "pc": [
-      804,
+      804
+    ]
+  },
+  {
+    "teal": 879,
+    "source": "contracts/AlgoDirectory.algo.ts:277",
+    "pc": [
       805,
       806
     ]
   },
   {
-    "teal": 805,
-    "source": 15,
+    "teal": 880,
+    "source": "contracts/AlgoDirectory.algo.ts:277",
     "pc": [
-      807,
-      808,
-      809,
+      807
+    ]
+  },
+  {
+    "teal": 881,
+    "source": "contracts/AlgoDirectory.algo.ts:277",
+    "pc": [
+      808
+    ]
+  },
+  {
+    "teal": 882,
+    "source": "contracts/AlgoDirectory.algo.ts:256",
+    "pc": [
+      809
+    ]
+  },
+  {
+    "teal": 887,
+    "source": "contracts/AlgoDirectory.algo.ts:292",
+    "pc": [
       810
     ]
   },
   {
-    "teal": 808,
-    "source": 15,
-    "errorMessage": "this contract does not implement the given ABI method for create NoOp",
+    "teal": 890,
+    "source": "contracts/AlgoDirectory.algo.ts:292",
     "pc": [
-      811
+      811,
+      812,
+      813
     ]
   },
   {
-    "teal": 811,
-    "source": 15,
+    "teal": 891,
+    "source": "contracts/AlgoDirectory.algo.ts:292",
     "pc": [
-      812,
-      813,
-      814,
+      814
+    ]
+  },
+  {
+    "teal": 894,
+    "source": "contracts/AlgoDirectory.algo.ts:292",
+    "pc": [
       815,
       816,
       817
     ]
   },
   {
-    "teal": 812,
-    "source": 15,
+    "teal": 895,
+    "source": "contracts/AlgoDirectory.algo.ts:292",
     "pc": [
-      818,
-      819,
-      820,
+      818
+    ]
+  },
+  {
+    "teal": 896,
+    "source": "contracts/AlgoDirectory.algo.ts:292",
+    "pc": [
+      819
+    ]
+  },
+  {
+    "teal": 897,
+    "source": "contracts/AlgoDirectory.algo.ts:292",
+    "pc": [
+      820
+    ]
+  },
+  {
+    "teal": 898,
+    "source": "contracts/AlgoDirectory.algo.ts:292",
+    "pc": [
       821,
       822,
       823
     ]
   },
   {
-    "teal": 813,
-    "source": 15,
+    "teal": 899,
+    "source": "contracts/AlgoDirectory.algo.ts:292",
     "pc": [
-      824,
-      825,
-      826,
-      827,
-      828,
+      824
+    ]
+  },
+  {
+    "teal": 900,
+    "source": "contracts/AlgoDirectory.algo.ts:292",
+    "pc": [
+      825
+    ]
+  },
+  {
+    "teal": 901,
+    "source": "contracts/AlgoDirectory.algo.ts:292",
+    "pc": [
+      826
+    ]
+  },
+  {
+    "teal": 902,
+    "source": "contracts/AlgoDirectory.algo.ts:292",
+    "pc": [
+      827
+    ]
+  },
+  {
+    "teal": 903,
+    "source": "contracts/AlgoDirectory.algo.ts:292",
+    "pc": [
+      828
+    ]
+  },
+  {
+    "teal": 904,
+    "source": "contracts/AlgoDirectory.algo.ts:292",
+    "pc": [
       829
     ]
   },
   {
-    "teal": 814,
-    "source": 15,
+    "teal": 912,
+    "source": "contracts/AlgoDirectory.algo.ts:292",
     "pc": [
       830,
       831,
-      832,
-      833,
-      834,
-      835
+      832
     ]
   },
   {
-    "teal": 815,
-    "source": 15,
+    "teal": 915,
+    "source": "contracts/AlgoDirectory.algo.ts:292",
     "pc": [
-      836,
-      837,
-      838,
+      833
+    ]
+  },
+  {
+    "teal": 916,
+    "source": "contracts/AlgoDirectory.algo.ts:292",
+    "pc": [
+      834
+    ]
+  },
+  {
+    "teal": 920,
+    "source": "contracts/AlgoDirectory.algo.ts:294",
+    "pc": [
+      835,
+      836
+    ]
+  },
+  {
+    "teal": 921,
+    "source": "contracts/AlgoDirectory.algo.ts:294",
+    "pc": [
+      837
+    ]
+  },
+  {
+    "teal": 922,
+    "source": "contracts/AlgoDirectory.algo.ts:294",
+    "pc": [
+      838
+    ]
+  },
+  {
+    "teal": 923,
+    "source": "contracts/AlgoDirectory.algo.ts:294",
+    "pc": [
       839,
-      840,
+      840
+    ]
+  },
+  {
+    "teal": 924,
+    "source": "contracts/AlgoDirectory.algo.ts:294",
+    "pc": [
       841
     ]
   },
   {
-    "teal": 816,
-    "source": 15,
+    "teal": 925,
+    "source": "contracts/AlgoDirectory.algo.ts:294",
     "pc": [
-      842,
-      843,
+      842
+    ]
+  },
+  {
+    "teal": 926,
+    "source": "contracts/AlgoDirectory.algo.ts:294",
+    "pc": [
+      843
+    ]
+  },
+  {
+    "teal": 929,
+    "source": "contracts/AlgoDirectory.algo.ts:294",
+    "errorMessage": "Caller must have the admin token",
+    "pc": [
       844
     ]
   },
   {
-    "teal": 817,
-    "source": 15,
+    "teal": 933,
+    "source": "contracts/AlgoDirectory.algo.ts:296",
     "pc": [
       845,
-      846,
-      847,
+      846
+    ]
+  },
+  {
+    "teal": 934,
+    "source": "contracts/AlgoDirectory.algo.ts:296",
+    "pc": [
+      847
+    ]
+  },
+  {
+    "teal": 935,
+    "source": "contracts/AlgoDirectory.algo.ts:296",
+    "pc": [
       848,
-      849,
+      849
+    ]
+  },
+  {
+    "teal": 939,
+    "source": "contracts/AlgoDirectory.algo.ts:297",
+    "pc": [
       850,
       851,
       852,
       853,
       854,
       855,
-      856
+      856,
+      857,
+      858
     ]
   },
   {
-    "teal": 820,
-    "source": 15,
-    "errorMessage": "this contract does not implement the given ABI method for call NoOp",
+    "teal": 940,
+    "source": "contracts/AlgoDirectory.algo.ts:296",
     "pc": [
-      857
-    ]
-  },
-  {
-    "teal": 823,
-    "source": 15,
-    "pc": [
-      858,
       859,
-      860,
-      861,
-      862,
-      863
+      860
     ]
   },
   {
-    "teal": 824,
-    "source": 15,
+    "teal": 941,
+    "source": "contracts/AlgoDirectory.algo.ts:296",
     "pc": [
-      864,
+      861
+    ]
+  },
+  {
+    "teal": 944,
+    "source": "contracts/AlgoDirectory.algo.ts:296",
+    "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
+    "pc": [
+      862
+    ]
+  },
+  {
+    "teal": 945,
+    "source": "contracts/AlgoDirectory.algo.ts:297",
+    "pc": [
+      863,
+      864
+    ]
+  },
+  {
+    "teal": 946,
+    "source": "contracts/AlgoDirectory.algo.ts:297",
+    "pc": [
       865,
       866
     ]
   },
   {
-    "teal": 825,
-    "source": 15,
+    "teal": 947,
+    "source": "contracts/AlgoDirectory.algo.ts:297",
     "pc": [
       867,
-      868,
+      868
+    ]
+  },
+  {
+    "teal": 948,
+    "source": "contracts/AlgoDirectory.algo.ts:297",
+    "pc": [
       869,
       870
     ]
   },
   {
-    "teal": 828,
-    "source": 15,
-    "errorMessage": "this contract does not implement the given ABI method for call UpdateApplication",
+    "teal": 949,
+    "source": "contracts/AlgoDirectory.algo.ts:297",
     "pc": [
-      871
+      871,
+      872
     ]
   },
   {
-    "teal": 831,
-    "source": 15,
+    "teal": 950,
+    "source": "contracts/AlgoDirectory.algo.ts:297",
     "pc": [
-      872,
-      873,
+      873
+    ]
+  },
+  {
+    "teal": 951,
+    "source": "contracts/AlgoDirectory.algo.ts:297",
+    "pc": [
       874
     ]
   },
   {
-    "teal": 832,
-    "source": 15,
+    "teal": 952,
+    "source": "contracts/AlgoDirectory.algo.ts:297",
     "pc": [
       875,
       876
     ]
   },
   {
-    "teal": 833,
-    "source": 15,
+    "teal": 953,
+    "source": "contracts/AlgoDirectory.algo.ts:297",
     "pc": [
-      877,
+      877
+    ]
+  },
+  {
+    "teal": 954,
+    "source": "contracts/AlgoDirectory.algo.ts:297",
+    "pc": [
       878
     ]
   },
   {
-    "teal": 834,
-    "source": 15,
+    "teal": 955,
+    "source": "contracts/AlgoDirectory.algo.ts:297",
     "pc": [
       879
     ]
   },
   {
-    "teal": 835,
-    "source": 15,
+    "teal": 956,
+    "source": "contracts/AlgoDirectory.algo.ts:297",
     "pc": [
-      880,
+      880
+    ]
+  },
+  {
+    "teal": 957,
+    "source": "contracts/AlgoDirectory.algo.ts:297",
+    "pc": [
       881
     ]
   },
   {
-    "teal": 836,
-    "source": 15,
+    "teal": 958,
+    "source": "contracts/AlgoDirectory.algo.ts:297",
     "pc": [
-      882,
+      882
+    ]
+  },
+  {
+    "teal": 959,
+    "source": "contracts/AlgoDirectory.algo.ts:297",
+    "pc": [
       883
     ]
   },
   {
-    "teal": 837,
-    "source": 15,
+    "teal": 960,
+    "source": "contracts/AlgoDirectory.algo.ts:297",
     "pc": [
-      884
+      884,
+      885,
+      886
     ]
   },
   {
-    "teal": 840,
-    "source": 15,
+    "teal": 961,
+    "source": "contracts/AlgoDirectory.algo.ts:297",
     "pc": [
-      885,
-      886,
       887
     ]
   },
   {
-    "teal": 841,
-    "source": 15,
+    "teal": 962,
+    "source": "contracts/AlgoDirectory.algo.ts:297",
     "pc": [
       888,
-      889
-    ]
-  },
-  {
-    "teal": 842,
-    "source": 15,
-    "pc": [
+      889,
       890,
-      891
-    ]
-  },
-  {
-    "teal": 843,
-    "source": 15,
-    "pc": [
-      892
-    ]
-  },
-  {
-    "teal": 844,
-    "source": 15,
-    "pc": [
+      891,
+      892,
       893,
-      894
-    ]
-  },
-  {
-    "teal": 845,
-    "source": 15,
-    "pc": [
+      894,
       895,
-      896
-    ]
-  },
-  {
-    "teal": 846,
-    "source": 15,
-    "pc": [
-      897
-    ]
-  },
-  {
-    "teal": 847,
-    "source": 15,
-    "pc": [
-      898
-    ]
-  },
-  {
-    "teal": 848,
-    "source": 15,
-    "pc": [
+      896,
+      897,
+      898,
       899,
-      900
-    ]
-  },
-  {
-    "teal": 849,
-    "source": 15,
-    "pc": [
-      901
-    ]
-  },
-  {
-    "teal": 850,
-    "source": 15,
-    "pc": [
-      902
-    ]
-  },
-  {
-    "teal": 851,
-    "source": 15,
-    "pc": [
-      903
-    ]
-  },
-  {
-    "teal": 852,
-    "source": 15,
-    "pc": [
+      900,
+      901,
+      902,
+      903,
       904,
-      905,
+      905
+    ]
+  },
+  {
+    "teal": 963,
+    "source": "contracts/AlgoDirectory.algo.ts:297",
+    "pc": [
       906
     ]
   },
   {
-    "teal": 853,
-    "source": 15,
+    "teal": 964,
+    "source": "contracts/AlgoDirectory.algo.ts:297",
     "pc": [
       907,
       908
     ]
   },
   {
-    "teal": 854,
-    "source": 15,
+    "teal": 974,
+    "source": "contracts/AlgoDirectory.algo.ts:300",
     "pc": [
-      909,
+      909
+    ]
+  },
+  {
+    "teal": 975,
+    "source": "contracts/AlgoDirectory.algo.ts:300",
+    "pc": [
       910
     ]
   },
   {
-    "teal": 855,
-    "source": 15,
+    "teal": 976,
+    "source": "contracts/AlgoDirectory.algo.ts:300",
     "pc": [
-      911
-    ]
-  },
-  {
-    "teal": 856,
-    "source": 15,
-    "pc": [
+      911,
       912
     ]
   },
   {
-    "teal": 857,
-    "source": 15,
+    "teal": 980,
+    "source": "contracts/AlgoDirectory.algo.ts:301",
     "pc": [
       913,
       914
     ]
   },
   {
-    "teal": 858,
-    "source": 15,
+    "teal": 981,
+    "source": "contracts/AlgoDirectory.algo.ts:301",
     "pc": [
       915,
       916
     ]
   },
   {
-    "teal": 859,
-    "source": 15,
+    "teal": 985,
+    "source": "contracts/AlgoDirectory.algo.ts:302",
     "pc": [
       917,
       918
     ]
   },
   {
-    "teal": 860,
-    "source": 15,
+    "teal": 986,
+    "source": "contracts/AlgoDirectory.algo.ts:302",
     "pc": [
       919,
       920
     ]
   },
   {
-    "teal": 861,
-    "source": 15,
+    "teal": 990,
+    "source": "contracts/AlgoDirectory.algo.ts:296",
     "pc": [
-      921
+      921,
+      922
+    ]
+  },
+  {
+    "teal": 991,
+    "source": "contracts/AlgoDirectory.algo.ts:296",
+    "pc": [
+      923
+    ]
+  },
+  {
+    "teal": 994,
+    "source": "contracts/AlgoDirectory.algo.ts:296",
+    "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
+    "pc": [
+      924
+    ]
+  },
+  {
+    "teal": 995,
+    "source": "contracts/AlgoDirectory.algo.ts:303",
+    "pc": [
+      925,
+      926
+    ]
+  },
+  {
+    "teal": 996,
+    "source": "contracts/AlgoDirectory.algo.ts:303",
+    "pc": [
+      927,
+      928
+    ]
+  },
+  {
+    "teal": 997,
+    "source": "contracts/AlgoDirectory.algo.ts:303",
+    "pc": [
+      929,
+      930,
+      931
+    ]
+  },
+  {
+    "teal": 998,
+    "source": "contracts/AlgoDirectory.algo.ts:303",
+    "pc": [
+      932
+    ]
+  },
+  {
+    "teal": 999,
+    "source": "contracts/AlgoDirectory.algo.ts:303",
+    "pc": [
+      933,
+      934
+    ]
+  },
+  {
+    "teal": 1003,
+    "source": "contracts/AlgoDirectory.algo.ts:304",
+    "pc": [
+      935
+    ]
+  },
+  {
+    "teal": 1004,
+    "source": "contracts/AlgoDirectory.algo.ts:304",
+    "pc": [
+      936,
+      937
+    ]
+  },
+  {
+    "teal": 1008,
+    "source": "contracts/AlgoDirectory.algo.ts:305",
+    "pc": [
+      938,
+      939
+    ]
+  },
+  {
+    "teal": 1009,
+    "source": "contracts/AlgoDirectory.algo.ts:305",
+    "pc": [
+      940,
+      941
+    ]
+  },
+  {
+    "teal": 1012,
+    "source": "contracts/AlgoDirectory.algo.ts:300",
+    "pc": [
+      942
+    ]
+  },
+  {
+    "teal": 1018,
+    "source": "contracts/AlgoDirectory.algo.ts:309",
+    "pc": [
+      943,
+      944,
+      945,
+      946,
+      947,
+      948
+    ]
+  },
+  {
+    "teal": 1019,
+    "source": "contracts/AlgoDirectory.algo.ts:309",
+    "pc": [
+      949
+    ]
+  },
+  {
+    "teal": 1020,
+    "source": "contracts/AlgoDirectory.algo.ts:309",
+    "pc": [
+      950
+    ]
+  },
+  {
+    "teal": 1021,
+    "source": "contracts/AlgoDirectory.algo.ts:309",
+    "pc": [
+      951
+    ]
+  },
+  {
+    "teal": 1022,
+    "source": "contracts/AlgoDirectory.algo.ts:296",
+    "pc": [
+      952,
+      953
+    ]
+  },
+  {
+    "teal": 1023,
+    "source": "contracts/AlgoDirectory.algo.ts:296",
+    "pc": [
+      954
+    ]
+  },
+  {
+    "teal": 1026,
+    "source": "contracts/AlgoDirectory.algo.ts:296",
+    "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
+    "pc": [
+      955
+    ]
+  },
+  {
+    "teal": 1027,
+    "source": "contracts/AlgoDirectory.algo.ts:310",
+    "pc": [
+      956,
+      957,
+      958
+    ]
+  },
+  {
+    "teal": 1028,
+    "source": "contracts/AlgoDirectory.algo.ts:309",
+    "pc": [
+      959
+    ]
+  },
+  {
+    "teal": 1029,
+    "source": "contracts/AlgoDirectory.algo.ts:309",
+    "pc": [
+      960
+    ]
+  },
+  {
+    "teal": 1030,
+    "source": "contracts/AlgoDirectory.algo.ts:309",
+    "pc": [
+      961
+    ]
+  },
+  {
+    "teal": 1031,
+    "source": "contracts/AlgoDirectory.algo.ts:309",
+    "pc": [
+      962
+    ]
+  },
+  {
+    "teal": 1035,
+    "source": "contracts/AlgoDirectory.algo.ts:296",
+    "pc": [
+      963,
+      964
+    ]
+  },
+  {
+    "teal": 1036,
+    "source": "contracts/AlgoDirectory.algo.ts:296",
+    "pc": [
+      965
+    ]
+  },
+  {
+    "teal": 1039,
+    "source": "contracts/AlgoDirectory.algo.ts:296",
+    "errorMessage": "box value does not exist: this.listedNFDappIDs(nfdAppID).value",
+    "pc": [
+      966
+    ]
+  },
+  {
+    "teal": 1040,
+    "source": "contracts/AlgoDirectory.algo.ts:314",
+    "pc": [
+      967
+    ]
+  },
+  {
+    "teal": 1044,
+    "source": "contracts/AlgoDirectory.algo.ts:315",
+    "pc": [
+      968,
+      969
+    ]
+  },
+  {
+    "teal": 1045,
+    "source": "contracts/AlgoDirectory.algo.ts:315",
+    "pc": [
+      970
+    ]
+  },
+  {
+    "teal": 1046,
+    "source": "contracts/AlgoDirectory.algo.ts:315",
+    "pc": [
+      971
+    ]
+  },
+  {
+    "teal": 1050,
+    "source": "contracts/AlgoDirectory.algo.ts:317",
+    "pc": [
+      972,
+      973
+    ]
+  },
+  {
+    "teal": 1053,
+    "source": "contracts/AlgoDirectory.algo.ts:292",
+    "pc": [
+      974,
+      975
+    ]
+  },
+  {
+    "teal": 1056,
+    "source": "contracts/AlgoDirectory.algo.ts:292",
+    "pc": [
+      976,
+      977
+    ]
+  },
+  {
+    "teal": 1057,
+    "source": "contracts/AlgoDirectory.algo.ts:292",
+    "pc": [
+      978
+    ]
+  },
+  {
+    "teal": 1062,
+    "source": "contracts/AlgoDirectory.algo.ts:325",
+    "pc": [
+      979,
+      980,
+      981
+    ]
+  },
+  {
+    "teal": 1063,
+    "source": "contracts/AlgoDirectory.algo.ts:325",
+    "pc": [
+      982
+    ]
+  },
+  {
+    "teal": 1066,
+    "source": "contracts/AlgoDirectory.algo.ts:325",
+    "pc": [
+      983,
+      984,
+      985
+    ]
+  },
+  {
+    "teal": 1067,
+    "source": "contracts/AlgoDirectory.algo.ts:325",
+    "pc": [
+      986
+    ]
+  },
+  {
+    "teal": 1068,
+    "source": "contracts/AlgoDirectory.algo.ts:325",
+    "pc": [
+      987
+    ]
+  },
+  {
+    "teal": 1076,
+    "source": "contracts/AlgoDirectory.algo.ts:325",
+    "pc": [
+      988,
+      989,
+      990
+    ]
+  },
+  {
+    "teal": 1080,
+    "source": "contracts/AlgoDirectory.algo.ts:326",
+    "pc": [
+      991,
+      992
+    ]
+  },
+  {
+    "teal": 1081,
+    "source": "contracts/AlgoDirectory.algo.ts:326",
+    "pc": [
+      993,
+      994,
+      995
+    ]
+  },
+  {
+    "teal": 1082,
+    "source": "contracts/AlgoDirectory.algo.ts:326",
+    "pc": [
+      996,
+      997
+    ]
+  },
+  {
+    "teal": 1083,
+    "source": "contracts/AlgoDirectory.algo.ts:326",
+    "pc": [
+      998
+    ]
+  },
+  {
+    "teal": 1084,
+    "source": "contracts/AlgoDirectory.algo.ts:326",
+    "pc": [
+      999
+    ]
+  },
+  {
+    "teal": 1087,
+    "source": "contracts/AlgoDirectory.algo.ts:326",
+    "errorMessage": "Only the creator can set the admin token",
+    "pc": [
+      1000
+    ]
+  },
+  {
+    "teal": 1091,
+    "source": "contracts/AlgoDirectory.algo.ts:327",
+    "pc": [
+      1001
+    ]
+  },
+  {
+    "teal": 1092,
+    "source": "contracts/AlgoDirectory.algo.ts:327",
+    "pc": [
+      1002,
+      1003
+    ]
+  },
+  {
+    "teal": 1093,
+    "source": "contracts/AlgoDirectory.algo.ts:327",
+    "pc": [
+      1004
+    ]
+  },
+  {
+    "teal": 1094,
+    "source": "contracts/AlgoDirectory.algo.ts:325",
+    "pc": [
+      1005
+    ]
+  },
+  {
+    "teal": 1099,
+    "source": "contracts/AlgoDirectory.algo.ts:334",
+    "pc": [
+      1006,
+      1007,
+      1008
+    ]
+  },
+  {
+    "teal": 1100,
+    "source": "contracts/AlgoDirectory.algo.ts:334",
+    "pc": [
+      1009
+    ]
+  },
+  {
+    "teal": 1101,
+    "source": "contracts/AlgoDirectory.algo.ts:334",
+    "pc": [
+      1010
+    ]
+  },
+  {
+    "teal": 1107,
+    "source": "contracts/AlgoDirectory.algo.ts:334",
+    "pc": [
+      1011,
+      1012,
+      1013
+    ]
+  },
+  {
+    "teal": 1111,
+    "source": "contracts/AlgoDirectory.algo.ts:335",
+    "pc": [
+      1014,
+      1015
+    ]
+  },
+  {
+    "teal": 1112,
+    "source": "contracts/AlgoDirectory.algo.ts:335",
+    "pc": [
+      1016,
+      1017,
+      1018
+    ]
+  },
+  {
+    "teal": 1113,
+    "source": "contracts/AlgoDirectory.algo.ts:335",
+    "pc": [
+      1019,
+      1020
+    ]
+  },
+  {
+    "teal": 1114,
+    "source": "contracts/AlgoDirectory.algo.ts:335",
+    "pc": [
+      1021
+    ]
+  },
+  {
+    "teal": 1115,
+    "source": "contracts/AlgoDirectory.algo.ts:335",
+    "pc": [
+      1022
+    ]
+  },
+  {
+    "teal": 1118,
+    "source": "contracts/AlgoDirectory.algo.ts:335",
+    "errorMessage": "Only the creator can update the application",
+    "pc": [
+      1023
+    ]
+  },
+  {
+    "teal": 1119,
+    "source": "contracts/AlgoDirectory.algo.ts:334",
+    "pc": [
+      1024
+    ]
+  },
+  {
+    "teal": 1124,
+    "source": "contracts/AlgoDirectory.algo.ts:338",
+    "pc": [
+      1025,
+      1026,
+      1027
+    ]
+  },
+  {
+    "teal": 1125,
+    "source": "contracts/AlgoDirectory.algo.ts:338",
+    "pc": [
+      1028
+    ]
+  },
+  {
+    "teal": 1126,
+    "source": "contracts/AlgoDirectory.algo.ts:338",
+    "pc": [
+      1029
+    ]
+  },
+  {
+    "teal": 1130,
+    "source": "contracts/AlgoDirectory.algo.ts:338",
+    "pc": [
+      1030,
+      1031,
+      1032
+    ]
+  },
+  {
+    "teal": 1131,
+    "source": "contracts/AlgoDirectory.algo.ts:338",
+    "pc": [
+      1033
+    ]
+  },
+  {
+    "teal": 1134,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
+      1034,
+      1035,
+      1036,
+      1037,
+      1038,
+      1039
+    ]
+  },
+  {
+    "teal": 1135,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
+      1040,
+      1041,
+      1042
+    ]
+  },
+  {
+    "teal": 1136,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
+      1043,
+      1044,
+      1045,
+      1046
+    ]
+  },
+  {
+    "teal": 1139,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "errorMessage": "this contract does not implement the given ABI method for create NoOp",
+    "pc": [
+      1047
+    ]
+  },
+  {
+    "teal": 1142,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
+      1048,
+      1049,
+      1050,
+      1051,
+      1052,
+      1053
+    ]
+  },
+  {
+    "teal": 1143,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
+      1054,
+      1055,
+      1056,
+      1057,
+      1058,
+      1059
+    ]
+  },
+  {
+    "teal": 1144,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
+      1060,
+      1061,
+      1062,
+      1063,
+      1064,
+      1065
+    ]
+  },
+  {
+    "teal": 1145,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
+      1066,
+      1067,
+      1068,
+      1069,
+      1070,
+      1071
+    ]
+  },
+  {
+    "teal": 1146,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
+      1072,
+      1073,
+      1074,
+      1075,
+      1076,
+      1077
+    ]
+  },
+  {
+    "teal": 1147,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
+      1078,
+      1079,
+      1080,
+      1081,
+      1082,
+      1083
+    ]
+  },
+  {
+    "teal": 1148,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
+      1084,
+      1085,
+      1086
+    ]
+  },
+  {
+    "teal": 1149,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
+      1087,
+      1088,
+      1089,
+      1090,
+      1091,
+      1092,
+      1093,
+      1094,
+      1095,
+      1096,
+      1097,
+      1098,
+      1099,
+      1100
+    ]
+  },
+  {
+    "teal": 1152,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "errorMessage": "this contract does not implement the given ABI method for call NoOp",
+    "pc": [
+      1101
+    ]
+  },
+  {
+    "teal": 1155,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
+      1102,
+      1103,
+      1104,
+      1105,
+      1106,
+      1107
+    ]
+  },
+  {
+    "teal": 1156,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
+      1108,
+      1109,
+      1110
+    ]
+  },
+  {
+    "teal": 1157,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
+      1111,
+      1112,
+      1113,
+      1114
+    ]
+  },
+  {
+    "teal": 1160,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "errorMessage": "this contract does not implement the given ABI method for call UpdateApplication",
+    "pc": [
+      1115
+    ]
+  },
+  {
+    "teal": 1163,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
+      1116,
+      1117,
+      1118
+    ]
+  },
+  {
+    "teal": 1164,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
+      1119,
+      1120
+    ]
+  },
+  {
+    "teal": 1165,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
+      1121,
+      1122
+    ]
+  },
+  {
+    "teal": 1166,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
+      1123
+    ]
+  },
+  {
+    "teal": 1167,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
+      1124,
+      1125
+    ]
+  },
+  {
+    "teal": 1168,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
+      1126,
+      1127
+    ]
+  },
+  {
+    "teal": 1169,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
+      1128
+    ]
+  },
+  {
+    "teal": 1172,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
+      1129,
+      1130,
+      1131
+    ]
+  },
+  {
+    "teal": 1173,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
+      1132,
+      1133
+    ]
+  },
+  {
+    "teal": 1174,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
+      1134,
+      1135
+    ]
+  },
+  {
+    "teal": 1175,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
+      1136
+    ]
+  },
+  {
+    "teal": 1176,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
+      1137,
+      1138
+    ]
+  },
+  {
+    "teal": 1177,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
+      1139,
+      1140
+    ]
+  },
+  {
+    "teal": 1178,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
+      1141
+    ]
+  },
+  {
+    "teal": 1179,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
+      1142
+    ]
+  },
+  {
+    "teal": 1180,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
+      1143,
+      1144
+    ]
+  },
+  {
+    "teal": 1181,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
+      1145
+    ]
+  },
+  {
+    "teal": 1182,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
+      1146
+    ]
+  },
+  {
+    "teal": 1183,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
+      1147
+    ]
+  },
+  {
+    "teal": 1184,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
+      1148,
+      1149,
+      1150
+    ]
+  },
+  {
+    "teal": 1185,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
+      1151,
+      1152
+    ]
+  },
+  {
+    "teal": 1186,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
+      1153,
+      1154
+    ]
+  },
+  {
+    "teal": 1187,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
+      1155
+    ]
+  },
+  {
+    "teal": 1188,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
+      1156
+    ]
+  },
+  {
+    "teal": 1189,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
+      1157,
+      1158
+    ]
+  },
+  {
+    "teal": 1190,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
+      1159,
+      1160
+    ]
+  },
+  {
+    "teal": 1191,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
+      1161,
+      1162
+    ]
+  },
+  {
+    "teal": 1192,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
+      1163,
+      1164
+    ]
+  },
+  {
+    "teal": 1193,
+    "source": "contracts/AlgoDirectory.algo.ts:22",
+    "pc": [
+      1165
     ]
   }
 ]

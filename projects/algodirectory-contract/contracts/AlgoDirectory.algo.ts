@@ -3,8 +3,8 @@ import { Contract } from '@algorandfoundation/tealscript';
 type Listing = {
   timestamp: uint64; // 8 bytes
   vouchAmount: uint64; // 8 bytes
-  nfdAppID: uint64; // 8 bytes
-  tags: StaticArray<byte, 13>; // 13 bytes, each representing one of 255 possible tags
+  nfdAppID: AppID; // 8 bytes
+  tags: StaticArray<byte, 13>; // 13 bytes, each representing a text tag in the UI
   name: string; // NFD names are up to 27 characters
 }; // 64 bytes total
 
@@ -12,40 +12,70 @@ const LISTED_NFD_APP_ID_BOX_COST = 31300; // 2500 + (400 * (8 + 64))
 const LISTING_BOX_COST = 40900; // 2500 + (400 * (64 + 32))
 const TOTAL_LISTING_BOXES_COST = LISTED_NFD_APP_ID_BOX_COST + LISTING_BOX_COST;
 
+/**
+ * A singleton-pattern smart contract that stores metadata and collateral for
+ * all listings created for segments of the directory.algo NFD. A listing can be
+ * created, refreshed, and abandoned by its owner,
+ * removed by anyone if the underlying NFD was sold,
+ * or deleted by an administrator with a penalty.
+ */
 export class AlgoDirectory extends Contract {
-  listedNFDappIDs = BoxMap<uint64, Listing>(); // 8 byte key + 0 byte value =  8 bytes total
+  feeSinkAddress = TemplateVar<Address>();
 
-  listings = BoxMap<Listing, Address>(); // 64 byte key + 32 byte value = 96 bytes total
+  directoryAppID = TemplateVar<AppID>(); // Testnet 576232821 / Mainnet 766401564
+
+  nfdRegistryAppID = TemplateVar<AppID>(); // Testnet 84366825 / Mainnet 760937186
 
   adminToken = GlobalStateKey<AssetID>(); // The ASA ID of the token which gates the ability to delete listings
 
-  private checkCallerIsListingOwner(nfdAppID: uint64): void {
+  listedNFDappIDs = BoxMap<AppID, Listing>(); // 8 byte key + 0 byte value =  8 bytes total
+
+  listings = BoxMap<Listing, Address>(); // 64 byte key + 32 byte value = 96 bytes total
+
+  private checkCallerIsListingOwner(nfdAppID: AppID): void {
     const listingKey = this.listedNFDappIDs(nfdAppID).value;
     assert(this.txn.sender === this.listings(listingKey).value, 'Caller must be listing owner');
   }
 
-  private checkNFDIsSegmentOfDirectory(nfdAppID: uint64): void {
+  private checkNFDIsSegmentOfDirectory(nfdAppID: AppID): void {
     // Ensure the NFD is a segment of directory.algo by checking the parent appID
     assert(
-      btoi(AppID.fromUint64(nfdAppID).globalState('i.parentAppID') as bytes) === 576232821,
-      'NFD must be a segment of directory.algo with parent app ID 576232821'
+      btoi(nfdAppID.globalState('i.parentAppID') as bytes) === this.directoryAppID.id,
+      'NFD must be a segment of directory.algo'
     );
   }
 
-  private checkCallerIsNFDOwner(nfdAppID: uint64): void {
+  private checkCallerIsNFDOwner(nfdAppID: AppID): void {
     // Check in the NFD instance app that the sender is the owner of the NFD
     assert(
-      this.txn.sender === (AppID.fromUint64(nfdAppID).globalState('i.owner.a') as Address),
+      this.txn.sender === (nfdAppID.globalState('i.owner.a') as Address),
       'Listing creator must be the NFD app i.owner.a'
     );
   }
 
-  private checkNFDNotExpired(nfdAppID: uint64): void {
+  private checkNFDOwnerIsNotListingOwner(nfdAppID: AppID): void {
+    // Get the address of the listing owner
+    const listingKey = this.listedNFDappIDs(nfdAppID).value;
+    const listingOwner = this.listings(listingKey).value;
+    // Get the address of the NFD owner
+    const nfdOwner = nfdAppID.globalState('i.owner.a') as Address;
+    // Ensure the NFD owner is not the listing owner, and thus the NFD has been transferred
+    assert(nfdOwner !== listingOwner, 'NFD owner must be different than the listing owner');
+  }
+
+  private checkNFDNotExpired(nfdAppID: AppID): void {
     // Check that the segment is current and not expired
+    // Because directory.algo is V3, there are no lifetime ownership segments
     assert(
-      globals.latestTimestamp <= btoi(AppID.fromUint64(nfdAppID).globalState('i.expirationTime') as bytes),
+      globals.latestTimestamp <= btoi(nfdAppID.globalState('i.expirationTime') as bytes),
       'NFD segment must not be expired'
     );
+  }
+
+  private checkNFDNotForSale(nfdAppID: AppID): void {
+    // Check that the segment is not listed for sale, which wipes properties and
+    // would essentially invalidate a Directory listing
+    assert(!nfdAppID.globalStateExists('i.sellamt'), 'NFD segment must not be listed for sale');
   }
 
   private getRoundedTimestamp(): uint64 {
@@ -53,12 +83,21 @@ export class AlgoDirectory extends Contract {
   }
 
   /**
-   * Creates a listing in the directory by vouching for an NFD root or segment of directory.algo.
-   *
-   * @param nfdAppID The uint64 application ID of the NFD that will be listed
-   * @param collateralPayment The Algo payment of collateral to vouch for the listing
+   * Defines an ARC-28 event to be emitted by the createListing method that
+   * contains the listing which was created for an NFD segment of directory.algo
    */
-  createListing(collateralPayment: PayTxn, nfdAppID: uint64, listingTags: StaticArray<byte, 13>): Listing {
+  CreateListingEvent = new EventLogger<{
+    listing: Listing;
+  }>();
+
+  /**
+   * Creates a listing in the directory by vouching for an NFD root or segment of directory.algo
+   *
+   * @param collateralPayment The Algo payment transaction of collateral to vouch for the listing
+   * @param nfdAppID The Application ID of the NFD that will be listed
+   * @param listingTags An array of 13 bytes with each representing a tag for the listing
+   */
+  createListing(collateralPayment: PayTxn, nfdAppID: AppID, listingTags: StaticArray<byte, 13>): Listing {
     // Check that the caller is paying a mimimum amount of collateral to vouch for the listing
     verifyPayTxn(collateralPayment, {
       sender: this.txn.sender,
@@ -70,12 +109,13 @@ export class AlgoDirectory extends Contract {
     this.checkNFDIsSegmentOfDirectory(nfdAppID);
     this.checkCallerIsNFDOwner(nfdAppID);
     this.checkNFDNotExpired(nfdAppID);
+    this.checkNFDNotForSale(nfdAppID);
 
     // Check in the NFD registry that this is a valid NFD app ID (not a fake NFD)
-    const nfdLongName = AppID.fromUint64(nfdAppID).globalState('i.name') as bytes;
+    const nfdLongName = nfdAppID.globalState('i.name') as bytes;
 
     sendAppCall({
-      applicationID: AppID.fromUint64(84366825), // Mainnet 760937186
+      applicationID: this.nfdRegistryAppID,
       applicationArgs: ['is_valid_nfd_appid', nfdLongName, itob(nfdAppID)],
       fee: 0,
     });
@@ -101,19 +141,38 @@ export class AlgoDirectory extends Contract {
     // Map the NFD App ID to the listing key
     this.listedNFDappIDs(nfdAppID).value = listingKey;
 
+    // Emit an ARC-28 event for the subscriber to pick up
+    this.CreateListingEvent.log({
+      listing: listingKey,
+    });
+
     return listingKey;
   }
 
   /**
-   * Refreshes a listing in the directory and updates its last touched timestamp.
+   * Defines an ARC-28 event to be emitted by the refreshListing method that
+   * contains the listing which was refreshed
+   */ RefreshListingEvent = new EventLogger<{
+    listing: Listing;
+  }>();
+
+  /**
+   * Refreshes a listing in the directory and updates its last touched timestamp
    *
-   * @param nfdAppID The uint64 application ID of the NFD that will be refreshed
+   * @param nfdAppID The Application ID of the NFD that will be refreshed
+   * @param listingTags An array of 13 bytes with each representing a tag; used to update the tags of the listing, if no tags are to be updated, pass the existing tags
+   *
    */
-  refreshListing(nfdAppID: uint64): Listing {
-    // Ensure the caller owns this listing, owns the NFD, and the NFD has not expired
+  refreshListing(nfdAppID: AppID, listingTags: StaticArray<byte, 13>): Listing {
+    // Ensure the caller owns this listing, owns the NFD, and the NFD has not expired.
+    // Note that if the NFD has been transferred, the new owner will not be able to
+    // refresh as they will not be both the current NFD owner and the original listing owner.
+    // The new owner of a transferred NFD must abandon the old listing and create a new one
+    // with their own collateral.
     this.checkCallerIsListingOwner(nfdAppID);
     this.checkCallerIsNFDOwner(nfdAppID);
     this.checkNFDNotExpired(nfdAppID);
+    this.checkNFDNotForSale(nfdAppID);
 
     // The new listing box will be swapped for one with a new timestamp in the key struct
     const oldListingKey = this.listedNFDappIDs(nfdAppID).value;
@@ -121,7 +180,7 @@ export class AlgoDirectory extends Contract {
       timestamp: this.getRoundedTimestamp(), // Round the timestamp
       vouchAmount: oldListingKey.vouchAmount,
       nfdAppID: oldListingKey.nfdAppID,
-      tags: oldListingKey.tags,
+      tags: listingTags,
       name: oldListingKey.name,
     };
 
@@ -134,24 +193,45 @@ export class AlgoDirectory extends Contract {
     // Map the new listing to the NFD App ID
     this.listedNFDappIDs(nfdAppID).value = newListingKey;
 
+    // Emit an ARC-28 event for the subscriber to pick up
+    this.RefreshListingEvent.log({
+      listing: newListingKey,
+    });
+
     return newListingKey;
   }
 
   /**
-   * Abandons a listing in the directory and returns the vouched collateral.
-   *
-   * @param nfdAppID The uint64 application ID of the NFD that will be abandoned
-   */
-  abandonListing(nfdAppID: uint64): void {
-    const listingKey = this.listedNFDappIDs(nfdAppID).value;
-    this.checkCallerIsListingOwner(nfdAppID);
+   * Defines an ARC-28 event to be emitted by the abandonListing method that
+   * contains the listing which was abandoned
+   */ AbandonListingEvent = new EventLogger<{
+    listing: Listing;
+  }>();
 
-    // Return the vouched collateral to the listing owner
+  /**
+   * Abandons a listing in the directory and returns the vouched collateral
+   *
+   * @param nfdAppID The Application ID of the NFD that will be abandoned
+   */
+  abandonListing(nfdAppID: AppID): void {
+    const listingKey = this.listedNFDappIDs(nfdAppID).value;
+
+    // Check that the caller is the owner of the NFD
+    // The caller need not be the listing owner in case they purchased the NFD
+    // from a previous owner who created the listing
+    this.checkCallerIsNFDOwner(nfdAppID);
+
+    // Return the vouched collateral to the original listing owner
     sendPayment({
       sender: this.app.address,
       receiver: this.listings(listingKey).value,
       amount: listingKey.vouchAmount,
       fee: 0,
+    });
+
+    // Emit an ARC-28 event for the subscriber to pick up
+    this.AbandonListingEvent.log({
+      listing: listingKey,
     });
 
     // Remove both boxes for the listing: the NFD App ID and the listing itself
@@ -160,40 +240,99 @@ export class AlgoDirectory extends Contract {
   }
 
   /**
-   * Deletes a listing from the directory & sends the collateral to the fee sink.
-   *
-   * @param nfdAppID The uint64 application ID of the NFD that will be deleted
-   */
-  deleteListing(nfdAppID: uint64): void {
-    // // This method is restricted to only the creator of the directory contract
-    // verifyAppCallTxn(this.txn, { sender: globals.creatorAddress });
+   * Defines an ARC-28 event to be emitted by the removeTransferredListing method that
+   * contains the listing which was removed after the NFD was transferred
+   */ RemoveTransferredListingEvent = new EventLogger<{
+    listing: Listing;
+  }>();
 
+  /**
+   * Removes a listing for which the NFD has been transferred.
+   * Anyone can call this to clean up a listing that is no longer valid.
+   *
+   * @param nfdAppID The Application ID of the NFD that will be removed
+   */
+  removeTransferredListing(nfdAppID: AppID): void {
+    const listingKey = this.listedNFDappIDs(nfdAppID).value;
+
+    // Check that the NFD has changed hands
+    this.checkNFDOwnerIsNotListingOwner(nfdAppID);
+
+    // Return the vouched collateral to the original listing owner
+    sendPayment({
+      sender: this.app.address,
+      receiver: this.listings(listingKey).value,
+      amount: listingKey.vouchAmount,
+      fee: 0,
+    });
+
+    // Emit an ARC-28 event for the subscriber to pick up
+    this.RemoveTransferredListingEvent.log({
+      listing: listingKey,
+    });
+
+    // Remove both boxes for the listing: the NFD App ID and the listing itself
+    this.listings(listingKey).delete();
+    this.listedNFDappIDs(nfdAppID).delete();
+  }
+
+  /**
+   * Defines an ARC-28 event to be emitted by the deleteListing method that
+   * contains the listing which was deleted by an admin for inappropriate content
+   */ DeleteListingEvent = new EventLogger<{
+    listing: Listing;
+  }>();
+
+  /**
+   * Deletes a listing from the directory & sends the collateral to the fee sink
+   *
+   * @param nfdAppID The Application ID of the NFD that will be deleted
+   */
+  deleteListingWithPenalty(nfdAppID: AppID): string {
     // This method is restricted to only holders of the admin asset
     assert(this.txn.sender.assetBalance(this.adminToken.value) > 0, 'Caller must have the admin token');
 
     const listingKey = this.listedNFDappIDs(nfdAppID).value;
+    const deleteNote = 'Yeeted ' + listingKey.name + ' to the fee sink';
 
     // Yeet the vouched collateral into the fee sink as punishment
     sendPayment({
       sender: this.app.address,
-      receiver: Address.fromAddress('A7NMWS3NT3IUDMLVO26ULGXGIIOUQ3ND2TXSER6EBGRZNOBOUIQXHIBGDE'), // Testnet fee sink / Mainnet Y76M3MSY6DKBRHBL7C3NNDXGS5IIMQVQVUAB6MP4XEMMGVF2QWNPL226CA
+      receiver: this.feeSinkAddress,
       amount: listingKey.vouchAmount,
       fee: 0,
+      note: deleteNote,
+    });
+
+    // Emit an ARC-28 event for the subscriber to pick up
+    this.DeleteListingEvent.log({
+      listing: listingKey,
     });
 
     // Remove both boxes for the listing
     this.listings(listingKey).delete();
     this.listedNFDappIDs(nfdAppID).delete();
+
+    return deleteNote;
   }
 
-  createApplication(): void {}
-
+  /**
+   * Stores an ASA ID in global state that will control administration rights
+   *
+   * @param asaID The Asset ID of the ASA to be the admin token
+   */
   setAdminToken(asaID: AssetID): void {
     assert(this.txn.sender === this.app.creator, 'Only the creator can set the admin token');
     this.adminToken.value = asaID;
   }
 
+  /**
+   * Enables the application to be updated by the creator
+   *
+   */
   updateApplication(): void {
     assert(this.txn.sender === this.app.creator, 'Only the creator can update the application');
   }
+
+  createApplication(): void {}
 }

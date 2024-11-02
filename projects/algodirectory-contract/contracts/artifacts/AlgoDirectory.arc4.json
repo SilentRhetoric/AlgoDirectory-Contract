@@ -4,49 +4,157 @@
   "methods": [
     {
       "name": "createListing",
-      "desc": "Creates a listing in the directory by vouching for an NFD root or segment of directory.algo.",
+      "desc": "Creates a listing in the directory by vouching for an NFD root or segment of directory.algo",
       "args": [
         {
           "name": "collateralPayment",
           "type": "pay",
-          "desc": "The Algo payment of collateral to vouch for the listing"
+          "desc": "The Algo payment transaction of collateral to vouch for the listing"
         },
         {
           "name": "nfdAppID",
           "type": "uint64",
-          "desc": "The uint64 application ID of the NFD that will be listed"
+          "desc": "The Application ID of the NFD that will be listed"
         },
         {
           "name": "listingTags",
-          "type": "byte[13]"
+          "type": "byte[13]",
+          "desc": "An array of 13 bytes with each representing a tag for the listing"
         }
       ],
       "returns": {
         "type": "(uint64,uint64,uint64,byte[13],string)"
-      }
+      },
+      "events": [
+        {
+          "name": "CreateListingEvent",
+          "args": [
+            {
+              "name": "listing",
+              "type": "(uint64,uint64,uint64,byte[13],string)"
+            }
+          ],
+          "desc": "Defines an ARC-28 event to be emitted by the createListing method that\ncontains the listing which was created for an NFD segment of directory.algo"
+        }
+      ]
     },
     {
       "name": "refreshListing",
-      "desc": "Refreshes a listing in the directory and updates its last touched timestamp.",
+      "desc": "Refreshes a listing in the directory and updates its last touched timestamp",
       "args": [
         {
           "name": "nfdAppID",
           "type": "uint64",
-          "desc": "The uint64 application ID of the NFD that will be refreshed"
+          "desc": "The Application ID of the NFD that will be refreshed"
+        },
+        {
+          "name": "listingTags",
+          "type": "byte[13]",
+          "desc": "An array of 13 bytes with each representing a tag; used to update the tags of the listing, if no tags are to be updated, pass the existing tags"
         }
       ],
       "returns": {
         "type": "(uint64,uint64,uint64,byte[13],string)"
-      }
+      },
+      "events": [
+        {
+          "name": "RefreshListingEvent",
+          "args": [
+            {
+              "name": "listing",
+              "type": "(uint64,uint64,uint64,byte[13],string)"
+            }
+          ],
+          "desc": "Defines an ARC-28 event to be emitted by the refreshListing method that\ncontains the listing which was refreshed"
+        }
+      ]
     },
     {
       "name": "abandonListing",
-      "desc": "Abandons a listing in the directory and returns the vouched collateral.",
+      "desc": "Abandons a listing in the directory and returns the vouched collateral",
       "args": [
         {
           "name": "nfdAppID",
           "type": "uint64",
-          "desc": "The uint64 application ID of the NFD that will be abandoned"
+          "desc": "The Application ID of the NFD that will be abandoned"
+        }
+      ],
+      "returns": {
+        "type": "void"
+      },
+      "events": [
+        {
+          "name": "AbandonListingEvent",
+          "args": [
+            {
+              "name": "listing",
+              "type": "(uint64,uint64,uint64,byte[13],string)"
+            }
+          ],
+          "desc": "Defines an ARC-28 event to be emitted by the abandonListing method that\ncontains the listing which was abandoned"
+        }
+      ]
+    },
+    {
+      "name": "removeTransferredListing",
+      "desc": "Removes a listing for which the NFD has been transferred.\nAnyone can call this to clean up a listing that is no longer valid.",
+      "args": [
+        {
+          "name": "nfdAppID",
+          "type": "uint64",
+          "desc": "The Application ID of the NFD that will be removed"
+        }
+      ],
+      "returns": {
+        "type": "void"
+      },
+      "events": [
+        {
+          "name": "RemoveTransferredListingEvent",
+          "args": [
+            {
+              "name": "listing",
+              "type": "(uint64,uint64,uint64,byte[13],string)"
+            }
+          ],
+          "desc": "Defines an ARC-28 event to be emitted by the removeTransferredListing method that\ncontains the listing which was removed after the NFD was transferred"
+        }
+      ]
+    },
+    {
+      "name": "deleteListingWithPenalty",
+      "desc": "Deletes a listing from the directory & sends the collateral to the fee sink",
+      "args": [
+        {
+          "name": "nfdAppID",
+          "type": "uint64",
+          "desc": "The Application ID of the NFD that will be deleted"
+        }
+      ],
+      "returns": {
+        "type": "string"
+      },
+      "events": [
+        {
+          "name": "DeleteListingEvent",
+          "args": [
+            {
+              "name": "listing",
+              "type": "(uint64,uint64,uint64,byte[13],string)"
+            }
+          ],
+          "desc": "Defines an ARC-28 event to be emitted by the deleteListing method that\ncontains the listing which was deleted by an admin for inappropriate content"
+        }
+      ]
+    },
+    {
+      "name": "setAdminToken",
+      "desc": "Stores an ASA ID in global state that will control administration rights",
+      "args": [
+        {
+          "name": "asaID",
+          "type": "uint64",
+          "desc": "The Asset ID of the ASA to be the admin token"
         }
       ],
       "returns": {
@@ -54,15 +162,9 @@
       }
     },
     {
-      "name": "deleteListing",
-      "desc": "Deletes a listing from the directory & sends the collateral to the fee sink.",
-      "args": [
-        {
-          "name": "nfdAppID",
-          "type": "uint64",
-          "desc": "The uint64 application ID of the NFD that will be deleted"
-        }
-      ],
+      "name": "updateApplication",
+      "desc": "Enables the application to be updated by the creator",
+      "args": [],
       "returns": {
         "type": "void"
       }
@@ -73,25 +175,58 @@
       "returns": {
         "type": "void"
       }
-    },
+    }
+  ],
+  "events": [
     {
-      "name": "setAdminToken",
+      "name": "CreateListingEvent",
       "args": [
         {
-          "name": "asaID",
-          "type": "uint64"
+          "name": "listing",
+          "type": "(uint64,uint64,uint64,byte[13],string)"
         }
       ],
-      "returns": {
-        "type": "void"
-      }
+      "desc": "Defines an ARC-28 event to be emitted by the createListing method that\ncontains the listing which was created for an NFD segment of directory.algo"
     },
     {
-      "name": "updateApplication",
-      "args": [],
-      "returns": {
-        "type": "void"
-      }
+      "name": "RefreshListingEvent",
+      "args": [
+        {
+          "name": "listing",
+          "type": "(uint64,uint64,uint64,byte[13],string)"
+        }
+      ],
+      "desc": "Defines an ARC-28 event to be emitted by the refreshListing method that\ncontains the listing which was refreshed"
+    },
+    {
+      "name": "AbandonListingEvent",
+      "args": [
+        {
+          "name": "listing",
+          "type": "(uint64,uint64,uint64,byte[13],string)"
+        }
+      ],
+      "desc": "Defines an ARC-28 event to be emitted by the abandonListing method that\ncontains the listing which was abandoned"
+    },
+    {
+      "name": "RemoveTransferredListingEvent",
+      "args": [
+        {
+          "name": "listing",
+          "type": "(uint64,uint64,uint64,byte[13],string)"
+        }
+      ],
+      "desc": "Defines an ARC-28 event to be emitted by the removeTransferredListing method that\ncontains the listing which was removed after the NFD was transferred"
+    },
+    {
+      "name": "DeleteListingEvent",
+      "args": [
+        {
+          "name": "listing",
+          "type": "(uint64,uint64,uint64,byte[13],string)"
+        }
+      ],
+      "desc": "Defines an ARC-28 event to be emitted by the deleteListing method that\ncontains the listing which was deleted by an admin for inappropriate content"
     }
   ]
 }
