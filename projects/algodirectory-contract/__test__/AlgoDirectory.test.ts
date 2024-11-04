@@ -6,11 +6,11 @@ import { AlgoAmount } from '@algorandfoundation/algokit-utils/types/amount';
 import { AlgoDirectoryClient, AlgoDirectoryFactory } from '../contracts/clients/AlgoDirectoryClient';
 
 // For network-based template variables substitution at compile time
-const FEE_SINK_ADDRESS = process.env.FEE_SINK_ADDRESS || 'A7NMWS3NT3IUDMLVO26ULGXGIIOUQ3ND2TXSER6EBGRZNOBOUIQXHIBGDE'; // Testnet & Betanet A7NMWS3NT3IUDMLVO26ULGXGIIOUQ3ND2TXSER6EBGRZNOBOUIQXHIBGDE / Mainnet Y76M3MSY6DKBRHBL7C3NNDXGS5IIMQVQVUAB6MP4XEMMGVF2QWNPL226CA
-const NFD_REGISTRY_APP_ID = Number(process.env.NFD_REGISTRY_APP_ID); // Testnet 84366825 / Betanet 842656530 / Mainnet 760937186
-const BETANET_NFD_REGISTRY_APP_ID = Number(process.env.BETANET_NFD_REGISTRY_APP_ID); // Betanet 842656530
-const DIRECTORY_DOT_ALGO_APP_ID = Number(process.env.DIRECTORY_DOT_ALGO_APP_ID); // Testnet 576232821 / Betanet 2020045263 / Mainnet 766401564
-const BETANET_DIRECTORY_DOT_ALGO_APP_ID = Number(process.env.BETANET_DIRECTORY_DOT_ALGO_APP_ID); // Betanet 2020045263
+const FEE_SINK_ADDRESS = process.env.FEE_SINK_ADDRESS || 'A7NMWS3NT3IUDMLVO26ULGXGIIOUQ3ND2TXSER6EBGRZNOBOUIQXHIBGDE';
+const NFD_REGISTRY_APP_ID = Number(process.env.NFD_REGISTRY_APP_ID);
+const BETANET_NFD_REGISTRY_APP_ID = Number(process.env.BETANET_NFD_REGISTRY_APP_ID);
+const DIRECTORY_DOT_ALGO_APP_ID = Number(process.env.DIRECTORY_DOT_ALGO_APP_ID);
+const BETANET_DIRECTORY_DOT_ALGO_APP_ID = Number(process.env.BETANET_DIRECTORY_DOT_ALGO_APP_ID);
 
 // For testing purposes
 const CREATOR = 'CREATOR';
@@ -28,8 +28,11 @@ const FOR_SALE_SEGMENT_APP_ID = Number(process.env.FOR_SALE_SEGMENT_APP_ID); // 
 const FOR_SALE_WITH_LISTING_SEGMENT_APP_ID = Number(process.env.FOR_SALE_WITH_LISTING_SEGMENT_APP_ID); // forsalewithlisting.directory.algo
 
 // Put an existing admin asset held by CREATOR & BETH in .env to use that, else a new one will be created
-const ADMIN_TOKEN_ASA_ID = BigInt(Number(process.env.ADMIN_TOKEN_ASA_ID)); // Testnet 721940792 / Mainnet TBD
-const BETANET_ADMIN_TOKEN_ASA_ID = BigInt(Number(process.env.BETANET_ADMIN_TOKEN_ASA_ID)); // Betanet 2020073537
+const ADMIN_TOKEN_ASA_ID = BigInt(Number(process.env.ADMIN_TOKEN_ASA_ID));
+const BETANET_ADMIN_TOKEN_ASA_ID = BigInt(Number(process.env.BETANET_ADMIN_TOKEN_ASA_ID));
+
+// Special token to use for updating the app if not by the creator
+const UPDATE_TOKEN_ASA_ID = BigInt(Number(process.env.UPDATE_TOKEN_ASA_ID));
 
 // Create two Algorand clients, one for testnet and one for betanet
 const algorandTestnet = AlgorandClient.testNet();
@@ -63,10 +66,12 @@ describe('AlgoDirectory', () => {
       updateParams: { method: 'updateApplication', args: [] },
       onSchemaBreak: 'replace',
       onUpdate: 'update',
+      populateAppCallResources: true,
       deployTimeParams: {
         feeSinkAddress: decodeAddress(FEE_SINK_ADDRESS).publicKey,
         nfdRegistryAppID: encodeUint64(NFD_REGISTRY_APP_ID),
         directoryAppID: encodeUint64(DIRECTORY_DOT_ALGO_APP_ID),
+        updateToken: encodeUint64(UPDATE_TOKEN_ASA_ID),
       },
     });
 
@@ -139,7 +144,10 @@ describe('AlgoDirectory', () => {
     const contractAdminAsset = await creatorTypedAppClient.state.global.adminToken();
     // If contract has an old admin asset ID in storage, overwrite it with the new asset
     if (contractAdminAsset !== adminAsset) {
-      const setAdminTokenResult = await creatorTypedAppClient.send.setAdminToken({ args: { asaId: adminAsset } });
+      const setAdminTokenResult = await creatorTypedAppClient.send.setAdminToken({
+        args: { asaId: adminAsset },
+        populateAppCallResources: true,
+      });
       console.debug('Set admin token in contract result: ', setAdminTokenResult.transaction.txID());
     } // End of testnet app creation
 
@@ -156,10 +164,12 @@ describe('AlgoDirectory', () => {
       updateParams: { method: 'updateApplication', args: [] },
       onSchemaBreak: 'replace',
       onUpdate: 'update',
+      populateAppCallResources: true,
       deployTimeParams: {
         feeSinkAddress: decodeAddress(FEE_SINK_ADDRESS).publicKey,
         nfdRegistryAppID: encodeUint64(BETANET_NFD_REGISTRY_APP_ID),
         directoryAppID: encodeUint64(BETANET_DIRECTORY_DOT_ALGO_APP_ID),
+        updateToken: encodeUint64(UPDATE_TOKEN_ASA_ID),
       },
     });
 
@@ -234,6 +244,7 @@ describe('AlgoDirectory', () => {
     if (betanetContractAdminAsset !== betanetAdminAsset) {
       const setAdminTokenResult = await betanetCreatorTypedAppClient.send.setAdminToken({
         args: { asaId: betanetAdminAsset },
+        populateAppCallResources: true,
       });
       console.debug('Set admin token in contract result: ', setAdminTokenResult.transaction.txID());
     } // End of BETANET app creation

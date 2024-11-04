@@ -6,10 +6,11 @@
     "generate-client": "algokit -v generate client contracts/artifacts/ --language typescript  --output contracts/clients/{contract_name}Client.ts",
     "compile-contract": "tealscript contracts/*.algo.ts contracts/artifacts",
     "generate-components": "algokit-generate-component contracts/artifacts/AlgodirectoryContract.arc32.json contracts/artifacts/components",
-    "build": "npm run compile-contract && npm run generate-client",
-    "test": "npm run build && dotenv -e .env -- jest",
+    "build": "pnpm run compile-contract && pnpm run generate-client",
+    "test": "pnpm run build && dotenv -e .env -- jest",
     "lint": "eslint . --ext .ts",
-    "fix": "eslint . --ext .ts --fix"
+    "fix": "eslint . --ext .ts --fix",
+    "deploy": "dotenv -e .env -- pnpm exec ts-node deploy/deploy.ts"
   },
   "dependencies": {
     "@algorandfoundation/algokit-client-generator": "^v4.0.0-beta.5",
@@ -33,6 +34,7 @@
     "jest": "^29.5.0",
     "prettier": "^3.0.3",
     "ts-jest": "^29.1.0",
+    "ts-node": "^10.9.2",
     "typescript": "5.0.2"
   }
 }

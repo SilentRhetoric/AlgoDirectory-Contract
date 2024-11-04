@@ -149,7 +149,7 @@
     },
     {
       "name": "setAdminToken",
-      "desc": "Stores an ASA ID in global state that will control administration rights",
+      "desc": "Stores an ASA ID in global state that will control listing admin rights",
       "args": [
         {
           "name": "asaID",
@@ -163,7 +163,7 @@
     },
     {
       "name": "updateApplication",
-      "desc": "Enables the application to be updated by the creator",
+      "desc": "Enables the application to be updated by the creator or update token holder",
       "args": [],
       "returns": {
         "type": "void"

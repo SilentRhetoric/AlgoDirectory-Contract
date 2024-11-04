@@ -22,9 +22,11 @@ const TOTAL_LISTING_BOXES_COST = LISTED_NFD_APP_ID_BOX_COST + LISTING_BOX_COST;
 export class AlgoDirectory extends Contract {
   feeSinkAddress = TemplateVar<Address>();
 
-  directoryAppID = TemplateVar<AppID>(); // Testnet 576232821 / Mainnet 766401564
+  directoryAppID = TemplateVar<AppID>();
 
-  nfdRegistryAppID = TemplateVar<AppID>(); // Testnet 84366825 / Mainnet 760937186
+  nfdRegistryAppID = TemplateVar<AppID>();
+
+  updateToken = TemplateVar<AssetID>(); // The ASA ID of the token which gates updates to the application
 
   adminToken = GlobalStateKey<AssetID>(); // The ASA ID of the token which gates the ability to delete listings
 
@@ -317,21 +319,27 @@ export class AlgoDirectory extends Contract {
   }
 
   /**
-   * Stores an ASA ID in global state that will control administration rights
+   * Stores an ASA ID in global state that will control listing admin rights
    *
    * @param asaID The Asset ID of the ASA to be the admin token
    */
   setAdminToken(asaID: AssetID): void {
-    assert(this.txn.sender === this.app.creator, 'Only the creator can set the admin token');
+    assert(
+      this.txn.sender === this.app.creator || this.txn.sender.assetBalance(this.updateToken) > 0,
+      'Only the creator or holder of the update token can set the admin token'
+    );
     this.adminToken.value = asaID;
   }
 
   /**
-   * Enables the application to be updated by the creator
+   * Enables the application to be updated by the creator or update token holder
    *
    */
   updateApplication(): void {
-    assert(this.txn.sender === this.app.creator, 'Only the creator can update the application');
+    assert(
+      this.txn.sender === this.app.creator || this.txn.sender.assetBalance(this.updateToken) > 0,
+      'Only the creator or holder of the update token can update the application'
+    );
   }
 
   createApplication(): void {}

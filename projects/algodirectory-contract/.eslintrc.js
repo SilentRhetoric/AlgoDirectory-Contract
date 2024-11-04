@@ -36,6 +36,7 @@ module.exports = {
         devDependencies: ['**/*.test.ts'],
       },
     ],
+    'no-console': 'off', // Add this line to disable the no-console rule
   },
   overrides: [
     {
